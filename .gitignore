@@ -1,0 +1,17 @@
+# Dev screenshots (local only)
+temporary screenshots/
+
+# Claude internal
+.claude/
+
+# Node modules
+node_modules/
+
+# Puppeteer / screenshot dev scripts (reference local machine paths)
+screenshot.mjs
+screenshot-footer.mjs
+screenshot-hero.mjs
+
+# OS
+.DS_Store
+Thumbs.db
