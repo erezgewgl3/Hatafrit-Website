@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>סדנת לחמים דלי פחמימה | התפריט</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #FDF6EC;
+  --warm-bg: #FAF0E4;
+  --gold: #C8963E;
+  --gold-light: #E8C882;
+  --gold-glow: rgba(200, 150, 62, 0.35);
+  --brown: #5C3D2E;
+  --brown-light: #8B6848;
+  --brown-deep: #3A2518;
+  --brown-darkest: #2A1810;
+  --text-main: #3A2518;
+  --text-soft: #6B5243;
+  --white: #FFFFFF;
+  --accent-green: #6B8F5B;
+  --accent-red: #C0392B;
+  --border-subtle: rgba(200, 150, 62, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Heebo', sans-serif;
+  background: var(--cream);
+  color: var(--text-main);
+  line-height: 1.7;
+  overflow-x: hidden;
+  padding-bottom: 72px;
+}
+
+@media (min-width: 769px) {
+  body { padding-bottom: 0; }
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: linear-gradient(175deg, var(--brown) 0%, var(--brown-deep) 60%, var(--brown-darkest) 100%);
+  color: var(--white);
+  padding: 2.5rem 1.25rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C8963E' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.6;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--gold);
+  color: var(--brown);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.3rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.02em;
+}
+
+.hero h1 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 span {
+  color: var(--gold-light);
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.85);
+  font-weight: 300;
+  max-width: 520px;
+  margin: 0 auto 1.2rem;
+  line-height: 1.7;
+}
+
+.hero-details {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+
+.hero-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.9);
+}
+
+.hero-detail .icon {
+  font-size: 1.1rem;
+}
+
+.hero-price-anchor {
+  display: inline-block;
+  font-size: 0.95rem;
+  color: var(--gold-light);
+  font-weight: 500;
+  margin-bottom: 1.2rem;
+  opacity: 0.9;
+}
+
+.hero-price-anchor strong {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+/* Urgency bar */
+.urgency-bar {
+  background: var(--accent-red);
+  color: var(--white);
+  text-align: center;
+  padding: 0.55rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  position: relative;
+  overflow: hidden;
+}
+
+.urgency-bar::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  animation: urgencyShine 3s infinite;
+}
+
+@keyframes urgencyShine {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* ===== CTA BUTTON ===== */
+.cta-button {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--brown);
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.9rem 2.2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 20px var(--gold-glow);
+  cursor: pointer;
+  border: none;
+  position: relative;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(200, 150, 62, 0.5);
+  background: var(--gold-light);
+}
+
+.cta-button:focus-visible {
+  outline: 3px solid var(--gold-light);
+  outline-offset: 3px;
+}
+
+.cta-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 12px var(--gold-glow);
+}
+
+.cta-button--hero {
+  font-size: 1.15rem;
+  padding: 1rem 2.5rem;
+  animation: ctaPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: 0 4px 20px var(--gold-glow); }
+  50% { box-shadow: 0 4px 35px rgba(200, 150, 62, 0.55); }
+}
+
+.cta-subtext {
+  display: block;
+  text-align: center;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.55);
+  margin-top: 0.5rem;
+}
+
+/* ===== INLINE TESTIMONIAL (mini, near hero) ===== */
+.inline-testimonial {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin: 1.5rem auto 0;
+  max-width: 440px;
+  text-align: right;
+}
+
+.inline-testimonial-text {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+.inline-testimonial-source {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
+/* ===== SECTION COMMON ===== */
+.section {
+  padding: 2.5rem 1.25rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--brown);
+  margin-bottom: 1.2rem;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+
+/* ===== INSTRUCTOR CREDIBILITY ===== */
+.instructor {
+  background: var(--white);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.instructor-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: right;
+}
+
+.instructor-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--brown-light));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+}
+
+.instructor-info {
+  flex: 1;
+}
+
+.instructor-name {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--brown);
+}
+
+.instructor-bio {
+  font-size: 0.88rem;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+.instructor-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.6rem;
+}
+
+.instructor-stat {
+  font-size: 0.8rem;
+  color: var(--brown-light);
+  font-weight: 600;
+}
+
+/* ===== RECOGNITION / PAIN ===== */
+.recognition {
+  background: var(--white);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.recognition-text {
+  font-size: 1.05rem;
+  color: var(--text-main);
+  text-align: center;
+  line-height: 1.9;
+}
+
+.recognition-text p {
+  margin-bottom: 0.8rem;
+}
+
+.recognition-text .highlight {
+  background: linear-gradient(transparent 60%, rgba(200, 150, 62, 0.25) 60%);
+  font-weight: 600;
+}
+
+.recognition-punchline {
+  font-weight: 700;
+  color: var(--brown);
+  font-size: 1.1rem;
+  margin-top: 0.3rem;
+}
+
+/* ===== WHAT YOU GET ===== */
+.what-you-get {
+  background: var(--cream);
+}
+
+.benefit-card {
+  background: var(--white);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.3rem 1.2rem;
+  margin-bottom: 0.8rem;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-2px);
+}
+
+.benefit-number {
+  position: absolute;
+  top: -11px;
+  right: 18px;
+  background: var(--gold);
+  color: var(--white);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px var(--gold-glow);
+}
+
+.benefit-title {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--brown);
+  margin-bottom: 0.3rem;
+}
+
+.benefit-desc {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+/* ===== BONUS ===== */
+.bonus-section {
+  background: var(--warm-bg);
+  border-top: 2px solid var(--gold);
+  border-bottom: 2px solid var(--gold);
+}
+
+.bonus-card {
+  background: var(--white);
+  border: 2px dashed var(--gold-light);
+  border-radius: 12px;
+  padding: 1.3rem;
+  text-align: center;
+}
+
+.bonus-label {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--white);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.7rem;
+  border-radius: 4px;
+  margin-bottom: 0.6rem;
+}
+
+.bonus-title {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--brown);
+  margin-bottom: 0.3rem;
+}
+
+.bonus-desc {
+  font-size: 0.88rem;
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+/* ===== SUITABILITY TAG ===== */
+.suitability {
+  background: linear-gradient(135deg, #F0F7ED, #E8F1E4);
+  border: 1px solid rgba(107, 143, 91, 0.3);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 720px;
+}
+
+.suitability-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent-green);
+}
+
+/* ===== SOCIAL PROOF ===== */
+.social-proof {
+  background: var(--white);
+}
+
+.testimonial {
+  background: var(--cream);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 0.8rem;
+  border-right: 3px solid var(--gold);
+  position: relative;
+}
+
+.testimonial::before {
+  content: '\201D';
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  font-size: 2.2rem;
+  color: var(--gold-light);
+  font-family: serif;
+  line-height: 1;
+}
+
+.testimonial-text {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  padding-right: 1.3rem;
+  line-height: 1.7;
+}
+
+.testimonial-source {
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  margin-top: 0.4rem;
+  font-weight: 500;
+}
+
+/* ===== SCHEDULE ===== */
+.schedule {
+  background: var(--cream);
+}
+
+.schedule-box {
+  background: var(--white);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.schedule-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  gap: 0.7rem;
+}
+
+.schedule-row:last-child {
+  border-bottom: none;
+}
+
+.schedule-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.schedule-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--brown);
+}
+
+.schedule-value {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  margin-top: 0.1rem;
+}
+
+/* ===== WHO IS THIS FOR ===== */
+.who-for {
+  background: var(--white);
+}
+
+.who-list {
+  list-style: none;
+}
+
+.who-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.55rem 0;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+.who-list li .check {
+  color: var(--accent-green);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ===== PRICING ===== */
+.pricing {
+  background: linear-gradient(175deg, var(--brown), var(--brown-deep));
+  color: var(--white);
+  text-align: center;
+  padding: 2.5rem 1.25rem;
+}
+
+.pricing .section-title {
+  color: var(--gold-light);
+}
+
+.pricing-cards {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pricing-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 16px;
+  padding: 1.5rem 1.2rem;
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.pricing-card.featured {
+  border-color: var(--gold);
+  background: rgba(200, 150, 62, 0.12);
+}
+
+.pricing-card.featured::before {
+  content: 'הכי משתלם';
+  position: absolute;
+  top: -11px;
+  right: 50%;
+  transform: translateX(50%);
+  background: var(--gold);
+  color: var(--brown);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.9rem;
+  border-radius: 50px;
+  white-space: nowrap;
+}
+
+.pricing-label {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 0.4rem;
+}
+
+.pricing-amount {
+  font-family: 'Rubik', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--gold-light);
+  line-height: 1;
+}
+
+.pricing-amount span {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.pricing-note {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+  margin-top: 0.4rem;
+}
+
+.pricing-includes {
+  margin-top: 1.2rem;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.8;
+}
+
+.guarantee {
+  margin-top: 1.2rem;
+  padding: 0.8rem 1rem;
+  background: rgba(107, 143, 91, 0.15);
+  border: 1px solid rgba(107, 143, 91, 0.3);
+  border-radius: 10px;
+  display: inline-block;
+  max-width: 420px;
+}
+
+.guarantee-text {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+}
+
+/* ===== FAQ (Collapsible) ===== */
+.faq {
+  background: var(--cream);
+}
+
+.faq-item {
+  background: var(--white);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  margin-bottom: 0.6rem;
+  overflow: hidden;
+}
+
+.faq-q {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--brown);
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.faq-q:hover {
+  background: rgba(200, 150, 62, 0.05);
+}
+
+.faq-q:active {
+  background: rgba(200, 150, 62, 0.1);
+}
+
+.faq-q::after {
+  content: '+';
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--gold);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+}
+
+.faq-item.open .faq-q::after {
+  transform: rotate(45deg);
+}
+
+.faq-a {
+  font-size: 0.88rem;
+  color: var(--text-soft);
+  line-height: 1.7;
+  padding: 0 1.2rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding-bottom 0.3s ease;
+  padding-bottom: 0;
+}
+
+.faq-item.open .faq-a {
+  max-height: 300px;
+  padding-bottom: 1rem;
+}
+
+/* ===== FINAL CTA ===== */
+.final-cta {
+  background: var(--warm-bg);
+  text-align: center;
+  padding: 2.5rem 1.25rem;
+}
+
+.final-cta-text {
+  font-size: 1.1rem;
+  color: var(--text-main);
+  margin-bottom: 1.2rem;
+  line-height: 1.8;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.final-cta .cta-button {
+  background: var(--brown);
+  color: var(--gold-light);
+}
+
+.final-cta .cta-button:hover {
+  background: var(--brown-deep);
+}
+
+.final-cta .cta-button:active {
+  background: var(--brown-darkest);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--text-main);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 1.2rem;
+  font-size: 0.78rem;
+}
+
+.footer a {
+  color: var(--gold-light);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ===== STICKY MOBILE CTA ===== */
+.sticky-cta {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sticky-cta {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: var(--brown-deep);
+    border-top: 2px solid var(--gold);
+    padding: 0.6rem 1rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+  }
+
+  .sticky-cta-price {
+    color: var(--gold-light);
+    font-family: 'Rubik', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .sticky-cta-price small {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    display: block;
+  }
+
+  .sticky-cta .cta-button {
+    font-size: 0.95rem;
+    padding: 0.7rem 1.4rem;
+    white-space: nowrap;
+    animation: none;
+    flex-shrink: 0;
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (min-width: 768px) {
+  .hero {
+    padding: 3.5rem 2rem 4rem;
+  }
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  .section {
+    padding: 3rem 2rem;
+  }
+  .section-title {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .hero h1 {
+    font-size: 1.55rem;
+  }
+  .hero-sub {
+    font-size: 0.98rem;
+  }
+  .pricing-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  .pricing-card {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+/* ===== MID-PAGE CTA ===== */
+.mid-cta {
+  text-align: center;
+  padding: 1.5rem 1.25rem;
+  background: var(--cream);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.benefit-card, .testimonial, .bonus-card {
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+.benefit-card:nth-child(1) { animation-delay: 0.1s; }
+.benefit-card:nth-child(2) { animation-delay: 0.15s; }
+.benefit-card:nth-child(3) { animation-delay: 0.2s; }
+.benefit-card:nth-child(4) { animation-delay: 0.25s; }
+
+/* ===== COUNTDOWN ===== */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.countdown-unit {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 0.4rem 0.6rem;
+  min-width: 52px;
+  text-align: center;
+}
+
+.countdown-number {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1;
+}
+
+.countdown-label {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.55);
+  margin-top: 0.15rem;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== URGENCY BAR ===== -->
+<div class="urgency-bar">
+  🔥 הרשמה מוקדמת ב-99₪ עד שבת 21.3 — אחרי זה המחיר עולה!
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🍞 סדנה מיוחדת לפסח</div>
+    <h1>
+      פסח מתקרב<br>
+      ו<span>הלחם לא חייב להיעלם</span> מהשולחן
+    </h1>
+    <p class="hero-sub">
+      סדנת לחמים דלי פחמימה בזום. ללא גלוטן, ללא סוכר.<br>
+      נכין ביחד, כל אחד מהמטבח שלו, ותצאו עם חוברת מתכונים מלאה.
+    </p>
+    <div class="hero-details">
+      <div class="hero-detail">
+        <span class="icon">📅</span>
+        <span>חמישי 26.3 | 19:30</span>
+      </div>
+      <div class="hero-detail">
+        <span class="icon">💻</span>
+        <span>בזום, מהבית</span>
+      </div>
+      <div class="hero-detail">
+        <span class="icon">📖</span>
+        <span>חוברת + בונוס חלות</span>
+      </div>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown" id="countdown">
+      <div class="countdown-unit">
+        <div class="countdown-number" id="cd-days">--</div>
+        <div class="countdown-label">ימים</div>
+      </div>
+      <div class="countdown-unit">
+        <div class="countdown-number" id="cd-hours">--</div>
+        <div class="countdown-label">שעות</div>
+      </div>
+      <div class="countdown-unit">
+        <div class="countdown-number" id="cd-mins">--</div>
+        <div class="countdown-label">דקות</div>
+      </div>
+    </div>
+
+    <!-- Price anchor in hero -->
+    <div class="hero-price-anchor">החל מ-<strong>99₪</strong> בלבד</div>
+
+    <!-- Hero CTA -->
+    <div>
+      <a href="https://meshulam.co.il/purchase?b=837d3eea33ffd7c939f75e47086242ac" class="cta-button cta-button--hero">שמרו לי מקום בסדנה 🍞</a>
+      <span class="cta-subtext">הצטרפו ל-350+ שלמדו לאפות בסדנאות שלנו</span>
+    </div>
+
+    <!-- Inline social proof in hero -->
+    <div class="inline-testimonial">
+      <div class="inline-testimonial-text">
+        "אחרי כל סדנה שלך אני אומרת לעצמי איפה הייתי עד היום. פשוט מאוד. כבר מחכה לסדנה הבאה"
+      </div>
+      <div class="inline-testimonial-source">— שמחה, משתתפת חוזרת</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INSTRUCTOR CREDIBILITY ===== -->
+<section class="instructor section">
+  <div class="instructor-content">
+    <div class="instructor-avatar">👩‍🍳</div>
+    <div class="instructor-info">
+      <div class="instructor-name">מי מלמדת? התפריט</div>
+      <div class="instructor-bio">
+        יוצרת תוכן ומתכונים דלי פחמימה. מלמדת בסדנאות לייב ומחברת ספרי מתכונים שכבר נמצאים במטבחים של מאות משפחות בארץ.
+      </div>
+      <div class="instructor-stats">
+        <span class="instructor-stat">350+ משתתפות בסדנאות</span>
+        <span class="instructor-stat">3 ספרי מתכונים</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RECOGNITION (shortened) ===== -->
+<section class="recognition section">
+  <div class="recognition-text">
+    <p>
+      כל שנה אותו דבר — פסח מגיע, ו<span class="highlight">הלחם פשוט נעלם מהשולחן</span>.
+    </p>
+    <p>
+      מי שלא אוכל פחמימות נשאר עם כלום, או עם תחליפים בטעם של קרטון.
+      ואם יש במשפחה סוכרתי או צליאקי? ארוחת החג הופכת לשדה מוקשים.
+    </p>
+    <p class="recognition-punchline">
+      מה אם הייתם יכולים להכין לחם אמיתי, דל פחמימה, ללא גלוטן — שכולם ירצו לאכול?
+    </p>
+  </div>
+</section>
+
+<!-- ===== MID-PAGE CTA ===== -->
+<div class="mid-cta">
+  <a href="https://meshulam.co.il/purchase?b=837d3eea33ffd7c939f75e47086242ac" class="cta-button">אני רוצה לחם אמיתי בפסח הזה ←</a>
+</div>
+
+<!-- ===== WHAT YOU GET ===== -->
+<section class="what-you-get section">
+  <h2 class="section-title">מה קורה בסדנה?</h2>
+
+  <div class="benefit-card">
+    <div class="benefit-number">1</div>
+    <div class="benefit-title">מתכון אחד נכין ביחד, בזמן אמת</div>
+    <div class="benefit-desc">
+      אתם מכינים את המצרכים מראש, ובסדנה אנחנו הולכים צעד אחר צעד ביחד. כל אחד מהמטבח שלו, אני מדריכה לייב. נכין לחם מחבת, בלי תנור, בלי המתנה, ובסוף הסדנה יהיה לכם לחם מחבת מעולה לטוסט ולכריך.
+    </div>
+  </div>
+
+  <div class="benefit-card">
+    <div class="benefit-number">2</div>
+    <div class="benefit-title">עוד 2-3 מתכוני לחם בהדגמה מלאה</div>
+    <div class="benefit-desc">
+      אני מכינה, מסבירה, מראה כל שלב ואתם צופים ושואלים שאלות. ככה תכירו סוגי לחמים שונים ותוכלו להכין לבד אחר כך בקלות.
+    </div>
+  </div>
+
+  <div class="benefit-card">
+    <div class="benefit-number">3</div>
+    <div class="benefit-title">חוברת מתכונים מלאה</div>
+    <div class="benefit-desc">
+      בסיום הסדנה תקבלו חוברת עם כל המתכונים, כולל הסברים על חומרי הגלם, טיפים, ותמונות. הכל במסמך מסודר שנשאר אצלכם לתמיד, כולל גרסת PDF נוחה להדפסה.
+    </div>
+  </div>
+
+  <div class="benefit-card">
+    <div class="benefit-number">4</div>
+    <div class="benefit-title">קבוצת וואטסאפ + הקלטה</div>
+    <div class="benefit-desc">
+      קבוצת וואטסאפ משותפת למשתתפים לשאלות, תמונות, ושיתוף. ההקלטה של הסדנה תישלח אחרי, כדי שתוכלו לחזור שוב על הכל בקצב ובזמן שלכם.
+    </div>
+  </div>
+</section>
+
+<!-- ===== BONUS ===== -->
+<section class="bonus-section section">
+  <h2 class="section-title">🎁 בונוס מיוחד לסדנה הזו</h2>
+
+  <div class="bonus-card">
+    <div class="bonus-label">מוסף חלות</div>
+    <div class="bonus-title">מוסף חלות לשולחן החג, 3 מתכונים</div>
+    <div class="bonus-desc">
+      שלושה מתכוני חלות דלות פחמימה שמתאימות לשבת, לחג, ולכל שולחן משפחתי.<br>
+      ללא גלוטן, ללא סוכר, וכל המשפחה אוכלת מאותה חלה.<br>
+      <strong>המוסף מגיע בנוסף לחוברת הסדנה, בלי תוספת תשלום.</strong>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SUITABILITY ===== -->
+<div class="section" style="padding-top: 0; padding-bottom: 0;">
+  <div class="suitability">
+    <div class="suitability-text">
+      ✅ כל המתכונים בסדנה מתאימים לסוכרתיים, צליאקים, ודלת פחמימה
+    </div>
+  </div>
+</div>
+
+<!-- ===== WHO IS THIS FOR ===== -->
+<section class="who-for section">
+  <h2 class="section-title">הסדנה הזו בשבילכם אם</h2>
+  <ul class="who-list">
+    <li>
+      <span class="check">✓</span>
+      <span>אתם בתזונה דלת פחמימה ורוצים לחם טעים ואיכותי, לא תחליף שעשוי כולו מעמילנים שהופכים בגוף לסוכרים</span>
+    </li>
+    <li>
+      <span class="check">✓</span>
+      <span>יש במשפחה מישהו עם סכרת או צליאק ואתם רוצים שכולם יאכלו ויהנו בחג</span>
+    </li>
+    <li>
+      <span class="check">✓</span>
+      <span>אתם רוצים ללמוד להכין לחמים בעצמכם, לא להיות תלויים ולשלם הון על ההיצע המצומצם שיש בחנות</span>
+    </li>
+    <li>
+      <span class="check">✓</span>
+      <span>ניסיתם מתכונים מהאינטרנט וזה תמיד יוצא חיוור, דחוס ובטעם ביצים</span>
+    </li>
+    <li>
+      <span class="check">✓</span>
+      <span>רוצים שבחג הזה כולם יאכלו משולחן אחד שמתאים לכולם</span>
+    </li>
+  </ul>
+</section>
+
+<!-- ===== SOCIAL PROOF ===== -->
+<section class="social-proof section">
+  <h2 class="section-title">מה אומרים משתתפים מסדנאות קודמות</h2>
+
+  <div class="testimonial">
+    <div class="testimonial-text">
+      גילו לאח שלי סכרת נעורים ולי יש צליאק כבר שנים, ככה שכל המתכונים שלך מושלמים עבור שנינו. תודה לך על רגע של שלווה.
+    </div>
+    <div class="testimonial-source">— הודעה מעוקבת באינסטגרם</div>
+  </div>
+
+  <div class="testimonial">
+    <div class="testimonial-text">
+      קניתי את מארז ספרי המתכונים שלך ואני חייבת לשתף אותך שאני ממש נהנית! ההסברים על חומרי הגלם מאוד עוזרים. יש דברים שהמשפחה אוכלים ואפילו לא שמים לב שזה דל פחמימה.
+    </div>
+    <div class="testimonial-source">— רינת, לקוחה</div>
+  </div>
+
+  <div class="testimonial">
+    <div class="testimonial-text">
+      הסדנא לשבועות היתה נהדרת. ממתינה לסדנאות נוספות 🙏
+    </div>
+    <div class="testimonial-source">— הודעה מעוקבת</div>
+  </div>
+</section>
+
+<!-- ===== SCHEDULE ===== -->
+<section class="schedule section">
+  <h2 class="section-title">פרטים טכניים</h2>
+  <div class="schedule-box">
+    <div class="schedule-row">
+      <span class="schedule-icon">📅</span>
+      <div>
+        <div class="schedule-label">מתי</div>
+        <div class="schedule-value">יום חמישי, 26 במרץ 2026, בשעה 19:30</div>
+      </div>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-icon">💻</span>
+      <div>
+        <div class="schedule-label">איפה</div>
+        <div class="schedule-value">בזום. לינק יישלח למייל ולוואטסאפ לפני הסדנה</div>
+      </div>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-icon">⏱️</span>
+      <div>
+        <div class="schedule-label">כמה זמן</div>
+        <div class="schedule-value">כשעה וחצי עד שעתיים</div>
+      </div>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-icon">🛒</span>
+      <div>
+        <div class="schedule-label">מה צריך להכין</div>
+        <div class="schedule-value">רשימת מצרכים תישלח אחרי ההרשמה, ככה תספיקו לקנות הכל מראש</div>
+      </div>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-icon">🎥</span>
+      <div>
+        <div class="schedule-label">לא יכולים בתאריך?</div>
+        <div class="schedule-value">הסדנה מוקלטת. תקבלו את ההקלטה + חוברת גם אם לא הצלחתם להגיע</div>
+      </div>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-icon">📖</span>
+      <div>
+        <div class="schedule-label">מה מקבלים אחרי</div>
+        <div class="schedule-value">חוברת מתכוני הסדנה + מוסף 3 מתכוני חלות לחג, הכל במייל, כולל PDF להדפסה</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="pricing" id="pricing">
+  <h2 class="section-title">כמה זה עולה?</h2>
+
+  <div class="pricing-cards">
+    <div class="pricing-card featured">
+      <div class="pricing-label">הרשמה מוקדמת</div>
+      <div class="pricing-amount">99 <span>₪</span></div>
+      <div class="pricing-note">עד יום שבת 21.3</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-label">מחיר רגיל</div>
+      <div class="pricing-amount">129 <span>₪</span></div>
+      <div class="pricing-note">מיום ראשון 22.3</div>
+    </div>
+  </div>
+
+  <a href="https://meshulam.co.il/purchase?b=837d3eea33ffd7c939f75e47086242ac" class="cta-button cta-button--hero">שמרו לי מקום בסדנה 🍞</a>
+
+  <div class="pricing-includes">
+    המחיר כולל: סדנה לייב בזום + הקלטה + חוברת מתכונים + מוסף חלות לחג + קבוצת וואטסאפ
+  </div>
+
+  <div class="guarantee">
+    <div class="guarantee-text">
+      🎥 <strong>לא יכולים להגיע?</strong> תקבלו הקלטה מלאה + כל החומרים. אתם לא מפסידים כלום.
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq section">
+  <h2 class="section-title">שאלות שתמיד שואלים</h2>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      <span>אני לא יודע/ת לאפות, זה מתאים לי?</span>
+    </div>
+    <div class="faq-a">בהחלט. הסדנה מיועדת גם למתחילים. אני מסבירה כל שלב, כל חומר גלם, וכל טעות נפוצה. תצאו עם ביטחון להכין לבד והמתכונים שאני מלמדת לא מצריכים שום ציוד מיוחד או ניסיון קודם באפייה.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      <span>מה אם אני לא יכול/ה להגיע בתאריך?</span>
+    </div>
+    <div class="faq-a">הסדנה מוקלטת. תקבלו את ההקלטה + את חוברת המתכונים + את מוסף החלות גם אם לא השתתפתם בלייב.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      <span>מאיפה קונים את חומרי הגלם?</span>
+    </div>
+    <div class="faq-a">רשימת מצרכים מפורטת תישלח אחרי ההרשמה. רוב החומרים זמינים בחנויות טבע, באינטרנט, או ברשתות השיווק הגדולות. אני גם אתן טיפים למי שקונה לראשונה.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      <span>האם המתכונים מתאימים לסוכרתיים / צליאקים?</span>
+    </div>
+    <div class="faq-a">כן. כל המתכונים שבסדנה מתאימים לסוכרתיים, צליאקים ותזונה דלת פחמימה.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      <span>אפשר לשלם בתשלומים?</span>
+    </div>
+    <div class="faq-a">כרגע המחיר הוא תשלום אחד של 99 או 129 ש״ח.</div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta">
+  <div class="final-cta-text">
+    פסח הזה, הלחם לא חייב להיעלם מהשולחן.<br>
+    בואו תלמדו להכין לחמים שכולם אוכלים — גם סוכרתיים, גם צליאקים, גם כל המשפחה.<br>
+    <strong>ואף אחד לא מרגיש שונה.</strong>
+  </div>
+  <a href="https://meshulam.co.il/purchase?b=837d3eea33ffd7c939f75e47086242ac" class="cta-button">אני רוצה לחם אמיתי בפסח ←</a>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  התפריט &copy; 2026 | כל הזכויות שמורות<br>
+  לשאלות, שלחו הודעה בפרטי באינסטגרם <a href="https://instagram.com/hatafrit">@hatafrit</a>
+</footer>
+
+<!-- ===== STICKY MOBILE CTA ===== -->
+<div class="sticky-cta">
+  <div class="sticky-cta-price">
+    99₪
+    <small>הרשמה מוקדמת</small>
+  </div>
+  <a href="https://meshulam.co.il/purchase?b=837d3eea33ffd7c939f75e47086242ac" class="cta-button">שמרו לי מקום</a>
+</div>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+// Countdown to workshop: March 26, 2026 19:30 Israel time
+(function() {
+  var target = new Date('2026-03-26T19:30:00+03:00').getTime();
+
+  function update() {
+    var now = Date.now();
+    var diff = target - now;
+
+    if (diff <= 0) {
+      document.getElementById('countdown').style.display = 'none';
+      return;
+    }
+
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+    document.getElementById('cd-days').textContent = days;
+    document.getElementById('cd-hours').textContent = hours;
+    document.getElementById('cd-mins').textContent = mins;
+  }
+
+  update();
+  setInterval(update, 60000);
+})();
+
+// Show sticky CTA only after scrolling past hero
+(function() {
+  var sticky = document.querySelector('.sticky-cta');
+  if (!sticky) return;
+
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        var scrolled = window.scrollY > window.innerHeight * 0.6;
+        sticky.style.transform = scrolled ? 'translateY(0)' : 'translateY(100%)';
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  sticky.style.transform = 'translateY(100%)';
+  sticky.style.transition = 'transform 0.3s ease';
+})();
+</script>
+
+</body>
+</html>
