@@ -1,17 +1,19 @@
-# Dev screenshots (local only)
-temporary screenshots/
+# Dev tools (screenshot scripts, temp files)
+_dev/
+.playwright-mcp/
+
+# Node
+node_modules/
 
 # Claude internal
 .claude/
 
-# Node modules
-node_modules/
-
-# Puppeteer / screenshot dev scripts (reference local machine paths)
-screenshot.mjs
-screenshot-footer.mjs
-screenshot-hero.mjs
+# Vercel
+.vercel/
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Docs (local planning files)
+docs/

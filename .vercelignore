@@ -1,0 +1,16 @@
+# Temp screenshots from dev
+bonus-*.png
+bonuses-*.png
+full-page-*.png
+guarantee-*.png
+hero-*.png
+value-*.png
+screenshot-*.png
+
+# Dev scripts
+*.mjs
+.playwright-mcp/
+temporary screenshots/
+node_modules/
+sales-page-review.html
+temp-*

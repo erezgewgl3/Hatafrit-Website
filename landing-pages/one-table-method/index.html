@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיטת שולחן אחד | התפריט</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Frank+Ruhl+Libre:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --warm-cream: #FAF6F1;
+    --deep-brown: #3D2B1F;
+    --warm-gold: #C4923A;
+    --soft-olive: #7A8B6F;
+    --burnt-orange: #D4764E;
+    --light-sand: #F0E6D8;
+    --text-primary: #2C1810;
+    --text-secondary: #5C4A3A;
+    --text-muted: #8B7968;
+    --white: #FFFFFF;
+    --red-accent: #C0392B;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Heebo', sans-serif; background: var(--warm-cream); color: var(--text-primary); line-height: 1.8; overflow-x: hidden; }
+  img { display: block; max-width: 100%; height: auto; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+    background: var(--deep-brown); color: var(--white); position: relative; overflow: hidden;
+  }
+  .hero-content {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 60px 48px 60px 32px; position: relative; z-index: 1;
+  }
+  .hero-image { position: relative; overflow: hidden; }
+  .hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: center center; }
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-image { height: 35vh; order: -1; }
+    .hero-image::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+      background: linear-gradient(to top, var(--deep-brown), transparent); pointer-events: none;
+    }
+    .hero-content { padding: 32px 24px 48px; align-items: center; text-align: center; }
+    .hero-content .cta-btn { align-self: center; }
+    .hero-content .hero-badge { align-self: center; }
+  }
+  .hero-badge {
+    display: inline-block; align-self: flex-start;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 40px; padding: 8px 22px; font-size: 13px; font-weight: 500;
+    margin-bottom: 24px; color: var(--warm-gold);
+  }
+  .hero h1 {
+    font-family: 'Frank Ruhl Libre', serif; font-size: clamp(30px, 5vw, 50px);
+    font-weight: 900; line-height: 1.3; margin-bottom: 18px;
+  }
+  .hero h1 em { font-style: normal; color: var(--warm-gold); }
+  .hero-sub {
+    font-size: clamp(15px, 2.2vw, 18px); font-weight: 300; line-height: 1.9;
+    opacity: 0.88; margin-bottom: 32px; max-width: 500px;
+  }
+  .cta-btn {
+    display: inline-block; align-self: flex-start; background: var(--warm-gold); color: var(--white);
+    font-family: 'Heebo', sans-serif; font-size: 19px; font-weight: 700;
+    padding: 17px 44px; border-radius: 12px; text-decoration: none; border: none; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 24px rgba(196,146,58,0.35);
+  }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(196,146,58,0.5); }
+  .cta-sub { margin-top: 12px; font-size: 13px; opacity: 0.6; }
+
+  /* ===== SHARED ===== */
+  section { padding: 64px 24px; }
+  .container { max-width: 760px; margin: 0 auto; }
+  .section-label { font-size: 13px; font-weight: 700; color: var(--warm-gold); letter-spacing: 1px; margin-bottom: 8px; }
+  .section-title {
+    font-family: 'Frank Ruhl Libre', serif; font-size: clamp(24px, 4vw, 36px);
+    font-weight: 700; line-height: 1.4; margin-bottom: 16px; color: var(--deep-brown);
+  }
+  .section-body { font-size: 17px; color: var(--text-secondary); line-height: 1.9; }
+  .section-body p + p { margin-top: 14px; }
+
+  /* ===== BEFORE / AFTER — images only, no bullet lists ===== */
+  .before-after { background: var(--white); padding: 56px 24px; }
+  .ba-visual {
+    margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  }
+  @media (max-width: 640px) { .ba-visual { grid-template-columns: 1fr; } }
+  .ba-img-card { position: relative; overflow: hidden; }
+  .ba-img-card img { width: 100%; height: 280px; object-fit: cover; }
+  @media (max-width: 640px) { .ba-img-card img { height: 200px; } }
+  .ba-img-card .ba-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 24px;
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 700; color: white;
+  }
+  .ba-img-card .ba-overlay .ba-title { font-size: 20px; }
+  .ba-img-card .ba-overlay .ba-desc { font-size: 14px; font-family: 'Heebo', sans-serif; font-weight: 400; opacity: 0.9; margin-top: 4px; }
+  .ba-img-card.before .ba-overlay { background: linear-gradient(to top, rgba(140,60,35,0.92) 0%, transparent 100%); }
+  .ba-img-card.after .ba-overlay { background: linear-gradient(to top, rgba(70,100,55,0.92) 0%, transparent 100%); }
+
+  /* ===== SOCIAL PROOF ===== */
+  .social-proof { background: var(--warm-cream); }
+  .testimonials { margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+  .testimonial {
+    background: var(--white); border-radius: 14px; padding: 22px 24px;
+    border: 1px solid #E8DDD0;
+  }
+  .testimonial.featured {
+    padding: 28px 28px; border-color: var(--warm-gold); border-width: 2px;
+  }
+  .testimonial.featured .quote { font-size: 19px; }
+  .testimonial .quote {
+    font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 8px;
+  }
+  .testimonial .quote::before {
+    content: '״'; font-family: 'Frank Ruhl Libre', serif;
+    font-size: 28px; color: var(--warm-gold); line-height: 0; vertical-align: -6px; margin-left: 4px;
+  }
+  .testimonial .source { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+  .testimonial .source .tag {
+    display: inline-block; background: var(--light-sand);
+    padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 500;
+  }
+  .testimonial-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px;
+  }
+  @media (max-width: 640px) { .testimonial-grid { grid-template-columns: 1fr; } }
+
+  /* ===== ABOUT ADI ===== */
+  .about-adi { background: var(--light-sand); }
+  .about-inner {
+    display: grid; grid-template-columns: 180px 1fr; gap: 28px; align-items: center;
+  }
+  @media (max-width: 640px) {
+    .about-inner { grid-template-columns: 1fr; text-align: center; }
+    .about-photo { margin: 0 auto; }
+  }
+  .about-photo {
+    width: 180px; height: 180px; border-radius: 50%; overflow: hidden;
+    border: 4px solid var(--warm-gold); box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+  .about-text p { font-size: 16px; color: var(--text-secondary); line-height: 1.8; }
+  .about-text p + p { margin-top: 10px; }
+  .about-stats {
+    display: flex; gap: 24px; margin-top: 16px; flex-wrap: wrap;
+  }
+  @media (max-width: 640px) { .about-stats { justify-content: center; } }
+  .about-stat { text-align: center; }
+  .about-stat .num {
+    font-family: 'Frank Ruhl Libre', serif; font-size: 24px; font-weight: 900;
+    color: var(--deep-brown);
+  }
+  .about-stat .lbl { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+
+  /* ===== PRICE ANCHOR ===== */
+  .price-anchor {
+    margin-top: 24px; margin-bottom: 8px; text-align: center;
+    font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.8;
+  }
+  .price-anchor strong { color: rgba(255,255,255,0.95); font-weight: 600; }
+
+  /* ===== WHAT YOU GET ===== */
+  .what-you-get { background: var(--white); }
+  .core-offer {
+    background: var(--warm-cream); border-radius: 20px; padding: 36px 28px;
+    margin-top: 24px; border: 2px solid var(--warm-gold);
+  }
+  .core-offer h3 {
+    font-family: 'Frank Ruhl Libre', serif; font-size: 22px; font-weight: 700;
+    color: var(--deep-brown); margin-bottom: 16px;
+  }
+  .core-layers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 640px) { .core-layers { grid-template-columns: 1fr; } }
+  .layer-item { background: var(--white); padding: 16px 18px; border-radius: 12px; }
+  .layer-item strong { display: block; font-size: 15px; color: var(--deep-brown); margin-bottom: 2px; }
+  .layer-item span { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ===== MID CTA ===== */
+  .mid-cta { background: var(--light-sand); text-align: center; padding: 48px 24px; }
+  .mid-cta .section-title { margin-bottom: 20px; }
+
+  /* ===== BONUSES ===== */
+  .bonuses { background: var(--warm-cream); }
+  .bonus-stack { margin-top: 28px; display: flex; flex-direction: column; gap: 16px; }
+  .bonus-card {
+    background: var(--white); border-radius: 16px; overflow: hidden;
+    border: 1px solid #E8DDD0; position: relative;
+  }
+  .bonus-card.expiring { border-color: var(--red-accent); background: #FDF5F4; }
+  .bonus-card.has-image { display: grid; grid-template-columns: 160px 1fr; }
+  @media (max-width: 640px) {
+    .bonus-card.has-image { grid-template-columns: 1fr; }
+    .bonus-card.has-image .bonus-img img { height: 200px; }
+  }
+  .bonus-img { overflow: hidden; }
+  .bonus-img img { width: 100%; height: 100%; object-fit: cover; min-height: 140px; }
+  .bonus-body {
+    padding: 20px 24px; display: flex; justify-content: space-between;
+    align-items: flex-start; gap: 14px;
+  }
+  .bonus-info h4 {
+    font-family: 'Frank Ruhl Libre', serif; font-size: 17px; font-weight: 700;
+    color: var(--deep-brown); margin-bottom: 4px;
+  }
+  .bonus-info p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+  .bonus-value { flex-shrink: 0; text-align: center; min-width: 65px; }
+  .bonus-value .amount {
+    font-family: 'Frank Ruhl Libre', serif; font-size: 20px; font-weight: 700;
+    color: var(--text-muted); text-decoration: line-through; opacity: 0.6;
+  }
+  .bonus-value .label { font-size: 14px; color: var(--soft-olive); font-weight: 700; margin-top: 2px; }
+  .expiring-banner {
+    grid-column: 1 / -1; background: var(--red-accent); color: white;
+    text-align: center; padding: 7px 16px; font-size: 13px; font-weight: 700;
+  }
+
+  /* ===== VALUE REVEAL ===== */
+  .value-reveal {
+    margin-top: 36px; text-align: center; padding: 36px 28px;
+    background: linear-gradient(135deg, #3D2B1F, #5C3D2E);
+    border-radius: 16px; color: white;
+  }
+  .value-reveal .struck {
+    font-family: 'Frank Ruhl Libre', serif; font-size: 32px; font-weight: 700;
+    text-decoration: line-through; opacity: 0.5;
+  }
+  .value-reveal .desc { font-size: 15px; opacity: 0.8; }
+  .value-reveal .price-reveal {
+    font-family: 'Frank Ruhl Libre', serif; font-size: clamp(48px, 8vw, 64px);
+    font-weight: 900; color: var(--warm-gold); line-height: 1; margin: 12px 0 4px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+
+  /* ===== FAQ ===== */
+  .faq { background: var(--white); }
+  .faq-list { margin-top: 24px; display: flex; flex-direction: column; gap: 8px; }
+  .faq-item {
+    background: var(--warm-cream); border-radius: 12px;
+    border: 1px solid #E8DDD0; overflow: hidden;
+  }
+  .faq-item summary {
+    padding: 16px 22px; cursor: pointer; font-weight: 600; font-size: 16px;
+    color: var(--deep-brown); list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+'; font-size: 22px; color: var(--warm-gold); font-weight: 300;
+    transition: transform 0.2s;
+  }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item .faq-answer {
+    padding: 0 22px 18px; font-size: 15px; color: var(--text-secondary); line-height: 1.8;
+  }
+
+  /* ===== GUARANTEE ===== */
+  .guarantee { background: var(--warm-cream); padding: 56px 24px; }
+  .guarantee-box {
+    background: #EDF3EA; border: 2px solid #C5D9BB; border-radius: 20px;
+    padding: 40px 32px; text-align: center;
+  }
+  .guarantee-box .icon { font-size: 44px; margin-bottom: 12px; }
+  .guarantee-box h3 {
+    font-family: 'Frank Ruhl Libre', serif; font-size: 24px; font-weight: 700;
+    color: var(--deep-brown); margin-bottom: 10px;
+  }
+  .guarantee-box p { font-size: 17px; color: var(--text-secondary); max-width: 480px; margin: 0 auto; line-height: 1.8; }
+  .guarantee-box .guarantee-sub { margin-top: 10px; font-size: 16px; color: var(--deep-brown); font-weight: 600; }
+
+  /* ===== FINAL CTA ===== */
+  .final-cta {
+    background: linear-gradient(165deg, #3D2B1F 0%, #5C3D2E 40%, #7A5240 100%);
+    color: var(--white); text-align: center; padding: 56px 24px;
+  }
+  .final-cta .section-title { color: var(--white); margin-bottom: 8px; }
+  .final-cta .objection { font-size: 16px; opacity: 0.65; font-weight: 300; margin-top: 20px; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center; padding: 32px 24px; background: var(--deep-brown);
+    color: rgba(255,255,255,0.45); font-size: 13px; line-height: 1.8;
+  }
+
+  /* ===== STICKY CTA ===== */
+  .sticky-cta {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: rgba(61,43,31,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    padding: 12px 24px; display: flex; justify-content: center; align-items: center; gap: 16px;
+    z-index: 100; box-shadow: 0 -4px 24px rgba(0,0,0,0.25);
+    transform: translateY(100%); transition: transform 0.4s ease;
+  }
+  .sticky-cta.visible { transform: translateY(0); }
+  .sticky-cta .price {
+    font-family: 'Frank Ruhl Libre', serif; font-size: 22px; font-weight: 900; color: var(--warm-gold);
+  }
+  .sticky-cta .cta-btn { font-size: 15px; padding: 11px 28px; box-shadow: none; }
+  .spacer-bottom { height: 68px; }
+
+  /* ===== ANIMATIONS ===== */
+  @media (prefers-reduced-motion: no-preference) {
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== MOBILE SPACING & TYPOGRAPHY ===== */
+  @media (max-width: 640px) {
+    section { padding: 40px 20px; }
+    .section-body { font-size: 16px; }
+    .bonus-info p { font-size: 13.5px; }
+    .faq-item .faq-answer { font-size: 14.5px; }
+    .before-after { padding: 36px 20px; }
+    .mid-cta { padding: 32px 20px; }
+    .guarantee { padding: 36px 20px; }
+    .guarantee-box { padding: 28px 24px; }
+    .final-cta { padding: 40px 20px; }
+    .value-reveal { margin-top: 20px; padding: 28px 24px; }
+    .value-section { padding: 0 20px 32px !important; }
+    .bonuses { padding-bottom: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== 1. HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">מערכת ל-6 שבועות | השקה מיוחדת</div>
+    <h1>לא עוד <em>שתי ארוחות</em> כל ערב.<br>שולחן אחד, <em>ארוחה אחת.</em></h1>
+    <p class="hero-sub">ב-6 שבועות, במקום שתי ארוחות כל ערב — ארוחה אחת שמתאימה לכולם.<br>תפריטים מוכנים, רשימות קניות, והכנה מראש שלוקחת דקות.<br>מתאים לסוכרתיים, ציליאקים, ודלת פחמימה.</p>
+    <a href="#final-cta" class="cta-btn hero-cta-btn">להתחיל עכשיו ←</a>
+    <p class="cta-sub">אם המשפחה שלכם לא טועמת לפחות מנה אחת תוך שבועיים — החזר מלא.</p>
+  </div>
+  <div class="hero-image">
+    <img src="images/image-1.avif" alt="עדי מהתפריט במטבח">
+  </div>
+</section>
+
+<!-- ===== 2. BEFORE / AFTER — images only, one line each ===== -->
+<section class="before-after">
+  <div class="container">
+    <div class="section-label">מכירים את זה?</div>
+    <div class="section-title">יום שלישי, 18:00. הילדים רעבים. כולם עייפים.</div>
+    <div class="section-body">
+      <p>חוזרים מהעבודה, הילדים צועקים ״רעבים!״ — זורקים להם פסטה או שניצל, ואז מתחילים מבצע נפרד: עוד סיר, עוד צלחת, עוד ארוחה למי שחייב לאכול אחרת.</p>
+      <p>הילד הסוכרתי אוכל ״אוכל מיוחד״ — והאחים שמים לב. בן הזוג עם הצליאק אוכל לבד. ומי שעושה קיטו? אוכלת את השאריות של הילדים. בעמידה. אחרי כולם.</p>
+      <p>כל ערב אותו דבר. שני שולחנות באותו מטבח. מישהו תמיד מרגיש שונה.</p>
+    </div>
+    <div class="ba-visual fade-up">
+      <div class="ba-img-card before">
+        <img src="images/image-2.png" alt="מטבח כאוטי">
+        <div class="ba-overlay">
+          <div class="ba-title">לפני 😔</div>
+          <div class="ba-desc">שתי ארוחות, שלושה סירים. מישהו תמיד מרגיש שונה.</div>
+        </div>
+      </div>
+      <div class="ba-img-card after">
+        <img src="images/image-3.png" alt="שולחן אחד">
+        <div class="ba-overlay">
+          <div class="ba-title">אחרי ✨</div>
+          <div class="ba-desc">ארוחה אחת. כולם ביחד. אף אחד לא שונה.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3. SOCIAL PROOF — moved up, featured quotes ===== -->
+<section class="social-proof">
+  <div class="container">
+    <div class="section-label">מה כותבים לי</div>
+    <div class="section-title">הודעות שקיבלתי מכם...</div>
+
+    <div class="testimonials fade-up">
+      <div class="testimonial featured">
+        <div class="quote">בזכותך הוא אוכל אוכל טעים. כדאי להדגיש שטוב לציליאקים.״</div>
+        <div class="source"><span class="tag">אמא לילד עם סכרת + צליאק</span></div>
+      </div>
+      <div class="testimonial featured">
+        <div class="quote">החבר׳ה שלו במילואים מחסלים הכל ואפילו לא מרגישים שהכל ללא גלוטן וללא סוכר.״</div>
+        <div class="source"><span class="tag">אשת מילואימניק</span></div>
+      </div>
+    </div>
+    <div class="testimonial-grid fade-up">
+      <div class="testimonial">
+        <div class="quote">המתכונים שלך מצילים אותי!״</div>
+        <div class="source"><span class="tag">סכרת הריון</span></div>
+      </div>
+      <div class="testimonial">
+        <div class="quote">לאמא שלי לאחרונה גילו סכרת והמתכונים שלך עוזרים מאוד!!!״</div>
+        <div class="source"><span class="tag">בת למטופלת סכרת</span></div>
+      </div>
+      <div class="testimonial">
+        <div class="quote">שוב הכנתי שתי ארוחות ערב. שוב ישבתי לאכול אחרי כולם. ואז ניסיתי את המתכונים האלה — והילדים ביקשו לטעום.״</div>
+        <div class="source"><span class="tag">אמא שעושה קיטו</span></div>
+      </div>
+      <div class="testimonial">
+        <div class="quote">אחרי כל סדנה שלך אני אומרת לעצמי איפה הייתי עד היום.״</div>
+        <div class="source"><span class="tag">משתתפת סדנה</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ADI ===== -->
+<section class="about-adi">
+  <div class="container">
+    <div class="section-label">מי מאחורי זה</div>
+    <div class="about-inner fade-up">
+      <div class="about-photo">
+        <img src="images/image-8.jpg" alt="עדי מהתפריט">
+      </div>
+      <div class="about-text">
+        <div class="section-title" style="margin-bottom: 10px;">עדי, התפריט</div>
+        <p>כבר שנים שאני מפתחת מתכונים דלי פחמימה, ללא גלוטן וללא סוכר — כאלה שהמשפחה שלי אוכלת בלי לשים לב שהם ״בריאים.״ אחרי 6 ספרי מתכונים, סדנאות שנמכרו שוב ושוב, וקהילה של עשרות אלפי משפחות — בניתי את המערכת שהלוואי שהיתה לי כשהתחלתי.</p>
+        <div class="about-stats">
+          <div class="about-stat"><div class="num">115K+</div><div class="lbl">עוקבים</div></div>
+          <div class="about-stat"><div class="num">6</div><div class="lbl">ספרי מתכונים</div></div>
+          <div class="about-stat"><div class="num">10K+</div><div class="lbl">משפחות ברשימה</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4. WHAT YOU GET — cards only, no flat-lay ===== -->
+<section class="what-you-get" id="what-you-get">
+  <div class="container">
+    <div class="section-label">מה בפנים</div>
+    <div class="section-title">שיטת שולחן אחד — מערכת ל-6 שבועות</div>
+    <div class="section-body">
+      <p>לא עוד אוסף מתכונים. מערכת שלמה שאומרת בדיוק מה לבשל, מתי להכין, ומה לקנות — כדי שיום שלישי בערב ייקח 5 דקות ולא שעה.</p>
+    </div>
+    <div class="core-offer fade-up">
+      <div class="core-layers">
+        <div class="layer-item">
+          <strong>📋 תפריט שבועי</strong>
+          <span>כל ערב כבר מתוכנן. פותחים את התפריט, יודעים מה מכינים.</span>
+        </div>
+        <div class="layer-item">
+          <strong>🔪 מדריך הכנה מראש</strong>
+          <span>שעה ביום שישי — ויום שלישי בערב לוקח 5 דקות.</span>
+        </div>
+        <div class="layer-item">
+          <strong>🌉 מתכוני גשר</strong>
+          <span>מתכון אחד שעובד לכולם — הילדים, הסוכרתי, הציליאקי. אף אחד לא אוכל ״משהו אחר.״</span>
+        </div>
+        <div class="layer-item">
+          <strong>📊 כרטיסי מידע תזונתי</strong>
+          <span>כל מתכון עם הערכים המדויקים — פחמימות, סוכרים, חלבון. בלי לחשב לבד.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5. MID CTA ===== -->
+<section class="mid-cta">
+  <div class="section-title">שולחן אחד. ארוחה אחת. אף אחד לא מרגיש שונה.</div>
+  <a href="#final-cta" class="cta-btn">להתחיל עכשיו ←</a>
+</section>
+
+<!-- ===== 6. BONUSES + VALUE REVEAL ===== -->
+<section class="bonuses">
+  <div class="container">
+    <div class="section-label">גם את זה מקבלים</div>
+    <div class="section-title">בונוסים ממני — הכל כלול, בלי תוספת עלות</div>
+
+    <div class="bonus-stack">
+      <div class="bonus-card has-image fade-up">
+        <div class="bonus-img"><img src="images/image-4.png" alt="מרכיבים למטבח דל פחמימה"></div>
+        <div class="bonus-body">
+          <div class="bonus-info">
+            <h4>🛒 הכל מהסופר</h4>
+            <p>מדריך מרכיבים, תחליפים ורשימת קניות ראשונה. בלי אייהרב. בלי חיפושים. הכל מהסופר בשכונה.</p>
+          </div>
+          <div class="bonus-value"><div class="amount">149 ₪</div><div class="label">כלול ✓</div></div>
+        </div>
+      </div>
+
+      <div class="bonus-card has-image expiring fade-up">
+        <div class="expiring-banner">רק לרוכשים לפני ה-16 באפריל</div>
+        <div class="bonus-img"><img src="images/image-5.jpg" alt="לחם דל פחמימה"></div>
+        <div class="bonus-body">
+          <div class="bonus-info">
+            <h4>🍞 סדנת הלחמים המוקלטת</h4>
+            <p>לחם ב-15 דקות. בלי גלוטן, בלי סוכר. שנתיים חיכיתי לפרוסה הזאת. ההקלטה המלאה עם כל השאלות והתשובות.</p>
+          </div>
+          <div class="bonus-value"><div class="amount">199 ₪</div><div class="label">כלול ✓</div></div>
+        </div>
+      </div>
+
+      <div class="bonus-card has-image fade-up">
+        <div class="bonus-img"><img src="images/image-6.png" alt="שולחן שבת"></div>
+        <div class="bonus-body">
+          <div class="bonus-info">
+            <h4>🕯️ תפריט שבת שבועי</h4>
+            <p>כל יום רביעי — תפריט שבת מוכן: מתכונים, רשימת קניות, לוח זמנים להכנה. 52 שבועות. שולחן שבת שכולם אוכלים ביחד.</p>
+          </div>
+          <div class="bonus-value"><div class="amount">499 ₪</div><div class="label">כלול ✓</div></div>
+        </div>
+      </div>
+
+      <div class="bonus-card has-image fade-up">
+        <div class="bonus-img"><img src="images/image-7.png" alt="קינוחים לחגים"></div>
+        <div class="bonus-body">
+          <div class="bonus-info">
+            <h4>🍯 ערכות הישרדות לחגים</h4>
+            <p>לפני כל חג — תפריט חגיגי לכל המשפחה. מתכונים + הכנה מראש + ״מה להביא כשמגיעים כאורחים.״ בלי לחץ. בלי ארוחה נפרדת.</p>
+          </div>
+          <div class="bonus-value"><div class="amount">249 ₪</div><div class="label">כלול ✓</div></div>
+        </div>
+      </div>
+
+      <div class="bonus-card has-image fade-up">
+        <div class="bonus-img"><img src="images/image-8.jpg" alt="עדי"></div>
+        <div class="bonus-body">
+          <div class="bonus-info">
+            <h4>💬 מפגש קבוצתי חודשי עם עדי בזום</h4>
+            <p>30 דקות בחודש. שאלות ותשובות, טיפים, פתרון בעיות. גישה ישירה לעדי. 12 מפגשים בשנה.</p>
+          </div>
+          <div class="bonus-value"><div class="amount">499 ₪</div><div class="label">כלול ✓</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VALUE REVEAL — own section ===== -->
+<section class="value-section" style="background: var(--warm-cream); padding: 0 24px 48px;">
+  <div class="container">
+    <div class="value-reveal fade-up">
+      <div class="desc">כל זה שווה</div>
+      <div class="struck">2,585 ₪</div>
+      <div class="price-anchor">
+        <strong>ביקור אחד אצל תזונאית = 400–600 ₪.</strong><br>המערכת הזאת = 6 שבועות שלמות + שבת + חגים + גישה לעדי.
+      </div>
+      <div class="desc">המחיר שלכם:</div>
+      <div class="price-reveal">497 ₪ בלבד</div>
+      <a href="#final-cta" class="cta-btn" style="margin-top: 20px; font-size: 20px; padding: 18px 48px; align-self: center; display: inline-block;">להתחיל עכשיו ←</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 7. FAQ — before guarantee and price ===== -->
+<section class="faq">
+  <div class="container">
+    <div class="section-label">שאלות</div>
+    <div class="section-title">שאלות נפוצות</div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>למי זה מתאים?</summary>
+        <div class="faq-answer">למשפחות שמישהו בהן חייב לאכול אחרת — סוכרת, צליאק, רגישות לגלוטן — ומבשלים שתי ארוחות כל ערב. וגם למי שעושה קיטו או דלת פחמימה לבד, והמשפחה אוכלת רגיל — ובסוף אוכלים שאריות של הילדים במקום ארוחה אמיתית. אם זה מוכר, זה בדיוק בשביל זה.</div>
+      </details>
+      <details class="faq-item">
+        <summary>אני לא יודע/ת לבשל. זה בשבילי?</summary>
+        <div class="faq-answer">כן. המתכונים פשוטים, רוב ההכנה נעשית מראש, ויום שלישי בערב לוקח 5 דקות. לחמם במיקרו ולשים על צלחת — זה מספיק.</div>
+      </details>
+      <details class="faq-item">
+        <summary>הילדים שלי בררנים. הם לא יאכלו את זה.</summary>
+        <div class="faq-answer">חלק גדול מהמתכונים נראים ונטעמים כמו ״אוכל רגיל.״ לחם, פיצה, שניצל, מאפים — הילדים לא ידעו שזה שונה. זה בדיוק הקונספט: אף אחד לא מרגיש שונה.</div>
+      </details>
+      <details class="faq-item">
+        <summary>מה אם זה לא עובד?</summary>
+        <div class="faq-answer">אם המשפחה שלכם לא טועמת לפחות מנה אחת תוך שבועיים — החזר מלא.</div>
+      </details>
+      <details class="faq-item">
+        <summary>צריך מרכיבים מיוחדים?</summary>
+        <div class="faq-answer">בונוס ״הכל מהסופר״ נותן רשימת קניות מלאה עם תחליפים לכל מה שצריך. הכל זמין בסופר בשכונה — בלי אייהרב, בלי חנויות מיוחדות.</div>
+      </details>
+      <details class="faq-item">
+        <summary>מה קורה אחרי 6 שבועות?</summary>
+        <div class="faq-answer">הגישה נשארת. תפריט שבת ממשיך כל שבוע. ערכות חגים מגיעות לפני כל חג. המפגש החודשי עם עדי ממשיך. המערכת לא נגמרת — היא ממשיכה לעבוד.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 8. GUARANTEE ===== -->
+<section class="guarantee">
+  <div class="container">
+    <div class="guarantee-box fade-up">
+      <div class="icon">🛡️</div>
+      <h3>הבטחת ״המשפחה אוהבת״</h3>
+      <p>אם המשפחה שלכם לא טועמת לפחות מנה אחת תוך שבועיים — החזר מלא.</p>
+      <p class="guarantee-sub">הסיכון עלינו. רק צריך לנסות.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 9. FINAL CTA — single close ===== -->
+<section class="final-cta" id="final-cta">
+  <div class="container">
+    <div class="section-title">שולחן אחד, ארוחה אחת. אף אחד לא מרגיש שונה.</div>
+    <p style="font-size: 16px; opacity: 0.8; margin-bottom: 24px;">מערכת ל-6 שבועות + 5 בונוסים + הבטחת החזר מלא — הכל ב-497 ₪</p>
+    <a href="#" class="cta-btn" style="font-size: 22px; padding: 20px 56px; align-self: center;">להתחיל עכשיו ←</a>
+    <p class="objection">בלי לבשל שעות. בלי מתכונים מסובכים. פשוט ארוחה אחת שמתאימה לכולם.</p>
+  </div>
+</section>
+
+<div class="spacer-bottom"></div>
+
+<!-- STICKY CTA — appears after scrolling past "what you get" -->
+<div class="sticky-cta" id="sticky-cta">
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <a href="#final-cta" class="cta-btn">להתחיל עכשיו ←</a>
+      <span class="price">497 ₪</span>
+    </div>
+    <div style="font-size: 11px; color: var(--red-accent); font-weight: 600; opacity: 0.9;">🍞 סדנת הלחמים נעלמת ב-16 באפריל</div>
+  </div>
+</div>
+
+<footer class="footer">
+  התפריט © 2026 | כל הזכויות שמורות<br>מתאים לסוכרתיים, ציליאקים, ודלת פחמימה.
+</footer>
+
+<script>
+  // Fade-up on scroll
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+
+  // Sticky CTA — only show after scrolling past "what you get"
+  const trigger = document.getElementById('what-you-get');
+  const sticky = document.getElementById('sticky-cta');
+  if (trigger && sticky) {
+    const stickyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+          sticky.classList.add('visible');
+        } else {
+          sticky.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0 });
+    stickyObserver.observe(trigger);
+  }
+</script>
+</body>
+</html>
