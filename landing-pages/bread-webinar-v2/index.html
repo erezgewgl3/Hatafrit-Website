@@ -129,6 +129,30 @@ body {
   font-size: 1.1rem;
 }
 
+/* Hero bread image */
+.hero-image {
+  max-width: 340px;
+  margin: 1rem auto 1.2rem;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(200, 150, 62, 0.2);
+  border: 2px solid rgba(200, 150, 62, 0.3);
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .hero-image {
+    max-width: 420px;
+    margin: 1.5rem auto 1.5rem;
+    border-radius: 16px;
+  }
+}
+
 .hero-price-anchor {
   display: inline-block;
   font-size: 0.95rem;
@@ -961,6 +985,12 @@ body {
       סדנת לחמים דלי פחמימה בזום. ללא גלוטן, ללא סוכר.<br>
       נכין ביחד, כל אחד מהמטבח שלו, ותצאו עם חוברת מתכונים מלאה.
     </p>
+
+    <!-- Hero bread image -->
+    <div class="hero-image">
+      <img src="Low carb bread picture.jpeg" alt="לחם דל פחמימה פרוס - ללא גלוטן וללא סוכר">
+    </div>
+
     <div class="hero-details">
       <div class="hero-detail">
         <span class="icon">📅</span>
@@ -998,7 +1028,7 @@ body {
     <!-- Hero CTA -->
     <div>
       <a href="https://meshulam.co.il/purchase?b=837d3eea33ffd7c939f75e47086242ac" class="cta-button cta-button--hero">שמרו לי מקום בסדנה 🍞</a>
-      <span class="cta-subtext">הצטרפו ל-1,000+ שלמדו לאפות בסדנאות שלנו</span>
+      <span class="cta-subtext">הצטרפו ל-1,000+ שלמדו לאפות בסדנאות שלי</span>
     </div>
 
     <!-- Inline social proof in hero -->
@@ -1016,13 +1046,12 @@ body {
   <div class="instructor-content">
     <div class="instructor-avatar"><img src="adi.jpeg" alt="עדי - התפריט"></div>
     <div class="instructor-info">
-      <div class="instructor-name">מי מלמדת? התפריט</div>
+      <div class="instructor-name">עדי מהתפריט</div>
       <div class="instructor-bio">
-        יוצרת תוכן ומתכונים דלי פחמימה. מלמדת בסדנאות לייב ומחברת ספרי מתכונים שכבר נמצאים במטבחים של מאות משפחות בארץ.
+        כבר כמה שנים שאני מכינה לחמים, מאפים וארוחות בלי גלוטן ובלי סוכר — ובבית שלי כולם אוכלים מאותו שולחן. גם מי שחייב, גם מי שבוחר, גם הילדים הבררנים. הסדנאות שלי מלמדות את מה שלקח לי שנים ללמוד לבד — איך להכין לחם שטעים, משביע, ומתאים לכל המשפחה.
       </div>
       <div class="instructor-stats">
-        <span class="instructor-stat">1,000+ משתתפות בסדנאות</span>
-        <span class="instructor-stat">6 ספרי מתכונים</span>
+        <span class="instructor-stat">1,000+ משתתפות בסדנאות · 6 ספרי מתכונים בשימוש יומי</span>
       </div>
     </div>
   </div>
@@ -1039,14 +1068,14 @@ body {
       ואם יש במשפחה סוכרתי או צליאקי? ארוחת החג הופכת לשדה מוקשים.
     </p>
     <p class="recognition-punchline">
-      מה אם הייתם יכולים להכין לחם אמיתי, דל פחמימה, ללא גלוטן — שכולם ירצו לאכול?
+      מה אם הייתי אומרת לך שאפשר להכין לחם בבית — בלי גלוטן, בלי סוכר — שהמשפחה שלך תרצה לאכול?
     </p>
   </div>
 </section>
 
 <!-- ===== MID-PAGE CTA ===== -->
 <div class="mid-cta">
-  <a href="https://meshulam.co.il/purchase?b=837d3eea33ffd7c939f75e47086242ac" class="cta-button">אני רוצה לחם אמיתי בפסח הזה ←</a>
+  <a href="https://meshulam.co.il/purchase?b=837d3eea33ffd7c939f75e47086242ac" class="cta-button">אני רוצה לחם על השולחן בפסח הזה ←</a>
 </div>
 
 <!-- ===== WHAT YOU GET ===== -->
@@ -1105,7 +1134,7 @@ body {
 <div class="section" style="padding-top: 0; padding-bottom: 0;">
   <div class="suitability">
     <div class="suitability-text">
-      ✅ כל המתכונים בסדנה מתאימים לסוכרתיים, צליאקים, ודלת פחמימה
+      ✅ כל המתכונים בסדנה מתאימים לסוכרתיים, צליאקים, ותזונת דלת פחמימה
     </div>
   </div>
 </div>
@@ -1192,7 +1221,7 @@ body {
       <span class="schedule-icon">🛒</span>
       <div>
         <div class="schedule-label">מה צריך להכין</div>
-        <div class="schedule-value">רשימת מצרכים תישלח אחרי ההרשמה, ככה תספיקו לקנות הכל מראש</div>
+        <div class="schedule-value">רשימת מצרכים תישלח לקראת הסדנה, ככה תספיקו לקנות הכל מראש</div>
       </div>
     </div>
     <div class="schedule-row">
@@ -1264,7 +1293,7 @@ body {
     <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
       <span>מאיפה קונים את חומרי הגלם?</span>
     </div>
-    <div class="faq-a">רשימת מצרכים מפורטת תישלח אחרי ההרשמה. רוב החומרים זמינים בחנויות טבע, באינטרנט, או ברשתות השיווק הגדולות. אני גם אתן טיפים למי שקונה לראשונה.</div>
+    <div class="faq-a">רשימת מצרכים מפורטת תישלח לקראת הסדנה. רוב החומרים זמינים בחנויות טבע, באינטרנט, או ברשתות השיווק הגדולות. אני גם אתן טיפים למי שקונה לראשונה.</div>
   </div>
 
   <div class="faq-item">
@@ -1278,7 +1307,7 @@ body {
     <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
       <span>אפשר לשלם בתשלומים?</span>
     </div>
-    <div class="faq-a">כרגע המחיר הוא תשלום אחד של 99 או 129 ש״ח.</div>
+    <div class="faq-a">מי שנרשם עד שבת 21.3 משלם 99₪ בלבד. מיום ראשון 22.3 המחיר עולה ל-129₪.</div>
   </div>
 </section>
 
@@ -1289,13 +1318,12 @@ body {
     בואו תלמדו להכין לחמים שכולם אוכלים — גם סוכרתיים, גם צליאקים, גם כל המשפחה.<br>
     <strong>ואף אחד לא מרגיש שונה.</strong>
   </div>
-  <a href="https://meshulam.co.il/purchase?b=837d3eea33ffd7c939f75e47086242ac" class="cta-button">אני רוצה לחם אמיתי בפסח ←</a>
+  <a href="https://meshulam.co.il/purchase?b=837d3eea33ffd7c939f75e47086242ac" class="cta-button">אני רוצה לחם על השולחן בפסח הזה ←</a>
 </section>
 
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
-  התפריט &copy; 2026 | כל הזכויות שמורות<br>
-  לשאלות, שלחו הודעה בפרטי באינסטגרם <a href="https://instagram.com/hatafrit">@hatafrit</a>
+  התפריט &copy; 2026 | כל הזכויות שמורות
 </footer>
 
 <!-- ===== STICKY MOBILE CTA ===== -->
@@ -1333,6 +1361,52 @@ body {
 
   update();
   setInterval(update, 60000);
+})();
+
+// Price auto-switch: early bird ends March 21, 2026 at midnight Israel time
+// Preview post-deadline view by adding ?after to the URL
+(function() {
+  var deadline = new Date('2026-03-22T00:00:00+03:00').getTime();
+  var forceAfter = window.location.search.indexOf('after') !== -1;
+  var isAfterDeadline = forceAfter || Date.now() >= deadline;
+
+  if (isAfterDeadline) {
+    // Hide urgency bar
+    var urgencyBar = document.querySelector('.urgency-bar');
+    if (urgencyBar) urgencyBar.style.display = 'none';
+
+    // Update hero price anchor
+    var priceAnchor = document.querySelector('.hero-price-anchor');
+    if (priceAnchor) priceAnchor.innerHTML = '<strong>129₪</strong> בלבד';
+
+    // Replace two pricing cards with single card
+    var pricingCards = document.querySelector('.pricing-cards');
+    if (pricingCards) {
+      pricingCards.innerHTML = '<div class="pricing-card featured" style="min-width:240px;">' +
+        '<div class="pricing-label">מחיר הסדנה</div>' +
+        '<div class="pricing-amount">129 <span>₪</span></div>' +
+        '<div class="pricing-note">כולל הקלטה + חוברת + מוסף חלות</div>' +
+        '</div>';
+    }
+
+    // Update sticky CTA price
+    var stickyPrice = document.querySelector('.sticky-cta-price');
+    if (stickyPrice) {
+      stickyPrice.innerHTML = '129₪<small>מחיר הסדנה</small>';
+    }
+
+    // Update CTA subtext
+    var ctaSub = document.querySelector('.cta-subtext');
+    if (ctaSub) ctaSub.textContent = 'הצטרפו ל-1,000+ שלמדו לאפות בסדנאות שלי';
+
+    // Update FAQ payment answer
+    var faqItems = document.querySelectorAll('.faq-a');
+    faqItems.forEach(function(item) {
+      if (item.textContent.indexOf('מי שנרשם עד שבת') !== -1) {
+        item.textContent = 'המחיר הוא 129₪ — תשלום אחד שכולל סדנה לייב + הקלטה + חוברת מתכונים + מוסף חלות.';
+      }
+    });
+  }
 })();
 
 // Show sticky CTA only after scrolling past hero
