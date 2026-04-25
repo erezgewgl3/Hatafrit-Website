@@ -68,38 +68,38 @@
 
 <main class="pt-[52px] pb-32 lg:pb-16">
 
-  <!-- HERO — contained, condensed split. Mobile stacks image-on-top via order. -->
-  <section class="max-w-6xl mx-auto px-6 pt-8 lg:pt-12">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 lg:max-h-[440px]">
-      <div class="order-2 lg:order-none flex flex-col justify-center">
-        <div id="hero-tags" class="flex flex-wrap gap-2 mb-4"></div>
-        <h1 id="hero-title" class="font-h1 font-['Heebo'] text-3xl md:text-4xl lg:text-[40px] leading-[1.1] font-extrabold text-on-surface mb-4"></h1>
-        <p id="hero-description" class="font-body-lg text-base lg:text-[17px] leading-relaxed text-on-surface-variant mb-6"></p>
-        <div class="flex flex-wrap items-center gap-x-5 gap-y-3 text-sm pt-5 border-t border-outline-variant/40">
-          <div class="flex items-center gap-2 text-on-surface">
-            <span class="material-symbols-outlined text-primary text-[20px]">timer</span>
+  <!-- HERO — contained, tight. Mobile stacks image-on-top via order. -->
+  <section class="max-w-6xl mx-auto px-6 pt-6 lg:pt-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center">
+      <div class="order-2 lg:order-none">
+        <div id="hero-tags" class="flex flex-wrap gap-2 mb-3 empty:hidden"></div>
+        <h1 id="hero-title" class="font-h1 font-['Heebo'] text-[28px] md:text-[32px] lg:text-[36px] leading-[1.15] font-extrabold text-on-surface mb-3"></h1>
+        <p id="hero-description" class="text-[15px] lg:text-base leading-relaxed text-on-surface-variant mb-5 empty:hidden"></p>
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm pt-4 border-t border-outline-variant/40">
+          <div class="flex items-center gap-1.5 text-on-surface">
+            <span class="material-symbols-outlined text-primary text-[18px]">timer</span>
             <span class="font-semibold" id="meta-time">—</span>
           </div>
-          <span class="w-1 h-1 rounded-full bg-outline-variant/70"></span>
-          <div class="flex items-center gap-2 text-on-surface">
-            <span class="material-symbols-outlined text-secondary text-[20px]">signal_cellular_alt</span>
+          <span class="w-1 h-1 rounded-full bg-outline-variant/60"></span>
+          <div class="flex items-center gap-1.5 text-on-surface">
+            <span class="material-symbols-outlined text-secondary text-[18px]">signal_cellular_alt</span>
             <span class="font-semibold" id="meta-difficulty">—</span>
           </div>
-          <span class="w-1 h-1 rounded-full bg-outline-variant/70"></span>
-          <div class="flex items-center gap-2 text-on-surface">
-            <span class="material-symbols-outlined text-primary text-[20px]">restaurant</span>
+          <span class="w-1 h-1 rounded-full bg-outline-variant/60"></span>
+          <div class="flex items-center gap-1.5 text-on-surface">
+            <span class="material-symbols-outlined text-primary text-[18px]">restaurant</span>
             <span class="font-semibold" id="meta-servings">—</span>
           </div>
         </div>
       </div>
-      <div class="order-1 lg:order-none rounded-2xl overflow-hidden shadow-xl shadow-stone-900/10 bg-surface-container aspect-[4/3] lg:aspect-auto">
+      <div class="order-1 lg:order-none aspect-[3/2] rounded-2xl overflow-hidden shadow-lg shadow-stone-900/10 bg-surface-container">
         <img id="hero-img" class="w-full h-full object-cover" alt=""/>
       </div>
     </div>
   </section>
 
   <!-- CONTENT -->
-  <section class="max-w-6xl mx-auto px-6 mt-10 lg:mt-14">
+  <section class="max-w-6xl mx-auto px-6 mt-10 lg:mt-12">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
 
       <aside class="lg:col-span-4 lg:sticky lg:top-20 self-start">
