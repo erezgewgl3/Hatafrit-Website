@@ -204,13 +204,27 @@
   // measured ingredient becomes its own list item.
   function splitIngredients(text) {
     const lines = text.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
-    if (lines.length > 1) return lines;
-    const single = lines[0] || '';
-    if (!single) return [];
-    const UNITS = '(?:כוס(?:ות)?|כפית|כפיות|כפות|כף|גרם(?:ים)?|ק["״]ג|מ["״]ל|ליטר(?:ים)?|ביצים|ביצה|חבילה|חבילות|חופן|קופסה|פחית|שקית|צרור|טיפות|פרוסות|תפוז(?:ים)?)';
-    const re = new RegExp(`\\s+(?=(?:\\d+\\/\\d+|\\d+(?:\\.\\d+)?)\\s+${UNITS}(?:\\s|$))`, 'g');
-    const parts = single.split(re).map(s => s.trim()).filter(Boolean);
-    return parts.length > 1 ? parts : [single];
+    let parts;
+    if (lines.length > 1) {
+      parts = lines;
+    } else {
+      const single = lines[0] || '';
+      if (!single) return [];
+      const UNITS = '(?:כוס(?:ות)?|כפית|כפיות|כפות|כף|גרם(?:ים)?|ק["״]ג|מ["״]ל|ליטר(?:ים)?|ביצים|ביצה|חבילה|חבילות|חופן|קופסה|פחית|שקית|צרור|טיפות|פרוסות|תפוז(?:ים)?)';
+      const re = new RegExp(`\\s+(?=(?:\\d+\\/\\d+|\\d+(?:\\.\\d+)?)\\s+${UNITS}(?:\\s|$))`, 'g');
+      parts = single.split(re).map(s => s.trim()).filter(Boolean);
+      if (parts.length <= 1) return [single];
+    }
+    // Some Airtable rows end the ingredients block with trailing prep notes
+    // (pan setup, oven temp, "after 20 min cover…"). Truncate each chunk at the
+    // first instructional keyword so those notes don't bleed into ingredients.
+    const INSTR = /\s+(?:תבנית|לחמ(?:ם|ים)|להעביר|להוסיף|לערבב|לאפות|להוציא|לכסות|לצנן|אחרי\s|מערבבים|מוסיפים|מכניסים|מומלץ|מחממים|אופים|פורסים|חותכים|חוצים|מצננים|להפריד|להמיס)/;
+    return parts
+      .map(p => {
+        const m = p.search(INSTR);
+        return m > 0 ? p.slice(0, m).trim() : p;
+      })
+      .filter(Boolean);
   }
 
   function tagPill(t) {
