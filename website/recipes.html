@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>התפריט · ספריית מתכונים</title>
+<link rel="icon" type="image/png" href="brand_assets/Logo.png"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: { extend: {
+      colors: {
+        "outline": "#817563", "secondary": "#9e3e4c", "surface-bright": "#fff8f3",
+        "surface-container-highest": "#ece1d4", "on-surface-variant": "#4f4535",
+        "background": "#fff8f3", "primary-fixed": "#ffdea6", "primary": "#785600",
+        "on-primary": "#ffffff", "on-surface": "#201b13",
+        "surface-container-high": "#f1e7d9", "surface-container-low": "#fdf2e5",
+        "surface": "#fff8f3", "primary-container": "#986d00",
+        "surface-container-lowest": "#ffffff", "secondary-container": "#fd8896",
+        "surface-variant": "#ece1d4", "outline-variant": "#d3c4af",
+        "surface-dim": "#e3d8cc", "surface-container": "#f7ecdf"
+      },
+      borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
+      spacing: { lg: "48px", md: "24px", sm: "12px", gutter: "24px", xs: "4px", xl: "80px", base: "8px" },
+      fontFamily: {
+        h2: ["Heebo"], "body-lg": ["Assistant"], caption: ["Assistant"],
+        "body-md": ["Assistant"], h3: ["Heebo"], h1: ["Heebo"], "label-caps": ["Heebo"]
+      },
+      fontSize: {
+        "h2": ["32px", { lineHeight: "1.3", fontWeight: "700" }],
+        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+        "caption": ["12px", { lineHeight: "1.4", fontWeight: "400" }],
+        "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+        "h3": ["24px", { lineHeight: "1.4", fontWeight: "600" }],
+        "h1": ["48px", { lineHeight: "1.2", fontWeight: "800" }],
+        "label-caps": ["14px", { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "700" }]
+      }
+    }}
+  };
+</script>
+<style>
+  body { background-color: #fff8f3; color: #201b13; font-family: 'Assistant', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .skel { background: linear-gradient(90deg, #f1e7d9 0%, #ece1d4 50%, #f1e7d9 100%); background-size: 200% 100%; animation: skel 1.4s ease-in-out infinite; }
+  @keyframes skel { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }
+</style>
+</head>
+<body class="font-body-md bg-background">
+
+<header class="bg-stone-50/95 backdrop-blur-md fixed top-0 w-full z-50 border-b border-stone-200/50 shadow-sm shadow-stone-200/50">
+  <div class="flex flex-row-reverse justify-between items-center px-6 py-4 max-w-7xl mx-auto font-['Heebo'] text-base font-medium">
+    <a href="/" class="text-3xl font-black text-yellow-800">התפריט</a>
+    <nav class="hidden md:flex flex-row-reverse gap-8">
+      <a class="text-yellow-700 border-b-2 border-yellow-700 pb-1" href="/recipes">מתכונים</a>
+      <a class="text-stone-600 hover:text-yellow-600" href="/#method">השיטה</a>
+      <a class="text-stone-600 hover:text-yellow-600" href="/#about">אודות</a>
+    </nav>
+    <div class="flex items-center gap-4">
+      <button aria-label="חיפוש" class="material-symbols-outlined text-yellow-700">search</button>
+      <button aria-label="חשבון" class="material-symbols-outlined text-yellow-700">account_circle</button>
+    </div>
+  </div>
+</header>
+
+<main class="pt-32 pb-24 px-6 max-w-7xl mx-auto">
+  <div class="flex flex-col mb-12">
+    <h1 class="font-h1 text-h1 text-on-surface mb-8">כל המתכונים</h1>
+    <div class="flex gap-2 w-full max-w-3xl">
+      <div class="relative flex-grow">
+        <input id="search-input" class="w-full bg-surface-container-low border-b-2 border-outline-variant focus:border-primary py-4 px-12 text-body-lg outline-none" placeholder="חפשו מתכון, רכיב או סגנון..." type="text"/>
+        <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+      </div>
+      <button id="search-btn" class="px-8 bg-primary text-on-primary font-h3 rounded-lg hover:bg-primary-container shadow-md transition-colors">חיפוש</button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+    <aside class="lg:col-span-3 flex flex-col gap-8">
+      <section>
+        <h3 class="font-h3 text-h3 mb-4 border-r-4 border-primary pr-3">קטגוריות</h3>
+        <div id="cat-filters" class="flex flex-col gap-2 max-h-[420px] overflow-y-auto pr-1">
+          <div class="skel h-6 w-3/4 rounded"></div>
+          <div class="skel h-6 w-2/3 rounded"></div>
+          <div class="skel h-6 w-3/4 rounded"></div>
+          <div class="skel h-6 w-1/2 rounded"></div>
+        </div>
+      </section>
+
+      <section>
+        <h3 class="font-h3 text-h3 mb-4 border-r-4 border-primary pr-3">התאמה אישית</h3>
+        <div class="flex flex-col gap-3" id="diet-filters">
+          <div class="p-3 bg-secondary-container/20 rounded-xl border border-secondary-container/30">
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input class="w-5 h-5 rounded-sm border-secondary text-secondary focus:ring-secondary" type="checkbox" data-diet="diabetic"/>
+              <span class="font-body-md font-semibold text-secondary">סוכרתיים</span>
+            </label>
+          </div>
+          <div class="p-3 bg-secondary-container/20 rounded-xl border border-secondary-container/30">
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input class="w-5 h-5 rounded-sm border-secondary text-secondary focus:ring-secondary" type="checkbox" data-diet="celiac"/>
+              <span class="font-body-md font-semibold text-secondary">צליאק</span>
+            </label>
+          </div>
+          <div class="p-3 bg-secondary-container/20 rounded-xl border border-secondary-container/30">
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input class="w-5 h-5 rounded-sm border-secondary text-secondary focus:ring-secondary" type="checkbox" data-diet="lowcarb"/>
+              <span class="font-body-md font-semibold text-secondary">דלת פחמימה</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h3 class="font-h3 text-h3 mb-4 border-r-4 border-primary pr-3">זמן הכנה</h3>
+        <input id="time-slider" class="w-full h-2 bg-surface-container-highest rounded-full appearance-none cursor-pointer accent-primary" type="range" min="15" max="120" step="15" value="120"/>
+        <div class="flex justify-between mt-2 font-caption text-caption text-outline">
+          <span>עד 15 דק'</span>
+          <span id="time-value">מעל שעתיים</span>
+        </div>
+      </section>
+
+      <button id="reset-filters" class="text-on-surface-variant text-sm hover:text-primary self-start underline underline-offset-4">נקי סינונים</button>
+    </aside>
+
+    <div class="lg:col-span-9">
+      <div class="flex justify-between items-center mb-4 px-1">
+        <span id="result-count" class="text-on-surface-variant text-sm"></span>
+      </div>
+      <div id="card-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-md">
+        <!-- skeleton cards -->
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+      </div>
+      <div class="mt-12 flex justify-center">
+        <button id="load-more" class="px-8 py-3 bg-primary text-on-primary font-label-caps rounded-lg hover:bg-primary-container shadow-md transition-colors hidden">הצג מתכונים נוספים</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="bg-stone-100 w-full mt-auto border-t border-stone-200 font-['Assistant'] text-sm">
+  <div class="bg-primary/5 border-b border-stone-200 py-12 px-12">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+      <div class="max-w-md">
+        <h3 class="font-h2 text-h2 text-on-surface mb-2">הצטרפו לקהילת 'התפריט'</h3>
+        <p class="font-body-md text-on-surface-variant">הירשמו לניוזלטר שלנו וקבלו מתכונים בריאים וטיפים לתזונה נכונה ישירות למייל שלכם.</p>
+      </div>
+      <form class="flex flex-col sm:flex-row gap-4 w-full md:w-auto" onsubmit="event.preventDefault();">
+        <input class="min-w-[300px] bg-white border border-outline-variant px-4 py-3 rounded-lg focus:border-primary outline-none" placeholder="כתובת האימייל שלך" required type="email"/>
+        <button class="px-8 py-3 bg-primary text-on-primary font-label-caps rounded-lg hover:bg-primary-container shadow-md whitespace-nowrap transition-colors" type="submit">הרשמה לניוזלטר</button>
+      </form>
+    </div>
+  </div>
+  <div class="flex flex-col md:flex-row-reverse justify-between items-center gap-6 px-12 py-10 w-full">
+    <div class="text-xl font-bold text-stone-800">התפריט</div>
+    <div class="flex flex-row-reverse gap-8">
+      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="#">תנאי שימוש</a>
+      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="#">מדיניות פרטיות</a>
+      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="#">צור קשר</a>
+    </div>
+    <p class="text-stone-500">© 2026 התפריט - מתאים לסוכרתיים, צליאק, ודלת פחמימה. כל הזכויות שמורות.</p>
+  </div>
+</footer>
+
+<script>
+  const PAGE_SIZE = 9;
+
+  const DIET_TAG_MAP = {
+    diabetic: ['ללא תוספת סוכר', 'ללא סוכר'],
+    celiac: ['ללא גלוטן'],
+    lowcarb: ['דל פחמימה'],
+  };
+
+  const escapeHTML = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+
+  function difficultyText(prepTime) {
+    const m = parseInt(prepTime, 10);
+    if (isNaN(m)) return 'בינוני';
+    if (m <= 20) return 'קל מאוד';
+    if (m <= 45) return 'קל';
+    if (m <= 90) return 'בינוני';
+    return 'מושקע';
+  }
+
+  function recipeCard(r) {
+    const tag = (r.tags && r.tags[0]) || '';
+    const img = r.imageUrl || '';
+    return `
+      <a href="/recipe/${r.id}" class="group block bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-surface-container">
+        <div class="aspect-square overflow-hidden relative bg-surface-container">
+          ${img ? `<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${img}" alt="${escapeHTML(r.name)}"/>` : ''}
+          ${tag ? `<div class="absolute top-4 right-4 bg-secondary text-white px-3 py-1 text-caption font-label-caps rounded-full">${escapeHTML(tag)}</div>` : ''}
+        </div>
+        <div class="p-5 text-right">
+          <h4 class="font-h3 text-h3 mb-2 group-hover:text-primary transition-colors line-clamp-2">${escapeHTML(r.name)}</h4>
+          <div class="flex flex-row-reverse items-center gap-4 text-outline font-caption">
+            <div class="flex flex-row-reverse items-center gap-1"><span class="material-symbols-outlined text-[18px]">schedule</span><span>${escapeHTML(r.prepTime || '—')}</span></div>
+            <div class="flex flex-row-reverse items-center gap-1"><span class="material-symbols-outlined text-[18px]">restaurant</span><span>${escapeHTML(difficultyText(r.prepTime))}</span></div>
+          </div>
+        </div>
+      </a>`;
+  }
+
+  // State
+  let ALL = [];
+  let visible = PAGE_SIZE;
+  const state = {
+    q: '',
+    cats: new Set(),
+    diets: new Set(),
+    maxTime: 120,
+  };
+
+  function applyFilters() {
+    const q = state.q.trim().toLowerCase();
+    return ALL.filter(r => {
+      if (q && !(r.name && r.name.toLowerCase().includes(q))) return false;
+      if (state.cats.size && !state.cats.has(r.category)) return false;
+      if (state.diets.size) {
+        const tags = r.tags || [];
+        for (const d of state.diets) {
+          const required = DIET_TAG_MAP[d] || [];
+          const hit = required.some(t => tags.includes(t));
+          if (!hit) return false;
+        }
+      }
+      const t = parseInt(r.prepTime, 10);
+      if (state.maxTime < 120 && (isNaN(t) || t > state.maxTime)) return false;
+      return true;
+    });
+  }
+
+  function render() {
+    const filtered = applyFilters();
+    const grid = document.getElementById('card-grid');
+    const slice = filtered.slice(0, visible);
+    grid.innerHTML = slice.map(recipeCard).join('') ||
+      '<p class="col-span-full text-center text-on-surface-variant py-12">לא נמצאו מתכונים תואמים. נסי לנקות את הסינון.</p>';
+    document.getElementById('result-count').textContent = `${filtered.length} מתכונים`;
+    const more = document.getElementById('load-more');
+    if (filtered.length > visible) more.classList.remove('hidden'); else more.classList.add('hidden');
+  }
+
+  function buildCategoryFilters(recipes) {
+    const counts = {};
+    for (const r of recipes) if (r.category) counts[r.category] = (counts[r.category] || 0) + 1;
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const wrap = document.getElementById('cat-filters');
+    wrap.innerHTML = sorted.map(([name, n]) => `
+      <label class="flex items-center gap-3 cursor-pointer group">
+        <input class="w-5 h-5 rounded-sm border-outline text-primary focus:ring-primary" type="checkbox" data-cat="${escapeHTML(name)}"/>
+        <span class="font-body-md text-on-surface-variant group-hover:text-primary">${escapeHTML(name)} <span class="text-outline text-caption">(${n})</span></span>
+      </label>`).join('');
+    wrap.addEventListener('change', (e) => {
+      const cb = e.target;
+      if (!cb.matches('input[data-cat]')) return;
+      const name = cb.dataset.cat;
+      if (cb.checked) state.cats.add(name); else state.cats.delete(name);
+      visible = PAGE_SIZE; render();
+    });
+  }
+
+  function bindUI() {
+    const search = document.getElementById('search-input');
+    const onSearch = () => { state.q = search.value; visible = PAGE_SIZE; render(); };
+    search.addEventListener('input', onSearch);
+    document.getElementById('search-btn').addEventListener('click', onSearch);
+
+    document.getElementById('diet-filters').addEventListener('change', (e) => {
+      const cb = e.target.closest('input[data-diet]');
+      if (!cb) return;
+      const d = cb.dataset.diet;
+      if (cb.checked) state.diets.add(d); else state.diets.delete(d);
+      visible = PAGE_SIZE; render();
+    });
+
+    const slider = document.getElementById('time-slider');
+    slider.addEventListener('input', () => {
+      const v = parseInt(slider.value, 10);
+      state.maxTime = v;
+      document.getElementById('time-value').textContent = v >= 120 ? 'מעל שעתיים' : `עד ${v} דק'`;
+      visible = PAGE_SIZE; render();
+    });
+
+    document.getElementById('load-more').addEventListener('click', () => { visible += PAGE_SIZE; render(); });
+
+    document.getElementById('reset-filters').addEventListener('click', () => {
+      state.q = ''; state.cats.clear(); state.diets.clear(); state.maxTime = 120;
+      search.value = ''; slider.value = 120;
+      document.getElementById('time-value').textContent = 'מעל שעתיים';
+      document.querySelectorAll('#cat-filters input, #diet-filters input').forEach(c => c.checked = false);
+      visible = PAGE_SIZE; render();
+    });
+  }
+
+  function applyURLParams() {
+    const p = new URLSearchParams(location.search);
+    const q = p.get('q'); const cat = p.get('cat');
+    if (q) { state.q = q; document.getElementById('search-input').value = q; }
+    if (cat) {
+      state.cats.add(cat);
+      const cb = document.querySelector(`#cat-filters input[data-cat="${cat.replace(/"/g, '\\"')}"]`);
+      if (cb) cb.checked = true;
+    }
+  }
+
+  (async function init() {
+    bindUI();
+    try {
+      const res = await fetch('/api/recipes');
+      const data = await res.json();
+      ALL = data.recipes || [];
+      buildCategoryFilters(ALL);
+      applyURLParams();
+      render();
+    } catch (err) {
+      console.error('Failed to load recipes:', err);
+      document.getElementById('card-grid').innerHTML =
+        '<p class="col-span-full text-center text-on-surface-variant py-12">שגיאה בטעינת המתכונים.</p>';
+    }
+  })();
+</script>
+</body>
+</html>
