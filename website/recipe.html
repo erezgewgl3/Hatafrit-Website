@@ -204,6 +204,20 @@
       </div>`;
   }
 
+  // Some Airtable rows use newlines between ingredients, others run them together.
+  // If no newlines, split before "<digit/fraction> <Hebrew unit word>" so each
+  // measured ingredient becomes its own list item.
+  function splitIngredients(text) {
+    const lines = text.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+    if (lines.length > 1) return lines;
+    const single = lines[0] || '';
+    if (!single) return [];
+    const UNITS = '(?:כוס(?:ות)?|כפית|כפיות|כפות|כף|גרם(?:ים)?|ק["״]ג|מ["״]ל|ליטר(?:ים)?|ביצים|ביצה|חבילה|חבילות|חופן|קופסה|פחית|שקית|צרור|טיפות|פרוסות|תפוז(?:ים)?)';
+    const re = new RegExp(`\\s+(?=(?:\\d+\\/\\d+|\\d+(?:\\.\\d+)?)\\s+${UNITS}(?:\\s|$))`, 'g');
+    const parts = single.split(re).map(s => s.trim()).filter(Boolean);
+    return parts.length > 1 ? parts : [single];
+  }
+
   function tagPill(t) {
     const stylesByLabel = {
       'ללא גלוטן': 'bg-secondary/10 text-secondary border-secondary/20',
@@ -266,7 +280,7 @@
       document.getElementById('meta-difficulty').textContent = r.difficulty || '—';
       document.getElementById('meta-servings').textContent = r.servingSize || '—';
 
-      const ings = (r.ingredients || '').split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+      const ings = splitIngredients(r.ingredients || '');
       document.getElementById('ingredients-list').innerHTML = ings.map(ingredientItem).join('') ||
         '<li class="text-on-surface-variant text-sm">אין מצרכים זמינים.</li>';
       document.getElementById('ingredient-count').textContent = `${ings.length} רכיבים`;
