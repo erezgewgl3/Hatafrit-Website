@@ -57,19 +57,22 @@
 <body class="font-body-md text-on-surface">
 
 <nav class="fixed top-0 w-full z-50 bg-stone-50/95 backdrop-blur-md border-b border-stone-200/50 shadow-sm shadow-stone-200/50 font-['Heebo'] text-base font-medium">
-  <div class="flex flex-row-reverse justify-between items-center px-6 py-4 max-w-7xl mx-auto">
-    <a href="/" class="text-3xl font-black text-yellow-800">התפריט</a>
-    <div class="hidden md:flex flex-row-reverse gap-8">
+  <div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+    <a href="/" class="inline-flex items-center gap-2 text-3xl font-black text-yellow-800">
+      <img src="brand_assets/Logo.png" alt="התפריט" class="h-10 w-auto"/>
+      <span>התפריט</span>
+    </a>
+    <div class="hidden md:flex gap-8">
       <a class="text-stone-600 hover:text-yellow-600 transition-colors duration-300" href="/recipes">מתכונים</a>
       <a class="text-stone-600 hover:text-yellow-600 transition-colors duration-300" href="#method">השיטה</a>
       <a class="text-stone-600 hover:text-yellow-600 transition-colors duration-300" href="#about">אודות</a>
     </div>
-    <div class="flex flex-row-reverse items-center gap-4">
-      <div class="relative hidden lg:block mr-4">
+    <div class="flex items-center gap-4">
+      <button aria-label="חשבון" class="material-symbols-outlined text-yellow-700">account_circle</button>
+      <div class="relative hidden lg:block">
         <input id="nav-search" class="bg-stone-100 border-none rounded-full py-1.5 px-4 pr-10 text-sm focus:ring-2 focus:ring-yellow-600 w-48 text-right" placeholder="חיפוש מתכון..." type="text"/>
         <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 text-sm">search</span>
       </div>
-      <button aria-label="חשבון" class="material-symbols-outlined text-yellow-700">account_circle</button>
     </div>
   </div>
 </nav>
