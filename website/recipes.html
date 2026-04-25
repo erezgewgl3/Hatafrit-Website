@@ -81,25 +81,7 @@
   </div>
 
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-    <div class="lg:col-span-9">
-      <div class="flex justify-between items-center mb-4 px-1">
-        <span id="result-count" class="text-on-surface-variant text-sm"></span>
-      </div>
-      <div id="card-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-md">
-        <!-- skeleton cards -->
-        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
-        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
-        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
-        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
-        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
-        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
-      </div>
-      <div class="mt-12 flex justify-center">
-        <button id="load-more" class="px-8 py-3 bg-primary text-on-primary font-label-caps rounded-lg hover:bg-primary-container shadow-md transition-colors hidden">הצג מתכונים נוספים</button>
-      </div>
-    </div>
-
-    <aside class="lg:col-span-3 flex flex-col gap-8">
+    <aside class="lg:col-span-3 flex flex-col gap-8 order-2 lg:order-none">
       <section>
         <h3 class="font-h3 text-h3 mb-4 border-r-4 border-primary pr-3">קטגוריות</h3>
         <div id="cat-filters" class="flex flex-col gap-2 max-h-[420px] overflow-y-auto pr-1">
@@ -145,6 +127,24 @@
 
       <button id="reset-filters" class="text-on-surface-variant text-sm hover:text-primary self-start underline underline-offset-4">נקי סינונים</button>
     </aside>
+
+    <div class="lg:col-span-9 order-1 lg:order-none">
+      <div class="flex justify-between items-center mb-4 px-1">
+        <span id="result-count" class="text-on-surface-variant text-sm"></span>
+      </div>
+      <div id="card-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-md">
+        <!-- skeleton cards -->
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+      </div>
+      <div class="mt-12 flex justify-center">
+        <button id="load-more" class="px-8 py-3 bg-primary text-on-primary font-label-caps rounded-lg hover:bg-primary-container shadow-md transition-colors hidden">הצג מתכונים נוספים</button>
+      </div>
+    </div>
   </div>
 </main>
 
@@ -161,9 +161,9 @@
       </form>
     </div>
   </div>
-  <div class="flex flex-col md:flex-row-reverse justify-between items-center gap-6 px-12 py-10 w-full">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-6 px-12 py-10 w-full">
     <div class="text-xl font-bold text-stone-800">התפריט</div>
-    <div class="flex flex-row-reverse gap-8">
+    <div class="flex gap-8">
       <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="#">תנאי שימוש</a>
       <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="#">מדיניות פרטיות</a>
       <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="#">צור קשר</a>
@@ -203,9 +203,9 @@
         </div>
         <div class="p-5 text-right">
           <h4 class="font-h3 text-h3 mb-2 group-hover:text-primary transition-colors line-clamp-2">${escapeHTML(r.name)}</h4>
-          <div class="flex flex-row-reverse items-center gap-4 text-outline font-caption">
-            <div class="flex flex-row-reverse items-center gap-1"><span class="material-symbols-outlined text-[18px]">schedule</span><span>${escapeHTML(r.prepTime || '—')}</span></div>
-            <div class="flex flex-row-reverse items-center gap-1"><span class="material-symbols-outlined text-[18px]">restaurant</span><span>${escapeHTML(difficultyText(r.prepTime))}</span></div>
+          <div class="flex items-center gap-4 text-outline font-caption">
+            <div class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">schedule</span><span>${escapeHTML(r.prepTime || '—')}</span></div>
+            <div class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">restaurant</span><span>${escapeHTML(difficultyText(r.prepTime))}</span></div>
           </div>
         </div>
       </a>`;
