@@ -82,7 +82,7 @@ export default async function handler(req, res) {
 
     if (id) {
       // Single record fetch
-      const url = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE}/${encodeURIComponent(id)}?returnFieldsByFieldId=true&${fieldParams}`;
+      const url = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE}/${encodeURIComponent(id)}?returnFieldsByFieldId=true`;
       const r = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
       if (r.status === 404) { res.status(404).json({ error: 'Recipe not found' }); return; }
       if (!r.ok) { res.status(r.status).json({ error: `Airtable ${r.status}` }); return; }

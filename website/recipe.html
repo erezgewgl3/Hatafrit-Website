@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title id="page-title">התפריט · מתכון</title>
+<link rel="icon" type="image/png" href="brand_assets/Logo.png"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: { extend: {
+      colors: {
+        "outline": "#817563", "secondary": "#9e3e4c", "surface-bright": "#fff8f3",
+        "on-surface-variant": "#4f4535", "background": "#fff8f3", "primary": "#785600",
+        "on-primary": "#ffffff", "on-surface": "#201b13",
+        "surface-container-high": "#f1e7d9", "surface-container-low": "#fdf2e5",
+        "surface": "#fff8f3", "primary-container": "#986d00",
+        "surface-container-lowest": "#ffffff", "secondary-container": "#fd8896",
+        "outline-variant": "#d3c4af", "surface-container": "#f7ecdf"
+      },
+      borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
+      spacing: { lg: "32px", md: "16px", sm: "8px", gutter: "16px", xs: "2px", xl: "48px", base: "8px" },
+      fontFamily: {
+        h2: ["Heebo"], "body-lg": ["Assistant"], caption: ["Assistant"],
+        "body-md": ["Assistant"], h3: ["Heebo"], h1: ["Heebo"], "label-caps": ["Heebo"]
+      },
+      fontSize: {
+        "h2": ["28px", { lineHeight: "1.2", fontWeight: "700" }],
+        "body-lg": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+        "body-md": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+        "h3": ["20px", { lineHeight: "1.3", fontWeight: "600" }],
+        "h1": ["36px", { lineHeight: "1.1", fontWeight: "800" }],
+        "label-caps": ["13px", { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "700" }]
+      }
+    }}
+  };
+</script>
+<style>
+  body { background-color: #fff8f3; font-family: 'Assistant', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .step-checkbox:checked + label { text-decoration: line-through; opacity: 0.55; }
+  .skel { background: linear-gradient(90deg, #f1e7d9 0%, #ece1d4 50%, #f1e7d9 100%); background-size: 200% 100%; animation: skel 1.4s ease-in-out infinite; }
+  @keyframes skel { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body-md">
+
+<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-outline-variant/30">
+  <div class="flex flex-row-reverse justify-between items-center px-4 py-2 max-w-7xl mx-auto">
+    <a href="/" class="text-xl font-black text-primary font-['Heebo']">התפריט</a>
+    <div class="hidden md:flex flex-row-reverse gap-6 font-['Heebo'] text-sm font-medium">
+      <a class="text-stone-600 hover:text-primary transition-colors" href="/recipes">מתכונים</a>
+      <a class="text-stone-600 hover:text-primary transition-colors" href="/#method">השיטה</a>
+      <a class="text-stone-600 hover:text-primary transition-colors" href="/#about">אודות</a>
+    </div>
+    <div class="flex items-center gap-2">
+      <button aria-label="חיפוש" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-surface-container"><span class="material-symbols-outlined text-on-surface-variant text-xl">search</span></button>
+      <button aria-label="חשבון" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-surface-container"><span class="material-symbols-outlined text-on-surface-variant text-xl">account_circle</span></button>
+    </div>
+  </div>
+</nav>
+
+<main class="pt-[52px] pb-32 lg:pb-16">
+
+  <!-- HERO — mobile: image on top. Desktop md+: image visually LEFT, content visually RIGHT.
+       In RTL grid, source order 1 = visual right. Use md:order to swap on desktop. -->
+  <section class="grid grid-cols-1 md:grid-cols-2 bg-surface-container-low overflow-hidden lg:h-[70vh] lg:min-h-[600px]">
+    <div class="md:order-2 relative aspect-[16/9] md:aspect-auto md:h-full bg-surface-container">
+      <img id="hero-img" class="w-full h-full object-cover" alt=""/>
+    </div>
+    <div class="md:order-1 p-5 md:p-10 lg:px-24 lg:py-16 flex flex-col justify-center">
+      <div id="hero-tags" class="flex flex-wrap gap-2 mb-3"></div>
+      <h1 id="hero-title" class="font-h1 text-on-surface mb-3 text-3xl md:text-4xl lg:text-[48px] lg:leading-[1.1] leading-tight"></h1>
+      <p id="hero-description" class="font-body-lg text-on-surface-variant mb-6 max-w-xl"></p>
+      <div class="grid grid-cols-3 gap-4 lg:gap-6 border-t border-outline-variant/40 pt-5">
+        <div class="flex items-center gap-2">
+          <div class="w-9 h-9 lg:w-11 lg:h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary text-lg lg:text-xl">timer</span></div>
+          <div>
+            <div class="text-[9px] lg:text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">זמן הכנה</div>
+            <div id="meta-time" class="font-bold text-sm lg:text-base text-on-surface">—</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-9 h-9 lg:w-11 lg:h-11 rounded-full bg-secondary/10 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-secondary text-lg lg:text-xl">signal_cellular_alt</span></div>
+          <div>
+            <div class="text-[9px] lg:text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">רמת קושי</div>
+            <div id="meta-difficulty" class="font-bold text-sm lg:text-base text-on-surface">—</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-9 h-9 lg:w-11 lg:h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary text-lg lg:text-xl">restaurant</span></div>
+          <div>
+            <div class="text-[9px] lg:text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">מנות</div>
+            <div id="meta-servings" class="font-bold text-sm lg:text-base text-on-surface">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="max-w-6xl mx-auto px-4 lg:px-8 mt-8 lg:mt-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
+
+      <aside class="lg:col-span-4 lg:sticky lg:top-20 self-start">
+        <div class="bg-white rounded-xl p-5 lg:p-6 shadow-sm border border-outline-variant/20">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="font-h2 font-['Heebo'] text-xl lg:text-2xl">מצרכים</h2>
+            <span id="ingredient-count" class="text-xs font-medium text-primary bg-primary/5 px-2 py-0.5 rounded">—</span>
+          </div>
+          <ul id="ingredients-list" class="space-y-0.5">
+            <li class="skel h-7 rounded mb-2"></li>
+            <li class="skel h-7 rounded mb-2"></li>
+            <li class="skel h-7 rounded mb-2"></li>
+            <li class="skel h-7 rounded mb-2"></li>
+          </ul>
+          <!-- Desktop action row: save/print/share inside the card -->
+          <div class="hidden lg:flex items-center justify-between mt-6 pt-5 border-t border-outline-variant/30">
+            <button id="save-btn-desktop" aria-label="שמירה" class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-primary/5 hover:text-primary hover:border-primary/40 transition-colors"><span class="material-symbols-outlined text-lg">bookmark</span></button>
+            <button onclick="window.print()" aria-label="הדפסה" class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-primary/5 hover:text-primary hover:border-primary/40 transition-colors"><span class="material-symbols-outlined text-lg">print</span></button>
+            <button id="share-btn-desktop" aria-label="שיתוף" class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-primary/5 hover:text-primary hover:border-primary/40 transition-colors"><span class="material-symbols-outlined text-lg">share</span></button>
+          </div>
+        </div>
+      </aside>
+
+      <div class="lg:col-span-8">
+        <div class="flex items-center gap-3 mb-6">
+          <h2 class="font-h2 font-['Heebo'] text-2xl lg:text-3xl whitespace-nowrap">אופן ההכנה</h2>
+          <div class="h-[1px] flex-1 bg-gradient-to-l from-secondary/30 to-transparent"></div>
+        </div>
+        <div id="steps-list" class="space-y-8">
+          <div class="skel h-24 rounded-xl"></div>
+          <div class="skel h-24 rounded-xl"></div>
+          <div class="skel h-24 rounded-xl"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<!-- FLOATING ACTION BAR (mobile only) -->
+<div class="fixed bottom-4 inset-x-0 z-50 flex justify-center px-4 lg:hidden">
+  <div class="bg-white/95 backdrop-blur-xl border border-outline-variant/30 px-3 py-2 rounded-full shadow-lg flex items-center gap-1.5 max-w-sm w-full">
+    <button id="save-btn-mobile" class="flex-1 bg-primary text-white h-10 rounded-full text-sm font-bold flex items-center justify-center gap-2 active:scale-95 transition"><span class="material-symbols-outlined text-lg">bookmark</span><span>שמירה</span></button>
+    <div class="flex gap-1.5">
+      <button onclick="window.print()" aria-label="הדפסה" class="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant"><span class="material-symbols-outlined text-lg">print</span></button>
+      <button id="share-btn-mobile" aria-label="שיתוף" class="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant"><span class="material-symbols-outlined text-lg">share</span></button>
+    </div>
+  </div>
+</div>
+
+<footer class="bg-stone-100 w-full border-t border-stone-200">
+  <div class="flex flex-col md:flex-row-reverse justify-between items-center gap-4 px-8 py-6 w-full max-w-7xl mx-auto text-center md:text-right">
+    <a href="/" class="text-xl font-black text-primary font-['Heebo']">התפריט</a>
+    <div class="flex gap-4 font-['Assistant'] text-xs text-stone-500">
+      <a class="hover:text-primary" href="#">תנאי שימוש</a>
+      <a class="hover:text-primary" href="#">מדיניות פרטיות</a>
+      <a class="hover:text-primary" href="#">צור קשר</a>
+    </div>
+    <div class="font-['Assistant'] text-[10px] text-stone-500/80">© 2026 התפריט. כל הזכויות שמורות.</div>
+  </div>
+</footer>
+
+<script>
+  const escapeHTML = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+
+  function getRecipeId() {
+    const path = location.pathname.split('/').filter(Boolean);
+    const last = path[path.length - 1] || '';
+    if (last && last !== 'recipe' && last !== 'recipe.html') return last.replace(/\.html$/, '');
+    const p = new URLSearchParams(location.search);
+    return p.get('id') || '';
+  }
+
+  function ingredientItem(line, idx) {
+    return `
+      <li>
+        <label class="flex items-start gap-2.5 py-1.5 px-2 hover:bg-surface-container-lowest rounded-lg cursor-pointer group">
+          <input type="checkbox" class="step-checkbox w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary mt-1.5 shrink-0" id="ing-${idx}"/>
+          <span class="font-body-md text-on-surface group-hover:text-primary leading-relaxed">${escapeHTML(line)}</span>
+        </label>
+      </li>`;
+  }
+
+  function stepItem(line, idx) {
+    const num = String(idx + 1).padStart(2, '0');
+    const text = line.replace(/^\s*(\d+)\.\s*/, '').replace(/^\s*\*\s*/, '');
+    return `
+      <div class="flex flex-col gap-3 group">
+        <div class="flex-1">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="text-3xl lg:text-4xl font-black text-secondary/25 font-['Heebo']">${num}</span>
+            <h3 class="font-h3 font-['Heebo'] text-lg lg:text-xl text-on-surface">שלב ${num}</h3>
+          </div>
+          <p class="font-body-lg text-on-surface-variant leading-relaxed">${escapeHTML(text)}</p>
+        </div>
+      </div>`;
+  }
+
+  function tagPill(t) {
+    const stylesByLabel = {
+      'ללא גלוטן': 'bg-secondary/10 text-secondary border-secondary/20',
+      'דל פחמימה': 'bg-secondary/10 text-secondary border-secondary/20',
+      'ללא תוספת סוכר': 'bg-primary/10 text-primary border-primary/20',
+      'ללא סוכר': 'bg-primary/10 text-primary border-primary/20',
+    };
+    const cls = stylesByLabel[t] || 'bg-primary/10 text-primary border-primary/20';
+    return `<span class="${cls} px-2 py-0.5 text-[11px] font-bold rounded-md border">${escapeHTML(t)}</span>`;
+  }
+
+  async function shareRecipe() {
+    const url = location.href;
+    const title = document.getElementById('hero-title').textContent || 'התפריט';
+    if (navigator.share) {
+      try { await navigator.share({ title, url }); return; } catch(_){}
+    }
+    try { await navigator.clipboard.writeText(url); alert('הקישור הועתק!'); }
+    catch(_) { alert('שיתוף לא נתמך'); }
+  }
+
+  function bindActions() {
+    document.getElementById('share-btn-desktop')?.addEventListener('click', shareRecipe);
+    document.getElementById('share-btn-mobile')?.addEventListener('click', shareRecipe);
+    const onSave = () => alert('שמירה תעבוד בהמשך — בקרוב!');
+    document.getElementById('save-btn-desktop')?.addEventListener('click', onSave);
+    document.getElementById('save-btn-mobile')?.addEventListener('click', onSave);
+  }
+
+  function renderError(msg) {
+    document.querySelector('main').innerHTML = `<div class="max-w-2xl mx-auto px-6 py-32 text-center">
+      <h1 class="font-h1 text-3xl mb-4">המתכון לא נמצא</h1>
+      <p class="text-on-surface-variant mb-8">${escapeHTML(msg || '')}</p>
+      <a href="/recipes" class="inline-block px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-container">חזרה לספרייה</a>
+    </div>`;
+  }
+
+  (async function init() {
+    bindActions();
+    const id = getRecipeId();
+    if (!id) { renderError('לא צויין מזהה מתכון.'); return; }
+
+    try {
+      const res = await fetch('/api/recipes?id=' + encodeURIComponent(id));
+      if (!res.ok) {
+        if (res.status === 404) renderError('המתכון שביקשתם לא קיים.');
+        else renderError('שגיאת שרת: ' + res.status);
+        return;
+      }
+      const r = await res.json();
+
+      document.getElementById('page-title').textContent = `התפריט · ${r.name}`;
+      document.title = `התפריט · ${r.name}`;
+      document.getElementById('hero-img').src = r.imageFullUrl || r.imageUrl || '';
+      document.getElementById('hero-img').alt = r.name || '';
+      document.getElementById('hero-title').textContent = r.name || '';
+      document.getElementById('hero-description').textContent = r.description || '';
+      document.getElementById('hero-tags').innerHTML = (r.tags || []).map(tagPill).join('');
+      document.getElementById('meta-time').textContent = r.prepTime || '—';
+      document.getElementById('meta-difficulty').textContent = r.difficulty || '—';
+      document.getElementById('meta-servings').textContent = r.servingSize || '—';
+
+      const ings = (r.ingredients || '').split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+      document.getElementById('ingredients-list').innerHTML = ings.map(ingredientItem).join('') ||
+        '<li class="text-on-surface-variant text-sm">אין מצרכים זמינים.</li>';
+      document.getElementById('ingredient-count').textContent = `${ings.length} רכיבים`;
+
+      const steps = (r.instructions || '').split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+      document.getElementById('steps-list').innerHTML = steps.map(stepItem).join('') ||
+        '<p class="text-on-surface-variant">אין הוראות הכנה זמינות.</p>';
+
+    } catch (err) {
+      console.error(err);
+      renderError('שגיאה בטעינת המתכון.');
+    }
+  })();
+</script>
+</body>
+</html>
