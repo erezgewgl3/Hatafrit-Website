@@ -79,20 +79,17 @@
 
 <main class="pt-20">
 
-  <!-- HERO — editorial split. Text on the right (RTL start), photo on the left in a clean card. No overlay on Adi. -->
-  <section class="bg-background">
-    <div class="max-w-7xl mx-auto px-gutter pt-12 pb-14 lg:pt-16 lg:pb-20">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-        <div class="lg:col-span-6 text-right">
-          <h1 class="font-h1 font-['Heebo'] text-4xl md:text-5xl lg:text-[56px] leading-[1.05] font-extrabold text-on-surface mb-5">ארוחה אחת שמתאימה לכולם</h1>
-          <p class="text-on-surface-variant text-body-lg lg:text-[19px] leading-relaxed mb-8 max-w-xl">מתאים לסוכרתיים, צליאק, ודלת פחמימה. בלי להתפשר על הטעם ובלי לבשל בכמה סירים.</p>
-          <div class="flex flex-wrap gap-3">
-            <a href="#method" class="bg-[#B8860B] text-white px-7 py-3.5 font-label-caps text-label-caps rounded-xl hover:brightness-110 transition active:scale-95">גלי את שיטת שולחן אחד</a>
-            <a href="/recipes" class="border-2 border-on-surface text-on-surface px-7 py-3.5 font-label-caps text-label-caps rounded-xl hover:bg-on-surface/5 transition active:scale-95">עיון במתכונים</a>
-          </div>
-        </div>
-        <div class="lg:col-span-6 aspect-[4/5] md:aspect-[5/4] lg:aspect-[6/7] rounded-3xl overflow-hidden shadow-xl shadow-stone-900/10 bg-surface-container">
-          <img alt="עדי במטבח" class="w-full h-full object-cover" src="brand_assets/WhatsApp%20Image%202026-03-13%20at%202.16.30%20PM.jpeg"/>
+  <!-- HERO — full-bleed photo, no dark overlay. object-position biased up so Adi's head isn't cut.
+       Text anchored right (RTL start) with a soft text-shadow for legibility on the bare image. -->
+  <section class="relative h-[600px] lg:h-[680px] overflow-hidden">
+    <img alt="עדי במטבח" class="absolute inset-0 w-full h-full object-cover" style="object-position: center 22%;" src="brand_assets/WhatsApp%20Image%202026-03-13%20at%202.16.30%20PM.jpeg"/>
+    <div class="relative z-10 h-full max-w-7xl mx-auto px-gutter flex items-center justify-start">
+      <div class="max-w-md text-white text-right" style="text-shadow: 0 2px 18px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.6);">
+        <h1 class="font-h1 text-h1 mb-5 leading-[1.1]">ארוחה אחת שמתאימה לכולם</h1>
+        <p class="font-body-lg text-body-lg mb-8 opacity-95">מתאים לסוכרתיים, צליאק, ודלת פחמימה. בלי להתפשר על הטעם ובלי לבשל בכמה סירים.</p>
+        <div class="flex gap-3" style="text-shadow: none;">
+          <a href="#method" class="bg-[#B8860B] text-white px-7 py-3.5 font-label-caps text-label-caps rounded-xl hover:brightness-110 transition active:scale-95 shadow-lg shadow-black/30">גלי את שיטת שולחן אחד</a>
+          <a href="/recipes" class="border-2 border-white text-white px-7 py-3.5 font-label-caps text-label-caps rounded-xl hover:bg-white/10 transition active:scale-95 backdrop-blur-sm bg-black/10">עיון במתכונים</a>
         </div>
       </div>
     </div>
