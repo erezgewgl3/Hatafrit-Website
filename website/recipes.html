@@ -58,11 +58,21 @@
     </a>
     <nav class="hidden md:flex items-center gap-8">
       <a class="text-yellow-700 border-b-2 border-yellow-700 pb-1" href="/recipes">מתכונים</a>
-      <a class="text-stone-600 hover:text-yellow-600" href="/shulchan-echad">השיטה</a>
+      <a class="text-stone-600 hover:text-yellow-600" href="/hamrot">המרות ומידות</a>
       <a class="text-stone-600 hover:text-yellow-600" href="/#about">אודות</a>
       <a class="bg-[#B8860B] text-white px-4 py-1.5 rounded-full hover:brightness-110 transition-all" href="/shulchan-echad">שיטת שולחן אחד</a>
     </nav>
-    <button aria-label="חיפוש" class="material-symbols-outlined text-yellow-700">search</button>
+    <button id="mobile-nav-toggle" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg text-stone-600 hover:bg-stone-100 transition-colors" aria-label="תפריט" aria-expanded="false" aria-controls="mobile-nav-panel">
+      <span class="material-symbols-outlined text-[26px]">menu</span>
+    </button>
+  </div>
+  <div id="mobile-nav-panel" hidden class="md:hidden border-t border-stone-200/50 bg-white">
+    <div class="flex flex-col gap-1 px-6 py-3 max-w-7xl mx-auto text-[15px]">
+      <a class="text-yellow-700 font-semibold py-2.5" href="/recipes">מתכונים</a>
+      <a class="text-stone-700 hover:text-yellow-700 py-2.5" href="/hamrot">המרות ומידות</a>
+      <a class="text-stone-700 hover:text-yellow-700 py-2.5" href="/#about">אודות</a>
+      <a class="bg-[#B8860B] text-white px-4 py-2.5 rounded-full text-center mt-2 mb-1" href="/shulchan-echad">שיטת שולחן אחד</a>
+    </div>
   </div>
 </header>
 
@@ -78,8 +88,22 @@
     </div>
   </div>
 
+  <!-- NEWSLETTER -->
+  <div class="bg-primary/5 border border-outline-variant/40 rounded-xl px-4 py-3.5 lg:px-7 lg:py-5 mb-8 lg:mb-10">
+    <div class="flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-6 text-right">
+      <div class="md:max-w-md md:shrink-0">
+        <h2 class="font-h2 text-[18px] lg:text-h2 text-on-surface mb-1 leading-tight">הצטרפו לקהילת 'התפריט'</h2>
+        <p class="text-[13px] lg:text-body-md text-on-surface-variant leading-snug">הירשמו לניוזלטר שלנו וקבלו מתכונים בריאים וטיפים לתזונה נכונה ישירות למייל שלכם.</p>
+      </div>
+      <form class="flex gap-2 w-full md:flex-1" onsubmit="event.preventDefault();">
+        <input class="flex-1 bg-white border border-outline-variant px-3 py-2 lg:px-4 lg:py-3 rounded-lg focus:border-primary outline-none text-[14px]" placeholder="כתובת האימייל שלכם" required type="email"/>
+        <button class="px-4 py-2 lg:px-7 lg:py-3 bg-primary text-on-primary font-label-caps text-[12px] lg:text-label-caps rounded-lg hover:bg-primary-container shadow-md whitespace-nowrap transition-colors" type="submit">הרשמה לניוזלטר</button>
+      </form>
+    </div>
+  </div>
+
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-    <aside class="lg:col-span-3 flex flex-col gap-8 order-2 lg:order-none">
+    <aside class="hidden lg:flex lg:col-span-3 flex-col gap-8 order-2 lg:order-none">
       <!-- Desktop-only: full categories list. On mobile this is replaced by
            the dropdown above the cards. -->
       <section class="hidden lg:block">
@@ -141,18 +165,29 @@
   <div class="flex flex-col md:flex-row justify-between items-center gap-6 px-12 py-10 w-full">
     <div class="text-right">
       <div class="text-xl font-bold text-stone-800">התפריט</div>
-      <div class="text-stone-500 text-[12px] mt-1">מתאים לסוכרתיים, צליאק, ודלת פחמימה</div>
+      <div class="text-stone-500 text-[12px] mt-1">מתאים לסוכרתיים, צליאקים, ותזונה דלת פחמימה</div>
     </div>
     <div class="flex gap-8">
-      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="#">תנאי שימוש</a>
-      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="#">מדיניות פרטיות</a>
-      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="#">צור קשר</a>
+      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="/terms">תנאי שימוש</a>
+      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="/privacy">מדיניות פרטיות</a>
+      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="/contact">צור קשר</a>
     </div>
     <p class="text-stone-500">© 2026 התפריט. כל הזכויות שמורות.</p>
   </div>
 </footer>
 
 <script>
+  // Mobile hamburger toggle
+  const navToggle = document.getElementById('mobile-nav-toggle');
+  const navPanel = document.getElementById('mobile-nav-panel');
+  if (navToggle && navPanel) {
+    navToggle.addEventListener('click', () => {
+      const willOpen = navPanel.hidden;
+      navPanel.hidden = !willOpen;
+      navToggle.setAttribute('aria-expanded', String(willOpen));
+    });
+  }
+
   const PAGE_SIZE = 9;
 
   const escapeHTML = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
@@ -167,20 +202,20 @@
   }
 
   function recipeCard(r) {
-    const tag = (r.tags && r.tags[0]) || '';
     const img = r.imageUrl || '';
+    const netCarbs = (r.netCarbs || '').toString().trim();
     return `
       <a href="/recipe/${r.id}" class="group block bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-surface-container">
         <div class="aspect-square overflow-hidden relative bg-surface-container">
           ${img ? `<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${img}" alt="${escapeHTML(r.name)}"/>` : ''}
-          ${tag ? `<div class="absolute top-4 right-4 bg-secondary text-white px-3 py-1 text-caption font-label-caps rounded-full">${escapeHTML(tag)}</div>` : ''}
         </div>
         <div class="p-5 text-right">
           <h4 class="font-h3 text-h3 mb-1 group-hover:text-primary transition-colors line-clamp-2">${escapeHTML(r.name)}</h4>
-          <p class="text-[12px] text-on-surface-variant/80 mb-3">מתאים לסוכרתיים, צליאק, ודלת פחמימה</p>
-          <div class="flex items-center gap-4 text-outline font-caption">
+          <p class="text-[12px] text-on-surface-variant/80 mb-3">מתאים לסוכרתיים, צליאקים, ותזונה דלת פחמימה</p>
+          <div class="flex items-center gap-4 text-outline font-caption flex-wrap">
             <div class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">schedule</span><span>${escapeHTML(r.prepTime || '—')}</span></div>
             <div class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">restaurant</span><span>${escapeHTML(difficultyText(r.prepTime))}</span></div>
+            ${netCarbs ? `<div class="flex items-center gap-1" title="פחמימות נטו"><span class="material-symbols-outlined text-[18px]">nutrition</span><span>${escapeHTML(netCarbs)} ג׳ נטו</span></div>` : ''}
           </div>
         </div>
       </a>`;

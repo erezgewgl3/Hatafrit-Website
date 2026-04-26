@@ -56,11 +56,21 @@
     </a>
     <div class="hidden md:flex items-center gap-6 font-['Heebo'] text-sm font-medium">
       <a class="text-stone-600 hover:text-primary transition-colors" href="/recipes">מתכונים</a>
-      <a class="text-stone-600 hover:text-primary transition-colors" href="/shulchan-echad">השיטה</a>
+      <a class="text-stone-600 hover:text-primary transition-colors" href="/hamrot">המרות ומידות</a>
       <a class="text-stone-600 hover:text-primary transition-colors" href="/#about">אודות</a>
       <a class="bg-[#B8860B] text-white px-3.5 py-1 rounded-full hover:brightness-110 transition-all" href="/shulchan-echad">שיטת שולחן אחד</a>
     </div>
-    <button aria-label="חיפוש" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-surface-container"><span class="material-symbols-outlined text-on-surface-variant text-xl">search</span></button>
+    <button id="mobile-nav-toggle" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" aria-label="תפריט" aria-expanded="false" aria-controls="mobile-nav-panel">
+      <span class="material-symbols-outlined text-[24px]">menu</span>
+    </button>
+  </div>
+  <div id="mobile-nav-panel" hidden class="md:hidden border-t border-outline-variant/30 bg-white">
+    <div class="flex flex-col gap-1 px-4 py-3 max-w-7xl mx-auto font-['Heebo'] text-[15px] font-medium">
+      <a class="text-stone-700 hover:text-primary py-2.5" href="/recipes">מתכונים</a>
+      <a class="text-stone-700 hover:text-primary py-2.5" href="/hamrot">המרות ומידות</a>
+      <a class="text-stone-700 hover:text-primary py-2.5" href="/#about">אודות</a>
+      <a class="bg-[#B8860B] text-white px-4 py-2.5 rounded-full text-center mt-2 mb-1" href="/shulchan-echad">שיטת שולחן אחד</a>
+    </div>
   </div>
 </nav>
 
@@ -70,7 +80,6 @@
   <section class="max-w-6xl mx-auto px-6 pt-6 lg:pt-10">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center">
       <div class="order-2 lg:order-none">
-        <div id="hero-tags" class="flex flex-wrap gap-2 mb-3 empty:hidden"></div>
         <h1 id="hero-title" class="font-h1 font-['Heebo'] text-[28px] md:text-[32px] lg:text-[36px] leading-[1.15] font-extrabold text-on-surface mb-3"></h1>
         <p id="hero-description" class="text-[15px] lg:text-base leading-relaxed text-on-surface-variant mb-5 empty:hidden"></p>
         <div class="flex flex-wrap items-center gap-2 pt-5 border-t border-outline-variant/40">
@@ -86,10 +95,30 @@
             <span class="material-symbols-outlined text-[16px]">restaurant</span>
             <span id="meta-servings"></span>
           </span>
+          <span data-meta="netCarbs" class="inline-flex items-center gap-1.5 bg-on-surface/5 text-on-surface px-3 py-1.5 rounded-full text-[13px] font-semibold">
+            <span class="material-symbols-outlined text-[16px]">nutrition</span>
+            <span id="meta-net-carbs"></span>
+          </span>
         </div>
       </div>
       <div class="order-1 lg:order-none aspect-[3/2] rounded-2xl overflow-hidden shadow-lg shadow-stone-900/10 bg-surface-container">
         <img id="hero-img" class="w-full h-full object-cover" alt=""/>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="max-w-6xl mx-auto px-6 mt-8 lg:mt-10">
+    <div class="bg-primary/5 border border-outline-variant/40 rounded-xl px-4 py-3.5 lg:px-7 lg:py-5">
+      <div class="flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-6 text-right">
+        <div class="md:max-w-md md:shrink-0">
+          <h2 class="font-h2 text-[18px] lg:text-h2 text-on-surface mb-1 leading-tight">הצטרפו לקהילת 'התפריט'</h2>
+          <p class="text-[13px] lg:text-body-md text-on-surface-variant leading-snug">הירשמו לניוזלטר שלנו וקבלו מתכונים בריאים וטיפים לתזונה נכונה ישירות למייל שלכם.</p>
+        </div>
+        <form class="flex gap-2 w-full md:flex-1" onsubmit="event.preventDefault();">
+          <input class="flex-1 bg-white border border-outline-variant px-3 py-2 lg:px-4 lg:py-3 rounded-lg focus:border-primary outline-none text-[14px]" placeholder="כתובת האימייל שלכם" required type="email"/>
+          <button class="px-4 py-2 lg:px-7 lg:py-3 bg-primary text-on-primary font-label-caps text-[12px] lg:text-label-caps rounded-lg hover:bg-primary-container shadow-md whitespace-nowrap transition-colors" type="submit">הרשמה לניוזלטר</button>
+        </form>
       </div>
     </div>
   </section>
@@ -150,18 +179,29 @@
   <div class="flex flex-col md:flex-row justify-between items-center gap-4 px-8 py-6 w-full max-w-7xl mx-auto text-center md:text-right">
     <div class="md:text-right">
       <a href="/" class="text-xl font-black text-primary font-['Heebo']">התפריט</a>
-      <div class="text-[11px] text-stone-500 mt-0.5">מתאים לסוכרתיים, צליאק, ודלת פחמימה</div>
+      <div class="text-[11px] text-stone-500 mt-0.5">מתאים לסוכרתיים, צליאקים, ותזונה דלת פחמימה</div>
     </div>
     <div class="flex gap-4 font-['Assistant'] text-xs text-stone-500">
-      <a class="hover:text-primary" href="#">תנאי שימוש</a>
-      <a class="hover:text-primary" href="#">מדיניות פרטיות</a>
-      <a class="hover:text-primary" href="#">צור קשר</a>
+      <a class="hover:text-primary" href="/terms">תנאי שימוש</a>
+      <a class="hover:text-primary" href="/privacy">מדיניות פרטיות</a>
+      <a class="hover:text-primary" href="/contact">צור קשר</a>
     </div>
     <div class="font-['Assistant'] text-[10px] text-stone-500/80">© 2026 התפריט. כל הזכויות שמורות.</div>
   </div>
 </footer>
 
 <script>
+  // Mobile hamburger toggle
+  const navToggle = document.getElementById('mobile-nav-toggle');
+  const navPanel = document.getElementById('mobile-nav-panel');
+  if (navToggle && navPanel) {
+    navToggle.addEventListener('click', () => {
+      const willOpen = navPanel.hidden;
+      navPanel.hidden = !willOpen;
+      navToggle.setAttribute('aria-expanded', String(willOpen));
+    });
+  }
+
   const escapeHTML = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 
   function getRecipeId() {
@@ -242,17 +282,6 @@
       .filter(Boolean);
   }
 
-  function tagPill(t) {
-    const stylesByLabel = {
-      'ללא גלוטן': 'bg-secondary/10 text-secondary border-secondary/20',
-      'דל פחמימה': 'bg-secondary/10 text-secondary border-secondary/20',
-      'ללא תוספת סוכר': 'bg-primary/10 text-primary border-primary/20',
-      'ללא סוכר': 'bg-primary/10 text-primary border-primary/20',
-    };
-    const cls = stylesByLabel[t] || 'bg-primary/10 text-primary border-primary/20';
-    return `<span class="${cls} px-2 py-0.5 text-[11px] font-bold rounded-md border">${escapeHTML(t)}</span>`;
-  }
-
   async function shareRecipe() {
     const url = location.href;
     const title = document.getElementById('hero-title').textContent || 'התפריט';
@@ -299,13 +328,20 @@
       document.getElementById('hero-img').alt = r.name || '';
       document.getElementById('hero-title').textContent = r.name || '';
       document.getElementById('hero-description').textContent = r.description || '';
-      document.getElementById('hero-tags').innerHTML = (r.tags || []).map(tagPill).join('');
       const metas = { time: r.prepTime, difficulty: r.difficulty, servings: r.servingSize };
       for (const [k, v] of Object.entries(metas)) {
         const value = (v || '').trim();
         document.getElementById(`meta-${k}`).textContent = value;
         const pill = document.querySelector(`[data-meta="${k}"]`);
         if (!value || value === '—') pill.style.display = 'none';
+      }
+      // Net carbs — formatted with unit + label, hidden when empty
+      const netCarbsValue = (r.netCarbs || '').toString().trim();
+      const netCarbsPill = document.querySelector('[data-meta="netCarbs"]');
+      if (netCarbsValue) {
+        document.getElementById('meta-net-carbs').textContent = `${netCarbsValue} ג׳ פחמימות נטו`;
+      } else {
+        netCarbsPill.style.display = 'none';
       }
 
       const ings = splitIngredients(r.ingredients || '');

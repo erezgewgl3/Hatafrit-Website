@@ -14,16 +14,16 @@ const AIRTABLE_TABLE = 'tblx4gWhB6m81apfT';
 const FIELDS = {
   name:         'flddpcF2EmlBShsSI',
   category:     'fldLfZTOT68WKrKi9',
-  tags:         'flduwopGbNHV4CSwu',
   description:  'fldnObh6jNKLFQwHY',
   prepTime:     'fldywAg4Ew7tyM8jY',
   image:        'fldtDK3PBckFDyb7K',
   ingredients:  'fldzG5aH7sO6Mxcdn',
   instructions: 'fldre7wfL15XxPL6D',
   servingSize:  'fld6WyQdPtYBnydxW',
+  netCarbs:     'fldLLBHC01hOmnXNq',
 };
 
-const FIELD_IDS = Object.values(FIELDS);
+const FIELD_IDS = Object.values(FIELDS).filter(Boolean);
 
 function inferDifficulty(prepTime) {
   const min = parseInt(prepTime, 10);
@@ -47,18 +47,17 @@ function toCategoryArray(raw) {
 
 function normalizeRecord(r) {
   const f = r.fields || {};
-  const tagsRaw = f[FIELDS.tags] || [];
   const imgArr = f[FIELDS.image] || [];
   const img0 = imgArr[0];
   const prepTime = f[FIELDS.prepTime] || '';
   const categories = toCategoryArray(f[FIELDS.category]);
+  const netCarbsRaw = FIELDS.netCarbs ? f[FIELDS.netCarbs] : '';
 
   return {
     id: r.id,
     name: f[FIELDS.name] || '',
     categories,                       // array — primary
     category: categories[0] || '',    // string — backward-compat for any unmodified caller
-    tags: tagsRaw.map(t => (t && t.name) ? t.name : t).filter(Boolean),
     description: f[FIELDS.description] || '',
     prepTime,
     difficulty: inferDifficulty(prepTime),
@@ -67,6 +66,7 @@ function normalizeRecord(r) {
     ingredients: f[FIELDS.ingredients] || '',
     instructions: f[FIELDS.instructions] || '',
     servingSize: f[FIELDS.servingSize] || '',
+    netCarbs: netCarbsRaw === null || netCarbsRaw === undefined ? '' : String(netCarbsRaw),
     createdTime: r.createdTime || '',
   };
 }

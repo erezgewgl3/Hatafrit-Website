@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>תנאי שימוש | התפריט</title>
+<meta name="description" content="תנאי השימוש באתר התפריט — מוצרים דיגיטליים, מדיניות החזרים, קניין רוחני ואחריות."/>
+<link rel="icon" type="image/png" href="/brand_assets/Logo.png"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        "outline": "#817563", "secondary": "#9e3e4c",
+        "on-surface-variant": "#4f4535", "background": "#fff8f3",
+        "primary-fixed": "#ffdea6", "primary": "#785600", "on-primary": "#ffffff",
+        "on-surface": "#201b13", "surface-container-low": "#fdf2e5",
+        "outline-variant": "#d3c4af", "surface-container": "#f7ecdf", "gold": "#B8860B",
+      },
+      borderRadius: { DEFAULT: "0.125rem", lg: "0.5rem", xl: "0.75rem", "2xl": "1rem", full: "9999px" },
+      fontFamily: { h: ["Heebo"], body: ["Assistant"] },
+    }}
+  };
+</script>
+<style>
+  body { background-color: #fff8f3; color: #201b13; font-family: 'Assistant', sans-serif; }
+  h1, h2, h3, h4 { font-family: 'Heebo', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .prose-h2 { font-family: 'Heebo', sans-serif; font-weight: 700; font-size: 20px; line-height: 1.3; color: #201b13; margin-top: 2.25rem; margin-bottom: 0.75rem; }
+  @media (min-width: 1024px) { .prose-h2 { font-size: 22px; } }
+  .prose-p { font-size: 15px; line-height: 1.8; color: #4f4535; margin-bottom: 1rem; }
+  @media (min-width: 1024px) { .prose-p { font-size: 16px; } }
+  .prose-a { color: #785600; text-decoration: underline; text-underline-offset: 3px; }
+  .prose-a:hover { color: #B8860B; }
+</style>
+</head>
+<body class="font-body bg-background text-on-surface antialiased">
+
+<header class="bg-stone-50/95 backdrop-blur-md fixed top-0 w-full z-50 border-b border-stone-200/50 shadow-sm shadow-stone-200/50">
+  <div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto font-['Heebo'] text-base font-medium">
+    <a href="/" class="inline-flex items-center gap-3 text-4xl font-black text-yellow-800">
+      <img src="/brand_assets/Logo.png" alt="התפריט" class="h-14 w-auto"/>
+      <span>התפריט</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8">
+      <a class="text-stone-600 hover:text-yellow-600 transition-colors" href="/recipes">מתכונים</a>
+      <a class="text-stone-600 hover:text-yellow-600 transition-colors" href="/hamrot">המרות ומידות</a>
+      <a class="text-stone-600 hover:text-yellow-600 transition-colors" href="/#about">אודות</a>
+      <a class="bg-[#B8860B] text-white px-4 py-1.5 rounded-full hover:brightness-110 transition-all" href="/shulchan-echad">שיטת שולחן אחד</a>
+    </nav>
+    <button id="mobile-nav-toggle" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg text-on-surface-variant hover:bg-stone-100 transition-colors" aria-label="תפריט" aria-expanded="false" aria-controls="mobile-nav-panel">
+      <span class="material-symbols-outlined text-[26px]">menu</span>
+    </button>
+  </div>
+  <div id="mobile-nav-panel" hidden class="md:hidden border-t border-stone-200/50 bg-white">
+    <div class="flex flex-col gap-1 px-6 py-3 max-w-7xl mx-auto font-['Heebo'] text-[15px] font-medium">
+      <a class="text-stone-700 hover:text-yellow-700 py-2.5" href="/recipes">מתכונים</a>
+      <a class="text-stone-700 hover:text-yellow-700 py-2.5" href="/hamrot">המרות ומידות</a>
+      <a class="text-stone-700 hover:text-yellow-700 py-2.5" href="/#about">אודות</a>
+      <a class="bg-[#B8860B] text-white px-4 py-2.5 rounded-full text-center mt-2 mb-1" href="/shulchan-echad">שיטת שולחן אחד</a>
+    </div>
+  </div>
+</header>
+
+<main class="pt-32 pb-20 px-6 max-w-3xl mx-auto">
+
+  <h1 class="text-[32px] md:text-[40px] lg:text-[44px] font-extrabold leading-tight text-on-surface mb-6">תנאי שימוש</h1>
+
+  <p class="prose-p">ברוכים הבאים לאתר התפריט (hatafrit.co.il). השימוש באתר ובשירותים המוצעים בו כפוף לתנאים המפורטים להלן. עצם השימוש באתר מהווה הסכמה לתנאים אלה.</p>
+
+  <h2 class="prose-h2">כללי</h2>
+  <p class="prose-p">האתר מופעל על ידי עדי מ"התפריט" ומציע תוכן בנושא תזונה דלת פחמימה, ללא גלוטן וללא סוכר, לרבות מתכונים, מדריכים, ספרים דיגיטליים, סדנאות מוקלטות ותוכניות תזונה דיגיטליות.</p>
+  <p class="prose-p">התוכן באתר נועד למטרות מידע כללי בלבד ואינו מהווה ייעוץ רפואי, תזונתי או מקצועי. יש להתייעץ עם גורם מקצועי מוסמך לפני ביצוע שינויים תזונתיים, במיוחד במקרים של סוכרת, צליאק או כל מצב רפואי אחר.</p>
+
+  <h2 class="prose-h2">מוצרים דיגיטליים ורכישות</h2>
+  <p class="prose-p">המוצרים הדיגיטליים הנמכרים באתר (ספרים דיגיטליים, תוכניות, סדנאות מוקלטות) מסופקים באמצעות דואר אלקטרוני ו/או גישה מקוונת.</p>
+  <p class="prose-p">לאחר השלמת הרכישה, המוצר הדיגיטלי יישלח לכתובת המייל שסופקה בעת הרכישה. באחריות הרוכש/ת לוודא שכתובת המייל תקינה ונגישה.</p>
+  <p class="prose-p">מחירי המוצרים באתר כוללים מע"מ כחוק, אלא אם צוין אחרת.</p>
+
+  <h2 class="prose-h2">מדיניות החזרים</h2>
+  <p class="prose-p">התוכנית "שיטת שולחן אחד" כוללת הבטחת "המשפחה אוהבת": אם המשפחה לא טועמת לפחות מנה אחת תוך 14 יום מיום הרכישה — תינתן החזר מלא, ללא שאלות. לקבלת החזר יש לפנות במייל.</p>
+  <p class="prose-p">לגבי מוצרים דיגיטליים אחרים (ספרים דיגיטליים, סדנאות מוקלטות): בהתאם לחוק הגנת הצרכן, התשמ"א-1981, זכות הביטול חלה עד 14 ימים מיום הרכישה או מיום קבלת המוצר, לפי המאוחר, ובתנאי שלא נעשה שימוש במוצר הדיגיטלי. לאחר פתיחת/הורדת המוצר הדיגיטלי, לא ניתן יהיה לבטל את העסקה.</p>
+
+  <h2 class="prose-h2">קניין רוחני</h2>
+  <p class="prose-p">כל התכנים באתר — לרבות מתכונים, טקסטים, תמונות, סרטונים, עיצוב ולוגו — הם קניינה הרוחני של התפריט ומוגנים על פי חוקי זכויות יוצרים.</p>
+  <p class="prose-p">אין להעתיק, לשכפל, להפיץ, לפרסם או להשתמש בתכני האתר לכל מטרה מסחרית ללא אישור מראש ובכתב.</p>
+  <p class="prose-p">רכישת מוצר דיגיטלי מקנה רישיון שימוש אישי בלבד. אין להעביר, לשתף או להפיץ את המוצר לצדדים שלישיים.</p>
+
+  <h2 class="prose-h2">אחריות</h2>
+  <p class="prose-p">התוכן באתר מוצע "כמות שהוא" (AS IS). התפריט אינה אחראית לכל נזק ישיר או עקיף הנובע מהשימוש באתר או במוצרים הדיגיטליים.</p>
+  <p class="prose-p">התפריט אינה מתחייבת שהאתר יפעל ללא הפרעות או שגיאות, ושומרת על הזכות לעדכן, לשנות או להסיר תכנים בכל עת.</p>
+  <p class="prose-p">המתכונים באתר מתאימים לתזונה דלת פחמימה, ללא גלוטן וללא סוכר, אך אינם מהווים תחליף לייעוץ רפואי או תזונאי אישי. בפרט, חולי סוכרת, צליאק ובעלי מצבים רפואיים אחרים מתבקשים להתייעץ עם הרופא המטפל לגבי התאמה אישית.</p>
+
+  <h2 class="prose-h2">שינויים בתנאים</h2>
+  <p class="prose-p">התפריט רשאית לעדכן תנאים אלה מעת לעת. המשך השימוש באתר לאחר עדכון התנאים מהווה הסכמה לתנאים המעודכנים.</p>
+
+  <h2 class="prose-h2">יצירת קשר</h2>
+  <p class="prose-p">לשאלות בנוגע לתנאי השימוש ניתן לפנות אלינו במייל: <a class="prose-a" href="mailto:adi@hatafrit.co.il">adi@hatafrit.co.il</a></p>
+
+  <p class="text-[12px] text-on-surface-variant/80 mt-12 italic">עודכן לאחרונה: אפריל 2026</p>
+
+</main>
+
+<footer class="bg-stone-100 w-full mt-auto border-t border-stone-200 font-['Assistant'] text-sm">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-6 px-6 py-10 w-full max-w-7xl mx-auto">
+    <div class="text-right">
+      <div class="text-xl font-bold text-stone-800">התפריט</div>
+      <div class="text-stone-500 text-[12px] mt-1">מתאים לסוכרתיים, צליאקים, ותזונה דלת פחמימה</div>
+    </div>
+    <div class="flex gap-8">
+      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="/terms">תנאי שימוש</a>
+      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="/privacy">מדיניות פרטיות</a>
+      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="/contact">צור קשר</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile hamburger toggle
+  const navToggle = document.getElementById('mobile-nav-toggle');
+  const navPanel = document.getElementById('mobile-nav-panel');
+  if (navToggle && navPanel) {
+    navToggle.addEventListener('click', () => {
+      const willOpen = navPanel.hidden;
+      navPanel.hidden = !willOpen;
+      navToggle.setAttribute('aria-expanded', String(willOpen));
+    });
+  }
+</script>
+
+</body>
+</html>

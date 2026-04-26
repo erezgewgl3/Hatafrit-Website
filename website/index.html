@@ -64,13 +64,24 @@
     </a>
     <div class="hidden md:flex items-center gap-8">
       <a class="text-stone-600 hover:text-yellow-600 transition-colors duration-300" href="/recipes">מתכונים</a>
-      <a class="text-stone-600 hover:text-yellow-600 transition-colors duration-300" href="/shulchan-echad">השיטה</a>
+      <a class="text-stone-600 hover:text-yellow-600 transition-colors duration-300" href="/hamrot">המרות ומידות</a>
       <a class="text-stone-600 hover:text-yellow-600 transition-colors duration-300" href="#about">אודות</a>
       <a class="bg-[#B8860B] text-white px-4 py-1.5 rounded-full hover:brightness-110 transition-all" href="/shulchan-echad">שיטת שולחן אחד</a>
     </div>
     <div class="relative hidden lg:block">
       <input id="nav-search" class="bg-stone-100 border-none rounded-full py-1.5 px-4 pr-10 text-sm focus:ring-2 focus:ring-yellow-600 w-48 text-right" placeholder="חיפוש מתכון..." type="text"/>
       <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 text-sm">search</span>
+    </div>
+    <button id="mobile-nav-toggle" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg text-stone-600 hover:bg-stone-100 transition-colors" aria-label="תפריט" aria-expanded="false" aria-controls="mobile-nav-panel">
+      <span class="material-symbols-outlined text-[26px]">menu</span>
+    </button>
+  </div>
+  <div id="mobile-nav-panel" hidden class="md:hidden border-t border-stone-200/50 bg-white">
+    <div class="flex flex-col gap-1 px-6 py-3 max-w-7xl mx-auto text-[15px]">
+      <a class="text-stone-700 hover:text-yellow-700 py-2.5" href="/recipes">מתכונים</a>
+      <a class="text-stone-700 hover:text-yellow-700 py-2.5" href="/hamrot">המרות ומידות</a>
+      <a class="text-stone-700 hover:text-yellow-700 py-2.5" href="#about">אודות</a>
+      <a class="bg-[#B8860B] text-white px-4 py-2.5 rounded-full text-center mt-2 mb-1" href="/shulchan-echad">שיטת שולחן אחד</a>
     </div>
   </div>
 </nav>
@@ -81,13 +92,16 @@
        of Adi's body and creates more breathing room between her face and the right-side text. -->
   <section class="relative h-[640px] lg:h-[760px] overflow-hidden">
     <img alt="עדי במטבח" class="absolute inset-0 w-full h-full object-cover" style="object-position: 35% 25%; transform: scale(1.14); transform-origin: 100% 50%;" src="brand_assets/WhatsApp%20Image%202026-03-13%20at%202.16.30%20PM.jpeg"/>
-    <div class="relative z-10 h-full max-w-7xl mx-auto px-gutter flex items-center justify-start">
+    <div class="relative z-10 h-full max-w-7xl mx-auto px-gutter flex items-end lg:items-center justify-start pb-16 lg:pb-0">
       <div class="max-w-md text-white text-right" style="text-shadow: 0 0 1px rgba(0,0,0,0.85), 0 0 6px rgba(0,0,0,0.6), 0 2px 14px rgba(0,0,0,0.5);">
         <h1 class="font-h1 text-h1 mb-3 leading-[1.1]">ארוחה אחת שמתאימה לכולם</h1>
-        <p class="text-[16px] md:text-[18px] font-semibold tracking-wide mb-5 text-white/95">מתאים לסוכרתיים, צליאק, ודלת פחמימה</p>
+        <p class="text-[16px] md:text-[18px] font-semibold tracking-wide mb-5 text-white/95">מתאים לסוכרתיים, צליאקים, ותזונה דלת פחמימה</p>
         <p class="font-body-lg text-body-lg font-medium mb-8">בלי להתפשר על הטעם ובלי לבשל בכמה סירים.</p>
         <div class="flex gap-3" style="text-shadow: none;">
-          <a href="/recipes" class="bg-[#B8860B] text-white px-7 py-3.5 font-label-caps text-label-caps rounded-xl hover:brightness-110 transition active:scale-95 shadow-lg shadow-black/30">עיון במתכונים</a>
+          <a href="/recipes" class="bg-[#B8860B] text-white px-7 py-3.5 font-label-caps text-label-caps rounded-xl hover:brightness-110 transition active:scale-95 shadow-lg shadow-black/30 inline-flex items-center gap-2">
+            <span>למתכונים</span>
+            <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+          </a>
         </div>
       </div>
     </div>
@@ -96,7 +110,7 @@
   <!-- TRUST -->
   <div class="bg-surface-container-high py-6 border-b border-outline-variant">
     <div class="container-max mx-auto px-gutter text-center">
-      <p class="font-label-caps text-label-caps text-on-surface-variant tracking-widest">115,000 עוקבות באינסטגרם · 6 ספרי מתכונים · מאות אלפי ארוחות</p>
+      <p class="font-label-caps text-label-caps text-on-surface-variant tracking-widest">115,000 עוקבים באינסטגרם · 6 ספרי מתכונים · מאות אלפי ארוחות</p>
     </div>
   </div>
 
@@ -121,7 +135,7 @@
         </div>
       </div>
       <div class="text-center">
-        <a href="#about" class="text-primary font-h3 border-b-2 border-primary pb-1 hover:text-primary-container transition-colors">למדו עוד על השיטה</a>
+        <a href="/shulchan-echad" class="text-primary font-h3 border-b-2 border-primary pb-1 hover:text-primary-container transition-colors">למדו עוד על השיטה</a>
       </div>
     </div>
   </section>
@@ -130,7 +144,7 @@
   <section class="py-xl">
     <div class="container-max mx-auto px-gutter">
       <div class="flex justify-between items-end mb-12">
-        <h2 class="font-h2 text-h2">הכי פופולריים השבוע</h2>
+        <h2 class="font-h2 text-h2">מתכונים שאהבתם השבוע...</h2>
         <a class="text-primary font-label-caps border-b border-primary" href="/recipes">לכל המתכונים</a>
       </div>
       <div id="featured-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
@@ -142,12 +156,19 @@
     </div>
   </section>
 
-  <!-- BENTO CATEGORIES -->
-  <section class="py-xl bg-surface-dim">
+  <!-- NEWSLETTER -->
+  <section class="bg-primary/5 border-y border-outline-variant py-6 lg:py-10">
     <div class="container-max mx-auto px-gutter">
-      <h2 class="font-h2 text-h2 text-center mb-2">מה נבשל היום?</h2>
-      <p class="text-center text-on-surface-variant text-body-md mb-10">כל המתכונים מתאימים לסוכרתיים, צליאק, ודלת פחמימה</p>
-      <div id="bento-grid" class="grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-4 h-[600px]"></div>
+      <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-8 text-right">
+        <div class="md:max-w-md md:shrink-0">
+          <h2 class="font-h2 text-[18px] lg:text-h2 text-on-surface mb-1 leading-tight">הצטרפו לקהילת 'התפריט'</h2>
+          <p class="text-[13px] lg:text-body-md text-on-surface-variant leading-snug">הירשמו לניוזלטר שלנו וקבלו מתכונים בריאים וטיפים לתזונה נכונה ישירות למייל שלכם.</p>
+        </div>
+        <form class="flex gap-2 w-full md:flex-1" onsubmit="event.preventDefault();">
+          <input class="flex-1 bg-white border border-outline-variant px-3 py-2 lg:px-4 lg:py-3 rounded-lg focus:border-primary outline-none text-[14px]" placeholder="כתובת האימייל שלכם" required type="email"/>
+          <button class="px-4 py-2 lg:px-8 lg:py-3 bg-primary text-on-primary font-label-caps text-[12px] lg:text-label-caps rounded-lg hover:bg-primary-container shadow-md whitespace-nowrap transition-colors" type="submit">הרשמה לניוזלטר</button>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -158,8 +179,8 @@
         <div class="w-full md:w-2/3 text-right order-2 md:order-none">
           <span class="text-secondary font-label-caps mb-4 block">נעים להכיר, אני עדי</span>
           <h2 class="font-h2 text-h2 mb-6">אמא, יוצרת מתכונים, ומבינה בדיוק מה אתם עוברים</h2>
-          <p class="font-body-lg text-body-lg mb-5 text-on-surface-variant">אני יודעת בדיוק איך זה — להכין שתי ארוחות כל ערב כי מישהו במשפחה חייב לאכול אחרת. להרגיש שהילד עם הצליאק תמיד מקבל "אוכל אחר", או לאכול את שאריות הילדים בעמידה כי אתם היחידים שעושים דל פחמימה.</p>
-          <p class="font-body-lg text-body-lg mb-8 text-on-surface-variant">13 שנה גרתי בארה"ב, שנים של ניסיונות ופיתוח — עד שהבנתי שאפשר אחרת. שאפשר ארוחה אחת שמתאימה לכולם, בלי שמישהו ירגיש שונה. זאת שיטת שולחן אחד.</p>
+          <p class="font-body-lg text-body-lg mb-5 text-on-surface-variant">אני יודעת בדיוק איך זה - להכין שתי ארוחות כל ערב כי מישהו במשפחה חייב לאכול אחרת. להרגיש שהילד עם הצליאק תמיד מקבל "אוכל אחר", או לאכול את שאריות הילדים בעמידה כי אתם היחידים שעושים דל פחמימה.</p>
+          <p class="font-body-lg text-body-lg mb-8 text-on-surface-variant">13 שנה גרתי בארה"ב, שנים של ניסיונות ופיתוח - עד שהבנתי שאפשר אחרת. שאפשר ארוחה אחת שמתאימה לכולם, בלי שמישהו ירגיש שונה. זאת שיטת שולחן אחד.</p>
           <a href="/shulchan-echad" class="inline-flex items-center gap-2 text-primary font-medium hover:text-primary-container transition-colors">
             <span>רוצים שבוע שלם של ארוחות שמתאימות לכל המשפחה? גלו את שיטת שולחן אחד</span>
             <span class="material-symbols-outlined text-[18px]">arrow_back</span>
@@ -172,31 +193,18 @@
     </div>
   </section>
 
-  <!-- EMAIL CAPTURE -->
-  <section class="py-24 bg-[#221d10] text-white">
-    <div class="container-max mx-auto px-gutter max-w-3xl text-center">
-      <h2 class="font-h2 text-h2 mb-3">מתכון חדש למייל בכל שבוע</h2>
-      <p class="text-[15px] font-semibold tracking-wide text-white/85 mb-3">מתאים לסוכרתיים, צליאק, ודלת פחמימה</p>
-      <p class="font-body-lg text-body-lg mb-10 text-white/90">הצטרפו ל-80,000 משפחות שמבשלות ארוחה אחת לכולם.</p>
-      <form class="flex flex-col sm:flex-row gap-4" onsubmit="event.preventDefault();">
-        <input class="flex-1 px-6 py-4 rounded-xl border-none focus:ring-2 focus:ring-primary text-right text-on-surface" placeholder="הכתובת שלכם כאן..." type="email" required/>
-        <button class="bg-[#B8860B] text-white px-10 py-4 font-label-caps text-label-caps rounded-xl shadow-md hover:shadow-lg transition-shadow">אני רוצה להצטרף</button>
-      </form>
-      <p class="text-caption mt-4 opacity-70 italic">אנחנו שונאים ספאם בדיוק כמוכם. ניתן להסיר את עצמכם בכל עת.</p>
-    </div>
-  </section>
 </main>
 
 <footer class="bg-stone-100 w-full mt-auto border-t border-stone-200 font-['Assistant'] text-sm">
   <div class="flex flex-col md:flex-row justify-between items-center gap-6 px-12 py-10 w-full">
     <div class="text-right">
       <div class="text-xl font-bold text-stone-800">התפריט</div>
-      <div class="text-stone-500 text-[12px] mt-1">מתאים לסוכרתיים, צליאק, ודלת פחמימה</div>
+      <div class="text-stone-500 text-[12px] mt-1">מתאים לסוכרתיים, צליאקים, ותזונה דלת פחמימה</div>
     </div>
     <div class="flex gap-8 text-stone-500">
-      <a class="hover:text-red-700 underline underline-offset-4" href="#">תנאי שימוש</a>
-      <a class="hover:text-red-700 underline underline-offset-4" href="#">מדיניות פרטיות</a>
-      <a class="hover:text-red-700 underline underline-offset-4" href="#">צור קשר</a>
+      <a class="hover:text-red-700 underline underline-offset-4" href="/terms">תנאי שימוש</a>
+      <a class="hover:text-red-700 underline underline-offset-4" href="/privacy">מדיניות פרטיות</a>
+      <a class="hover:text-red-700 underline underline-offset-4" href="/contact">צור קשר</a>
     </div>
     <div class="text-stone-500">© 2026 התפריט. כל הזכויות שמורות.</div>
   </div>
@@ -209,37 +217,33 @@
     }
   });
 
-  // Each tile picks its hero photo from any recipe carrying any of the listed
-  // categories. First match (in array order) with an image becomes the tile's
-  // representative recipe. Names match the actual Airtable options after the
-  // 2026-04-26 migration.
-  const BENTO = [
-    { match: ['מנה עיקרית'],
-      label: 'ארוחות',          span: 'col-span-2 row-span-2' },
-    { match: ['לחמים ולחמניות'],
-      label: 'לחמים ולחמניות',   span: 'col-span-1 row-span-1' },
-    { match: ['חנוכה','פסח','חגי תשרי','שבועות','פורים','יום העצמאות'],
-      label: 'חגים',            span: 'col-span-1 row-span-1' },
-    { match: ['עוגיות','קינוחים עם טוויסט','עוגות ביתיות'],
-      label: 'מתוקים ובריאים',   span: 'col-span-2 row-span-1' },
-  ];
+  // Mobile hamburger toggle
+  const navToggle = document.getElementById('mobile-nav-toggle');
+  const navPanel = document.getElementById('mobile-nav-panel');
+  if (navToggle && navPanel) {
+    navToggle.addEventListener('click', () => {
+      const willOpen = navPanel.hidden;
+      navPanel.hidden = !willOpen;
+      navToggle.setAttribute('aria-expanded', String(willOpen));
+    });
+  }
 
   const escapeHTML = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 
   function recipeCard(r) {
-    const tag = (r.tags && r.tags[0]) || '';
     const img = r.imageUrl || '';
+    const netCarbs = (r.netCarbs || '').toString().trim();
     return `
       <a href="/recipe/${r.id}" class="block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
         <div class="relative aspect-square overflow-hidden bg-surface-container">
           ${img ? `<img loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${img}" alt="${escapeHTML(r.name)}"/>` : ''}
-          ${tag ? `<span class="absolute top-4 right-4 bg-secondary text-white px-3 py-1 text-caption font-bold rounded-full">${escapeHTML(tag)}</span>` : ''}
         </div>
         <div class="p-4 text-right">
           <h4 class="font-h3 text-body-lg mb-1 line-clamp-2">${escapeHTML(r.name)}</h4>
-          <p class="text-[12px] text-on-surface-variant/80 mb-2">מתאים לסוכרתיים, צליאק, ודלת פחמימה</p>
-          <div class="flex items-center gap-2 text-on-surface-variant text-caption">
-            <span class="material-symbols-outlined text-sm">schedule</span><span>${escapeHTML(r.prepTime || '—')}</span>
+          <p class="text-[12px] text-on-surface-variant/80 mb-2">מתאים לסוכרתיים, צליאקים, ותזונה דלת פחמימה</p>
+          <div class="flex items-center gap-3 text-on-surface-variant text-caption flex-wrap">
+            <span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span><span>${escapeHTML(r.prepTime || '—')}</span></span>
+            ${netCarbs ? `<span class="inline-flex items-center gap-1" title="פחמימות נטו"><span class="material-symbols-outlined text-sm">nutrition</span><span>${escapeHTML(netCarbs)} ג׳ נטו</span></span>` : ''}
           </div>
         </div>
       </a>`;
@@ -250,19 +254,36 @@
     return r.category ? [r.category] : [];
   }
 
-  function bentoTile(cat, recipe) {
-    // Link to the first matching category (most specific), comma-list rest if multi
-    const url = '/recipes?cat=' + encodeURIComponent(cat.match.join(','));
-    const img = recipe?.imageUrl || '';
-    const label = cat.label;
-    return `
-      <a href="${url}" class="${cat.span} relative rounded-xl overflow-hidden group">
-        ${img ? `<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${img}" alt="${escapeHTML(label)}"/>` : `<div class="absolute inset-0 bg-surface-container-high"></div>`}
-        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors"></div>
-        <div class="absolute bottom-0 right-0 p-6 text-white text-right">
-          <h3 class="font-h3 text-h3 drop-shadow-md">${escapeHTML(label)}</h3>
-        </div>
-      </a>`;
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function pickFeatured(recipes, n) {
+    const pool = shuffle(recipes);
+    const seenCats = new Set();
+    const picked = [];
+    // First pass — skip any recipe that shares ANY category with an already-picked one
+    for (const r of pool) {
+      if (picked.length >= n) break;
+      const cats = recipeCats(r).map(c => (c || '').trim()).filter(Boolean);
+      if (cats.some(c => seenCats.has(c))) continue;
+      cats.forEach(c => seenCats.add(c));
+      picked.push(r);
+    }
+    // Fallback — fill from the rest if the data didn't have enough non-overlapping categories
+    if (picked.length < n) {
+      const pickedIds = new Set(picked.map(r => r.id));
+      for (const r of pool) {
+        if (picked.length >= n) break;
+        if (!pickedIds.has(r.id)) picked.push(r);
+      }
+    }
+    return picked;
   }
 
   (async function load() {
@@ -271,18 +292,12 @@
       const data = await r.json();
       const recipes = data.recipes || [];
 
-      const withImg = recipes.filter(x => x.imageUrl).sort((a, b) => (b.createdTime || '').localeCompare(a.createdTime || ''));
-      document.getElementById('featured-grid').innerHTML = withImg.slice(0, 4).map(recipeCard).join('') ||
+      const withImg = recipes.filter(x => x.imageUrl);
+      // Featured: 4 random per page-load, max one per primary category for variety.
+      // Falls back to filling with leftovers when the data has fewer than 4 categories.
+      const featured = pickFeatured(withImg, 4);
+      document.getElementById('featured-grid').innerHTML = featured.map(recipeCard).join('') ||
         '<p class="col-span-full text-center text-on-surface-variant">לא נמצאו מתכונים.</p>';
-
-      // Build a categoryName → first recipe-with-image map (one walk through all recipes)
-      const byCat = {};
-      for (const x of withImg) for (const c of recipeCats(x)) {
-        if (c && !byCat[c]) byCat[c] = x;
-      }
-      // Each tile picks the first match in its `match` list that has a recipe
-      const pickRecipe = tile => tile.match.map(c => byCat[c]).find(Boolean);
-      document.getElementById('bento-grid').innerHTML = BENTO.map(c => bentoTile(c, pickRecipe(c))).join('');
     } catch (err) {
       console.error('Failed to load recipes:', err);
       document.getElementById('featured-grid').innerHTML = '<p class="col-span-full text-center text-on-surface-variant">שגיאה בטעינת המתכונים.</p>';
