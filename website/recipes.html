@@ -44,14 +44,6 @@
 <style>
   body { background-color: #fff8f3; color: #201b13; font-family: 'Assistant', sans-serif; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-  /* Mobile category-strip edge fades. data-at-start / data-at-end let JS
-     suppress the fade at the corresponding scroll extreme. The fade is
-     applied to both sides by default; we hide the right fade when at the
-     RTL start, the left fade when at the RTL end. */
-  .mobile-cats-fade { mask-image: linear-gradient(to left, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%); -webkit-mask-image: linear-gradient(to left, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%); }
-  .mobile-cats-fade[data-at-start="1"] { mask-image: linear-gradient(to left, transparent 0, #000 28px, #000 100%); -webkit-mask-image: linear-gradient(to left, transparent 0, #000 28px, #000 100%); }
-  .mobile-cats-fade[data-at-end="1"] { mask-image: linear-gradient(to left, #000 0, #000 calc(100% - 28px), transparent 100%); -webkit-mask-image: linear-gradient(to left, #000 0, #000 calc(100% - 28px), transparent 100%); }
-  .mobile-cats-fade[data-at-start="1"][data-at-end="1"] { mask-image: none; -webkit-mask-image: none; }
   .skel { background: linear-gradient(90deg, #f1e7d9 0%, #ece1d4 50%, #f1e7d9 100%); background-size: 200% 100%; animation: skel 1.4s ease-in-out infinite; }
   @keyframes skel { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }
 </style>
@@ -111,19 +103,19 @@
     </aside>
 
     <div class="lg:col-span-9 order-1 lg:order-none">
-      <!-- Mobile-only horizontal category pill strip (desktop has the sidebar).
-           Edge-fade mask hints that the strip is scrollable; data-* state
-           lets JS toggle the fade off at scroll extremes. -->
-      <div id="mobile-cats-wrap" class="lg:hidden relative mb-2 -mx-6">
-        <div id="mobile-cats"
-             class="px-6 overflow-x-auto whitespace-nowrap pb-1 [&::-webkit-scrollbar]:hidden mobile-cats-fade"
-             data-at-start="1" data-at-end="0"
-             style="scrollbar-width: none;"></div>
-        <div id="mobile-cats-hint" class="px-6 pt-1 text-[11px] text-on-surface-variant flex items-center gap-1 transition-opacity">
-          <span class="material-symbols-outlined text-[14px]">swipe</span>
-          <span>החליקו לקטגוריות נוספות</span>
-        </div>
-      </div>
+      <!-- Mobile-only category dropdown (desktop has the sidebar). One button
+           by default; tap to reveal the full hierarchical list. -->
+      <details id="mobile-cats-dropdown" class="lg:hidden mb-4 group [&_summary::-webkit-details-marker]:hidden">
+        <summary class="cursor-pointer flex items-center justify-between gap-3 bg-white border border-outline-variant/40 rounded-xl px-4 py-3 list-none shadow-sm shadow-stone-900/5">
+          <span class="flex items-center gap-2 font-bold text-[15px] text-on-surface">
+            <span class="material-symbols-outlined text-[20px] text-primary">tune</span>
+            <span>קטגוריות</span>
+            <span id="mobile-cats-badge" class="hidden bg-primary text-white text-[11px] font-semibold px-2 py-0.5 rounded-full"></span>
+          </span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[22px] transition-transform group-open:rotate-180">expand_more</span>
+        </summary>
+        <div id="mobile-cats" class="mt-2 bg-white border border-outline-variant/30 rounded-xl p-4 shadow-sm shadow-stone-900/5"></div>
+      </details>
       <div class="flex justify-between items-center mb-4 px-1">
         <span id="result-count" class="text-on-surface-variant text-sm"></span>
       </div>
@@ -315,8 +307,8 @@
   }
 
   function renderMobileCategories(sections) {
-    // One horizontal scrolling row of pills. Subtle separator between groups
-    // (vertical line) instead of group labels — mobile space is tight.
+    // Mobile dropdown content: same hierarchical layout as the desktop
+    // sidebar but compact pills inside group sections.
     const pill = (name, n) => {
       const empty = !n;
       if (empty) return ''; // skip empty meal-type slots on mobile
@@ -324,47 +316,31 @@
       const cls = active
         ? 'inline-flex items-center gap-1 bg-primary text-white px-3 py-1.5 rounded-full text-[13px] font-semibold'
         : 'inline-flex items-center gap-1 bg-stone-100 hover:bg-primary/10 text-on-surface px-3 py-1.5 rounded-full text-[13px]';
-      return `<button class="${cls} ml-2 shrink-0" data-cat="${escapeHTML(name)}">${escapeHTML(name)} <span class="opacity-70 text-[11px]">${n}</span></button>`;
+      return `<button type="button" class="${cls}" data-cat="${escapeHTML(name)}">${escapeHTML(name)} <span class="opacity-70 text-[11px]">${n}</span></button>`;
     };
-    const sep = '<span class="inline-block w-px h-5 bg-outline-variant align-middle ml-2"></span>';
-    const html = sections
-      .map(g => g.items.map(([name, n]) => pill(name, n)).filter(Boolean).join(''))
-      .filter(Boolean)
-      .join(sep);
+
+    const html = sections.map(g => {
+      const pills = g.items.map(([name, n]) => pill(name, n)).filter(Boolean).join(' ');
+      if (!pills) return '';
+      const header = g.label
+        ? `<div class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mt-3 mb-2 first:mt-0">${escapeHTML(g.label)}</div>`
+        : '';
+      return header + `<div class="flex flex-wrap gap-2">${pills}</div>`;
+    }).join('');
     document.getElementById('mobile-cats').innerHTML = html;
-    // Recompute the edge-fade state since the strip's scrollWidth may have changed.
-    window.dispatchEvent(new Event('resize'));
+
+    // Update the dropdown button's selected-count badge
+    const badge = document.getElementById('mobile-cats-badge');
+    if (badge) {
+      if (state.cats.size > 0) { badge.textContent = state.cats.size; badge.classList.remove('hidden'); }
+      else { badge.classList.add('hidden'); }
+    }
   }
 
   function renderCategoryFilters() {
     const sections = categorySections(ALL);
     renderDesktopCategories(sections);
     renderMobileCategories(sections);
-  }
-
-  function bindMobileScrollHints() {
-    const track = document.getElementById('mobile-cats');
-    const hint = document.getElementById('mobile-cats-hint');
-    if (!track) return;
-    const update = () => {
-      // Cross-browser RTL scroll: scrollLeft is 0..-(scrollWidth-clientWidth) in modern Chrome/Firefox/Safari
-      const max = track.scrollWidth - track.clientWidth;
-      // Use absolute distance from extremes; |scrollLeft| ≈ 0 at start, ≈ max at end
-      const dist = Math.abs(track.scrollLeft);
-      const atStart = dist <= 4;
-      const atEnd = dist >= max - 4 || max <= 0;
-      track.dataset.atStart = atStart ? '1' : '0';
-      track.dataset.atEnd = atEnd ? '1' : '0';
-    };
-    track.addEventListener('scroll', () => {
-      update();
-      if (hint && !hint.classList.contains('opacity-0')) {
-        hint.classList.add('opacity-0', 'pointer-events-none');
-      }
-    }, { passive: true });
-    // Run after the strip is rendered and after window resize
-    setTimeout(update, 50);
-    window.addEventListener('resize', update, { passive: true });
   }
 
   function bindCategoryClicks() {
@@ -402,7 +378,6 @@
     document.getElementById('search-btn').addEventListener('click', onSearch);
 
     bindCategoryClicks();
-    bindMobileScrollHints();
 
     const slider = document.getElementById('time-slider');
     // Reset slider to "no filter" on every page load (defeats bfcache restore)
