@@ -175,7 +175,14 @@
     return p.get('id') || '';
   }
 
+  function isIngSubheader(line) {
+    return line.endsWith(':') && line.length <= 40;
+  }
+
   function ingredientItem(line, idx) {
+    if (isIngSubheader(line)) {
+      return `<li class="font-h font-bold text-[14px] lg:text-[15px] text-primary mt-3 mb-1 px-2">${escapeHTML(line)}</li>`;
+    }
     return `
       <li>
         <label class="flex items-start gap-2.5 py-1.5 px-2 hover:bg-surface-container-lowest rounded-lg cursor-pointer group">
@@ -307,7 +314,8 @@
       const ings = splitIngredients(r.ingredients || '');
       document.getElementById('ingredients-list').innerHTML = ings.map(ingredientItem).join('') ||
         '<li class="text-on-surface-variant text-sm">אין מצרכים זמינים.</li>';
-      document.getElementById('ingredient-count').textContent = `${ings.length} רכיבים`;
+      const realIngCount = ings.filter(l => !isIngSubheader(l)).length;
+      document.getElementById('ingredient-count').textContent = `${realIngCount} רכיבים`;
 
       document.getElementById('steps-list').innerHTML = renderInstructions(r.instructions) ||
         '<p class="text-on-surface-variant">אין הוראות הכנה זמינות.</p>';
