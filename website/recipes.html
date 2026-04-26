@@ -250,13 +250,25 @@
     });
   }
 
+  function activeFilterDesc() {
+    const parts = [];
+    if (state.q.trim()) parts.push(`חיפוש: "${state.q.trim()}"`);
+    if (state.cats.size) parts.push([...state.cats].join(', '));
+    if (state.diets.size) {
+      const dietLabels = { diabetic: 'סוכרתיים', celiac: 'צליאק', lowcarb: 'דלת פחמימה' };
+      parts.push([...state.diets].map(d => dietLabels[d] || d).join(', '));
+    }
+    if (state.maxTime < 120) parts.push(`עד ${state.maxTime} דק'`);
+    return parts.length ? ' · ' + parts.join(' · ') : '';
+  }
+
   function render() {
     const filtered = applyFilters();
     const grid = document.getElementById('card-grid');
     const slice = filtered.slice(0, visible);
     grid.innerHTML = slice.map(recipeCard).join('') ||
       '<p class="col-span-full text-center text-on-surface-variant py-12">לא נמצאו מתכונים תואמים. נסו לנקות את הסינון.</p>';
-    document.getElementById('result-count').textContent = `${filtered.length} מתכונים`;
+    document.getElementById('result-count').textContent = `${filtered.length} מתכונים${activeFilterDesc()}`;
     const more = document.getElementById('load-more');
     if (filtered.length > visible) more.classList.remove('hidden'); else more.classList.add('hidden');
   }
@@ -281,16 +293,19 @@
     }
 
     // Bucket every category into top-level / ארוחה / חגים.
-    const top = [], meal = [], holiday = [];
+    const top = [], holiday = [];
     for (const [name, n] of Object.entries(counts)) {
+      if (MEAL_KEYS.has(name)) continue; // handled below in canonical order
       if (HOLIDAY_KEYS.has(name)) holiday.push([name, n]);
-      else if (MEAL_KEYS.has(name)) meal.push([name, n]);
       else top.push([name, n]);
     }
-    // Sort each group: count desc, then Hebrew alphabetical for ties
+    // Meal types render in fixed reading order (start → main → side), and
+    // always show — even at zero count — so Adi sees the buckets exist.
+    const MEAL_ORDER = ['מנה ראשונה','מנה עיקרית','תוספת'];
+    const meal = MEAL_ORDER.map(k => [k, counts[k] || 0]);
+    // Top-level + holidays sort by count desc, then Hebrew alphabetical for ties
     const byCountThenName = (a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'he');
     top.sort(byCountThenName);
-    meal.sort(byCountThenName);
     holiday.sort(byCountThenName);
 
     // Order: top-level (no header), then ארוחה, then חגים.
@@ -300,11 +315,23 @@
       { label: 'חגים',  items: holiday },
     ];
 
-    const checkboxRow = (name, n) => `
-      <label class="flex items-center gap-3 cursor-pointer group">
-        <input class="w-5 h-5 rounded-sm border-outline text-primary focus:ring-primary" type="checkbox" data-cat="${escapeHTML(name)}"/>
-        <span class="font-body-md text-on-surface-variant group-hover:text-primary">${escapeHTML(name)} <span class="text-outline text-caption">(${n || 0})</span></span>
-      </label>`;
+    const checkboxRow = (name, n) => {
+      const empty = !n;
+      // Empty rows are visible but greyed out and not clickable — they still
+      // signal that the bucket exists (mostly for ארוחה: ראשונה/תוספת are 0
+      // until Adi enriches recipes with secondary categories).
+      const labelCls = empty
+        ? 'flex items-center gap-3 opacity-40 cursor-not-allowed'
+        : 'flex items-center gap-3 cursor-pointer group';
+      const textCls = empty
+        ? 'font-body-md text-on-surface-variant'
+        : 'font-body-md text-on-surface-variant group-hover:text-primary';
+      return `
+        <label class="${labelCls}">
+          <input class="w-5 h-5 rounded-sm border-outline text-primary focus:ring-primary" type="checkbox" data-cat="${escapeHTML(name)}"${empty ? ' disabled' : ''}/>
+          <span class="${textCls}">${escapeHTML(name)} <span class="text-outline text-caption">(${n})</span></span>
+        </label>`;
+    };
 
     const wrap = document.getElementById('cat-filters');
     wrap.innerHTML = sections.map(g => {
@@ -326,6 +353,9 @@
 
   function bindUI() {
     const search = document.getElementById('search-input');
+    // Browser bfcache can restore form values across navigations — start clean.
+    search.value = '';
+    state.q = '';
     const onSearch = () => { state.q = search.value; visible = PAGE_SIZE; render(); };
     search.addEventListener('input', onSearch);
     document.getElementById('search-btn').addEventListener('click', onSearch);
@@ -339,6 +369,10 @@
     });
 
     const slider = document.getElementById('time-slider');
+    // Reset slider to "no filter" on every page load (defeats bfcache restore)
+    slider.value = 120;
+    state.maxTime = 120;
+    document.getElementById('time-value').textContent = 'מעל שעתיים';
     slider.addEventListener('input', () => {
       const v = parseInt(slider.value, 10);
       state.maxTime = v;
