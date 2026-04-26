@@ -127,10 +127,10 @@
           <h2 class="font-h2 font-['Heebo'] text-2xl lg:text-3xl whitespace-nowrap">אופן ההכנה</h2>
           <div class="h-[1px] flex-1 bg-gradient-to-l from-secondary/30 to-transparent"></div>
         </div>
-        <div id="steps-list" class="space-y-8">
-          <div class="skel h-24 rounded-xl"></div>
-          <div class="skel h-24 rounded-xl"></div>
-          <div class="skel h-24 rounded-xl"></div>
+        <div id="steps-list">
+          <div class="skel h-24 rounded-xl mb-6"></div>
+          <div class="skel h-24 rounded-xl mb-6"></div>
+          <div class="skel h-24 rounded-xl mb-6"></div>
         </div>
       </div>
 
@@ -185,14 +185,29 @@
       </li>`;
   }
 
-  function stepItem(line, idx) {
-    const num = String(idx + 1).padStart(2, '0');
-    const text = line.replace(/^\s*(\d+)\.\s*/, '').replace(/^\s*\*\s*/, '');
-    return `
-      <div class="flex gap-4 lg:gap-5 group">
-        <span class="text-3xl lg:text-4xl font-black text-secondary/25 font-['Heebo'] leading-none shrink-0 w-12 lg:w-14">${num}</span>
-        <p class="font-body-lg text-on-surface leading-relaxed pt-1">${escapeHTML(text)}</p>
-      </div>`;
+  // Render the instructions block. A line that's just a short label ending with
+  // ":" (e.g. "מילוי:", "ציפוי:", "בצק:") is a subsection header, not a step —
+  // it should not get a step number and should not break the running count.
+  function renderInstructions(text) {
+    const lines = (text || '').split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+    let stepNum = 0;
+    const out = [];
+    for (const line of lines) {
+      const cleaned = line.replace(/^\s*(\d+)\.\s*/, '').replace(/^\s*\*\s*/, '').trim();
+      const isSubheader = cleaned.endsWith(':') && cleaned.length <= 50;
+      if (isSubheader) {
+        out.push(`<h3 class="font-h font-['Heebo'] font-bold text-[17px] lg:text-[19px] text-primary mt-2 mb-1">${escapeHTML(cleaned)}</h3>`);
+        continue;
+      }
+      stepNum++;
+      const num = String(stepNum).padStart(2, '0');
+      out.push(`
+        <div class="flex gap-4 lg:gap-5 group mb-6">
+          <span class="text-3xl lg:text-4xl font-black text-secondary/25 font-['Heebo'] leading-none shrink-0 w-12 lg:w-14">${num}</span>
+          <p class="font-body-lg text-on-surface leading-relaxed pt-1">${escapeHTML(cleaned)}</p>
+        </div>`);
+    }
+    return out.join('');
   }
 
   // Some Airtable rows use newlines between ingredients, others run them together.
@@ -294,8 +309,7 @@
         '<li class="text-on-surface-variant text-sm">אין מצרכים זמינים.</li>';
       document.getElementById('ingredient-count').textContent = `${ings.length} רכיבים`;
 
-      const steps = (r.instructions || '').split(/\r?\n/).map(s => s.trim()).filter(Boolean);
-      document.getElementById('steps-list').innerHTML = steps.map(stepItem).join('') ||
+      document.getElementById('steps-list').innerHTML = renderInstructions(r.instructions) ||
         '<p class="text-on-surface-variant">אין הוראות הכנה זמינות.</p>';
 
     } catch (err) {
