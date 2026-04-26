@@ -209,11 +209,14 @@
     }
   });
 
+  // Each tile picks its hero photo from any recipe carrying the listed category.
+  // `match` accepts an array — first match (in array order) that has an image
+  // becomes the tile's representative recipe.
   const BENTO = [
-    { name: 'ארוחת צהריים', span: 'col-span-2 row-span-2' },
-    { name: 'לחמים ולחמניות', span: 'col-span-1 row-span-1' },
-    { name: 'חנוכה', label: 'חגים', span: 'col-span-1 row-span-1' },
-    { name: 'עוגיות ומתוקים', label: 'מתוקים ובריאים', span: 'col-span-2 row-span-1' },
+    { match: ['מנה עיקרית'],                       label: 'ארוחות',          span: 'col-span-2 row-span-2' },
+    { match: ['לחמים ולחמניות'],                    label: 'לחמים ולחמניות',   span: 'col-span-1 row-span-1' },
+    { match: ['חנוכה','פסח','חגי תשרי','שבועות','פורים','יום העצמאות'], label: 'חגים', span: 'col-span-1 row-span-1' },
+    { match: ['עוגיות','קינוחים','עוגות'],          label: 'מתוקים ובריאים',   span: 'col-span-2 row-span-1' },
   ];
 
   const escapeHTML = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
@@ -237,10 +240,16 @@
       </a>`;
   }
 
+  function recipeCats(r) {
+    if (Array.isArray(r.categories)) return r.categories;
+    return r.category ? [r.category] : [];
+  }
+
   function bentoTile(cat, recipe) {
-    const url = '/recipes?cat=' + encodeURIComponent(cat.name);
+    // Link to the first matching category (most specific), comma-list rest if multi
+    const url = '/recipes?cat=' + encodeURIComponent(cat.match.join(','));
     const img = recipe?.imageUrl || '';
-    const label = cat.label || cat.name;
+    const label = cat.label;
     return `
       <a href="${url}" class="${cat.span} relative rounded-xl overflow-hidden group">
         ${img ? `<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${img}" alt="${escapeHTML(label)}"/>` : `<div class="absolute inset-0 bg-surface-container-high"></div>`}
@@ -261,9 +270,14 @@
       document.getElementById('featured-grid').innerHTML = withImg.slice(0, 4).map(recipeCard).join('') ||
         '<p class="col-span-full text-center text-on-surface-variant">לא נמצאו מתכונים.</p>';
 
+      // Build a categoryName → first recipe-with-image map (one walk through all recipes)
       const byCat = {};
-      for (const x of withImg) { if (x.category && !byCat[x.category]) byCat[x.category] = x; }
-      document.getElementById('bento-grid').innerHTML = BENTO.map(c => bentoTile(c, byCat[c.name])).join('');
+      for (const x of withImg) for (const c of recipeCats(x)) {
+        if (c && !byCat[c]) byCat[c] = x;
+      }
+      // Each tile picks the first match in its `match` list that has a recipe
+      const pickRecipe = tile => tile.match.map(c => byCat[c]).find(Boolean);
+      document.getElementById('bento-grid').innerHTML = BENTO.map(c => bentoTile(c, pickRecipe(c))).join('');
     } catch (err) {
       console.error('Failed to load recipes:', err);
       document.getElementById('featured-grid').innerHTML = '<p class="col-span-full text-center text-on-surface-variant">שגיאה בטעינת המתכונים.</p>';

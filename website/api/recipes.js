@@ -30,18 +30,30 @@ function inferDifficulty(prepTime) {
   return 'מושקע';
 }
 
+// Normalize the Airtable category value into an array of strings.
+// Handles both the legacy single-select shape (string OR { name } object)
+// and the future multi-select shape (array of objects/strings).
+function toCategoryArray(raw) {
+  if (raw == null || raw === '') return [];
+  const list = Array.isArray(raw) ? raw : [raw];
+  return list
+    .map(v => (v && typeof v === 'object') ? (v.name || '') : v)
+    .filter(Boolean);
+}
+
 function normalizeRecord(r) {
   const f = r.fields || {};
-  const cat = f[FIELDS.category];
   const tagsRaw = f[FIELDS.tags] || [];
   const imgArr = f[FIELDS.image] || [];
   const img0 = imgArr[0];
   const prepTime = f[FIELDS.prepTime] || '';
+  const categories = toCategoryArray(f[FIELDS.category]);
 
   return {
     id: r.id,
     name: f[FIELDS.name] || '',
-    category: typeof cat === 'object' && cat !== null ? (cat.name || '') : (cat || ''),
+    categories,                       // array — primary
+    category: categories[0] || '',    // string — backward-compat for any unmodified caller
     tags: tagsRaw.map(t => (t && t.name) ? t.name : t).filter(Boolean),
     description: f[FIELDS.description] || '',
     prepTime,

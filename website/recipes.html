@@ -223,11 +223,19 @@
     maxTime: 120,
   };
 
+  function recipeCategories(r) {
+    if (Array.isArray(r.categories)) return r.categories;
+    return r.category ? [r.category] : [];
+  }
+
   function applyFilters() {
     const q = state.q.trim().toLowerCase();
     return ALL.filter(r => {
       if (q && !(r.name && r.name.toLowerCase().includes(q))) return false;
-      if (state.cats.size && !state.cats.has(r.category)) return false;
+      if (state.cats.size) {
+        const rc = recipeCategories(r);
+        if (!rc.some(c => state.cats.has(c))) return false;
+      }
       if (state.diets.size) {
         const tags = r.tags || [];
         for (const d of state.diets) {
@@ -253,16 +261,45 @@
     if (filtered.length > visible) more.classList.remove('hidden'); else more.classList.add('hidden');
   }
 
+  // Category groups for the filter sidebar — hierarchy lives in the UI, not the data.
+  // Top-level standalone categories first, then "ארוחות", then "חגים".
+  const CATEGORY_GROUPS = [
+    { label: null,     keys: ['לחמים ולחמניות','עוגיות','עוגות','קרקרים וחטיפים','קינוחים','מאפים ממולאים','פיצות ופוקאצות','אפייה','לילדודס'] },
+    { label: 'ארוחות', keys: ['מנה ראשונה','מנה עיקרית','תוספת'] },
+    { label: 'חגים',   keys: ['חגי תשרי','חנוכה','פורים','פסח','שבועות','יום העצמאות'] },
+  ];
+
   function buildCategoryFilters(recipes) {
+    // Count each recipe once per category it belongs to
     const counts = {};
-    for (const r of recipes) if (r.category) counts[r.category] = (counts[r.category] || 0) + 1;
-    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-    const wrap = document.getElementById('cat-filters');
-    wrap.innerHTML = sorted.map(([name, n]) => `
+    for (const r of recipes) for (const c of recipeCategories(r)) {
+      counts[c] = (counts[c] || 0) + 1;
+    }
+
+    // Render the known groups in order. Any category present in the data but not
+    // in the group map gets appended as "ללא קבוצה" so nothing silently disappears.
+    const known = new Set(CATEGORY_GROUPS.flatMap(g => g.keys));
+    const orphans = Object.keys(counts).filter(k => !known.has(k));
+    const groups = orphans.length
+      ? [...CATEGORY_GROUPS, { label: 'אחר', keys: orphans }]
+      : CATEGORY_GROUPS;
+
+    const checkboxRow = (name, n) => `
       <label class="flex items-center gap-3 cursor-pointer group">
         <input class="w-5 h-5 rounded-sm border-outline text-primary focus:ring-primary" type="checkbox" data-cat="${escapeHTML(name)}"/>
-        <span class="font-body-md text-on-surface-variant group-hover:text-primary">${escapeHTML(name)} <span class="text-outline text-caption">(${n})</span></span>
-      </label>`).join('');
+        <span class="font-body-md text-on-surface-variant group-hover:text-primary">${escapeHTML(name)} <span class="text-outline text-caption">(${n || 0})</span></span>
+      </label>`;
+
+    const wrap = document.getElementById('cat-filters');
+    wrap.innerHTML = groups.map(g => {
+      const items = g.keys.filter(k => counts[k] > 0);
+      if (items.length === 0) return '';
+      const header = g.label
+        ? `<div class="text-[12px] font-bold text-on-surface-variant uppercase tracking-wider mt-3 mb-1.5 first:mt-0">${escapeHTML(g.label)}</div>`
+        : '';
+      return header + items.map(k => checkboxRow(k, counts[k])).join('');
+    }).join('');
+
     wrap.addEventListener('change', (e) => {
       const cb = e.target;
       if (!cb.matches('input[data-cat]')) return;
@@ -307,12 +344,16 @@
 
   function applyURLParams() {
     const p = new URLSearchParams(location.search);
-    const q = p.get('q'); const cat = p.get('cat');
+    const q = p.get('q');
+    const cat = p.get('cat'); // accepts comma-separated values
     if (q) { state.q = q; document.getElementById('search-input').value = q; }
     if (cat) {
-      state.cats.add(cat);
-      const cb = document.querySelector(`#cat-filters input[data-cat="${cat.replace(/"/g, '\\"')}"]`);
-      if (cb) cb.checked = true;
+      const cats = cat.split(',').map(s => s.trim()).filter(Boolean);
+      for (const c of cats) {
+        state.cats.add(c);
+        const cb = document.querySelector(`#cat-filters input[data-cat="${c.replace(/"/g, '\\"')}"]`);
+        if (cb) cb.checked = true;
+      }
     }
   }
 
