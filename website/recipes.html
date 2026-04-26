@@ -91,30 +91,6 @@
       </section>
 
       <section>
-        <h3 class="font-h3 text-h3 mb-4 border-r-4 border-primary pr-3">התאמה אישית</h3>
-        <div class="flex flex-col gap-3" id="diet-filters">
-          <div class="p-3 bg-secondary-container/20 rounded-xl border border-secondary-container/30">
-            <label class="flex items-center gap-3 cursor-pointer">
-              <input class="w-5 h-5 rounded-sm border-secondary text-secondary focus:ring-secondary" type="checkbox" data-diet="diabetic"/>
-              <span class="font-body-md font-semibold text-secondary">סוכרתיים</span>
-            </label>
-          </div>
-          <div class="p-3 bg-secondary-container/20 rounded-xl border border-secondary-container/30">
-            <label class="flex items-center gap-3 cursor-pointer">
-              <input class="w-5 h-5 rounded-sm border-secondary text-secondary focus:ring-secondary" type="checkbox" data-diet="celiac"/>
-              <span class="font-body-md font-semibold text-secondary">צליאק</span>
-            </label>
-          </div>
-          <div class="p-3 bg-secondary-container/20 rounded-xl border border-secondary-container/30">
-            <label class="flex items-center gap-3 cursor-pointer">
-              <input class="w-5 h-5 rounded-sm border-secondary text-secondary focus:ring-secondary" type="checkbox" data-diet="lowcarb"/>
-              <span class="font-body-md font-semibold text-secondary">דלת פחמימה</span>
-            </label>
-          </div>
-        </div>
-      </section>
-
-      <section>
         <h3 class="font-h3 text-h3 mb-4 border-r-4 border-primary pr-3">זמן הכנה</h3>
         <input id="time-slider" class="w-full h-2 bg-surface-container-highest rounded-full appearance-none cursor-pointer accent-primary" type="range" min="15" max="120" step="15" value="120"/>
         <div class="flex justify-between mt-2 font-caption text-caption text-outline">
@@ -127,6 +103,8 @@
     </aside>
 
     <div class="lg:col-span-9 order-1 lg:order-none">
+      <!-- Mobile-only horizontal category pill strip (desktop has the sidebar) -->
+      <div id="mobile-cats" class="lg:hidden mb-4 -mx-6 px-6 overflow-x-auto whitespace-nowrap pb-1 [&::-webkit-scrollbar]:hidden" style="scrollbar-width: none;"></div>
       <div class="flex justify-between items-center mb-4 px-1">
         <span id="result-count" class="text-on-surface-variant text-sm"></span>
       </div>
@@ -176,12 +154,6 @@
 <script>
   const PAGE_SIZE = 9;
 
-  const DIET_TAG_MAP = {
-    diabetic: ['ללא תוספת סוכר', 'ללא סוכר'],
-    celiac: ['ללא גלוטן'],
-    lowcarb: ['דל פחמימה'],
-  };
-
   const escapeHTML = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 
   function difficultyText(prepTime) {
@@ -219,7 +191,6 @@
   const state = {
     q: '',
     cats: new Set(),
-    diets: new Set(),
     maxTime: 120,
   };
 
@@ -236,14 +207,6 @@
         const rc = recipeCategories(r);
         if (!rc.some(c => state.cats.has(c))) return false;
       }
-      if (state.diets.size) {
-        const tags = r.tags || [];
-        for (const d of state.diets) {
-          const required = DIET_TAG_MAP[d] || [];
-          const hit = required.some(t => tags.includes(t));
-          if (!hit) return false;
-        }
-      }
       const t = parseInt(r.prepTime, 10);
       if (state.maxTime < 120 && (isNaN(t) || t > state.maxTime)) return false;
       return true;
@@ -254,10 +217,6 @@
     const parts = [];
     if (state.q.trim()) parts.push(`חיפוש: "${state.q.trim()}"`);
     if (state.cats.size) parts.push([...state.cats].join(', '));
-    if (state.diets.size) {
-      const dietLabels = { diabetic: 'סוכרתיים', celiac: 'צליאק', lowcarb: 'דלת פחמימה' };
-      parts.push([...state.diets].map(d => dietLabels[d] || d).join(', '));
-    }
     if (state.maxTime < 120) parts.push(`עד ${state.maxTime} דק'`);
     return parts.length ? ' · ' + parts.join(' · ') : '';
   }
@@ -285,41 +244,35 @@
     'מנה ראשונה','מנה עיקרית','תוספת',
   ]);
 
-  function buildCategoryFilters(recipes) {
-    // Count each recipe once per category it belongs to
+  // Compute the ordered/grouped category sections from the current data.
+  // Used by both the desktop sidebar and the mobile pill strip.
+  function categorySections(recipes) {
     const counts = {};
     for (const r of recipes) for (const c of recipeCategories(r)) {
       counts[c] = (counts[c] || 0) + 1;
     }
-
-    // Bucket every category into top-level / ארוחה / חגים.
     const top = [], holiday = [];
     for (const [name, n] of Object.entries(counts)) {
-      if (MEAL_KEYS.has(name)) continue; // handled below in canonical order
+      if (MEAL_KEYS.has(name)) continue;
       if (HOLIDAY_KEYS.has(name)) holiday.push([name, n]);
       else top.push([name, n]);
     }
-    // Meal types render in fixed reading order (start → main → side), and
-    // always show — even at zero count — so Adi sees the buckets exist.
     const MEAL_ORDER = ['מנה ראשונה','מנה עיקרית','תוספת'];
     const meal = MEAL_ORDER.map(k => [k, counts[k] || 0]);
-    // Top-level + holidays sort by count desc, then Hebrew alphabetical for ties
     const byCountThenName = (a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'he');
     top.sort(byCountThenName);
     holiday.sort(byCountThenName);
-
-    // Order: top-level (no header), then ארוחה, then חגים.
-    const sections = [
+    return [
       { label: null,    items: top },
       { label: 'ארוחה', items: meal },
       { label: 'חגים',  items: holiday },
     ];
+  }
 
+  function renderDesktopCategories(sections) {
     const checkboxRow = (name, n) => {
       const empty = !n;
-      // Empty rows are visible but greyed out and not clickable — they still
-      // signal that the bucket exists (mostly for ארוחה: ראשונה/תוספת are 0
-      // until Adi enriches recipes with secondary categories).
+      const checked = state.cats.has(name);
       const labelCls = empty
         ? 'flex items-center gap-3 opacity-40 cursor-not-allowed'
         : 'flex items-center gap-3 cursor-pointer group';
@@ -328,11 +281,10 @@
         : 'font-body-md text-on-surface-variant group-hover:text-primary';
       return `
         <label class="${labelCls}">
-          <input class="w-5 h-5 rounded-sm border-outline text-primary focus:ring-primary" type="checkbox" data-cat="${escapeHTML(name)}"${empty ? ' disabled' : ''}/>
+          <input class="w-5 h-5 rounded-sm border-outline text-primary focus:ring-primary" type="checkbox" data-cat="${escapeHTML(name)}"${empty ? ' disabled' : ''}${checked ? ' checked' : ''}/>
           <span class="${textCls}">${escapeHTML(name)} <span class="text-outline text-caption">(${n})</span></span>
         </label>`;
     };
-
     const wrap = document.getElementById('cat-filters');
     wrap.innerHTML = sections.map(g => {
       if (g.items.length === 0) return '';
@@ -341,13 +293,56 @@
         : '';
       return header + g.items.map(([name, n]) => checkboxRow(name, n)).join('');
     }).join('');
+  }
 
-    wrap.addEventListener('change', (e) => {
+  function renderMobileCategories(sections) {
+    // One horizontal scrolling row of pills. Subtle separator between groups
+    // (vertical line) instead of group labels — mobile space is tight.
+    const pill = (name, n) => {
+      const empty = !n;
+      if (empty) return ''; // skip empty meal-type slots on mobile
+      const active = state.cats.has(name);
+      const cls = active
+        ? 'inline-flex items-center gap-1 bg-primary text-white px-3 py-1.5 rounded-full text-[13px] font-semibold'
+        : 'inline-flex items-center gap-1 bg-stone-100 hover:bg-primary/10 text-on-surface px-3 py-1.5 rounded-full text-[13px]';
+      return `<button class="${cls} ml-2 shrink-0" data-cat="${escapeHTML(name)}">${escapeHTML(name)} <span class="opacity-70 text-[11px]">${n}</span></button>`;
+    };
+    const sep = '<span class="inline-block w-px h-5 bg-outline-variant align-middle ml-2"></span>';
+    const html = sections
+      .map(g => g.items.map(([name, n]) => pill(name, n)).filter(Boolean).join(''))
+      .filter(Boolean)
+      .join(sep);
+    document.getElementById('mobile-cats').innerHTML = html;
+  }
+
+  function renderCategoryFilters() {
+    const sections = categorySections(ALL);
+    renderDesktopCategories(sections);
+    renderMobileCategories(sections);
+  }
+
+  function bindCategoryClicks() {
+    // Single toggle handler shared by desktop checkboxes and mobile pills.
+    const toggle = (name) => {
+      if (state.cats.has(name)) state.cats.delete(name); else state.cats.add(name);
+      visible = PAGE_SIZE;
+      renderCategoryFilters();
+      render();
+    };
+    document.getElementById('cat-filters').addEventListener('change', (e) => {
       const cb = e.target;
       if (!cb.matches('input[data-cat]')) return;
+      // Checkbox changed itself; don't re-toggle, just sync state then re-render.
       const name = cb.dataset.cat;
       if (cb.checked) state.cats.add(name); else state.cats.delete(name);
-      visible = PAGE_SIZE; render();
+      visible = PAGE_SIZE;
+      renderCategoryFilters();
+      render();
+    });
+    document.getElementById('mobile-cats').addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-cat]');
+      if (!btn) return;
+      toggle(btn.dataset.cat);
     });
   }
 
@@ -360,13 +355,7 @@
     search.addEventListener('input', onSearch);
     document.getElementById('search-btn').addEventListener('click', onSearch);
 
-    document.getElementById('diet-filters').addEventListener('change', (e) => {
-      const cb = e.target.closest('input[data-diet]');
-      if (!cb) return;
-      const d = cb.dataset.diet;
-      if (cb.checked) state.diets.add(d); else state.diets.delete(d);
-      visible = PAGE_SIZE; render();
-    });
+    bindCategoryClicks();
 
     const slider = document.getElementById('time-slider');
     // Reset slider to "no filter" on every page load (defeats bfcache restore)
@@ -383,11 +372,12 @@
     document.getElementById('load-more').addEventListener('click', () => { visible += PAGE_SIZE; render(); });
 
     document.getElementById('reset-filters').addEventListener('click', () => {
-      state.q = ''; state.cats.clear(); state.diets.clear(); state.maxTime = 120;
+      state.q = ''; state.cats.clear(); state.maxTime = 120;
       search.value = ''; slider.value = 120;
       document.getElementById('time-value').textContent = 'מעל שעתיים';
-      document.querySelectorAll('#cat-filters input, #diet-filters input').forEach(c => c.checked = false);
-      visible = PAGE_SIZE; render();
+      visible = PAGE_SIZE;
+      renderCategoryFilters();
+      render();
     });
   }
 
@@ -398,11 +388,7 @@
     if (q) { state.q = q; document.getElementById('search-input').value = q; }
     if (cat) {
       const cats = cat.split(',').map(s => s.trim()).filter(Boolean);
-      for (const c of cats) {
-        state.cats.add(c);
-        const cb = document.querySelector(`#cat-filters input[data-cat="${c.replace(/"/g, '\\"')}"]`);
-        if (cb) cb.checked = true;
-      }
+      for (const c of cats) state.cats.add(c);
     }
   }
 
@@ -412,8 +398,8 @@
       const res = await fetch('/api/recipes');
       const data = await res.json();
       ALL = data.recipes || [];
-      buildCategoryFilters(ALL);
       applyURLParams();
+      renderCategoryFilters();
       render();
     } catch (err) {
       console.error('Failed to load recipes:', err);
