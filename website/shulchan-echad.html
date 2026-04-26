@@ -160,41 +160,81 @@
     </div>
   </section>
 
-  <!-- ────────── SOCIAL PROOF (3-col, denser) ────────── -->
+  <!-- ────────── SOCIAL PROOF (DM-style cards) ────────── -->
   <section class="bg-surface-container-low py-12 lg:py-14">
     <div class="max-w-6xl mx-auto px-6 text-right">
-      <h2 class="font-h text-[24px] lg:text-[30px] font-extrabold mb-7 leading-tight">מה אומרות המשפחות</h2>
+      <div class="flex items-baseline justify-between gap-4 mb-7 flex-wrap">
+        <h2 class="font-h text-[24px] lg:text-[30px] font-extrabold leading-tight">מה אומרות המשפחות</h2>
+        <p class="text-[12px] lg:text-[13px] text-on-surface-variant">הודעות אמיתיות מקוראות באינסטגרם וב-DM</p>
+      </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
-        <figure class="bg-white border border-outline-variant/30 rounded-xl p-5 shadow-sm shadow-stone-900/5">
-          <div class="text-secondary text-2xl leading-none mb-2 font-h">״</div>
-          <blockquote class="text-[15px] leading-snug text-on-surface mb-2">המתכונים שלך מצילים אותי!</blockquote>
-          <figcaption class="text-[12px] text-on-surface-variant">— אמא עם סכרת הריון</figcaption>
+
+        <figure class="bg-white border border-outline-variant/30 rounded-2xl rounded-tr-sm p-4 shadow-md shadow-stone-900/[0.06]">
+          <div class="flex items-center gap-2.5 mb-2.5 pb-2.5 border-b border-stone-100">
+            <div class="w-8 h-8 rounded-full bg-secondary/15 flex items-center justify-center text-secondary font-bold text-[13px] shrink-0">ס</div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[13px] font-bold text-on-surface truncate">אמא עם סכרת הריון</div>
+              <div class="text-[10px] text-stone-500 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">forum</span><span>הודעה ב-DM</span></div>
+            </div>
+          </div>
+          <blockquote class="text-[15px] leading-[1.55] text-on-surface">המתכונים שלך מצילים אותי!</blockquote>
         </figure>
-        <figure class="bg-white border border-outline-variant/30 rounded-xl p-5 shadow-sm shadow-stone-900/5">
-          <div class="text-secondary text-2xl leading-none mb-2 font-h">״</div>
-          <blockquote class="text-[15px] leading-snug text-on-surface mb-2">בזכותך הוא אוכל אוכל טעים</blockquote>
-          <figcaption class="text-[12px] text-on-surface-variant">— אמא לילד עם סכרת נעורים וצליאק</figcaption>
+
+        <figure class="bg-white border border-outline-variant/30 rounded-2xl rounded-tr-sm p-4 shadow-md shadow-stone-900/[0.06]">
+          <div class="flex items-center gap-2.5 mb-2.5 pb-2.5 border-b border-stone-100">
+            <div class="w-8 h-8 rounded-full bg-secondary/15 flex items-center justify-center text-secondary font-bold text-[13px] shrink-0">צ</div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[13px] font-bold text-on-surface truncate">אמא לילד עם סכרת נעורים וצליאק</div>
+              <div class="text-[10px] text-stone-500 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">forum</span><span>הודעה ב-DM</span></div>
+            </div>
+          </div>
+          <blockquote class="text-[15px] leading-[1.55] text-on-surface">בזכותך הוא אוכל אוכל טעים</blockquote>
         </figure>
-        <figure class="bg-white border border-outline-variant/30 rounded-xl p-5 shadow-sm shadow-stone-900/5">
-          <div class="text-secondary text-2xl leading-none mb-2 font-h">״</div>
-          <blockquote class="text-[15px] leading-snug text-on-surface mb-2">המשפחה אוכלים ואפילו לא שמים לב שזה דל״פ</blockquote>
-          <figcaption class="text-[12px] text-on-surface-variant">— אמא, דלת פחמימה</figcaption>
+
+        <figure class="bg-white border border-outline-variant/30 rounded-2xl rounded-tr-sm p-4 shadow-md shadow-stone-900/[0.06]">
+          <div class="flex items-center gap-2.5 mb-2.5 pb-2.5 border-b border-stone-100">
+            <div class="w-8 h-8 rounded-full bg-primary/15 flex items-center justify-center text-primary font-bold text-[13px] shrink-0">ד</div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[13px] font-bold text-on-surface truncate">אמא, דלת פחמימה</div>
+              <div class="text-[10px] text-stone-500 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">favorite</span><span>תגובה באינסטגרם</span></div>
+            </div>
+          </div>
+          <blockquote class="text-[15px] leading-[1.55] text-on-surface">המשפחה אוכלים ואפילו לא שמים לב שזה דל״פ</blockquote>
         </figure>
-        <figure class="bg-white border border-outline-variant/30 rounded-xl p-5 shadow-sm shadow-stone-900/5">
-          <div class="text-secondary text-2xl leading-none mb-2 font-h">״</div>
-          <blockquote class="text-[15px] leading-snug text-on-surface mb-2">אחרי כל סדנה שלך אני אומרת לעצמי איפה הייתי עד היום</blockquote>
-          <figcaption class="text-[12px] text-on-surface-variant">— משתתפת בסדנה</figcaption>
+
+        <figure class="bg-white border border-outline-variant/30 rounded-2xl rounded-tr-sm p-4 shadow-md shadow-stone-900/[0.06]">
+          <div class="flex items-center gap-2.5 mb-2.5 pb-2.5 border-b border-stone-100">
+            <div class="w-8 h-8 rounded-full bg-primary/15 flex items-center justify-center text-primary font-bold text-[13px] shrink-0">ס</div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[13px] font-bold text-on-surface truncate">משתתפת בסדנה</div>
+              <div class="text-[10px] text-stone-500 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">forum</span><span>הודעה ב-DM</span></div>
+            </div>
+          </div>
+          <blockquote class="text-[15px] leading-[1.55] text-on-surface">אחרי כל סדנה שלך אני אומרת לעצמי איפה הייתי עד היום</blockquote>
         </figure>
-        <figure class="bg-white border border-outline-variant/30 rounded-xl p-5 shadow-sm shadow-stone-900/5">
-          <div class="text-secondary text-2xl leading-none mb-2 font-h">״</div>
-          <blockquote class="text-[15px] leading-snug text-on-surface mb-2">החבר׳ה שלו במילואים מחסלים הכל ואפילו לא יודעים שזה ללא גלוטן</blockquote>
-          <figcaption class="text-[12px] text-on-surface-variant">— אמא לחייל עם צליאק</figcaption>
+
+        <figure class="bg-white border border-outline-variant/30 rounded-2xl rounded-tr-sm p-4 shadow-md shadow-stone-900/[0.06]">
+          <div class="flex items-center gap-2.5 mb-2.5 pb-2.5 border-b border-stone-100">
+            <div class="w-8 h-8 rounded-full bg-secondary/15 flex items-center justify-center text-secondary font-bold text-[13px] shrink-0">צ</div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[13px] font-bold text-on-surface truncate">אמא לחייל עם צליאק</div>
+              <div class="text-[10px] text-stone-500 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">favorite</span><span>תגובה באינסטגרם</span></div>
+            </div>
+          </div>
+          <blockquote class="text-[15px] leading-[1.55] text-on-surface">החבר׳ה שלו במילואים מחסלים הכל ואפילו לא יודעים שזה ללא גלוטן</blockquote>
         </figure>
-        <figure class="bg-white border border-outline-variant/30 rounded-xl p-5 shadow-sm shadow-stone-900/5">
-          <div class="text-secondary text-2xl leading-none mb-2 font-h">״</div>
-          <blockquote class="text-[15px] leading-snug text-on-surface mb-2">5 דקות וזה היה מוכן</blockquote>
-          <figcaption class="text-[12px] text-on-surface-variant">— אמא עסוקה</figcaption>
+
+        <figure class="bg-white border border-outline-variant/30 rounded-2xl rounded-tr-sm p-4 shadow-md shadow-stone-900/[0.06]">
+          <div class="flex items-center gap-2.5 mb-2.5 pb-2.5 border-b border-stone-100">
+            <div class="w-8 h-8 rounded-full bg-primary/15 flex items-center justify-center text-primary font-bold text-[13px] shrink-0">ע</div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[13px] font-bold text-on-surface truncate">אמא עסוקה</div>
+              <div class="text-[10px] text-stone-500 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">forum</span><span>הודעה ב-DM</span></div>
+            </div>
+          </div>
+          <blockquote class="text-[15px] leading-[1.55] text-on-surface">5 דקות וזה היה מוכן</blockquote>
         </figure>
+
       </div>
     </div>
   </section>
