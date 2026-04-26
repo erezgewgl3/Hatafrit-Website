@@ -209,19 +209,18 @@
     }
   });
 
-  // Each tile picks its hero photo from any recipe carrying the listed category.
-  // `match` accepts an array — first match (in array order) that has an image
-  // becomes the tile's representative recipe. Lists include BOTH the new
-  // multi-select category names AND the legacy single-select names so the
-  // bento renders fully even before Adi finishes the Airtable migration.
+  // Each tile picks its hero photo from any recipe carrying any of the listed
+  // categories. First match (in array order) with an image becomes the tile's
+  // representative recipe. Names match the actual Airtable options after the
+  // 2026-04-26 migration.
   const BENTO = [
-    { match: ['מנה עיקרית','ארוחת צהריים'],
+    { match: ['מנה עיקרית'],
       label: 'ארוחות',          span: 'col-span-2 row-span-2' },
     { match: ['לחמים ולחמניות'],
       label: 'לחמים ולחמניות',   span: 'col-span-1 row-span-1' },
-    { match: ['חנוכה','פסח','חגי תשרי','תשרי','שבועות','פורים','יום העצמאות'],
+    { match: ['חנוכה','פסח','חגי תשרי','שבועות','פורים','יום העצמאות'],
       label: 'חגים',            span: 'col-span-1 row-span-1' },
-    { match: ['עוגיות','עוגיות ומתוקים','קינוחים','קינוחים עם טוויסט','עוגות','עוגות ביתיות'],
+    { match: ['עוגיות','קינוחים עם טוויסט','עוגות ביתיות'],
       label: 'מתוקים ובריאים',   span: 'col-span-2 row-span-1' },
   ];
 

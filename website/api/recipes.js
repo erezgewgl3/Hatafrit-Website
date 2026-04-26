@@ -4,7 +4,11 @@
 //   GET /api/recipes        → all recipes
 //   GET /api/recipes?id=... → single recipe by Airtable record id
 
-const AIRTABLE_BASE  = 'app5KCfdL587mYDxh';
+// Restored from the 2026-04-25 snapshot after a botched AI-driven category
+// rename wiped 142 records' categories. The previous base id was
+// app5KCfdL587mYDxh — once the new base is verified end-to-end and the old
+// one deleted, the previous id is dead.
+const AIRTABLE_BASE  = 'appSOzO2OxTctKIgD';
 const AIRTABLE_TABLE = 'tblx4gWhB6m81apfT';
 
 const FIELDS = {

@@ -261,13 +261,17 @@
     if (filtered.length > visible) more.classList.remove('hidden'); else more.classList.add('hidden');
   }
 
-  // Category groups for the filter sidebar — hierarchy lives in the UI, not the data.
-  // Top-level standalone categories first, then "ארוחות", then "חגים".
-  const CATEGORY_GROUPS = [
-    { label: null,     keys: ['לחמים ולחמניות','עוגיות','עוגות','קרקרים וחטיפים','קינוחים','מאפים ממולאים','פיצות ופוקאצות','אפייה','לילדודס'] },
-    { label: 'ארוחות', keys: ['מנה ראשונה','מנה עיקרית','תוספת'] },
-    { label: 'חגים',   keys: ['חגי תשרי','חנוכה','פורים','פסח','שבועות','יום העצמאות'] },
-  ];
+  // The sidebar is data-driven: every category present in the data shows up.
+  // Membership in the "ארוחה" or "חגים" group is determined by these sets;
+  // anything not matching falls into the top-level group automatically.
+  // Keeping legacy names (תשרי) in the holiday set in case any records still
+  // carry them — they still group correctly without changing the data.
+  const HOLIDAY_KEYS = new Set([
+    'חגי תשרי','תשרי','חנוכה','פורים','פסח','שבועות','יום העצמאות',
+  ]);
+  const MEAL_KEYS = new Set([
+    'מנה ראשונה','מנה עיקרית','תוספת',
+  ]);
 
   function buildCategoryFilters(recipes) {
     // Count each recipe once per category it belongs to
@@ -276,13 +280,25 @@
       counts[c] = (counts[c] || 0) + 1;
     }
 
-    // Render the known groups in order. Any category present in the data but not
-    // in the group map gets appended as "ללא קבוצה" so nothing silently disappears.
-    const known = new Set(CATEGORY_GROUPS.flatMap(g => g.keys));
-    const orphans = Object.keys(counts).filter(k => !known.has(k));
-    const groups = orphans.length
-      ? [...CATEGORY_GROUPS, { label: 'אחר', keys: orphans }]
-      : CATEGORY_GROUPS;
+    // Bucket every category into top-level / ארוחה / חגים.
+    const top = [], meal = [], holiday = [];
+    for (const [name, n] of Object.entries(counts)) {
+      if (HOLIDAY_KEYS.has(name)) holiday.push([name, n]);
+      else if (MEAL_KEYS.has(name)) meal.push([name, n]);
+      else top.push([name, n]);
+    }
+    // Sort each group: count desc, then Hebrew alphabetical for ties
+    const byCountThenName = (a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'he');
+    top.sort(byCountThenName);
+    meal.sort(byCountThenName);
+    holiday.sort(byCountThenName);
+
+    // Order: top-level (no header), then ארוחה, then חגים.
+    const sections = [
+      { label: null,    items: top },
+      { label: 'ארוחה', items: meal },
+      { label: 'חגים',  items: holiday },
+    ];
 
     const checkboxRow = (name, n) => `
       <label class="flex items-center gap-3 cursor-pointer group">
@@ -291,13 +307,12 @@
       </label>`;
 
     const wrap = document.getElementById('cat-filters');
-    wrap.innerHTML = groups.map(g => {
-      const items = g.keys.filter(k => counts[k] > 0);
-      if (items.length === 0) return '';
+    wrap.innerHTML = sections.map(g => {
+      if (g.items.length === 0) return '';
       const header = g.label
         ? `<div class="text-[12px] font-bold text-on-surface-variant uppercase tracking-wider mt-3 mb-1.5 first:mt-0">${escapeHTML(g.label)}</div>`
         : '';
-      return header + items.map(k => checkboxRow(k, counts[k])).join('');
+      return header + g.items.map(([name, n]) => checkboxRow(name, n)).join('');
     }).join('');
 
     wrap.addEventListener('change', (e) => {
