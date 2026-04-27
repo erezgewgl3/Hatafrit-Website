@@ -90,9 +90,6 @@ export default async function handler(req, res) {
 
   const id = (req.query && req.query.id) || (req.url && new URL(req.url, 'http://x').searchParams.get('id'));
 
-  // Cache headers — list endpoint can be cached briefly, single recipe slightly longer
-  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=86400');
-
   try {
     const fieldParams = FIELD_IDS.map(f => `fields[]=${encodeURIComponent(f)}`).join('&');
 
@@ -103,6 +100,7 @@ export default async function handler(req, res) {
       if (r.status === 404) { res.status(404).json({ error: 'Recipe not found' }); return; }
       if (!r.ok) { res.status(r.status).json({ error: `Airtable ${r.status}` }); return; }
       const rec = await r.json();
+      res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=3600');
       res.status(200).json(normalizeRecord(rec));
       return;
     }
@@ -116,6 +114,7 @@ export default async function handler(req, res) {
       offset = data.offset || null;
     } while (offset);
 
+    res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=3600');
     res.status(200).json({ recipes: all.map(normalizeRecord) });
   } catch (err) {
     res.status(500).json({ error: String(err && err.message || err) });
