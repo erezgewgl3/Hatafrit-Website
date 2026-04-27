@@ -20,7 +20,13 @@
       ]
     },
     {
-      "source": "/api/(.*)",
+      "source": "/api/recipes",
+      "headers": [
+        { "key": "Cache-Control", "value": "s-maxage=300, stale-while-revalidate=3600" }
+      ]
+    },
+    {
+      "source": "/api/admin/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache" }
       ]
