@@ -530,6 +530,40 @@ const state = {
   allRecipes: null,       // recipe[] from GET /api/admin/recipes — Plan 03-02 uses
 };
 
+// ---- 1a. Categories taxonomy constant (Plan 03-02 / CAT-01) ---------------
+// Source: PRD §11 Q1 / additional_context locked decision.
+// Section grouping is FRONTEND-ONLY metadata; the Categories Airtable table is
+// flat (one column: Name). The 20 canonical names live HERE and are seeded
+// into Airtable by Wave 0's _dev/seed-categories.mjs script. Any extra rows
+// in the Airtable table that aren't in CATEGORY_SECTIONS land in the "נוספות"
+// (extras) bucket so Adi never loses categories she's added inline.
+const CATEGORY_SECTIONS = {
+  'סוג מנה': ['מנה ראשונה', 'מנה עיקרית', 'תוספת', 'קינוח', 'מאפה', 'שתייה', 'סלט', 'מרק'],
+  'חגים':    ['פסח', 'שבועות', 'ראש השנה', 'יום כיפור', 'סוכות', 'חנוכה', 'פורים', 'יום העצמאות'],
+  'תזונה':   ['טבעוני', 'ללא גלוטן', 'ללא ביצים', 'ללא חלב'],
+};
+const CATEGORY_EXTRAS_LABEL = 'נוספות';
+
+function groupCategories(catalog) {
+  // catalog: [{id, name}, ...] from GET /api/admin/categories.
+  // Returns: { sectionLabel: [name, name, ...] }.
+  const known = new Set(Object.values(CATEGORY_SECTIONS).flat());
+  const groups = {};
+  for (const [label, names] of Object.entries(CATEGORY_SECTIONS)) {
+    groups[label] = [...names]; // copy: each section starts with the canonical names
+  }
+  groups[CATEGORY_EXTRAS_LABEL] = [];
+  const seenInExtras = new Set();
+  for (const c of catalog || []) {
+    if (c && c.name && !known.has(c.name) && !seenInExtras.has(c.name)) {
+      groups[CATEGORY_EXTRAS_LABEL].push(c.name);
+      seenInExtras.add(c.name);
+    }
+  }
+  if (groups[CATEGORY_EXTRAS_LABEL].length === 0) delete groups[CATEGORY_EXTRAS_LABEL];
+  return groups;
+}
+
 // ---- 10. Init error helper (declared early so init() can call it) ----------
 function showInitError(msg) {
   const errEl = document.getElementById('save-error');
@@ -608,6 +642,65 @@ function renderStatusBadge() {
     badge.textContent = 'לבדוק';
     if (detailStatus) detailStatus.textContent = 'לבדוק';
   }
+}
+
+// ---- 3a. Render categories chip grid (Plan 03-02 / CAT-01) -----------------
+function renderCategories() {
+  const container = document.getElementById('categories-container');
+  if (!container) return;
+  const groups = groupCategories(state.categoryCatalog);
+  const selected = new Set(Array.isArray(state.original?.categories) ? state.original.categories : []);
+
+  // Build via DOM API (chip text via .textContent) — XSS defense-in-depth even
+  // though category names come from our own DB. T-03-09 mitigation.
+  container.replaceChildren();
+  for (const [sectionLabel, names] of Object.entries(groups)) {
+    const sectionWrap = document.createElement('div');
+    sectionWrap.setAttribute('data-section', sectionLabel);
+    sectionWrap.className = 'mb-6';
+
+    const labelEl = document.createElement('div');
+    labelEl.className = 'font-display text-[12px] font-bold uppercase tracking-[0.10em] text-on-surface-variant mb-3';
+    labelEl.textContent = sectionLabel;
+    sectionWrap.appendChild(labelEl);
+
+    const chipsRow = document.createElement('div');
+    chipsRow.className = 'flex flex-wrap gap-2';
+    for (const name of names) {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'cat-chip' + (selected.has(name) ? ' selected' : '');
+      chip.setAttribute('data-cat-name', name);
+      chip.setAttribute('aria-pressed', selected.has(name) ? 'true' : 'false');
+      chip.textContent = name;
+      chip.addEventListener('click', () => toggleChip(chip));
+      chipsRow.appendChild(chip);
+    }
+    sectionWrap.appendChild(chipsRow);
+    container.appendChild(sectionWrap);
+  }
+
+  // W7: orphan recovery — any category already attached to the recipe but not
+  // rendered yet (because it's neither in CATEGORY_SECTIONS nor in the live
+  // catalog) lands in נוספות. Without this, Save & next would silently DROP
+  // those categories from the recipe.
+  const renderedNames = new Set(
+    Array.from(container.querySelectorAll('.cat-chip')).map(c => c.dataset.catName)
+  );
+  for (const name of state.original?.categories || []) {
+    if (!renderedNames.has(name) && typeof appendChipToExtras === 'function') {
+      appendChipToExtras(name, /* selected */ true);
+    }
+  }
+
+  // W6 cleanup: remove the Plan 03-01 "טוען קטגוריות…" placeholder.
+  const loading = container.querySelector('#cat-loading');
+  if (loading) loading.remove();
+}
+
+function toggleChip(chip) {
+  const isOn = chip.classList.toggle('selected');
+  chip.setAttribute('aria-pressed', isOn ? 'true' : 'false');
 }
 
 // ---- 4. Collapsible blocks (EDIT-03) ---------------------------------------
@@ -699,9 +792,9 @@ wireCollapsible('instructions-toggle', 'instructions', 'instructions-preview');
   }
 
   renderForm();
-  // renderCategories() — Plan 03-02 implements; Plan 03-01 leaves the container empty.
-  // renderProgressChips() — Plan 03-02 implements.
-  // renderRecipeNumber() — Plan 03-02 implements.
+  renderCategories();      // Plan 03-02 / CAT-01 — fills #categories-container with chip grid.
+  // renderProgressChips() — Plan 03-02 Task 3.
+  // renderRecipeNumber()  — Plan 03-02 Task 3.
 })();
 
 /* =========================================================================
@@ -716,10 +809,12 @@ wireCollapsible('instructions-toggle', 'instructions', 'instructions-preview');
 
 // ---- 5. getDraft + isDirty -------------------------------------------------
 function getSelectedCategoryNames() {
-  // Plan 03-02 implements this fully (reads from chip-grid DOM).
-  // Plan 03-01: return current state.original.categories unchanged so PATCH
-  // does not accidentally clear them.
-  return Array.isArray(state.original?.categories) ? [...state.original.categories] : [];
+  // Plan 03-02 / CAT-01: DOM is the source of truth for chip selection state.
+  // Returns the array-of-strings shape PATCH expects (locked in 03-CATEGORY-SHAPE.md).
+  const chips = document.querySelectorAll('#categories-container .cat-chip.selected');
+  return Array.from(chips)
+    .map(c => c.getAttribute('data-cat-name'))
+    .filter(Boolean);
 }
 
 function getDraft() {
