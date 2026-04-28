@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="robots" content="noindex,nofollow">
+<title>התפריט · אדמין · כניסה</title>
+<link rel="icon" type="image/png" href="/brand_assets/Logo.png"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { "primary": "#785600", "primary-dark": "#5a4000",
+      "outline-variant": "#d3c4af", "on-surface-variant": "#4f4535",
+      "background": "#fff8f3", "surface-container": "#f7ecdf" } } } };
+</script>
+<style>
+  body { background: #fff8f3; font-family: 'Assistant', sans-serif; color: #201b13; min-height: 100vh; overflow-x: hidden; }
+  .font-display { font-family: 'Heebo', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .grain::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
+    opacity: 0.04; mix-blend-mode: multiply;
+  }
+  .input-base {
+    width: 100%; background: #ffffff; color: #201b13;
+    border: 1px solid #d3c4af; border-radius: 12px;
+    padding: 16px 18px; font-family: 'Assistant', sans-serif; font-size: 17px;
+    line-height: 1.4; text-align: right;
+    transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+  }
+  .input-base:focus {
+    outline: none; border-color: #785600;
+    box-shadow: 0 0 0 4px rgba(120,86,0,0.10); background: #fffdf9;
+  }
+  .btn-primary {
+    width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: linear-gradient(180deg, #8a6300 0%, #6d4c00 100%);
+    color: #ffffff; font-family: 'Heebo', sans-serif; font-weight: 700;
+    font-size: 16px; letter-spacing: 0.01em; padding: 16px 28px; border-radius: 12px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 6px 16px rgba(120,86,0,0.25);
+    transition: transform 120ms ease, box-shadow 200ms ease, filter 150ms ease;
+    cursor: pointer; border: none;
+  }
+  .btn-primary:hover { filter: brightness(1.06); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); filter: brightness(0.98); }
+  .ornament-line { display: flex; align-items: center; gap: 16px; color: #817563; font-size: 12px; font-family: 'Heebo', sans-serif; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+  .ornament-line::before, .ornament-line::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, #d3c4af 40%, #d3c4af 60%, transparent); }
+  /* Decorative background blooms */
+  .bloom-a, .bloom-b { position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; opacity: 0.45; z-index: 0; }
+  .bloom-a { top: -120px; right: -120px; width: 480px; height: 480px;
+    background: radial-gradient(circle, #ffdea6 0%, transparent 70%); }
+  .bloom-b { bottom: -160px; left: -160px; width: 560px; height: 560px;
+    background: radial-gradient(circle, #fd8896 0%, transparent 70%); opacity: 0.25; }
+</style>
+</head>
+<body class="grain">
+  <div class="bloom-a"></div>
+  <div class="bloom-b"></div>
+
+  <main class="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 py-12">
+
+    <!-- Brand mark -->
+    <div class="flex flex-col items-center mb-10 text-center">
+      <img src="/brand_assets/Logo.png" alt="התפריט" class="h-16 w-auto mb-5"/>
+      <div class="font-display text-[28px] font-extrabold tracking-tight text-on-surface">התפריט</div>
+      <div class="ornament-line w-[180px] mt-4">אדמין</div>
+    </div>
+
+    <!-- Login card -->
+    <div class="w-full max-w-[420px] bg-white rounded-[20px] border border-[#ece1d4] p-9"
+         style="box-shadow: 0 1px 2px rgba(120,86,0,0.04), 0 24px 56px rgba(120,86,0,0.08);">
+
+      <h1 class="font-display text-[24px] font-bold text-on-surface mb-1.5">ברוכה השבה, אדי</h1>
+      <p class="text-[15px] text-on-surface-variant mb-7 leading-relaxed">הזיני את סיסמת הניהול כדי להמשיך לבדיקת המתכונים.</p>
+
+      <form class="space-y-5">
+        <div>
+          <label for="pw" class="block font-display text-[12px] font-bold uppercase tracking-[0.08em] text-on-surface-variant mb-2">סיסמה</label>
+          <div class="relative">
+            <input type="password" id="pw" class="input-base pl-12" autofocus required/>
+            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary" aria-label="הצג סיסמה">
+              <span class="material-symbols-outlined text-[20px]">visibility</span>
+            </button>
+          </div>
+        </div>
+        <p id="error" class="hidden text-[14px] mt-2" style="color: #9e3e4c;" role="alert"></p>
+
+        <label class="flex items-center gap-2.5 cursor-pointer select-none text-[14px] text-on-surface-variant">
+          <span class="relative inline-flex items-center justify-center w-5 h-5 rounded-md border border-[#d3c4af] bg-white"
+                style="background: #785600; border-color: #785600;">
+            <span class="material-symbols-outlined text-white text-[16px]" style="font-variation-settings: 'wght' 700;">check</span>
+          </span>
+          <span>זכרי אותי 30 יום</span>
+        </label>
+
+        <button type="submit" class="btn-primary mt-2">
+          <span>כניסה</span>
+          <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+        </button>
+      </form>
+
+      <p class="text-center text-[13px] text-on-surface-variant mt-7 leading-relaxed">
+        איבדת סיסמה? פני ל<a href="mailto:eric@example.com" class="text-primary font-semibold hover:underline">אריק</a>.
+      </p>
+    </div>
+
+    <p class="text-center text-[12px] text-on-surface-variant mt-8 max-w-[360px] leading-relaxed">
+      כניסה זו פרטית. הקישור לא מופיע באתר הציבורי ואינו מסומן במנועי חיפוש.
+    </p>
+  </main>
+<script>
+const form = document.querySelector('form');
+const errorEl = document.getElementById('error');
+const pwInput = document.getElementById('pw');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  errorEl.textContent = '';
+  errorEl.classList.add('hidden');
+  const pw = pwInput.value;
+  try {
+    const r = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw }),
+      credentials: 'same-origin',
+    });
+    if (r.ok) { window.location.href = '/admin/'; return; }
+    let msg = 'סיסמה שגויה';
+    try { const j = await r.json(); if (j && j.error) msg = j.error; } catch {}
+    errorEl.textContent = msg;
+    errorEl.classList.remove('hidden');
+    pwInput.focus();
+    pwInput.select();
+  } catch (err) {
+    errorEl.textContent = 'שגיאת רשת — נסי שוב';
+    errorEl.classList.remove('hidden');
+  }
+});
+</script>
+</body>
+</html>
