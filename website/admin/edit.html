@@ -1156,6 +1156,64 @@ document.getElementById('btn-save-stay').addEventListener('click', saveAndStay);
 // to reveal the inline-add input row inside the categories card.
 document.getElementById('add-category-btn').addEventListener('click', openInlineAdd);
 
+// ---- Menu dropdown toggle (Plan 03-02 / MENU-01) ---------------------------
+// Mockup ships the dropdown permanently open (so reviewers see all items).
+// Real UX needs it CLOSED by default with click-to-toggle, click-outside to
+// dismiss, and Esc to close — composed with the bubble-phase Esc handler from
+// Plan 03-01 via stopImmediatePropagation() in CAPTURE phase.
+function setupMenuDropdown() {
+  const toggleBtn = document.getElementById('menu-toggle');
+  const dropdown = document.getElementById('menu-dropdown');
+  if (!toggleBtn || !dropdown) return;
+
+  function open() {
+    dropdown.classList.remove('hidden');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+  }
+  function close() {
+    dropdown.classList.add('hidden');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = !dropdown.classList.contains('hidden');
+    if (isOpen) close(); else open();
+  });
+
+  // Click-outside dismissal.
+  document.addEventListener('click', (e) => {
+    if (dropdown.classList.contains('hidden')) return;
+    if (dropdown.contains(e.target) || toggleBtn.contains(e.target)) return;
+    close();
+  });
+
+  // Esc closes the dropdown. Plan 03-01's keydown listener (Esc → reload after
+  // dirty-confirm) is registered on `document` in BUBBLE phase. To intercept
+  // Esc when the menu is open without changing Plan 03-01's code, register OUR
+  // Esc handler with {capture: true} so it runs first; if the menu was open,
+  // close it AND stopImmediatePropagation() to prevent the reload handler from
+  // firing. If the menu was already closed, do nothing — Plan 03-01's bubble
+  // handler runs normally (dirty-confirm + reload).
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !dropdown.classList.contains('hidden')) {
+      close();
+      e.stopImmediatePropagation();
+    }
+  }, true); // capture phase
+
+  // Logout — POST then redirect; redirect even if POST fails (cookie HttpOnly,
+  // server-side clear is best-effort but the user wants OUT either way).
+  const logoutBtn = document.getElementById('menu-logout');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', async () => {
+      try { await fetch('/api/admin/logout', { method: 'POST', credentials: 'same-origin' }); } catch {}
+      window.location.href = '/admin/login';
+    });
+  }
+}
+setupMenuDropdown();
+
 // ---- 7. Mark un-reviewed (EDIT-06) — sends {reviewedAt: null} per Pitfall #3
 async function markUnreviewed() {
   if (!state.original) return;
