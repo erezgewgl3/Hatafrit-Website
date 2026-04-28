@@ -576,6 +576,57 @@ function truncate(s, n) {
   return s.length <= n ? s : s.slice(0, n) + '…';
 }
 
+// ---- 1b. Nudge progress + recipe-number helpers (Plan 03-02 / NUDGE-01) ----
+// "Today" boundary is computed in IL timezone every call so a session that
+// crosses midnight rolls back to 0 today-count automatically (Pitfall #7).
+// Use 'en-CA' to get ISO format (YYYY-MM-DD) for stable string comparison.
+function todayStartIL() {
+  return new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Jerusalem' });
+}
+
+function ilDateOf(iso) {
+  if (!iso) return '';
+  try { return new Date(iso).toLocaleDateString('en-CA', { timeZone: 'Asia/Jerusalem' }); }
+  catch { return ''; }
+}
+
+function computeTodayCount() {
+  if (!Array.isArray(state.allRecipes)) return 0;
+  const today = todayStartIL();
+  return state.allRecipes.filter(r => r && r.reviewedAt && ilDateOf(r.reviewedAt) === today).length;
+}
+
+function computeTotalReviewed() {
+  if (!Array.isArray(state.allRecipes)) return 0;
+  return state.allRecipes.filter(r => r && r.reviewedAt).length;
+}
+
+function computeRecipeIndex() {
+  if (!state.original || !Array.isArray(state.allRecipes)) return null;
+  const idx = state.allRecipes.findIndex(r => r && r.id === state.original.id);
+  return idx >= 0 ? idx + 1 : null;
+}
+
+function renderProgressChips() {
+  const today = computeTodayCount();
+  const total = computeTotalReviewed();
+  const totalCount = Array.isArray(state.allRecipes) ? state.allRecipes.length : 222;
+  const todayEl = document.getElementById('today-count');
+  const totalEl = document.getElementById('total-reviewed');
+  const totalRecipesEl = document.getElementById('total-recipes');
+  if (todayEl) todayEl.textContent = String(today);
+  if (totalEl) totalEl.textContent = String(total);
+  if (totalRecipesEl) totalRecipesEl.textContent = String(totalCount);
+}
+
+function renderRecipeNumber() {
+  const el = document.getElementById('recipe-number');
+  if (!el) return;
+  const idx = computeRecipeIndex();
+  const totalCount = Array.isArray(state.allRecipes) ? state.allRecipes.length : 222;
+  el.textContent = idx ? `מתכון ${idx} מתוך ${totalCount}` : '—';
+}
+
 // ---- 3. Render form (textContent / .value only — never innerHTML on data) --
 function renderForm() {
   const r = state.original;
@@ -935,8 +986,8 @@ wireCollapsible('instructions-toggle', 'instructions', 'instructions-preview');
 
   renderForm();
   renderCategories();      // Plan 03-02 / CAT-01 — fills #categories-container with chip grid.
-  // renderProgressChips() — Plan 03-02 Task 3.
-  // renderRecipeNumber()  — Plan 03-02 Task 3.
+  renderProgressChips();   // Plan 03-02 / NUDGE-01 — today/total counts in top nav.
+  renderRecipeNumber();    // Plan 03-02 / NUDGE-01 — "מתכון N מתוך M" status line.
 })();
 
 /* =========================================================================
@@ -1054,12 +1105,14 @@ async function save({ andAdvance }) {
       reviewedAt: fields.reviewedAt,
     };
 
-    // Sync the in-memory full list so today-count reflects the save
-    // (Plan 03-02 will read this for the nudge progress chips).
+    // Sync the in-memory full list so today-count reflects the save.
     if (Array.isArray(state.allRecipes)) {
       const idx = state.allRecipes.findIndex(x => x && x.id === state.original.id);
       if (idx >= 0) state.allRecipes[idx].reviewedAt = fields.reviewedAt;
     }
+
+    // Plan 03-02 / NUDGE-01: refresh the progress chips after every save.
+    renderProgressChips();
 
     if (!andAdvance) {
       // Save & stay: just refresh the badge + previews from new state.original.
@@ -1067,7 +1120,17 @@ async function save({ andAdvance }) {
       return;
     }
 
-    // Plan 03-02 inserts the nudge check here. Plan 03-01 always advances.
+    // Plan 03-02 / NUDGE-01: 20/day soft-cap check BEFORE advancing.
+    // computeTodayCount() runs against the just-updated state.allRecipes, so
+    // the 20th save itself sees today === 20 and triggers the celebration.
+    // sessionStorage.nudgeBypassed is set by /admin/done's "המשיכי בכל זאת"
+    // (Plan 03-03) and lifts the cap for the rest of the session. Never
+    // persists across tab close (Pitfall #7 — done-screen overlay leaks).
+    if (computeTodayCount() === 20 && !sessionStorage.getItem('nudgeBypassed')) {
+      location.replace('/admin/done');
+      return;
+    }
+
     let nx;
     try {
       nx = await fetch('/api/admin/next-unreviewed', { credentials: 'same-origin' });
@@ -1125,11 +1188,15 @@ async function markUnreviewed() {
   state.original.reviewedAt = null;
   renderStatusBadge();
 
-  // Sync the in-memory full list too
+  // Sync the in-memory full list too.
   if (Array.isArray(state.allRecipes)) {
     const idx = state.allRecipes.findIndex(x => x && x.id === state.original.id);
     if (idx >= 0) state.allRecipes[idx].reviewedAt = null;
   }
+
+  // Plan 03-02 / NUDGE-01: today-count drops by 1 if Adi un-reviews a recipe
+  // she'd reviewed today; refresh the chips so the nav reflects reality.
+  renderProgressChips();
 }
 document.getElementById('btn-unreview').addEventListener('click', markUnreviewed);
 
