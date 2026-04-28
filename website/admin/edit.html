@@ -703,6 +703,220 @@ wireCollapsible('instructions-toggle', 'instructions', 'instructions-preview');
   // renderProgressChips() — Plan 03-02 implements.
   // renderRecipeNumber() — Plan 03-02 implements.
 })();
+
+/* =========================================================================
+ * Task 2b — Action handlers
+ *   getDraft, isDirty, save / saveAndNext / saveAndStay,
+ *   markUnreviewed, cancel, keyboard shortcuts.
+ *
+ * Plan 03-02 will replace getSelectedCategoryNames() with a DOM-driven
+ * implementation reading the chip grid. Until then, it returns the
+ * original categories so saves do not destructively clear them.
+ * ========================================================================= */
+
+// ---- 5. getDraft + isDirty -------------------------------------------------
+function getSelectedCategoryNames() {
+  // Plan 03-02 implements this fully (reads from chip-grid DOM).
+  // Plan 03-01: return current state.original.categories unchanged so PATCH
+  // does not accidentally clear them.
+  return Array.isArray(state.original?.categories) ? [...state.original.categories] : [];
+}
+
+function getDraft() {
+  return {
+    name: document.getElementById('name').value,
+    description: document.getElementById('description').value,
+    prepTime: document.getElementById('prepTime').value,
+    servingSize: document.getElementById('servingSize').value,
+    netCarbs: document.getElementById('netCarbs').value,
+    ingredients: document.getElementById('ingredients').value,
+    instructions: document.getElementById('instructions').value,
+    category: getSelectedCategoryNames(), // Plan 03-02 makes this DOM-driven
+  };
+}
+
+function isDirty() {
+  if (!state.original) return false;
+  const d = getDraft();
+  const o = state.original;
+  const stringKeys = ['name', 'description', 'prepTime', 'servingSize', 'netCarbs', 'ingredients', 'instructions'];
+  for (const k of stringKeys) {
+    if (String(d[k] ?? '') !== String(o[k] ?? '')) return true;
+  }
+  const oCats = Array.isArray(o.categories) ? o.categories : [];
+  if (JSON.stringify([...d.category].sort()) !== JSON.stringify([...oCats].sort())) return true;
+  return false;
+}
+
+// ---- 6. save / saveAndNext / saveAndStay (EDIT-04) -------------------------
+async function saveAndNext() {
+  await save({ andAdvance: true });
+}
+
+async function saveAndStay() {
+  await save({ andAdvance: false });
+}
+
+async function save({ andAdvance }) {
+  if (!state.original) return;
+
+  const errEl = document.getElementById('save-error');
+  errEl.classList.add('hidden');
+  errEl.textContent = '';
+
+  const draft = getDraft();
+  // PATCH wrapper shape per api/admin/recipes.js — server reads req.body?.fields.
+  // category is an ARRAY OF STRINGS per .planning/phases/.../03-CATEGORY-SHAPE.md
+  // (Wave 0 locked answer — verified live with Hebrew Unicode round-trip).
+  const fields = {
+    name: draft.name,
+    description: draft.description,
+    prepTime: draft.prepTime,
+    servingSize: draft.servingSize,
+    netCarbs: draft.netCarbs,
+    ingredients: draft.ingredients,
+    instructions: draft.instructions,
+    category: draft.category, // SHAPE: array of strings — locked in 03-CATEGORY-SHAPE.md
+    reviewedAt: new Date().toISOString(),
+  };
+
+  const saveBtn = document.getElementById(andAdvance ? 'btn-save-next' : 'btn-save-stay');
+  const otherBtn = document.getElementById(andAdvance ? 'btn-save-stay' : 'btn-save-next');
+  if (saveBtn) saveBtn.disabled = true;
+  if (otherBtn) otherBtn.disabled = true;
+
+  try {
+    const r = await fetch('/api/admin/recipes?id=' + encodeURIComponent(state.original.id), {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({ fields }),
+    });
+    if (r.status === 401) { location.replace('/admin/login'); return; }
+    if (!r.ok) {
+      let msg = 'שגיאה בשמירה.';
+      try { const j = await r.json(); if (j && j.error) msg = 'שגיאה בשמירה: ' + j.error; } catch {}
+      errEl.textContent = msg + ' (' + r.status + ')';
+      errEl.classList.remove('hidden');
+      return;
+    }
+
+    // PATCH-with-typecast response is sparse (Pitfall #2 / Wave 0 confirmation):
+    // refresh state.original from the local draft, NOT from the response body.
+    state.original = {
+      ...state.original,
+      name: fields.name,
+      description: fields.description,
+      prepTime: fields.prepTime,
+      servingSize: fields.servingSize,
+      netCarbs: fields.netCarbs,
+      ingredients: fields.ingredients,
+      instructions: fields.instructions,
+      categories: [...fields.category],
+      category: fields.category[0] || '',
+      reviewedAt: fields.reviewedAt,
+    };
+
+    // Sync the in-memory full list so today-count reflects the save
+    // (Plan 03-02 will read this for the nudge progress chips).
+    if (Array.isArray(state.allRecipes)) {
+      const idx = state.allRecipes.findIndex(x => x && x.id === state.original.id);
+      if (idx >= 0) state.allRecipes[idx].reviewedAt = fields.reviewedAt;
+    }
+
+    if (!andAdvance) {
+      // Save & stay: just refresh the badge + previews from new state.original.
+      renderForm();
+      return;
+    }
+
+    // Plan 03-02 inserts the nudge check here. Plan 03-01 always advances.
+    let nx;
+    try {
+      nx = await fetch('/api/admin/next-unreviewed', { credentials: 'same-origin' });
+    } catch {
+      errEl.textContent = 'שגיאת רשת — נסי שוב.';
+      errEl.classList.remove('hidden');
+      return;
+    }
+    if (nx.status === 401) { location.replace('/admin/login'); return; }
+    const data = nx.ok ? await nx.json() : { id: null };
+    if (!data || !data.id) { location.replace('/admin/done'); return; }
+    location.href = '/admin/edit?id=' + encodeURIComponent(data.id);
+  } finally {
+    if (saveBtn) saveBtn.disabled = false;
+    if (otherBtn) otherBtn.disabled = false;
+  }
+}
+
+document.getElementById('btn-save-next').addEventListener('click', saveAndNext);
+document.getElementById('btn-save-stay').addEventListener('click', saveAndStay);
+
+// ---- 7. Mark un-reviewed (EDIT-06) — sends {reviewedAt: null} per Pitfall #3
+async function markUnreviewed() {
+  if (!state.original) return;
+  if (!confirm('לבטל את סימון "נבדק" עבור המתכון הזה?')) return;
+
+  const errEl = document.getElementById('save-error');
+  errEl.classList.add('hidden');
+  errEl.textContent = '';
+
+  let r;
+  try {
+    r = await fetch('/api/admin/recipes?id=' + encodeURIComponent(state.original.id), {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({ fields: { reviewedAt: null } }), // null, NOT '' — Pitfall #3
+    });
+  } catch {
+    errEl.textContent = 'שגיאת רשת — נסי שוב.';
+    errEl.classList.remove('hidden');
+    return;
+  }
+  if (r.status === 401) { location.replace('/admin/login'); return; }
+  if (!r.ok) {
+    errEl.textContent = 'שגיאה בעדכון. (' + r.status + ')';
+    errEl.classList.remove('hidden');
+    return;
+  }
+
+  state.original.reviewedAt = null;
+  renderStatusBadge();
+
+  // Sync the in-memory full list too
+  if (Array.isArray(state.allRecipes)) {
+    const idx = state.allRecipes.findIndex(x => x && x.id === state.original.id);
+    if (idx >= 0) state.allRecipes[idx].reviewedAt = null;
+  }
+}
+document.getElementById('btn-unreview').addEventListener('click', markUnreviewed);
+
+// ---- 8. Cancel button — discards local edits (with dirty-confirm) ----------
+document.getElementById('btn-cancel').addEventListener('click', () => {
+  if (isDirty() && !confirm('שינויים לא נשמרו. לבטל?')) return;
+  location.reload();
+});
+
+// ---- 9. Keyboard shortcuts (EDIT-05) ---------------------------------------
+//
+// I12 note (handler order): this Esc handler is registered on `document` in
+// BUBBLE phase. Plan 03-02's menu-dropdown setup will register a CAPTURE-phase
+// Esc handler that runs FIRST when the dropdown is open and calls
+// stopImmediatePropagation() to prevent this handler's reload behavior from
+// firing. The two handlers compose: capture-phase Esc closes the menu when
+// open; bubble-phase Esc (this one) discards-and-reloads when the menu was
+// already closed. Do not register this handler in capture phase — that breaks
+// the composition.
+document.addEventListener('keydown', (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+    e.preventDefault();
+    saveAndNext();
+  } else if (e.key === 'Escape') {
+    if (isDirty() && !confirm('שינויים לא נשמרו. לבטל?')) return;
+    location.reload();
+  }
+});
 </script>
 </body>
 </html>
