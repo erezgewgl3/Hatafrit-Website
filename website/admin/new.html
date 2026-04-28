@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="robots" content="noindex,nofollow">
+<title>התפריט · אדמין · מתכון חדש</title>
+<link rel="icon" type="image/png" href="/brand_assets/Logo.png"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  /* Source: website/admin/edit.html:13-38 — verbatim Tailwind config (locked brand canon) */
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        "outline": "#817563", "secondary": "#9e3e4c",
+        "surface-bright": "#fff8f3", "surface-container-highest": "#ece1d4",
+        "on-surface-variant": "#4f4535", "background": "#fff8f3",
+        "primary-fixed": "#ffdea6", "primary": "#785600", "on-primary": "#ffffff",
+        "on-surface": "#201b13", "surface-container-high": "#f1e7d9",
+        "surface-container-low": "#fdf2e5", "surface": "#fff8f3",
+        "primary-container": "#986d00", "surface-container-lowest": "#ffffff",
+        "outline-variant": "#d3c4af", "surface-container": "#f7ecdf",
+        "review-pending": "#B8860B",
+        "review-done": "#5a7a3a",
+        "review-done-bg": "#eef0e3"
+      },
+      borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
+      spacing: { lg: "48px", "container-max": "1200px", md: "24px", sm: "12px",
+        gutter: "24px", xs: "4px", xl: "80px", base: "8px" },
+      fontFamily: { display: ["Heebo"], body: ["Assistant"] },
+      boxShadow: {
+        "warm-sm": "0 1px 2px rgba(120,86,0,0.06), 0 1px 1px rgba(120,86,0,0.04)",
+        "warm-md": "0 4px 12px rgba(120,86,0,0.06), 0 2px 4px rgba(120,86,0,0.04)",
+        "warm-lg": "0 12px 32px rgba(120,86,0,0.08), 0 4px 12px rgba(120,86,0,0.05)",
+        "warm-xl": "0 24px 56px rgba(120,86,0,0.10), 0 8px 24px rgba(120,86,0,0.06)"
+      }
+    }}
+  };
+</script>
+<style>
+  /* ===== Source: website/admin/edit.html:42-244 — chrome canon (verbatim) ===== */
+  body { background: #fff8f3; font-family: 'Assistant', sans-serif; color: #201b13; }
+  .font-display { font-family: 'Heebo', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+  /* Paper grain — subtle SVG noise */
+  .grain::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
+    opacity: 0.035; mix-blend-mode: multiply;
+  }
+
+  /* Inputs — branded, no Tailwind default rings */
+  .input-base {
+    width: 100%; background: #ffffff; color: #201b13;
+    border: 1px solid #d3c4af; border-radius: 10px;
+    padding: 12px 14px; font-family: 'Assistant', sans-serif; font-size: 16px;
+    line-height: 1.5;
+    transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+    text-align: right;
+  }
+  .input-base:focus {
+    outline: none; border-color: #785600;
+    box-shadow: 0 0 0 4px rgba(120,86,0,0.10);
+    background: #fffdf9;
+  }
+  .input-base::placeholder { color: #b6a589; }
+  .input-label {
+    display: block; font-family: 'Heebo', sans-serif;
+    font-weight: 700; font-size: 12px; letter-spacing: 0.08em;
+    color: #4f4535; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .input-helper {
+    font-size: 12px; color: #817563; margin-top: 6px;
+  }
+
+  /* Primary button — warm brown */
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(180deg, #8a6300 0%, #6d4c00 100%);
+    color: #ffffff; font-family: 'Heebo', sans-serif; font-weight: 700;
+    font-size: 16px; letter-spacing: 0.01em;
+    padding: 14px 28px; border-radius: 12px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 6px 16px rgba(120,86,0,0.25);
+    transition: transform 120ms ease, box-shadow 200ms ease, filter 150ms ease;
+    cursor: pointer; border: none;
+  }
+  .btn-primary:hover { filter: brightness(1.06); transform: translateY(-1px); box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 10px 24px rgba(120,86,0,0.32); }
+  .btn-primary:active { transform: translateY(0); filter: brightness(0.98); }
+  .btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(120,86,0,0.20), 0 6px 16px rgba(120,86,0,0.25); }
+  .btn-primary[disabled] { opacity: 0.6; cursor: wait; transform: none; filter: none; }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #ffffff; color: #4f4535; font-family: 'Heebo', sans-serif;
+    font-weight: 600; font-size: 15px;
+    padding: 12px 22px; border-radius: 12px;
+    border: 1px solid #d3c4af;
+    transition: background-color 150ms ease, border-color 150ms ease, transform 120ms ease;
+    cursor: pointer;
+  }
+  .btn-secondary:hover { background: #fdf2e5; border-color: #B8860B; }
+  .btn-secondary:active { transform: translateY(1px); }
+  .btn-secondary:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(120,86,0,0.18); border-color: #785600; }
+  .btn-secondary[disabled] { opacity: 0.6; cursor: wait; }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: #817563; font-family: 'Heebo', sans-serif;
+    font-weight: 500; font-size: 14px;
+    padding: 8px 12px; border-radius: 8px;
+    transition: color 150ms ease, background-color 150ms ease;
+    cursor: pointer; background: transparent; border: none;
+  }
+  .btn-ghost:hover { color: #785600; background: #fdf2e5; }
+  .btn-ghost:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(120,86,0,0.18); }
+
+  /* Card surface */
+  .card {
+    background: #ffffff; border-radius: 16px;
+    border: 1px solid #ece1d4;
+    box-shadow: 0 1px 2px rgba(120,86,0,0.04), 0 12px 28px rgba(120,86,0,0.05);
+  }
+
+  /* Three-column field row */
+  .field-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+  /* Numeric field with suffix */
+  .num-field { position: relative; }
+  .num-field input { padding-left: 44px; font-variant-numeric: tabular-nums; }
+  .num-field .suffix { position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    font-family: 'Heebo', sans-serif; font-weight: 700; font-size: 14px; color: #817563; }
+
+  /* Section dividers */
+  .section-label { display: flex; align-items: center; gap: 12px;
+    font-family: 'Heebo', sans-serif; font-weight: 700; font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: #4f4535; margin-bottom: 14px; }
+  .section-label::after { content: ""; flex: 1; height: 1px;
+    background: linear-gradient(90deg, #d3c4af 0%, transparent 100%); }
+
+  /* Category chip — checkbox styled as soft chip (verbatim from edit.html) */
+  .cat-chip { display: inline-flex; align-items: center; gap: 6px;
+    padding: 10px 18px; border-radius: 999px;
+    background: #ffffff; border: 1px solid #d3c4af;
+    font-family: 'Heebo', sans-serif; font-weight: 500; font-size: 14px;
+    color: #4f4535; cursor: pointer;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, transform 120ms ease;
+    user-select: none; }
+  .cat-chip:hover { background: #fdf2e5; border-color: #B8860B; color: #201b13; }
+  .cat-chip:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(120,86,0,0.18); border-color: #785600; }
+  .cat-chip.selected { background: #785600; color: #ffffff; border-color: #785600;
+    box-shadow: 0 2px 8px rgba(120,86,0,0.22); }
+  .cat-chip.selected::before { content: "✓"; font-weight: 700; font-size: 12px; }
+  .cat-chip-add { background: #fdf2e5; border: 1px dashed #B8860B; color: #785600;
+    font-weight: 600; }
+  .cat-chip-add:hover { background: #f1e7d9; }
+
+  /* Top admin nav */
+  .admin-nav { background: rgba(255, 248, 243, 0.9); backdrop-filter: blur(12px);
+    border-bottom: 1px solid #ece1d4; }
+
+  /* Sticky save bar at bottom */
+  .save-bar { position: fixed; bottom: 0; right: 0; left: 0; z-index: 40; padding: 16px 0;
+    background: linear-gradient(180deg, rgba(255,248,243,0.6) 0%, rgba(255,248,243,0.95) 30%, #fff8f3 100%);
+    backdrop-filter: blur(10px); border-top: 1px solid #ece1d4; }
+
+  /* Dropdown menu */
+  .dropdown-menu { background: #ffffff; border-radius: 16px; border: 1px solid #ece1d4;
+    box-shadow: 0 1px 2px rgba(120,86,0,0.04), 0 16px 40px rgba(120,86,0,0.12); padding: 8px 0;
+    min-width: 260px; }
+  .dropdown-menu a, .dropdown-menu button {
+    display: flex; align-items: center; gap: 12px; width: 100%;
+    padding: 12px 16px; text-align: right;
+    font-family: 'Heebo', sans-serif; font-weight: 500; font-size: 15px; color: #201b13;
+    background: transparent; border: none; cursor: pointer;
+    transition: background-color 150ms ease;
+  }
+  .dropdown-menu a:hover, .dropdown-menu button:hover { background: #fdf2e5; }
+  .dropdown-menu a:focus-visible, .dropdown-menu button:focus-visible { outline: none; background: #fdf2e5; }
+
+  /* Inline-add input — focused, ringed, clearly the active surface (verbatim from edit.html) */
+  .inline-add-wrap { display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 6px 4px 10px; border-radius: 999px;
+    background: #ffffff; border: 1.5px solid #785600;
+    box-shadow: 0 0 0 4px rgba(120,86,0,0.12);
+  }
+  .inline-add-wrap input {
+    border: none; outline: none; background: transparent;
+    font-family: 'Heebo', sans-serif; font-weight: 600; font-size: 14px;
+    color: #201b13; padding: 6px 4px; text-align: right; min-width: 140px;
+  }
+  .inline-add-wrap input::placeholder { color: #a89678; font-weight: 400; }
+  .inline-add-wrap .add-confirm { display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; border-radius: 999px;
+    background: #785600; color: #ffffff; border: none; cursor: pointer; }
+  .inline-add-wrap .add-cancel { color: #817563; cursor: pointer; padding: 0 4px; font-size: 13px;
+    background: transparent; border: none; }
+
+  /* "Just-added" pulse animation for newly-created chips */
+  .cat-chip.new-pulse { background: #5a7a3a; color: #fff; border-color: #5a7a3a;
+    animation: chip-pop 600ms cubic-bezier(0.22, 1, 0.36, 1); }
+  .cat-chip.new-pulse::before { content: "+"; font-weight: 800; }
+  @keyframes chip-pop { 0% { transform: scale(0.7); opacity: 0; } 60% { transform: scale(1.06); } 100% { transform: scale(1); opacity: 1; } }
+
+  /* ===== Source: _dev-mockups/admin/recipe-new.html:82-93 — new-page additions ===== */
+
+  /* Empty image upload area (right aside) */
+  .img-empty {
+    border: 2px dashed #d3c4af; border-radius: 16px;
+    background: #fdf2e5; aspect-ratio: 4/5;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 32px 24px; color: #817563;
+  }
+
+  /* Auto-marked-as-reviewed banner */
+  .new-banner {
+    background: linear-gradient(135deg, #fdf2e5 0%, #f7ecdf 100%);
+    border: 1px solid #d3c4af; border-radius: 16px; padding: 18px 22px;
+    display: flex; align-items: center; gap: 14px;
+  }
+</style>
+</head>
+<body class="grain pb-32">
+
+  <!-- =========================================================================
+       Top admin nav with progress chips + menu dropdown
+       (Source: website/admin/edit.html:285-343 — verbatim with title swap)
+       ========================================================================= -->
+  <nav class="admin-nav fixed top-0 right-0 left-0 z-40">
+    <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="/admin/edit" class="flex items-center gap-3">
+        <img src="/brand_assets/Logo.png" alt="" class="h-9 w-auto"/>
+        <div class="leading-tight">
+          <div class="font-display font-extrabold text-[18px] text-on-surface">התפריט</div>
+          <div class="font-display text-[10px] tracking-[0.18em] uppercase text-on-surface-variant">אדמין</div>
+        </div>
+      </a>
+
+      <!-- Center mini progress -->
+      <div class="hidden md:flex items-center gap-6">
+        <div class="text-center">
+          <div class="text-[11px] font-display font-bold uppercase tracking-[0.12em] text-on-surface-variant mb-1">היום</div>
+          <div class="font-display font-extrabold text-[18px] text-on-surface tabular-nums">
+            <span id="today-count">0</span> / 20
+          </div>
+        </div>
+        <div class="w-px h-8 bg-[#d3c4af]"></div>
+        <div class="text-center">
+          <div class="text-[11px] font-display font-bold uppercase tracking-[0.12em] text-on-surface-variant mb-1">סה״כ</div>
+          <div class="font-display font-extrabold text-[18px] text-on-surface tabular-nums">
+            <span id="total-reviewed">0</span> / <span id="total-recipes">222</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Menu button + dropdown — DEVIATION 2: replaces mockup's plain "תפריט" button per A10/Q6 -->
+      <div class="relative">
+        <button id="menu-toggle" type="button" class="btn-ghost" aria-haspopup="menu" aria-expanded="false">
+          <span class="material-symbols-outlined text-[20px]">menu</span>
+          <span>תפריט</span>
+        </button>
+        <div id="menu-dropdown" class="hidden dropdown-menu absolute top-full mt-2 left-0 z-50" role="menu">
+          <a href="/admin/recipes" role="menuitem">
+            <span class="material-symbols-outlined text-[20px] text-primary">list_alt</span>
+            <span>כל המתכונים</span>
+          </a>
+          <a href="/admin/new" role="menuitem">
+            <span class="material-symbols-outlined text-[20px] text-primary">add_circle</span>
+            <span>הוספת מתכון חדש</span>
+          </a>
+          <a href="/admin/coming-soon" role="menuitem">
+            <span class="material-symbols-outlined text-[20px] text-primary">label</span>
+            <span>ניהול קטגוריות</span>
+          </a>
+          <div class="border-t border-[#f1e7d9] my-1.5"></div>
+          <a href="/admin/dashboard" role="menuitem">
+            <span class="material-symbols-outlined text-[20px] text-on-surface-variant">space_dashboard</span>
+            <span>לוח התקדמות</span>
+          </a>
+          <button id="menu-logout" type="button" role="menuitem">
+            <span class="material-symbols-outlined text-[20px] text-on-surface-variant">logout</span>
+            <span>יציאה</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-24">
+    <div class="max-w-[1400px] mx-auto px-6">
+
+      <!-- Page heading (Source: _dev-mockups/admin/recipe-new.html:128-133) -->
+      <div class="mb-7 text-right">
+        <div class="font-display text-[11px] font-bold uppercase tracking-[0.14em] text-primary mb-2">מתכון חדש</div>
+        <h1 class="font-display font-extrabold text-[34px] tracking-tight text-on-surface mb-2 leading-tight">הוספת מתכון חדש לקטלוג</h1>
+        <p class="text-[16px] text-on-surface-variant max-w-[700px]">מלאי את הפרטים. כל השדות חוץ מהתמונה ניתנים לעריכה כאן. את התמונה תוסיפי דרך Airtable כשהיא מוכנה.</p>
+      </div>
+
+      <!-- Auto-marked-as-reviewed banner (Source: _dev-mockups/admin/recipe-new.html:135-141) -->
+      <div class="new-banner mb-7">
+        <span class="material-symbols-outlined text-[24px] text-primary">auto_awesome</span>
+        <div class="text-[14px] flex-1 leading-relaxed">
+          <span class="font-display font-bold text-on-surface">המתכון ייווצר עם סטטוס "נבדק" אוטומטית</span>
+          <span class="text-on-surface-variant"> · כיוון שאת המחברת. אם רוצה שמישהו אחר יוודא, אפשר לסמן "לא נבדק" אחרי השמירה.</span>
+        </div>
+      </div>
+
+      <!-- Two-column layout (mirrors edit page; source: _dev-mockups/admin/recipe-new.html:144-265) -->
+      <div class="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-8 items-start">
+
+        <!-- RIGHT (start side in RTL = first DOM child) — image placeholder + info card -->
+        <aside class="space-y-5">
+          <div class="img-empty">
+            <span class="material-symbols-outlined text-[44px] text-on-surface-variant mb-3">add_photo_alternate</span>
+            <div class="font-display font-bold text-[15px] text-on-surface mb-1">תמונת מתכון</div>
+            <div class="text-[13px] text-on-surface-variant leading-relaxed">בגרסה הזו תמונות מתווספות ישירות ב-Airtable.<br/>עדכון התמונה כאן יבוא בעדכון הבא.</div>
+            <!-- DEVIATION 1: omit "פתחי ב-Airtable" button per RESEARCH.md Q9 (deferred to v2) -->
+          </div>
+
+          <div class="card p-5">
+            <div class="font-display text-[11px] font-bold uppercase tracking-[0.12em] text-on-surface-variant mb-3">מה ייווצר</div>
+            <ul class="space-y-2 text-[14px] text-on-surface-variant">
+              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-primary">check</span>מתכון חדש בטבלת המתכונים</li>
+              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-primary">check</span>סטטוס "נבדק" + תאריך היום</li>
+              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-primary">check</span>גלוי באתר הציבורי תוך כמה שעות</li>
+            </ul>
+          </div>
+
+          <div class="px-5 py-4 rounded-2xl text-[13px] leading-relaxed text-on-surface-variant"
+               style="background: #f7ecdf; border: 1px dashed #d3c4af;">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-[20px] text-primary mt-0.5">tips_and_updates</span>
+              <div>
+                <div class="font-display font-bold text-on-surface mb-1">טיפ</div>
+                לחיצה על <span class="font-display font-bold">⌘ Enter</span> שומרת את המתכון. <span class="font-display font-bold">Esc</span> מבטל.
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- LEFT — the form -->
+        <div class="space-y-7">
+
+          <!-- Card 1: פרטים בסיסיים -->
+          <div class="card p-7">
+            <div class="section-label">פרטים בסיסיים</div>
+
+            <div class="space-y-5">
+              <div>
+                <label for="name" class="input-label">שם המתכון</label>
+                <input id="name" type="text" class="input-base font-display font-bold text-[20px]" autocomplete="off" placeholder="למשל: עוגיות שיבולת שועל ושוקולד מריר"/>
+              </div>
+
+              <div>
+                <label for="description" class="input-label">תיאור קצר</label>
+                <textarea id="description" class="input-base" rows="3" placeholder="משפט-שניים שיגרמו למישהי לרצות להכין את זה. מה הופך את המתכון למיוחד?"></textarea>
+              </div>
+
+              <div class="field-row">
+                <div>
+                  <label for="prepTime" class="input-label">זמן הכנה</label>
+                  <input id="prepTime" type="text" class="input-base" autocomplete="off" placeholder="20 דקות"/>
+                </div>
+                <div>
+                  <label for="servingSize" class="input-label">מספר מנות</label>
+                  <input id="servingSize" type="text" class="input-base" autocomplete="off" placeholder="6 מנות"/>
+                </div>
+                <div>
+                  <label for="netCarbs" class="input-label">פחמימות נטו</label>
+                  <div class="num-field">
+                    <input id="netCarbs" type="number" step="0.1" min="0" class="input-base" placeholder="0"/>
+                    <span class="suffix">g</span>
+                  </div>
+                  <p class="input-helper">לפי מנה</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: קטגוריות (chip grid + inline-add) -->
+          <div class="card p-7">
+            <div class="section-label">קטגוריות</div>
+            <p class="text-[14px] text-on-surface-variant mb-5 -mt-2">סמני את כל מה שמתאים. אפשר תמיד להוסיף קטגוריות חדשות.</p>
+            <div id="categories-container">
+              <div id="cat-loading" class="text-[14px] text-on-surface-variant">טוען קטגוריות…</div>
+            </div>
+            <div class="mt-5">
+              <button id="add-category-btn" type="button" class="cat-chip cat-chip-add">
+                <span class="material-symbols-outlined text-[16px]">add</span>
+                <span>הוסיפי קטגוריה</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 3: מצרכים -->
+          <div class="card p-7">
+            <label for="ingredients" class="input-label" style="margin-bottom: 10px;">מצרכים</label>
+            <textarea id="ingredients" class="input-base" rows="8" placeholder="שורה לכל מצרך · למשל: 2 כוסות קמח שקדים"></textarea>
+          </div>
+
+          <!-- Card 4: אופן ההכנה -->
+          <div class="card p-7">
+            <label for="instructions" class="input-label" style="margin-bottom: 10px;">אופן ההכנה</label>
+            <textarea id="instructions" class="input-base" rows="10" placeholder="שלב לכל פסקה · ספרור אוטומטי באתר הציבורי"></textarea>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Sticky save bar (Source: _dev-mockups/admin/recipe-new.html:270-284) -->
+  <div class="save-bar">
+    <div class="max-w-[1400px] mx-auto px-6 flex items-center justify-between flex-wrap gap-3">
+      <button id="btn-cancel" class="btn-ghost" type="button">
+        <span class="material-symbols-outlined text-[18px]">close</span><span>ביטול</span>
+      </button>
+      <div class="flex items-center gap-3">
+        <p id="save-error" class="hidden text-[14px]" style="color: #9e3e4c;" role="alert"></p>
+        <button id="btn-save-new" class="btn-primary" type="button">
+          <span>פרסמי מתכון חדש</span>
+          <span class="material-symbols-outlined text-[20px]">send</span>
+          <kbd class="text-[11px] opacity-70 mr-2 px-2 py-0.5 rounded border border-white/30">⌘ Enter</kbd>
+        </button>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* =========================================================================
+ * Hatafrit admin · new-recipe form (NEW-01)
+ *
+ * Module-scoped state + plain-DOM rendering. No framework, no build step.
+ *
+ * Reuses (verbatim from website/admin/edit.html):
+ *   - CATEGORY_SECTIONS constant (edit.html:540-545)
+ *   - groupCategories()                 (edit.html:547-565)
+ *   - todayStartIL/ilDateOf/computeTodayCount/computeTotalReviewed (edit.html:583-602)
+ *   - renderProgressChips()             (edit.html:610-620)
+ *   - renderCategories()                (edit.html:699-750)
+ *   - toggleChip()                      (edit.html:752-755)
+ *   - openInlineAdd()/closeInlineAdd()/confirmInlineAdd() (edit.html:760-857)
+ *   - appendChipToExtras()              (edit.html:859-891)
+ *   - cssEscape()                       (edit.html:894-897)
+ *   - getSelectedCategoryNames()        (edit.html:1004-1011)
+ *   - setupMenuDropdown()               (edit.html:1164-1215)
+ *
+ * Adapted (POST instead of PATCH):
+ *   - createRecipe()                    (derived from edit.html:1048-1090 save())
+ *
+ * New-page-specific:
+ *   - state stub with original.categories=[] so renderCategories() copies verbatim
+ *   - cancelToList() with dirty-confirm
+ *   - bubble-phase Esc/Cmd+Enter handler (composes with setupMenuDropdown's capture-phase Esc per Pitfall #8)
+ * ========================================================================= */
+
+// ---- 1. State container ----------------------------------------------------
+const state = {
+  categoryCatalog: null,  // {id,name}[] from GET /api/admin/categories
+  allRecipes: null,       // recipe[] from GET /api/admin/recipes — for nudge math
+  // STUB: renderCategories() reads state.original?.categories — empty for a new recipe.
+  // Provides a verbatim-copy seam (Pattern 6 in 04-PATTERNS.md).
+  original: { categories: [] },
+};
+
+// ---- 1a. Categories taxonomy constant (verbatim from edit.html:540-545) ---
+const CATEGORY_SECTIONS = {
+  'סוג מנה': ['מנה ראשונה', 'מנה עיקרית', 'תוספת', 'קינוח', 'מאפה', 'שתייה', 'סלט', 'מרק'],
+  'חגים':    ['פסח', 'שבועות', 'ראש השנה', 'יום כיפור', 'סוכות', 'חנוכה', 'פורים', 'יום העצמאות'],
+  'תזונה':   ['טבעוני', 'ללא גלוטן', 'ללא ביצים', 'ללא חלב'],
+};
+const CATEGORY_EXTRAS_LABEL = 'נוספות';
+
+// ---- 1b. groupCategories (verbatim from edit.html:547-565) ----------------
+function groupCategories(catalog) {
+  const known = new Set(Object.values(CATEGORY_SECTIONS).flat());
+  const groups = {};
+  for (const [label, names] of Object.entries(CATEGORY_SECTIONS)) {
+    groups[label] = [...names];
+  }
+  groups[CATEGORY_EXTRAS_LABEL] = [];
+  const seenInExtras = new Set();
+  for (const c of catalog || []) {
+    if (c && c.name && !known.has(c.name) && !seenInExtras.has(c.name)) {
+      groups[CATEGORY_EXTRAS_LABEL].push(c.name);
+      seenInExtras.add(c.name);
+    }
+  }
+  if (groups[CATEGORY_EXTRAS_LABEL].length === 0) delete groups[CATEGORY_EXTRAS_LABEL];
+  return groups;
+}
+
+// ---- 2. Error helper -------------------------------------------------------
+function showError(msg) {
+  const el = document.getElementById('save-error');
+  el.textContent = msg;
+  el.classList.remove('hidden');
+}
+
+// ---- 3. IL-timezone "today" helpers (verbatim from edit.html:583-620) -----
+function todayStartIL() {
+  return new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Jerusalem' });
+}
+
+function ilDateOf(iso) {
+  if (!iso) return '';
+  try { return new Date(iso).toLocaleDateString('en-CA', { timeZone: 'Asia/Jerusalem' }); }
+  catch { return ''; }
+}
+
+function computeTodayCount() {
+  if (!Array.isArray(state.allRecipes)) return 0;
+  const today = todayStartIL();
+  return state.allRecipes.filter(r => r && r.reviewedAt && ilDateOf(r.reviewedAt) === today).length;
+}
+
+function computeTotalReviewed() {
+  if (!Array.isArray(state.allRecipes)) return 0;
+  return state.allRecipes.filter(r => r && r.reviewedAt).length;
+}
+
+function renderProgressChips() {
+  const today = computeTodayCount();
+  const total = computeTotalReviewed();
+  const totalCount = Array.isArray(state.allRecipes) ? state.allRecipes.length : 222;
+  const todayEl = document.getElementById('today-count');
+  const totalEl = document.getElementById('total-reviewed');
+  const totalRecipesEl = document.getElementById('total-recipes');
+  if (todayEl) todayEl.textContent = String(today);
+  if (totalEl) totalEl.textContent = String(total);
+  if (totalRecipesEl) totalRecipesEl.textContent = String(totalCount);
+}
+
+// ---- 4. Render categories chip grid (verbatim from edit.html:699-750) -----
+function renderCategories() {
+  const container = document.getElementById('categories-container');
+  if (!container) return;
+  const groups = groupCategories(state.categoryCatalog);
+  const selected = new Set(Array.isArray(state.original?.categories) ? state.original.categories : []);
+
+  // Build via DOM API (chip text via .textContent) — XSS defense-in-depth.
+  container.replaceChildren();
+  for (const [sectionLabel, names] of Object.entries(groups)) {
+    const sectionWrap = document.createElement('div');
+    sectionWrap.setAttribute('data-section', sectionLabel);
+    sectionWrap.className = 'mb-6';
+
+    const labelEl = document.createElement('div');
+    labelEl.className = 'font-display text-[12px] font-bold uppercase tracking-[0.10em] text-on-surface-variant mb-3';
+    labelEl.textContent = sectionLabel;
+    sectionWrap.appendChild(labelEl);
+
+    const chipsRow = document.createElement('div');
+    chipsRow.className = 'flex flex-wrap gap-2';
+    for (const name of names) {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'cat-chip' + (selected.has(name) ? ' selected' : '');
+      chip.setAttribute('data-cat-name', name);
+      chip.setAttribute('aria-pressed', selected.has(name) ? 'true' : 'false');
+      chip.textContent = name;
+      chip.addEventListener('click', () => toggleChip(chip));
+      chipsRow.appendChild(chip);
+    }
+    sectionWrap.appendChild(chipsRow);
+    container.appendChild(sectionWrap);
+  }
+
+  // Orphan recovery — for new recipe, original.categories is [], so this loop is a no-op.
+  // Keeps the function byte-identical to edit.html for cross-page diff minimization.
+  const renderedNames = new Set(
+    Array.from(container.querySelectorAll('.cat-chip')).map(c => c.dataset.catName)
+  );
+  for (const name of state.original?.categories || []) {
+    if (!renderedNames.has(name) && typeof appendChipToExtras === 'function') {
+      appendChipToExtras(name, /* selected */ true);
+    }
+  }
+
+  // Cleanup loading placeholder.
+  const loading = container.querySelector('#cat-loading');
+  if (loading) loading.remove();
+}
+
+// ---- 4a. toggleChip (verbatim from edit.html:752-755) ---------------------
+function toggleChip(chip) {
+  const isOn = chip.classList.toggle('selected');
+  chip.setAttribute('aria-pressed', isOn ? 'true' : 'false');
+}
+
+// ---- 5. Inline-add (verbatim from edit.html:760-891) ----------------------
+function openInlineAdd() {
+  // Idempotent: if already open, just refocus the input.
+  let wrap = document.getElementById('inline-add-wrap');
+  if (wrap) {
+    const existingInput = document.getElementById('inline-add-input');
+    if (existingInput) existingInput.focus();
+    return;
+  }
+  const container = document.getElementById('categories-container');
+  if (!container) return;
+
+  wrap = document.createElement('div');
+  wrap.id = 'inline-add-wrap';
+  wrap.className = 'inline-add-wrap mt-4';
+  // Static template literal (no user-controlled interpolation) — XSS-safe.
+  wrap.innerHTML = `
+    <input type="text" id="inline-add-input" placeholder="שם קטגוריה חדשה" maxlength="40" autocomplete="off" />
+    <button type="button" class="add-confirm" id="inline-add-confirm" aria-label="הוסיפי">
+      <span class="material-symbols-outlined text-[18px]">check</span>
+    </button>
+    <button type="button" class="add-cancel" id="inline-add-cancel" aria-label="ביטול">
+      <span class="material-symbols-outlined text-[18px]">close</span>
+    </button>
+    <p id="inline-add-error" class="hidden text-[13px]" style="color: #9e3e4c;" role="alert"></p>
+  `;
+  container.appendChild(wrap);
+
+  const input = document.getElementById('inline-add-input');
+  input.focus();
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); confirmInlineAdd(); }
+    else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closeInlineAdd(); }
+  });
+  document.getElementById('inline-add-confirm').addEventListener('click', confirmInlineAdd);
+  document.getElementById('inline-add-cancel').addEventListener('click', closeInlineAdd);
+}
+
+function closeInlineAdd() {
+  const wrap = document.getElementById('inline-add-wrap');
+  if (wrap) wrap.remove();
+}
+
+async function confirmInlineAdd() {
+  const input = document.getElementById('inline-add-input');
+  const errEl = document.getElementById('inline-add-error');
+  const confirmBtn = document.getElementById('inline-add-confirm');
+  if (!input || !errEl || !confirmBtn) return;
+  errEl.classList.add('hidden');
+  errEl.textContent = '';
+
+  const name = (input.value || '').trim();
+  if (!name) { input.focus(); return; }
+
+  // Already in catalog (or rendered as a canonical chip)? Just toggle the existing chip.
+  const existingChip = document.querySelector(
+    `#categories-container .cat-chip[data-cat-name="${cssEscape(name)}"]`
+  );
+  const inCatalog = (state.categoryCatalog || []).some(c => c && c.name === name);
+  if (existingChip || inCatalog) {
+    if (existingChip && !existingChip.classList.contains('selected')) toggleChip(existingChip);
+    closeInlineAdd();
+    return;
+  }
+
+  // confirmBtn.disabled mitigates double-tap on the client (W8 race-window note).
+  confirmBtn.disabled = true;
+  try {
+    const r = await fetch('/api/admin/categories', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({ name }),
+    });
+    if (r.status === 401) { location.replace('/admin/login'); return; }
+    if (!r.ok) {
+      let msg = 'שגיאה בהוספת קטגוריה.';
+      try { const j = await r.json(); if (j && j.error) msg = j.error; } catch {}
+      errEl.textContent = msg;
+      errEl.classList.remove('hidden');
+      return;
+    }
+    const created = await r.json(); // { id, name }
+    if (!Array.isArray(state.categoryCatalog)) state.categoryCatalog = [];
+    state.categoryCatalog.push(created);
+
+    appendChipToExtras(created.name, /* selected */ true);
+    closeInlineAdd();
+  } catch (err) {
+    errEl.textContent = 'שגיאת רשת — נסי שוב.';
+    errEl.classList.remove('hidden');
+  } finally {
+    confirmBtn.disabled = false;
+  }
+}
+
+function appendChipToExtras(name, selected) {
+  const container = document.getElementById('categories-container');
+  if (!container) return;
+  let extrasWrap = container.querySelector('[data-section="' + CATEGORY_EXTRAS_LABEL + '"]');
+  if (!extrasWrap) {
+    extrasWrap = document.createElement('div');
+    extrasWrap.setAttribute('data-section', CATEGORY_EXTRAS_LABEL);
+    extrasWrap.className = 'mb-6';
+    const lbl = document.createElement('div');
+    lbl.className = 'font-display text-[12px] font-bold uppercase tracking-[0.10em] text-on-surface-variant mb-3';
+    lbl.textContent = CATEGORY_EXTRAS_LABEL;
+    extrasWrap.appendChild(lbl);
+    const row = document.createElement('div');
+    row.className = 'flex flex-wrap gap-2';
+    extrasWrap.appendChild(row);
+    const wrap = document.getElementById('inline-add-wrap');
+    if (wrap) container.insertBefore(extrasWrap, wrap);
+    else container.appendChild(extrasWrap);
+  }
+  const chipsRow = extrasWrap.querySelector('.flex');
+  const chip = document.createElement('button');
+  chip.type = 'button';
+  chip.className = 'cat-chip' + (selected ? ' selected new-pulse' : '');
+  chip.setAttribute('data-cat-name', name);
+  chip.setAttribute('aria-pressed', selected ? 'true' : 'false');
+  chip.textContent = name;
+  chip.addEventListener('click', () => toggleChip(chip));
+  chipsRow.appendChild(chip);
+  setTimeout(() => chip.classList.remove('new-pulse'), 800);
+}
+
+// ---- 6. cssEscape polyfill (verbatim from edit.html:894-897) --------------
+function cssEscape(s) {
+  if (typeof CSS !== 'undefined' && CSS.escape) return CSS.escape(s);
+  return String(s).replace(/[^a-zA-Z0-9_-]/g, ch => '\\' + ch.charCodeAt(0).toString(16) + ' ');
+}
+
+// ---- 7. getSelectedCategoryNames (verbatim from edit.html:1004-1011) ------
+function getSelectedCategoryNames() {
+  // DOM is the source of truth for chip selection state.
+  // Returns the array-of-strings shape POST expects (locked in 03-CATEGORY-SHAPE.md).
+  const chips = document.querySelectorAll('#categories-container .cat-chip.selected');
+  return Array.from(chips)
+    .map(c => c.getAttribute('data-cat-name'))
+    .filter(Boolean);
+}
+
+// ---- 8. Init flow — parallel-fetch categories + recipes -------------------
+(async function init() {
+  let catRes, listRes;
+  try {
+    [catRes, listRes] = await Promise.all([
+      fetch('/api/admin/categories', { credentials: 'same-origin' }),
+      fetch('/api/admin/recipes', { credentials: 'same-origin' }),
+    ]);
+  } catch (err) {
+    showError('שגיאת רשת — רעני את הדף.');
+    return;
+  }
+
+  if ([catRes, listRes].some(r => r.status === 401)) {
+    location.replace('/admin/login');
+    return;
+  }
+  try { state.categoryCatalog = (catRes.ok ? (await catRes.json()).categories : []) || []; }
+  catch { state.categoryCatalog = []; }
+  try { state.allRecipes = (listRes.ok ? (await listRes.json()).recipes : []) || []; }
+  catch { state.allRecipes = []; }
+
+  renderCategories();      // chips render with empty state.original.categories — all unselected
+  renderProgressChips();   // top-nav today/total
+  document.getElementById('name').focus();
+})();
+
+// ---- 9. createRecipe — POST to /api/admin/recipes -------------------------
+async function createRecipe() {
+  const errEl = document.getElementById('save-error');
+  errEl.classList.add('hidden');
+  errEl.textContent = '';
+
+  // POST body shape locked: { fields: { ... } } per api/admin/recipes.js:149.
+  // category is SINGULAR key, ARRAY value per 03-CATEGORY-SHAPE.md (Pitfall #6).
+  // reviewedAt is INTENTIONALLY OMITTED — server auto-stamps per api/admin/recipes.js:179-181 (T-04-02-02).
+  const fields = {
+    name: document.getElementById('name').value,
+    description: document.getElementById('description').value,
+    prepTime: document.getElementById('prepTime').value,
+    servingSize: document.getElementById('servingSize').value,
+    netCarbs: document.getElementById('netCarbs').value,
+    ingredients: document.getElementById('ingredients').value,
+    instructions: document.getElementById('instructions').value,
+    category: getSelectedCategoryNames(),
+  };
+
+  // Light client-side validation.
+  if (!fields.name.trim()) {
+    showError('שם המתכון לא יכול להיות ריק.');
+    document.getElementById('name').focus();
+    return;
+  }
+
+  const saveBtn = document.getElementById('btn-save-new');
+  if (saveBtn) saveBtn.disabled = true;
+
+  try {
+    const r = await fetch('/api/admin/recipes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({ fields }),
+    });
+    if (r.status === 401) { location.replace('/admin/login'); return; }
+    if (!r.ok) {
+      let msg = 'שגיאה ביצירה.';
+      try { const j = await r.json(); if (j && j.error) msg = 'שגיאה ביצירה: ' + j.error; } catch {}
+      showError(msg + ' (' + r.status + ')');
+      return;
+    }
+    const created = await r.json(); // normalized record incl. server-stamped reviewedAt
+    // Per RESEARCH.md Q3: redirect to editor with flash flag for forward-compat one-time toast.
+    location.href = '/admin/edit?id=' + encodeURIComponent(created.id) + '&just_created=1';
+  } finally {
+    if (saveBtn) saveBtn.disabled = false;
+  }
+}
+document.getElementById('btn-save-new').addEventListener('click', createRecipe);
+
+// Wire the existing #add-category-btn to reveal the inline-add input (CAT-02 reuse).
+document.getElementById('add-category-btn').addEventListener('click', openInlineAdd);
+
+// ---- 10. Cancel + Esc — dirty-confirm + redirect to /admin/recipes --------
+function isDirty() {
+  const filled = ['name','description','prepTime','servingSize','netCarbs','ingredients','instructions']
+    .some(id => (document.getElementById(id)?.value || '').trim());
+  const anyChip = document.querySelector('#categories-container .cat-chip.selected');
+  return Boolean(filled || anyChip);
+}
+
+function cancelToList() {
+  if (isDirty() && !confirm('שינויים לא נשמרו. לעזוב?')) return;
+  location.href = '/admin/recipes';
+}
+document.getElementById('btn-cancel').addEventListener('click', cancelToList);
+
+// ---- 11. Menu dropdown (verbatim from edit.html:1164-1215) ----------------
+function setupMenuDropdown() {
+  const toggleBtn = document.getElementById('menu-toggle');
+  const dropdown = document.getElementById('menu-dropdown');
+  if (!toggleBtn || !dropdown) return;
+
+  function open() {
+    dropdown.classList.remove('hidden');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+  }
+  function close() {
+    dropdown.classList.add('hidden');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = !dropdown.classList.contains('hidden');
+    if (isOpen) close(); else open();
+  });
+
+  // Click-outside dismissal.
+  document.addEventListener('click', (e) => {
+    if (dropdown.classList.contains('hidden')) return;
+    if (dropdown.contains(e.target) || toggleBtn.contains(e.target)) return;
+    close();
+  });
+
+  // Capture-phase Esc — closes dropdown when open and stops propagation so the
+  // bubble-phase Esc handler (cancelToList) doesn't fire. When dropdown is
+  // closed this handler is a no-op and bubble-phase Esc handles cancel.
+  // (Pitfall #8 composition.)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !dropdown.classList.contains('hidden')) {
+      close();
+      e.stopImmediatePropagation();
+    }
+  }, true);
+
+  // Logout — POST then redirect (redirect even if POST fails).
+  const logoutBtn = document.getElementById('menu-logout');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', async () => {
+      try { await fetch('/api/admin/logout', { method: 'POST', credentials: 'same-origin' }); } catch {}
+      window.location.href = '/admin/login';
+    });
+  }
+}
+setupMenuDropdown();
+
+// ---- 12. Bubble-phase keyboard handler — Esc cancel + Cmd/Ctrl+Enter submit
+// Composes with setupMenuDropdown's capture-phase Esc handler (Pitfall #8):
+// - Menu open: capture-phase fires first, closes menu, calls
+//   stopImmediatePropagation() — this handler does NOT run.
+// - Menu closed: capture-phase no-ops, this handler runs, triggers cancelToList.
+document.addEventListener('keydown', (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+    e.preventDefault();
+    createRecipe();
+  } else if (e.key === 'Escape') {
+    cancelToList();
+  }
+});
+</script>
+</body>
+</html>
