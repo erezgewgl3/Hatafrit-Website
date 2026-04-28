@@ -335,13 +335,39 @@
         const pill = document.querySelector(`[data-meta="${k}"]`);
         if (!value || value === '—') pill.style.display = 'none';
       }
-      // Net carbs — formatted with unit + label, hidden when empty
-      const netCarbsValue = (r.netCarbs || '').toString().trim();
+      // CARB-AI Task 4 — derive total from per-serving × servings (lower bound for ranges).
+      const trimZero = (n) =>
+        String(n).replace(/\.0+$/, '').replace(/(\.\d*[1-9])0+$/, '$1');
+      const carbsDisplay = (netCarbs, servingSize) => {
+        const carbs = parseFloat(netCarbs);
+        if (!isFinite(carbs)) return null;
+        const match = String(servingSize || '').match(/(\d+(?:\.\d+)?)/);
+        const n = match ? parseFloat(match[1]) : NaN;
+        if (!isFinite(n) || n < 2) {
+          return { perServing: trimZero(carbs) + ' ג׳', hasTotal: false };
+        }
+        const total = trimZero(parseFloat((carbs * n).toFixed(1)));
+        return {
+          perServing: trimZero(carbs) + ' ג׳ לפי מנה',
+          total: total + ' ג׳ סה״כ',
+          hasTotal: true
+        };
+      };
+
+      // Net carbs — dual-display per-serving + total when servings ≥ 2.
+      // carbsDisplay returns null when netCarbs is empty/invalid (pill hidden).
       const netCarbsPill = document.querySelector('[data-meta="netCarbs"]');
-      if (netCarbsValue) {
-        document.getElementById('meta-net-carbs').textContent = `${netCarbsValue} ג׳ פחמימות נטו`;
-      } else {
+      const carbsInfo = carbsDisplay(r.netCarbs, r.servingSize);
+      if (!carbsInfo) {
         netCarbsPill.style.display = 'none';
+      } else if (carbsInfo.hasTotal) {
+        // No "פחמימות נטו" suffix — too long; the nutrition icon conveys context.
+        document.getElementById('meta-net-carbs').textContent =
+          `${carbsInfo.perServing} · ${carbsInfo.total}`;
+      } else {
+        // Original copy preserved verbatim when there's no total to disambiguate.
+        const perNum = carbsInfo.perServing.replace(/\s*ג׳$/, '');
+        document.getElementById('meta-net-carbs').textContent = `${perNum} ג׳ פחמימות נטו`;
       }
 
       const ings = splitIngredients(r.ingredients || '');

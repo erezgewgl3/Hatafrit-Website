@@ -455,7 +455,7 @@
                       <span id="estimate-icon" class="material-symbols-outlined" style="font-size:14px;line-height:1;">auto_awesome</span><span id="estimate-label">הצעה אוטומטית</span>
                     </button>
                   </div>
-                  <p class="input-helper">לפי מנה</p>
+                  <p id="carbs-helper" class="input-helper">לפי מנה</p>
                   <p id="estimate-error" class="hidden mt-2 text-[13px]" style="color: #9e3e4c;" role="alert"></p>
                   <div id="estimate-fallback" class="hidden mt-2 p-3 rounded-lg" style="background: rgba(184,134,11,0.10); border: 1px solid rgba(184,134,11,0.25); color: #8a651e; font-size: 13px; line-height: 1.6;" role="status"></div>
                   <details id="estimate-breakdown" class="hidden mt-2 text-[13px]" style="color: #4f4535;">
@@ -715,6 +715,8 @@ function renderForm() {
   // leaking across recipe switches). Then evaluate the only-if-empty rule.
   if (typeof clearEstimateUI === 'function') clearEstimateUI();
   if (typeof setEstimateButtonVisibility === 'function') setEstimateButtonVisibility();
+  // CARB-AI Task 4: refresh the dual-display helper line for the loaded recipe.
+  if (typeof updateCarbsHelper === 'function') updateCarbsHelper();
 }
 
 function renderStatusBadge() {
@@ -1090,6 +1092,54 @@ function setEstimateButtonVisibility() {
   }
 }
 
+// CARB-AI Task 4 — derive total net carbs from per-serving × servings.
+// Returns null when netCarbs is empty/invalid (caller hides the line).
+// When servings parses as ≥ 2, returns hasTotal=true with both strings ready
+// for display. Range strings like "10-12 מנות" use the lower bound (10).
+function carbsDisplay(netCarbs, servingSize) {
+  const carbs = parseFloat(netCarbs);
+  if (!isFinite(carbs)) return null;
+  const match = String(servingSize || '').match(/(\d+(?:\.\d+)?)/);
+  const n = match ? parseFloat(match[1]) : NaN;
+  if (!isFinite(n) || n < 2) {
+    return { perServing: trimZero(carbs) + ' ג׳', hasTotal: false };
+  }
+  const total = trimZero(parseFloat((carbs * n).toFixed(1)));
+  return {
+    perServing: trimZero(carbs) + ' ג׳ לפי מנה',
+    total: total + ' ג׳ סה״כ',
+    hasTotal: true
+  };
+}
+function trimZero(n) {
+  // 12.0 → "12", 1.20 → "1.2", 0.7 → "0.7"
+  return String(n).replace(/\.0+$/, '').replace(/(\.\d*[1-9])0+$/, '$1');
+}
+
+// Live helper text under the netCarbs field. Empty → "לפי מנה" (initial copy).
+// Filled, no usable servings → "לפי מנה · {X}g" (parroted per-serving value).
+// Filled, servings ≥ 2 → "לפי מנה · סה״כ ~{Y}g" (computed total, ~ = approx).
+function updateCarbsHelper() {
+  const help = document.getElementById('carbs-helper');
+  if (!help) return;
+  const carbsEl = document.getElementById('netCarbs');
+  const servEl = document.getElementById('servingSize');
+  if (!carbsEl || !servEl) return;
+  const carbsRaw = String(carbsEl.value || '').trim();
+  if (!carbsRaw) { help.textContent = 'לפי מנה'; return; }
+  const d = carbsDisplay(carbsRaw, servEl.value);
+  if (!d) { help.textContent = 'לפי מנה'; return; }
+  if (d.hasTotal) {
+    // Strip "ג׳ סה״כ" suffix and use a tilde to flag the value as approximate.
+    const totalNum = d.total.replace(/\s*ג׳\s*סה״כ$/, '');
+    help.textContent = 'לפי מנה · סה״כ ~' + totalNum + 'g';
+  } else {
+    // Parroted per-serving value confirms the parse worked.
+    const perNum = d.perServing.replace(/\s*ג׳$/, '');
+    help.textContent = 'לפי מנה · ' + perNum + 'g';
+  }
+}
+
 function clearEstimateUI() {
   const err = document.getElementById('estimate-error');
   const fb = document.getElementById('estimate-fallback');
@@ -1400,10 +1450,15 @@ setupMenuDropdown();
 (function wireEstimator() {
   const btn = document.getElementById('btn-estimate-carbs');
   const carbs = document.getElementById('netCarbs');
+  const servings = document.getElementById('servingSize');
   if (btn) btn.addEventListener('click', estimateCarbs);
   // Visibility tracks input value live: empty → show button; non-empty → hide.
   // Also fires after a successful estimate (we dispatch a synthetic 'input' event).
   if (carbs) carbs.addEventListener('input', setEstimateButtonVisibility);
+  // CARB-AI Task 4 — dual-display helper updates live as either field changes.
+  // Synthetic 'input' from the AI estimate prefill (line ~1193) reuses this listener.
+  if (carbs) carbs.addEventListener('input', updateCarbsHelper);
+  if (servings) servings.addEventListener('input', updateCarbsHelper);
 })();
 
 // ---- 7. Mark un-reviewed (EDIT-06) — sends {reviewedAt: null} per Pitfall #3
