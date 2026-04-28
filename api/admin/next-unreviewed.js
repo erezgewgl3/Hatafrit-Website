@@ -5,10 +5,14 @@
 // Used by the Phase 2 stub shell to verify auth+data work end-to-end, and by
 // Phase 3's editor landing flow (login redirects to the editor for this recipe).
 //
-// Sort note (B1 fix from plan-checker):
-//   Sort by Airtable's magic `createdTime` field — NOT by the ReviewedAt column,
-//   which is blank for every record in the result set, so sorting on it is a no-op.
-//   `createdTime` gives Adi a deterministic queue (oldest-first).
+// Sort note (Rule 1 deviation during execution):
+//   Plan-checker B1 specified sort[0][field]=createdTime. Live Airtable rejected this
+//   with 422 "Unknown field name: createdTime" — the base does not have a Created field
+//   and `createdTime` is NOT a magic sort key in this Airtable account. We drop the sort
+//   parameter entirely; Airtable's default order over a filterByFormula={ReviewedAt}=BLANK()
+//   with maxRecords=1 returns a stable "next" record per call. This is sufficient for
+//   Phase 2's smoke ("show the next unreviewed recipe"); Phase 3 can refine ordering once
+//   Adi expresses a queue preference (e.g., add a Created datetime field on the table).
 //
 // Pattern source: api/recipes.js (style); RESEARCH.md §"Open Questions Q5".
 // Auth: requireAuth() — 401 on missing/invalid cookie.
@@ -32,12 +36,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Filter where ReviewedAt is blank; sort by createdTime asc (oldest first); take 1.
+    // Filter where ReviewedAt is blank; take 1. No sort — see header comment.
     // Request only the name field to keep the payload tiny.
     const params = [
       `filterByFormula=${encodeURIComponent(`{${FIELD_NAMES.reviewedAt}}=BLANK()`)}`,
-      'sort[0][field]=createdTime',
-      'sort[0][direction]=asc',
       'maxRecords=1',
       'returnFieldsByFieldId=true',
       `fields[]=${encodeURIComponent(FIELDS.name)}`,
