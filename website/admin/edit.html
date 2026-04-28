@@ -506,6 +506,203 @@
     </div>
   </div>
 
-<script>/* Wave 1 Task 2 wires this */</script>
+<script>
+/* =========================================================================
+ * Hatafrit admin · recipe editor
+ *
+ * Module-scoped state + plain-DOM rendering. No framework, no build step.
+ *
+ * Plan 03-01 ships:
+ *   - Task 2a (this section): state, init flow, renderForm,
+ *     renderStatusBadge, wireCollapsible, init error helper.
+ *   - Task 2b (next commit): action handlers — getDraft, isDirty, save,
+ *     saveAndNext, saveAndStay, markUnreviewed, cancel, keyboard shortcuts.
+ *
+ * Plan 03-02 will fill: category chips, inline-add, nudge progress,
+ * menu dropdown JS, recipe-number computation. The init flow already
+ * fetches the data those features need (categoryCatalog, allRecipes).
+ * ========================================================================= */
+
+// ---- 1. State container ----------------------------------------------------
+const state = {
+  original: null,         // Normalized recipe from GET /api/admin/recipes?id=...
+  categoryCatalog: null,  // {id,name}[] from GET /api/admin/categories — Plan 03-02 uses
+  allRecipes: null,       // recipe[] from GET /api/admin/recipes — Plan 03-02 uses
+};
+
+// ---- 10. Init error helper (declared early so init() can call it) ----------
+function showInitError(msg) {
+  const errEl = document.getElementById('save-error');
+  errEl.textContent = msg;
+  errEl.classList.remove('hidden');
+}
+
+function truncate(s, n) {
+  s = String(s || '');
+  return s.length <= n ? s : s.slice(0, n) + '…';
+}
+
+// ---- 3. Render form (textContent / .value only — never innerHTML on data) --
+function renderForm() {
+  const r = state.original;
+  if (!r) return;
+
+  // Inputs use `.value =` which is XSS-safe (no HTML parsing).
+  document.getElementById('name').value = r.name || '';
+  document.getElementById('description').value = r.description || '';
+  document.getElementById('prepTime').value = r.prepTime || '';
+  document.getElementById('servingSize').value = r.servingSize || '';
+  document.getElementById('netCarbs').value = r.netCarbs || '';
+  document.getElementById('ingredients').value = r.ingredients || '';
+  document.getElementById('instructions').value = r.instructions || '';
+
+  // Collapsed previews — textContent is XSS-safe (T-03-02 mitigation)
+  document.getElementById('ingredients-preview').textContent =
+    truncate(r.ingredients || '(אין מצרכים)', 200);
+  document.getElementById('instructions-preview').textContent =
+    truncate(r.instructions || '(אין הוראות הכנה)', 200);
+
+  // Image
+  const img = document.getElementById('recipe-image');
+  if (r.imageFullUrl) {
+    img.src = r.imageFullUrl;
+    img.alt = r.name || '';
+  } else if (r.imageUrl) {
+    img.src = r.imageUrl;
+    img.alt = r.name || '';
+  } else {
+    img.removeAttribute('src');
+    img.alt = '';
+  }
+
+  // Detail rows
+  document.getElementById('recipe-id').textContent = r.id || '';
+  try {
+    document.getElementById('recipe-created').textContent = r.createdTime
+      ? new Intl.DateTimeFormat('he-IL', { dateStyle: 'short' }).format(new Date(r.createdTime))
+      : '—';
+  } catch { document.getElementById('recipe-created').textContent = '—'; }
+
+  // Page title — helps Adi see which recipe she's on in the browser tab
+  if (r.name) document.title = 'התפריט · אדמין · ' + r.name;
+
+  renderStatusBadge();
+}
+
+function renderStatusBadge() {
+  const badge = document.getElementById('status-badge');
+  const detailStatus = document.getElementById('recipe-status');
+  if (!state.original) return;
+  if (state.original.reviewedAt) {
+    badge.className = 'status-badge done';
+    badge.textContent = 'נבדק';
+    if (detailStatus) {
+      try {
+        const when = new Intl.DateTimeFormat('he-IL', { dateStyle: 'short' })
+          .format(new Date(state.original.reviewedAt));
+        detailStatus.textContent = 'נבדק ' + when;
+      } catch { detailStatus.textContent = 'נבדק'; }
+    }
+  } else {
+    badge.className = 'status-badge pending';
+    badge.textContent = 'לבדוק';
+    if (detailStatus) detailStatus.textContent = 'לבדוק';
+  }
+}
+
+// ---- 4. Collapsible blocks (EDIT-03) ---------------------------------------
+function wireCollapsible(toggleId, textareaId, previewId) {
+  const btn = document.getElementById(toggleId);
+  const ta = document.getElementById(textareaId);
+  const pv = document.getElementById(previewId);
+  if (!btn || !ta || !pv) return;
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    if (expanded) {
+      // Collapse: hide textarea, show preview, re-render preview from current value
+      ta.classList.add('hidden');
+      pv.classList.remove('hidden');
+      pv.textContent = truncate(ta.value || '(ריק)', 200);
+      btn.setAttribute('aria-expanded', 'false');
+    } else {
+      // Expand: hide preview, show textarea, focus
+      pv.classList.add('hidden');
+      ta.classList.remove('hidden');
+      btn.setAttribute('aria-expanded', 'true');
+      ta.focus();
+    }
+  });
+}
+wireCollapsible('ingredients-toggle', 'ingredients', 'ingredients-preview');
+wireCollapsible('instructions-toggle', 'instructions', 'instructions-preview');
+
+// ---- 2. Init flow — resolve recipe ID, fetch in parallel -------------------
+(async function init() {
+  const params = new URL(location.href).searchParams;
+  const recordId = params.get('id');
+
+  // EDIT-01: no ?id= → fetch next-unreviewed and replace URL.
+  if (!recordId) {
+    try {
+      const r = await fetch('/api/admin/next-unreviewed', { credentials: 'same-origin' });
+      if (r.status === 401) { location.replace('/admin/login'); return; }
+      if (!r.ok) { showInitError('שגיאה בטעינת המתכון הבא. (' + r.status + ')'); return; }
+      const data = await r.json();
+      if (!data || !data.id) { location.replace('/admin/done'); return; }
+      location.replace('/admin/edit?id=' + encodeURIComponent(data.id));
+      return;
+    } catch (err) {
+      showInitError('שגיאת רשת — רעני את הדף.');
+      return;
+    }
+  }
+
+  // Parallel fetch: this recipe + categories list + full list (for nudge math in Plan 03-02).
+  let recipeRes, catRes, listRes;
+  try {
+    [recipeRes, catRes, listRes] = await Promise.all([
+      fetch('/api/admin/recipes?id=' + encodeURIComponent(recordId), { credentials: 'same-origin' }),
+      fetch('/api/admin/categories', { credentials: 'same-origin' }),
+      fetch('/api/admin/recipes', { credentials: 'same-origin' }),
+    ]);
+  } catch (err) {
+    showInitError('שגיאת רשת — רעני את הדף.');
+    return;
+  }
+
+  if ([recipeRes, catRes, listRes].some(r => r.status === 401)) {
+    location.replace('/admin/login');
+    return;
+  }
+  if (!recipeRes.ok) {
+    if (recipeRes.status === 404) { showInitError('מתכון לא נמצא.'); return; }
+    showInitError('שגיאה בטעינת המתכון. (' + recipeRes.status + ')');
+    return;
+  }
+
+  state.original = await recipeRes.json();
+  try { state.categoryCatalog = (catRes.ok ? (await catRes.json()).categories : []) || []; }
+  catch { state.categoryCatalog = []; }
+  try { state.allRecipes = (listRes.ok ? (await listRes.json()).recipes : []) || []; }
+  catch { state.allRecipes = []; }
+
+  // W6: visible "טוען…" placeholder in the categories container so the partial
+  // Wave 1 → Wave 2 state is obvious. Plan 03-02's renderCategories() removes
+  // this placeholder when chips are rendered.
+  const catContainer = document.getElementById('categories-container');
+  if (catContainer && !catContainer.querySelector('#cat-loading')) {
+    const loading = document.createElement('div');
+    loading.id = 'cat-loading';
+    loading.className = 'text-[14px] text-on-surface-variant';
+    loading.textContent = 'טוען קטגוריות…';
+    catContainer.appendChild(loading);
+  }
+
+  renderForm();
+  // renderCategories() — Plan 03-02 implements; Plan 03-01 leaves the container empty.
+  // renderProgressChips() — Plan 03-02 implements.
+  // renderRecipeNumber() — Plan 03-02 implements.
+})();
+</script>
 </body>
 </html>
