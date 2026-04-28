@@ -703,6 +703,148 @@ function toggleChip(chip) {
   chip.setAttribute('aria-pressed', isOn ? 'true' : 'false');
 }
 
+// ---- 3b. Inline-add new category (Plan 03-02 / CAT-02) ---------------------
+// Pattern: append the input row INSIDE the categories card (NOT a positioned
+// overlay) so tab order stays natural — Pitfall #5 mitigation.
+function openInlineAdd() {
+  // Idempotent: if already open, just refocus the input.
+  let wrap = document.getElementById('inline-add-wrap');
+  if (wrap) {
+    const existingInput = document.getElementById('inline-add-input');
+    if (existingInput) existingInput.focus();
+    return;
+  }
+  const container = document.getElementById('categories-container');
+  if (!container) return;
+
+  wrap = document.createElement('div');
+  wrap.id = 'inline-add-wrap';
+  wrap.className = 'inline-add-wrap mt-4';
+  // Static template literal (no user-controlled interpolation) — XSS-safe.
+  wrap.innerHTML = `
+    <input type="text" id="inline-add-input" placeholder="שם קטגוריה חדשה" maxlength="40" autocomplete="off" />
+    <button type="button" class="add-confirm" id="inline-add-confirm" aria-label="הוסיפי">
+      <span class="material-symbols-outlined text-[18px]">check</span>
+    </button>
+    <button type="button" class="add-cancel" id="inline-add-cancel" aria-label="ביטול">
+      <span class="material-symbols-outlined text-[18px]">close</span>
+    </button>
+    <p id="inline-add-error" class="hidden text-[13px]" style="color: #9e3e4c;" role="alert"></p>
+  `;
+  container.appendChild(wrap);
+
+  const input = document.getElementById('inline-add-input');
+  input.focus();
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); confirmInlineAdd(); }
+    else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closeInlineAdd(); }
+  });
+  document.getElementById('inline-add-confirm').addEventListener('click', confirmInlineAdd);
+  document.getElementById('inline-add-cancel').addEventListener('click', closeInlineAdd);
+}
+
+function closeInlineAdd() {
+  const wrap = document.getElementById('inline-add-wrap');
+  if (wrap) wrap.remove();
+}
+
+async function confirmInlineAdd() {
+  const input = document.getElementById('inline-add-input');
+  const errEl = document.getElementById('inline-add-error');
+  const confirmBtn = document.getElementById('inline-add-confirm');
+  if (!input || !errEl || !confirmBtn) return;
+  errEl.classList.add('hidden');
+  errEl.textContent = '';
+
+  const name = (input.value || '').trim();
+  if (!name) { input.focus(); return; }
+
+  // Already in catalog (or rendered as a canonical chip)? Just toggle the
+  // existing chip on and close — no POST needed.
+  const existingChip = document.querySelector(
+    `#categories-container .cat-chip[data-cat-name="${cssEscape(name)}"]`
+  );
+  const inCatalog = (state.categoryCatalog || []).some(c => c && c.name === name);
+  if (existingChip || inCatalog) {
+    if (existingChip && !existingChip.classList.contains('selected')) toggleChip(existingChip);
+    closeInlineAdd();
+    return;
+  }
+
+  // W8 race-window note: confirmBtn.disabled mitigates double-tap on the client.
+  // Server-side dedup is intentionally NOT implemented — single-user admin tool.
+  // Worst case: a duplicate name returns 4xx from Airtable and renders inline.
+  confirmBtn.disabled = true;
+  try {
+    const r = await fetch('/api/admin/categories', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({ name }),
+    });
+    if (r.status === 401) { location.replace('/admin/login'); return; }
+    if (!r.ok) {
+      let msg = 'שגיאה בהוספת קטגוריה.';
+      try { const j = await r.json(); if (j && j.error) msg = j.error; } catch {}
+      errEl.textContent = msg;
+      errEl.classList.remove('hidden');
+      return;
+    }
+    const created = await r.json(); // { id, name }
+    if (!Array.isArray(state.categoryCatalog)) state.categoryCatalog = [];
+    state.categoryCatalog.push(created);
+
+    // Append a chip to the נוספות section, mark selected + new-pulse animation.
+    appendChipToExtras(created.name, /* selected */ true);
+    closeInlineAdd();
+  } catch (err) {
+    errEl.textContent = 'שגיאת רשת — נסי שוב.';
+    errEl.classList.remove('hidden');
+  } finally {
+    confirmBtn.disabled = false;
+  }
+}
+
+function appendChipToExtras(name, selected) {
+  const container = document.getElementById('categories-container');
+  if (!container) return;
+  // Find or create the נוספות section.
+  let extrasWrap = container.querySelector('[data-section="' + CATEGORY_EXTRAS_LABEL + '"]');
+  if (!extrasWrap) {
+    extrasWrap = document.createElement('div');
+    extrasWrap.setAttribute('data-section', CATEGORY_EXTRAS_LABEL);
+    extrasWrap.className = 'mb-6';
+    const lbl = document.createElement('div');
+    lbl.className = 'font-display text-[12px] font-bold uppercase tracking-[0.10em] text-on-surface-variant mb-3';
+    lbl.textContent = CATEGORY_EXTRAS_LABEL;
+    extrasWrap.appendChild(lbl);
+    const row = document.createElement('div');
+    row.className = 'flex flex-wrap gap-2';
+    extrasWrap.appendChild(row);
+    // Insert BEFORE the inline-add-wrap so tab order stays sane.
+    const wrap = document.getElementById('inline-add-wrap');
+    if (wrap) container.insertBefore(extrasWrap, wrap);
+    else container.appendChild(extrasWrap);
+  }
+  const chipsRow = extrasWrap.querySelector('.flex');
+  const chip = document.createElement('button');
+  chip.type = 'button';
+  chip.className = 'cat-chip' + (selected ? ' selected new-pulse' : '');
+  chip.setAttribute('data-cat-name', name);
+  chip.setAttribute('aria-pressed', selected ? 'true' : 'false');
+  chip.textContent = name;
+  chip.addEventListener('click', () => toggleChip(chip));
+  chipsRow.appendChild(chip);
+  // Strip new-pulse after the animation completes (chip-pop is 600ms; pad to 800).
+  setTimeout(() => chip.classList.remove('new-pulse'), 800);
+}
+
+// Minimal CSS.escape polyfill for older browsers (modern Chrome has CSS.escape natively).
+function cssEscape(s) {
+  if (typeof CSS !== 'undefined' && CSS.escape) return CSS.escape(s);
+  return String(s).replace(/[^a-zA-Z0-9_-]/g, ch => '\\' + ch.charCodeAt(0).toString(16) + ' ');
+}
+
 // ---- 4. Collapsible blocks (EDIT-03) ---------------------------------------
 function wireCollapsible(toggleId, textareaId, previewId) {
   const btn = document.getElementById(toggleId);
@@ -946,6 +1088,10 @@ async function save({ andAdvance }) {
 
 document.getElementById('btn-save-next').addEventListener('click', saveAndNext);
 document.getElementById('btn-save-stay').addEventListener('click', saveAndStay);
+
+// Plan 03-02 / CAT-02: wire the existing #add-category-btn (markup from Wave 1)
+// to reveal the inline-add input row inside the categories card.
+document.getElementById('add-category-btn').addEventListener('click', openInlineAdd);
 
 // ---- 7. Mark un-reviewed (EDIT-06) — sends {reviewedAt: null} per Pitfall #3
 async function markUnreviewed() {
