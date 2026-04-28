@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="robots" content="noindex,nofollow">
+<title>התפריט · אדמין</title>
+<link rel="icon" type="image/png" href="/brand_assets/Logo.png"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        "outline": "#817563", "secondary": "#9e3e4c",
+        "surface-bright": "#fff8f3", "surface-container-highest": "#ece1d4",
+        "on-surface-variant": "#4f4535", "background": "#fff8f3",
+        "primary-fixed": "#ffdea6", "primary": "#785600", "on-primary": "#ffffff",
+        "on-surface": "#201b13", "surface-container-high": "#f1e7d9",
+        "surface-container-low": "#fdf2e5", "surface": "#fff8f3",
+        "primary-container": "#986d00", "surface-container-lowest": "#ffffff",
+        "outline-variant": "#d3c4af", "surface-container": "#f7ecdf",
+        "review-pending": "#B8860B",
+        "review-done": "#5a7a3a",
+        "review-done-bg": "#eef0e3"
+      },
+      borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
+      spacing: { lg: "48px", "container-max": "1200px", md: "24px", sm: "12px",
+        gutter: "24px", xs: "4px", xl: "80px", base: "8px" },
+      fontFamily: { display: ["Heebo"], body: ["Assistant"] },
+      boxShadow: {
+        "warm-sm": "0 1px 2px rgba(120,86,0,0.06), 0 1px 1px rgba(120,86,0,0.04)",
+        "warm-md": "0 4px 12px rgba(120,86,0,0.06), 0 2px 4px rgba(120,86,0,0.04)",
+        "warm-lg": "0 12px 32px rgba(120,86,0,0.08), 0 4px 12px rgba(120,86,0,0.05)",
+        "warm-xl": "0 24px 56px rgba(120,86,0,0.10), 0 8px 24px rgba(120,86,0,0.06)"
+      }
+    }}
+  };
+</script>
+<style>
+  body { background: #fff8f3; font-family: 'Assistant', sans-serif; color: #201b13; }
+  .font-display { font-family: 'Heebo', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+  /* Paper grain — subtle SVG noise to give the cream a tactile feel */
+  .grain::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
+    opacity: 0.035; mix-blend-mode: multiply;
+  }
+
+  /* Big display number — used for 5/20, 47/222, etc. */
+  .num-display {
+    font-family: 'Heebo', sans-serif; font-weight: 800;
+    letter-spacing: -0.04em; line-height: 0.95;
+    color: #201b13;
+  }
+
+  /* Progress bar — thin, brown gradient, no Tailwind blue */
+  .progress-track {
+    height: 6px; border-radius: 999px;
+    background: #ece1d4;
+    overflow: hidden; position: relative;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 999px;
+    background: linear-gradient(90deg, #B8860B 0%, #785600 60%, #5a4000 100%);
+    transition: width 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .progress-fill.done {
+    background: linear-gradient(90deg, #88a266 0%, #5a7a3a 100%);
+  }
+
+  /* Status dot — replaces generic pill badges */
+  .status-dot {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Heebo', sans-serif; font-weight: 600;
+    font-size: 13px; letter-spacing: 0.01em;
+  }
+  .status-dot::before {
+    content: ""; width: 9px; height: 9px; border-radius: 999px;
+    box-shadow: 0 0 0 3px rgba(184,134,11,0.18);
+    background: #B8860B;
+  }
+  .status-dot.done { color: #5a7a3a; }
+  .status-dot.done::before { background: #5a7a3a; box-shadow: 0 0 0 3px rgba(90,122,58,0.18); }
+  .status-dot.pending { color: #8a651e; }
+
+  /* Inputs — branded, no Tailwind default blue rings */
+  .input-base {
+    width: 100%; background: #ffffff; color: #201b13;
+    border: 1px solid #d3c4af; border-radius: 10px;
+    padding: 12px 14px; font-family: 'Assistant', sans-serif; font-size: 16px;
+    line-height: 1.5;
+    transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+    text-align: right;
+  }
+  .input-base:focus {
+    outline: none; border-color: #785600;
+    box-shadow: 0 0 0 4px rgba(120,86,0,0.10);
+    background: #fffdf9;
+  }
+  .input-label {
+    display: block; font-family: 'Heebo', sans-serif;
+    font-weight: 700; font-size: 12px; letter-spacing: 0.08em;
+    color: #4f4535; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .input-helper {
+    font-size: 12px; color: #817563; margin-top: 6px;
+  }
+
+  /* Primary button — warm brown, with confident chevron, transitions transform + opacity only */
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(180deg, #8a6300 0%, #6d4c00 100%);
+    color: #ffffff; font-family: 'Heebo', sans-serif; font-weight: 700;
+    font-size: 16px; letter-spacing: 0.01em;
+    padding: 14px 28px; border-radius: 12px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 6px 16px rgba(120,86,0,0.25);
+    transition: transform 120ms ease, box-shadow 200ms ease, filter 150ms ease;
+    cursor: pointer; border: none;
+  }
+  .btn-primary:hover { filter: brightness(1.06); transform: translateY(-1px); box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 10px 24px rgba(120,86,0,0.32); }
+  .btn-primary:active { transform: translateY(0); filter: brightness(0.98); }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #ffffff; color: #4f4535; font-family: 'Heebo', sans-serif;
+    font-weight: 600; font-size: 15px;
+    padding: 12px 22px; border-radius: 12px;
+    border: 1px solid #d3c4af;
+    transition: background-color 150ms ease, border-color 150ms ease, transform 120ms ease;
+    cursor: pointer;
+  }
+  .btn-secondary:hover { background: #fdf2e5; border-color: #B8860B; }
+  .btn-secondary:active { transform: translateY(1px); }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: #817563; font-family: 'Heebo', sans-serif;
+    font-weight: 500; font-size: 14px;
+    padding: 8px 12px; border-radius: 8px;
+    transition: color 150ms ease, background-color 150ms ease;
+    cursor: pointer; background: transparent; border: none;
+  }
+  .btn-ghost:hover { color: #785600; background: #fdf2e5; }
+
+  /* Card surface — color-tinted shadow, never flat */
+  .card {
+    background: #ffffff; border-radius: 16px;
+    border: 1px solid #ece1d4;
+    box-shadow: 0 1px 2px rgba(120,86,0,0.04), 0 12px 28px rgba(120,86,0,0.05);
+  }
+
+  /* Category chip — checkbox styled as a soft chip */
+  .cat-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 14px; border-radius: 999px;
+    background: #ffffff; border: 1px solid #d3c4af;
+    font-family: 'Heebo', sans-serif; font-weight: 500; font-size: 14px;
+    color: #4f4535; cursor: pointer;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+    user-select: none;
+  }
+  .cat-chip:hover { background: #fdf2e5; }
+  .cat-chip.selected {
+    background: #785600; color: #ffffff; border-color: #785600;
+    box-shadow: 0 2px 6px rgba(120,86,0,0.20);
+  }
+  .cat-chip.selected::before {
+    content: "✓"; font-weight: 700; font-size: 12px; margin-left: 2px;
+  }
+
+  /* Top admin nav */
+  .admin-nav {
+    background: rgba(255, 248, 243, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #ece1d4;
+  }
+
+  /* Sticky save bar at bottom of editor */
+  .save-bar {
+    background: linear-gradient(180deg, rgba(255,248,243,0.6) 0%, rgba(255,248,243,0.95) 30%, #fff8f3 100%);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid #ece1d4;
+  }
+
+  /* Field — disabled / read-only field gets a subtle wash */
+  .field-readonly {
+    background: #faf2e6; color: #4f4535; cursor: default;
+  }
+
+  /* Decorative — corner ornament for hero numbers */
+  .ornament {
+    width: 24px; height: 1px; background: #d3c4af;
+  }
+</style>
+</head>
+<body class="grain">
+  <main class="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 py-12">
+    <div class="card max-w-[520px] w-full p-9 text-center">
+      <img src="/brand_assets/Logo.png" alt="התפריט" class="h-14 w-auto mx-auto mb-5"/>
+      <h1 class="font-display text-[28px] font-extrabold tracking-tight text-on-surface mb-3">ברוכה השבה, אדי</h1>
+      <p id="status" class="text-[15px] text-on-surface-variant leading-relaxed mb-6">טוענת את המתכון הבא…</p>
+      <p id="phase-note" class="text-[13px] text-on-surface-variant leading-relaxed mb-6 hidden">בקרוב כאן יהיה מסך עריכת המתכונים. (Phase 3)</p>
+      <button id="logout" class="btn-secondary mx-auto">
+        <span class="material-symbols-outlined text-[18px]">logout</span>
+        <span>יציאה</span>
+      </button>
+    </div>
+  </main>
+<script>
+(async function gate() {
+  const statusEl = document.getElementById('status');
+  const noteEl = document.getElementById('phase-note');
+  try {
+    const r = await fetch('/api/admin/next-unreviewed', { credentials: 'same-origin' });
+    if (r.status === 401) {
+      window.location.replace('/admin/login');
+      return;
+    }
+    if (!r.ok) {
+      statusEl.textContent = 'שגיאה בטעינת המתכון. ' + (r.status === 500 ? '(שרת)' : '(' + r.status + ')');
+      noteEl.classList.remove('hidden');
+      return;
+    }
+    const data = await r.json();
+    if (!data || !data.id) {
+      statusEl.textContent = 'אין מתכונים שממתינים לבדיקה — סיימת!';
+    } else {
+      statusEl.textContent = 'המתכון הבא לבדיקה: ' + (data.name || '(ללא שם)') + ' (' + data.id + ')';
+    }
+    noteEl.classList.remove('hidden');
+  } catch (err) {
+    statusEl.textContent = 'שגיאת רשת — רעני את הדף.';
+    noteEl.classList.remove('hidden');
+  }
+})();
+
+document.getElementById('logout').addEventListener('click', async () => {
+  try {
+    await fetch('/api/admin/logout', { method: 'POST', credentials: 'same-origin' });
+  } catch {}
+  window.location.href = '/admin/login';
+});
+</script>
+</body>
+</html>
