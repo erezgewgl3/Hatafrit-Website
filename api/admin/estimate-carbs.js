@@ -17,7 +17,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { requireAuth } from '../_lib/auth.js';
 
 const MODEL = 'claude-sonnet-4-6';
-const TIMEOUT_MS = 15000;
+const TIMEOUT_MS = 25000;
 const MAX_TOKENS = 1024;
 
 // PRD §13 sweetener rule — Hebrew, verbatim. Encoded in the system prompt so
