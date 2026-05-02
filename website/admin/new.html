@@ -807,7 +807,8 @@ async function createRecipe() {
     }
     const created = await r.json(); // normalized record incl. server-stamped reviewedAt
     // Per RESEARCH.md Q3: redirect to editor with flash flag for forward-compat one-time toast.
-    location.href = '/admin/edit?id=' + encodeURIComponent(created.id) + '&just_created=1';
+    // need_image=1: edit page auto-opens the file picker so Adi can attach a photo immediately.
+    location.href = '/admin/edit?id=' + encodeURIComponent(created.id) + '&just_created=1&need_image=1';
   } finally {
     if (saveBtn) saveBtn.disabled = false;
   }
