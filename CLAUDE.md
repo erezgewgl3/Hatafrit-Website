@@ -52,3 +52,77 @@
 - Do not stop after one screenshot pass
 - Do not use `transition-all`
 - Do not use default Tailwind blue/indigo as primary color
+
+<!-- GSD:project-start source:PROJECT.md -->
+## Project
+
+**Hatafrit · Admin Review Interface**
+
+A separate, password-protected admin web interface (at `/admin` on hatafrit.co.il) that lets Adi review and edit the 222 existing recipes — fixing categorization, adding net carbs, and authoring new recipes — at a sustainable rate of ~20 reviews per day. Sits alongside the public Hebrew RTL recipe site (which serves Israeli mothers of diabetics, celiacs, and low-carb eaters) without changing its public surface.
+
+**Core Value:** Adi can review the next unreviewed recipe and move on in **one click**. If everything else fails, that flow must work.
+
+### Constraints
+
+- **Airtable API quota** — Public API at 1,147/month and saturating. Phase 0 (CACHE-01) must ship before any admin endpoint goes live, or admin write traffic will further pressure the quota.
+- **Token scope** — Existing PAT is read-only. Admin requires a second PAT with `data:read,write` scope, stored as `AIRTABLE_WRITE_TOKEN`. Schema-write scope is intentionally NOT requested (taxonomy add-new uses a separate table workaround).
+- **Tech stack** — Static HTML + inline Tailwind CDN + Vercel functions. No framework introduction. Files live under `website/admin/` (new folder).
+- **RTL** — All chrome follows `feedback_rtl_anchor_right`. Editor: image (aside) on the right, form on the left.
+- **Hebrew copy** — General chrome plural-masculine; Adi-direct-address feminine singular ("שלום אדי", "המשיכי", "שמרת").
+- **Visual system** — Reuse existing brand palette/typography verbatim from `website/index.html`. New status colors: pending = `#B8860B` (existing gold), done = `#5a7a3a` (new sage, derived from brand).
+- **No public surface changes** — Admin routes must not affect the public site. The CACHE-01 fix is the only public-side change.
+<!-- GSD:project-end -->
+
+<!-- GSD:stack-start source:STACK.md -->
+## Technology Stack
+
+Technology stack not yet documented. Will populate after codebase mapping or first phase.
+<!-- GSD:stack-end -->
+
+<!-- GSD:conventions-start source:CONVENTIONS.md -->
+## Conventions
+
+Conventions not yet established. Will populate as patterns emerge during development.
+<!-- GSD:conventions-end -->
+
+<!-- GSD:architecture-start source:ARCHITECTURE.md -->
+## Architecture
+
+Architecture not yet mapped. Follow existing patterns found in the codebase.
+<!-- GSD:architecture-end -->
+
+<!-- GSD:skills-start source:skills/ -->
+## Project Skills
+
+No project skills found. Add skills to any of: `.claude/skills/`, `.agents/skills/`, `.cursor/skills/`, `.github/skills/`, or `.codex/skills/` with a `SKILL.md` index file.
+<!-- GSD:skills-end -->
+
+<!-- GSD:session-continuity-start source:GSD defaults -->
+## Session Continuity
+
+If `.planning/HANDOFF.json` exists at the start of a session, a previous session was interrupted (for example by `/compact` or `/gsd:pause-work`) and its state is captured there.
+
+Run `/gsd:resume-work` immediately — before anything else, without waiting for user input. The resume skill will restore context, show project status, and clean up the handoff file.
+
+This instruction is a backup path. When the SessionStart hook fires it emits the same directive via systemMessage; either trigger is sufficient.
+<!-- GSD:session-continuity-end -->
+
+<!-- GSD:workflow-start source:GSD defaults -->
+## GSD Workflow Enforcement
+
+Before using Edit, Write, or other file-changing tools, start work through a GSD command so planning artifacts and execution context stay in sync.
+
+Use these entry points:
+- `/gsd:quick` for small fixes, doc updates, and ad-hoc tasks
+- `/gsd:debug` for investigation and bug fixing
+- `/gsd:execute-phase` for planned phase work
+
+Do not make direct repo edits outside a GSD workflow unless the user explicitly asks to bypass it.
+<!-- GSD:workflow-end -->
+
+<!-- GSD:profile-start -->
+## Developer Profile
+
+> Profile not yet configured. Run `/gsd:profile-user` to generate your developer profile.
+> This section is managed by `generate-claude-profile` -- do not edit manually.
+<!-- GSD:profile-end -->
