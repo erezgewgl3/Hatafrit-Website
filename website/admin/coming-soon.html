@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="robots" content="noindex,nofollow">
+<title>התפריט · אדמין · בקרוב</title>
+<link rel="icon" type="image/png" href="/brand_assets/Logo.png"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        "outline": "#817563", "secondary": "#9e3e4c",
+        "surface-bright": "#fff8f3", "surface-container-highest": "#ece1d4",
+        "on-surface-variant": "#4f4535", "background": "#fff8f3",
+        "primary-fixed": "#ffdea6", "primary": "#785600", "on-primary": "#ffffff",
+        "on-surface": "#201b13", "surface-container-high": "#f1e7d9",
+        "surface-container-low": "#fdf2e5", "surface": "#fff8f3",
+        "primary-container": "#986d00", "surface-container-lowest": "#ffffff",
+        "outline-variant": "#d3c4af", "surface-container": "#f7ecdf",
+        "review-pending": "#B8860B",
+        "review-done": "#5a7a3a",
+        "review-done-bg": "#eef0e3"
+      },
+      borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
+      spacing: { lg: "48px", "container-max": "1200px", md: "24px", sm: "12px",
+        gutter: "24px", xs: "4px", xl: "80px", base: "8px" },
+      fontFamily: { display: ["Heebo"], body: ["Assistant"] },
+      boxShadow: {
+        "warm-sm": "0 1px 2px rgba(120,86,0,0.06), 0 1px 1px rgba(120,86,0,0.04)",
+        "warm-md": "0 4px 12px rgba(120,86,0,0.06), 0 2px 4px rgba(120,86,0,0.04)",
+        "warm-lg": "0 12px 32px rgba(120,86,0,0.08), 0 4px 12px rgba(120,86,0,0.05)",
+        "warm-xl": "0 24px 56px rgba(120,86,0,0.10), 0 8px 24px rgba(120,86,0,0.06)"
+      }
+    }}
+  };
+</script>
+<style>
+  /* ===== Source: Phase 2 chrome canon (website/admin/index.html lines 42-198) — shared chrome wins per W5 ===== */
+  body { background: #fff8f3; font-family: 'Assistant', sans-serif; color: #201b13; min-height: 100vh; overflow-x: hidden; }
+  .font-display { font-family: 'Heebo', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+  .grain::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
+    opacity: 0.035; mix-blend-mode: multiply;
+  }
+
+  .card {
+    background: #ffffff; border-radius: 16px;
+    border: 1px solid #ece1d4;
+    box-shadow: 0 1px 2px rgba(120,86,0,0.04), 0 12px 28px rgba(120,86,0,0.05);
+  }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #ffffff; color: #4f4535; font-family: 'Heebo', sans-serif;
+    font-weight: 600; font-size: 15px;
+    padding: 12px 22px; border-radius: 12px;
+    border: 1px solid #d3c4af;
+    transition: background-color 150ms ease, border-color 150ms ease, transform 120ms ease;
+    cursor: pointer; text-decoration: none;
+  }
+  .btn-secondary:hover { background: #fdf2e5; border-color: #B8860B; }
+  .btn-secondary:active { transform: translateY(1px); }
+  .btn-secondary:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(120,86,0,0.10); }
+
+  /* Decorative blooms — match the login/done chrome for layered depth */
+  .bloom-a, .bloom-b { position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; opacity: 0.4; z-index: 0; }
+  .bloom-a { top: -120px; right: -120px; width: 480px; height: 480px;
+    background: radial-gradient(circle, #ffdea6 0%, transparent 70%); }
+  .bloom-b { bottom: -160px; left: -160px; width: 520px; height: 520px;
+    background: radial-gradient(circle, #c9d8a4 0%, transparent 70%); opacity: 0.35; }
+
+  .ornament-line { display: flex; align-items: center; gap: 12px; color: #817563;
+    font-size: 11px; font-family: 'Heebo', sans-serif; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase; }
+  .ornament-line::before, .ornament-line::after { content: ""; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, #d3c4af 40%, #d3c4af 60%, transparent); }
+</style>
+</head>
+<body class="grain">
+  <div class="bloom-a"></div>
+  <div class="bloom-b"></div>
+
+  <main class="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 py-12">
+    <div class="card max-w-[520px] w-full p-9 text-center">
+      <img src="/brand_assets/Logo.png" alt="התפריט" class="h-14 w-auto mx-auto mb-5"/>
+      <div class="ornament-line w-[180px] mx-auto mb-5">בשלב הבא</div>
+      <h1 class="font-display text-[28px] font-extrabold tracking-tight text-on-surface mb-3">בקרוב</h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed mb-7">
+        המסך הזה עדיין בעבודה. תפריט ← עריכת מתכון יחזיר אותך לזרימת הביקורת.
+      </p>
+      <a href="/admin/edit" class="btn-secondary inline-flex">
+        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        <span>חזרה לעריכה</span>
+      </a>
+    </div>
+  </main>
+<script>
+// Defense-in-depth auth gate: bounce to login on session expiry,
+// matching every other admin page. /api/admin/next-unreviewed is the cheapest
+// auth-only endpoint (it returns 401 immediately without a body for unauth'd requests).
+(async function gate() {
+  try {
+    const r = await fetch('/api/admin/next-unreviewed', { credentials: 'same-origin' });
+    if (r.status === 401) window.location.replace('/admin/login');
+  } catch {}
+})();
+</script>
+</body>
+</html>

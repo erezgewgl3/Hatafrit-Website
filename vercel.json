@@ -2,6 +2,10 @@
   "buildCommand": null,
   "outputDirectory": "website",
   "framework": null,
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/recipe/:id", "destination": "/recipe.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -13,6 +17,18 @@
       "source": "/brand_assets/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=86400, immutable" }
+      ]
+    },
+    {
+      "source": "/api/recipes",
+      "headers": [
+        { "key": "Cache-Control", "value": "s-maxage=300, stale-while-revalidate=3600" }
+      ]
+    },
+    {
+      "source": "/api/admin/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache" }
       ]
     }
   ]

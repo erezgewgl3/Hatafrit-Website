@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>התפריט · ספריית מתכונים</title>
+<link rel="icon" type="image/png" href="brand_assets/Logo.png"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: { extend: {
+      colors: {
+        "outline": "#817563", "secondary": "#9e3e4c", "surface-bright": "#fff8f3",
+        "surface-container-highest": "#ece1d4", "on-surface-variant": "#4f4535",
+        "background": "#fff8f3", "primary-fixed": "#ffdea6", "primary": "#785600",
+        "on-primary": "#ffffff", "on-surface": "#201b13",
+        "surface-container-high": "#f1e7d9", "surface-container-low": "#fdf2e5",
+        "surface": "#fff8f3", "primary-container": "#986d00",
+        "surface-container-lowest": "#ffffff", "secondary-container": "#fd8896",
+        "surface-variant": "#ece1d4", "outline-variant": "#d3c4af",
+        "surface-dim": "#e3d8cc", "surface-container": "#f7ecdf"
+      },
+      borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
+      spacing: { lg: "48px", md: "24px", sm: "12px", gutter: "24px", xs: "4px", xl: "80px", base: "8px" },
+      fontFamily: {
+        h2: ["Heebo"], "body-lg": ["Assistant"], caption: ["Assistant"],
+        "body-md": ["Assistant"], h3: ["Heebo"], h1: ["Heebo"], "label-caps": ["Heebo"]
+      },
+      fontSize: {
+        "h2": ["32px", { lineHeight: "1.3", fontWeight: "700" }],
+        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+        "caption": ["12px", { lineHeight: "1.4", fontWeight: "400" }],
+        "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+        "h3": ["24px", { lineHeight: "1.4", fontWeight: "600" }],
+        "h1": ["48px", { lineHeight: "1.2", fontWeight: "800" }],
+        "label-caps": ["14px", { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "700" }]
+      }
+    }}
+  };
+</script>
+<style>
+  body { background-color: #fff8f3; color: #201b13; font-family: 'Assistant', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .skel { background: linear-gradient(90deg, #f1e7d9 0%, #ece1d4 50%, #f1e7d9 100%); background-size: 200% 100%; animation: skel 1.4s ease-in-out infinite; }
+  @keyframes skel { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }
+</style>
+</head>
+<body class="font-body-md bg-background">
+
+<header class="bg-stone-50/95 backdrop-blur-md fixed top-0 w-full z-50 border-b border-stone-200/50 shadow-sm shadow-stone-200/50">
+  <div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto font-['Heebo'] text-base font-medium">
+    <a href="/" class="inline-flex items-center gap-3 text-4xl font-black text-yellow-800">
+      <img src="brand_assets/Logo.png" alt="התפריט" class="h-14 w-auto"/>
+      <span>התפריט</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8">
+      <a class="text-yellow-700 border-b-2 border-yellow-700 pb-1" href="/recipes">מתכונים</a>
+      <a class="text-stone-600 hover:text-yellow-600" href="/hamrot">המרות ומידות</a>
+      <a class="text-stone-600 hover:text-yellow-600" href="/#about">אודות</a>
+      <a class="bg-[#B8860B] text-white px-4 py-1.5 rounded-full hover:brightness-110 transition-[filter] duration-200" href="/shulchan-echad">שיטת שולחן אחד</a>
+    </nav>
+    <button id="mobile-nav-toggle" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg text-stone-600 hover:bg-stone-100 transition-colors" aria-label="תפריט" aria-expanded="false" aria-controls="mobile-nav-panel">
+      <span class="material-symbols-outlined text-[26px]">menu</span>
+    </button>
+  </div>
+  <div id="mobile-nav-panel" hidden class="md:hidden border-t border-stone-200/50 bg-white">
+    <div class="flex flex-col gap-1 px-6 py-3 max-w-7xl mx-auto text-[15px]">
+      <a class="text-yellow-700 font-semibold py-2.5" href="/recipes">מתכונים</a>
+      <a class="text-stone-700 hover:text-yellow-700 py-2.5" href="/hamrot">המרות ומידות</a>
+      <a class="text-stone-700 hover:text-yellow-700 py-2.5" href="/#about">אודות</a>
+      <a class="bg-[#B8860B] text-white px-4 py-2.5 rounded-full text-center mt-2 mb-1" href="/shulchan-echad">שיטת שולחן אחד</a>
+    </div>
+  </div>
+</header>
+
+<main class="pt-32 pb-24 px-6 max-w-7xl mx-auto">
+  <div class="flex flex-col mb-12">
+    <h1 class="font-h1 text-h1 text-on-surface mb-8">כל המתכונים</h1>
+    <div class="flex gap-2 w-full max-w-3xl">
+      <div class="relative flex-grow">
+        <input id="search-input" class="w-full bg-surface-container-low border-b-2 border-outline-variant focus:border-primary py-4 px-12 text-body-lg outline-none" placeholder="חפשו מתכון, רכיב או סגנון..." type="text"/>
+        <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+      </div>
+      <button id="search-btn" class="px-8 bg-primary text-on-primary font-h3 rounded-lg hover:bg-primary-container shadow-md transition-colors">חיפוש</button>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="bg-primary/5 border border-outline-variant/40 rounded-xl px-4 py-3.5 lg:px-7 lg:py-5 mb-8 lg:mb-10">
+    <div class="flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-6 text-right">
+      <div class="md:max-w-md md:shrink-0">
+        <h2 class="font-h2 text-[18px] lg:text-h2 text-on-surface mb-1 leading-tight">הצטרפו לקהילת 'התפריט'</h2>
+        <p class="text-[13px] lg:text-body-md text-on-surface-variant leading-snug">הירשמו לניוזלטר שלנו וקבלו מתכונים בריאים וטיפים לתזונה נכונה ישירות למייל שלכם.</p>
+      </div>
+      <form class="flex gap-2 w-full md:flex-1" onsubmit="event.preventDefault();">
+        <input class="flex-1 bg-white border border-outline-variant px-3 py-2 lg:px-4 lg:py-3 rounded-lg focus:border-primary outline-none text-[14px]" placeholder="כתובת האימייל שלכם" required type="email"/>
+        <button class="px-4 py-2 lg:px-7 lg:py-3 bg-primary text-on-primary font-label-caps text-[12px] lg:text-label-caps rounded-lg hover:bg-primary-container shadow-md whitespace-nowrap transition-colors" type="submit">הרשמה לניוזלטר</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+    <aside class="hidden lg:flex lg:col-span-3 flex-col gap-8 order-2 lg:order-none">
+      <!-- Desktop-only: full categories list. On mobile this is replaced by
+           the dropdown above the cards. -->
+      <section class="hidden lg:block">
+        <h3 class="font-h3 text-h3 mb-4 border-r-4 border-primary pr-3">קטגוריות</h3>
+        <div id="cat-filters" class="flex flex-col gap-2 max-h-[420px] overflow-y-auto pr-1">
+          <div class="skel h-6 w-3/4 rounded"></div>
+          <div class="skel h-6 w-2/3 rounded"></div>
+          <div class="skel h-6 w-3/4 rounded"></div>
+          <div class="skel h-6 w-1/2 rounded"></div>
+        </div>
+      </section>
+
+      <section>
+        <h3 class="font-h3 text-h3 mb-4 border-r-4 border-primary pr-3">זמן הכנה</h3>
+        <input id="time-slider" class="w-full h-2 bg-surface-container-highest rounded-full appearance-none cursor-pointer accent-primary" type="range" min="15" max="120" step="15" value="120"/>
+        <div class="flex justify-between mt-2 font-caption text-caption text-outline">
+          <span>עד 15 דק'</span>
+          <span id="time-value">מעל שעתיים</span>
+        </div>
+      </section>
+
+      <button id="reset-filters" class="text-on-surface-variant text-sm hover:text-primary self-start underline underline-offset-4">נקה סינונים</button>
+    </aside>
+
+    <div class="lg:col-span-9 order-1 lg:order-none">
+      <!-- Mobile-only category dropdown (desktop has the sidebar). One button
+           by default; tap to reveal the full hierarchical list. -->
+      <details id="mobile-cats-dropdown" class="lg:hidden mb-4 group [&_summary::-webkit-details-marker]:hidden">
+        <summary class="cursor-pointer flex items-center justify-between gap-3 bg-white border border-outline-variant/40 rounded-xl px-4 py-3 list-none shadow-sm shadow-stone-900/5">
+          <span class="flex items-center gap-2 font-bold text-[15px] text-on-surface">
+            <span class="material-symbols-outlined text-[20px] text-primary">tune</span>
+            <span>בחר קטגוריות</span>
+            <span id="mobile-cats-badge" class="hidden bg-primary text-white text-[11px] font-semibold px-2 py-0.5 rounded-full"></span>
+          </span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[22px] transition-transform group-open:rotate-180">expand_more</span>
+        </summary>
+        <div id="mobile-cats" class="mt-2 bg-white border border-outline-variant/30 rounded-xl p-4 shadow-sm shadow-stone-900/5"></div>
+      </details>
+      <div class="flex justify-between items-center mb-4 px-1">
+        <span id="result-count" class="text-on-surface-variant text-sm"></span>
+      </div>
+      <div id="card-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-md">
+        <!-- skeleton cards -->
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+        <div class="bg-surface-container-lowest border border-surface-container shadow-sm overflow-hidden"><div class="aspect-square skel"></div><div class="p-5"><div class="skel h-6 w-3/4 mb-2 rounded"></div><div class="skel h-4 w-1/2 rounded"></div></div></div>
+      </div>
+      <div class="mt-12 flex justify-center">
+        <button id="load-more" class="px-8 py-3 bg-primary text-on-primary font-label-caps rounded-lg hover:bg-primary-container shadow-md transition-colors hidden">הצג מתכונים נוספים</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="bg-stone-100 w-full mt-auto border-t border-stone-200 font-['Assistant'] text-sm">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-6 px-12 py-10 w-full">
+    <div class="text-right">
+      <div class="text-xl font-bold text-stone-800">התפריט</div>
+      <div class="text-stone-500 text-[12px] mt-1">מתאים לסוכרתיים, צליאקים, ותזונה דלת פחמימה</div>
+    </div>
+    <div class="flex gap-8">
+      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="/terms">תנאי שימוש</a>
+      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="/privacy">מדיניות פרטיות</a>
+      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="/contact">צור קשר</a>
+    </div>
+    <p class="text-stone-500">© 2026 התפריט. כל הזכויות שמורות.</p>
+  </div>
+</footer>
+
+<script>
+  // Mobile hamburger toggle
+  const navToggle = document.getElementById('mobile-nav-toggle');
+  const navPanel = document.getElementById('mobile-nav-panel');
+  if (navToggle && navPanel) {
+    navToggle.addEventListener('click', () => {
+      const willOpen = navPanel.hidden;
+      navPanel.hidden = !willOpen;
+      navToggle.setAttribute('aria-expanded', String(willOpen));
+    });
+  }
+
+  const PAGE_SIZE = 9;
+
+  const escapeHTML = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+
+  function difficultyText(prepTime) {
+    const m = parseInt(prepTime, 10);
+    if (isNaN(m)) return 'בינוני';
+    if (m <= 20) return 'קל מאוד';
+    if (m <= 45) return 'קל';
+    if (m <= 90) return 'בינוני';
+    return 'מושקע';
+  }
+
+  function recipeCard(r) {
+    const img = r.imageUrl || '';
+    const netCarbs = (r.netCarbs || '').toString().trim();
+    return `
+      <a href="/recipe/${r.id}" class="group block bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-surface-container">
+        <div class="aspect-square overflow-hidden relative bg-surface-container">
+          ${img ? `<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${img}" alt="${escapeHTML(r.name)}"/>` : ''}
+        </div>
+        <div class="p-5 text-right">
+          <h4 class="font-h3 text-h3 mb-1 group-hover:text-primary transition-colors line-clamp-2">${escapeHTML(r.name)}</h4>
+          <p class="text-[12px] text-on-surface-variant/80 mb-3">מתאים לסוכרתיים, צליאקים, ותזונה דלת פחמימה</p>
+          <div class="flex items-center gap-4 text-outline font-caption flex-wrap">
+            <div class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">schedule</span><span>${escapeHTML(r.prepTime || '—')}</span></div>
+            <div class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">restaurant</span><span>${escapeHTML(difficultyText(r.prepTime))}</span></div>
+            ${netCarbs ? `<div class="flex items-center gap-1" title="פחמימות נטו"><span class="material-symbols-outlined text-[18px]">nutrition</span><span>${escapeHTML(netCarbs)} ג׳ נטו</span></div>` : ''}
+          </div>
+        </div>
+      </a>`;
+  }
+
+  // State
+  let ALL = [];
+  let visible = PAGE_SIZE;
+  const state = {
+    q: '',
+    cats: new Set(),
+    maxTime: 120,
+  };
+
+  function recipeCategories(r) {
+    if (Array.isArray(r.categories)) return r.categories;
+    return r.category ? [r.category] : [];
+  }
+
+  function applyFilters() {
+    const q = state.q.trim().toLowerCase();
+    return ALL.filter(r => {
+      if (q && !(r.name && r.name.toLowerCase().includes(q))) return false;
+      if (state.cats.size) {
+        const rc = recipeCategories(r);
+        if (!rc.some(c => state.cats.has(c))) return false;
+      }
+      const t = parseInt(r.prepTime, 10);
+      if (state.maxTime < 120 && (isNaN(t) || t > state.maxTime)) return false;
+      return true;
+    });
+  }
+
+  function activeFilterDesc() {
+    const parts = [];
+    if (state.q.trim()) parts.push(`חיפוש: "${state.q.trim()}"`);
+    if (state.cats.size) parts.push([...state.cats].join(', '));
+    if (state.maxTime < 120) parts.push(`עד ${state.maxTime} דק'`);
+    return parts.length ? ' · ' + parts.join(' · ') : '';
+  }
+
+  function render() {
+    const filtered = applyFilters();
+    const grid = document.getElementById('card-grid');
+    const slice = filtered.slice(0, visible);
+    grid.innerHTML = slice.map(recipeCard).join('') ||
+      '<p class="col-span-full text-center text-on-surface-variant py-12">לא נמצאו מתכונים תואמים. נסו לנקות את הסינון.</p>';
+    document.getElementById('result-count').textContent = `${filtered.length} מתכונים${activeFilterDesc()}`;
+    const more = document.getElementById('load-more');
+    if (filtered.length > visible) more.classList.remove('hidden'); else more.classList.add('hidden');
+  }
+
+  // The sidebar is data-driven: every category present in the data shows up.
+  // Membership in the "ארוחה" or "חגים" group is determined by these sets;
+  // anything not matching falls into the top-level group automatically.
+  // Keeping legacy names (תשרי) in the holiday set in case any records still
+  // carry them — they still group correctly without changing the data.
+  const HOLIDAY_KEYS = new Set([
+    'חגי תשרי','תשרי','חנוכה','פורים','פסח','שבועות','יום העצמאות',
+  ]);
+  const MEAL_KEYS = new Set([
+    'מנה ראשונה','מנה עיקרית','תוספת',
+  ]);
+
+  // Compute the ordered/grouped category sections from the current data.
+  // Used by both the desktop sidebar and the mobile pill strip.
+  function categorySections(recipes) {
+    const counts = {};
+    for (const r of recipes) for (const c of recipeCategories(r)) {
+      counts[c] = (counts[c] || 0) + 1;
+    }
+    const top = [], holiday = [];
+    for (const [name, n] of Object.entries(counts)) {
+      if (MEAL_KEYS.has(name)) continue;
+      if (HOLIDAY_KEYS.has(name)) holiday.push([name, n]);
+      else top.push([name, n]);
+    }
+    const MEAL_ORDER = ['מנה ראשונה','מנה עיקרית','תוספת'];
+    const meal = MEAL_ORDER.map(k => [k, counts[k] || 0]);
+    const byCountThenName = (a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'he');
+    top.sort(byCountThenName);
+    holiday.sort(byCountThenName);
+    return [
+      { label: null,    items: top },
+      { label: 'ארוחה', items: meal },
+      { label: 'חגים',  items: holiday },
+    ];
+  }
+
+  function renderDesktopCategories(sections) {
+    const checkboxRow = (name, n) => {
+      const empty = !n;
+      const checked = state.cats.has(name);
+      const labelCls = empty
+        ? 'flex items-center gap-3 opacity-40 cursor-not-allowed'
+        : 'flex items-center gap-3 cursor-pointer group';
+      const textCls = empty
+        ? 'font-body-md text-on-surface-variant'
+        : 'font-body-md text-on-surface-variant group-hover:text-primary';
+      return `
+        <label class="${labelCls}">
+          <input class="w-5 h-5 rounded-sm border-outline text-primary focus:ring-primary" type="checkbox" data-cat="${escapeHTML(name)}"${empty ? ' disabled' : ''}${checked ? ' checked' : ''}/>
+          <span class="${textCls}">${escapeHTML(name)} <span class="text-outline text-caption">(${n})</span></span>
+        </label>`;
+    };
+    const wrap = document.getElementById('cat-filters');
+    wrap.innerHTML = sections.map(g => {
+      if (g.items.length === 0) return '';
+      const header = g.label
+        ? `<div class="text-[12px] font-bold text-on-surface-variant uppercase tracking-wider mt-3 mb-1.5 first:mt-0">${escapeHTML(g.label)}</div>`
+        : '';
+      return header + g.items.map(([name, n]) => checkboxRow(name, n)).join('');
+    }).join('');
+  }
+
+  function renderMobileCategories(sections) {
+    // Mobile dropdown content: same hierarchical layout as the desktop
+    // sidebar but compact pills inside group sections.
+    const pill = (name, n) => {
+      const empty = !n;
+      if (empty) return ''; // skip empty meal-type slots on mobile
+      const active = state.cats.has(name);
+      const cls = active
+        ? 'inline-flex items-center gap-1 bg-primary text-white px-3 py-1.5 rounded-full text-[13px] font-semibold'
+        : 'inline-flex items-center gap-1 bg-stone-100 hover:bg-primary/10 text-on-surface px-3 py-1.5 rounded-full text-[13px]';
+      return `<button type="button" class="${cls}" data-cat="${escapeHTML(name)}">${escapeHTML(name)} <span class="opacity-70 text-[11px]">${n}</span></button>`;
+    };
+
+    const html = sections.map(g => {
+      const pills = g.items.map(([name, n]) => pill(name, n)).filter(Boolean).join(' ');
+      if (!pills) return '';
+      const header = g.label
+        ? `<div class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mt-3 mb-2 first:mt-0">${escapeHTML(g.label)}</div>`
+        : '';
+      return header + `<div class="flex flex-wrap gap-2">${pills}</div>`;
+    }).join('');
+    document.getElementById('mobile-cats').innerHTML = html;
+
+    // Update the dropdown button's selected-count badge
+    const badge = document.getElementById('mobile-cats-badge');
+    if (badge) {
+      if (state.cats.size > 0) { badge.textContent = state.cats.size; badge.classList.remove('hidden'); }
+      else { badge.classList.add('hidden'); }
+    }
+  }
+
+  function renderCategoryFilters() {
+    const sections = categorySections(ALL);
+    renderDesktopCategories(sections);
+    renderMobileCategories(sections);
+  }
+
+  function bindCategoryClicks() {
+    // Single toggle handler shared by desktop checkboxes and mobile pills.
+    const toggle = (name) => {
+      if (state.cats.has(name)) state.cats.delete(name); else state.cats.add(name);
+      visible = PAGE_SIZE;
+      renderCategoryFilters();
+      render();
+    };
+    document.getElementById('cat-filters').addEventListener('change', (e) => {
+      const cb = e.target;
+      if (!cb.matches('input[data-cat]')) return;
+      // Checkbox changed itself; don't re-toggle, just sync state then re-render.
+      const name = cb.dataset.cat;
+      if (cb.checked) state.cats.add(name); else state.cats.delete(name);
+      visible = PAGE_SIZE;
+      renderCategoryFilters();
+      render();
+    });
+    document.getElementById('mobile-cats').addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-cat]');
+      if (!btn) return;
+      toggle(btn.dataset.cat);
+    });
+  }
+
+  function bindUI() {
+    const search = document.getElementById('search-input');
+    // Browser bfcache can restore form values across navigations — start clean.
+    search.value = '';
+    state.q = '';
+    const onSearch = () => { state.q = search.value; visible = PAGE_SIZE; render(); };
+    search.addEventListener('input', onSearch);
+    document.getElementById('search-btn').addEventListener('click', onSearch);
+
+    bindCategoryClicks();
+
+    const slider = document.getElementById('time-slider');
+    // Reset slider to "no filter" on every page load (defeats bfcache restore)
+    slider.value = 120;
+    state.maxTime = 120;
+    document.getElementById('time-value').textContent = 'מעל שעתיים';
+    slider.addEventListener('input', () => {
+      const v = parseInt(slider.value, 10);
+      state.maxTime = v;
+      document.getElementById('time-value').textContent = v >= 120 ? 'מעל שעתיים' : `עד ${v} דק'`;
+      visible = PAGE_SIZE; render();
+    });
+
+    document.getElementById('load-more').addEventListener('click', () => { visible += PAGE_SIZE; render(); });
+
+    document.getElementById('reset-filters').addEventListener('click', () => {
+      state.q = ''; state.cats.clear(); state.maxTime = 120;
+      search.value = ''; slider.value = 120;
+      document.getElementById('time-value').textContent = 'מעל שעתיים';
+      visible = PAGE_SIZE;
+      renderCategoryFilters();
+      render();
+    });
+  }
+
+  function applyURLParams() {
+    const p = new URLSearchParams(location.search);
+    const q = p.get('q');
+    const cat = p.get('cat'); // accepts comma-separated values
+    if (q) { state.q = q; document.getElementById('search-input').value = q; }
+    if (cat) {
+      const cats = cat.split(',').map(s => s.trim()).filter(Boolean);
+      for (const c of cats) state.cats.add(c);
+    }
+  }
+
+  (async function init() {
+    bindUI();
+    try {
+      const res = await fetch('/api/recipes');
+      const data = await res.json();
+      ALL = data.recipes || [];
+      applyURLParams();
+      renderCategoryFilters();
+      render();
+    } catch (err) {
+      console.error('Failed to load recipes:', err);
+      document.getElementById('card-grid').innerHTML =
+        '<p class="col-span-full text-center text-on-surface-variant py-12">שגיאה בטעינת המתכונים.</p>';
+    }
+  })();
+</script>
+</body>
+</html>

@@ -11,9 +11,20 @@ node_modules/
 # Vercel
 .vercel/
 
+# Env files (NEVER commit secrets)
+.env
+.env.local
+.env.*.local
+
 # OS
 .DS_Store
 Thumbs.db
 
 # Docs (local planning files)
 docs/
+
+.planning/
+
+# MemPalace per-project files (issue #185)
+mempalace.yaml
+entities.json

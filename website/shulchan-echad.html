@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>שיטת שולחן אחד · ארוחה אחת שמתאימה לכל המשפחה</title>
+<meta name="description" content="6 שבועות שמלמדים אותך להכין ארוחה אחת שמתאימה לכל המשפחה. סוכרתיים, צליאקים, תזונה דלת פחמימה — כולם מאותו שולחן."/>
+<link rel="icon" type="image/png" href="/brand_assets/Logo.png"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: { extend: {
+      colors: {
+        "outline": "#817563", "secondary": "#9e3e4c", "secondary-container": "#fd8896",
+        "on-surface-variant": "#4f4535", "background": "#fff8f3",
+        "primary-fixed": "#ffdea6", "primary": "#785600", "on-primary": "#ffffff",
+        "on-surface": "#201b13", "surface-container-high": "#f1e7d9",
+        "surface-container-low": "#fdf2e5", "surface": "#fff8f3",
+        "primary-container": "#986d00", "surface-container-lowest": "#ffffff",
+        "outline-variant": "#d3c4af", "surface-container": "#f7ecdf",
+        "inverse-surface": "#353027", "inverse-on-surface": "#faefe2",
+        "gold": "#B8860B", "dark-warm": "#221d10",
+      },
+      borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", "2xl": "1rem", full: "9999px", soft: "0.75rem" },
+      fontFamily: { h: ["Heebo"], body: ["Assistant"] },
+    }}
+  };
+</script>
+<style>
+  body { background-color: #fff8f3; color: #201b13; font-family: 'Assistant', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  h1, h2, h3, h4 { font-family: 'Heebo', sans-serif; }
+</style>
+</head>
+<body class="bg-background text-on-surface antialiased">
+
+<!-- Minimal logo-only header -->
+<header class="bg-stone-50/95 backdrop-blur-md border-b border-stone-200/50">
+  <div class="flex justify-between items-center px-6 py-4 max-w-6xl mx-auto">
+    <a href="/" class="inline-flex items-center gap-3 text-4xl font-black text-yellow-800">
+      <img src="/brand_assets/Logo.png" alt="התפריט" class="h-14 w-auto"/>
+      <span>התפריט</span>
+    </a>
+    <a href="/" class="text-sm text-stone-500 hover:text-primary transition-colors">חזרה לאתר</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ════════════ 1. HERO ════════════ -->
+  <section class="max-w-6xl mx-auto px-6 pt-8 pb-10 lg:pt-12 lg:pb-14">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <!-- TEXT (source 1 = right column on lg in RTL; mobile order-2 puts image on top) -->
+      <div class="text-right order-2 lg:order-1">
+        <h1 class="font-h text-[36px] md:text-[44px] lg:text-[54px] font-extrabold leading-[1.05] mb-4 tracking-[-0.02em]">
+          ארוחה אחת שמתאימה לכולם
+        </h1>
+        <div class="inline-flex items-center gap-2 bg-primary-fixed text-primary px-4 py-1.5 rounded-full text-[15px] md:text-[17px] font-bold tracking-wide mb-5 ring-1 ring-primary/20 shadow-sm shadow-primary/10">
+          <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1, 'wght' 600;">verified</span>
+          <span>מתאים לסוכרתיים, צליאקים, ותזונה דלת פחמימה</span>
+        </div>
+        <p class="text-[16px] lg:text-[18px] leading-[1.7] text-on-surface-variant mb-7">
+          מאמא שמכינה שתי ארוחות כל ערב - כי מישהו במשפחה חייב לאכול אחרת - לאמא שמכינה ארוחה אחת לכולם.<br/>
+          <span class="text-on-surface font-semibold">אף אחד לא מרגיש שונה.</span>
+        </p>
+        <a href="#offer" class="bg-gold text-white px-7 py-3.5 font-bold rounded-soft hover:brightness-110 transition shadow-lg shadow-stone-900/15 inline-flex items-center justify-center gap-2 text-[16px] lg:text-[17px] w-full sm:w-auto">
+          <span>רוצה להפסיק לבשל פעמיים?</span>
+          <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+        </a>
+        <p class="text-[13px] lg:text-[14px] text-on-surface-variant mt-3.5">הצטרפו לאלפי משפחות שכבר יושבות סביב שולחן אחד</p>
+      </div>
+      <!-- IMAGE (source 2 = left column on lg; order-1 on mobile) -->
+      <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-xl shadow-stone-900/10 bg-surface-container order-1 lg:order-2">
+        <img alt="עדי במטבח" class="w-full h-full object-cover" style="object-position: center 20%;" src="/brand_assets/WhatsApp%20Image%202026-03-13%20at%202.16.30%20PM.jpeg"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 2. RECOGNITION (Before / After in one section) ════════════ -->
+  <section class="bg-surface-container-low border-y border-outline-variant/30 py-10 lg:py-14">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-5 lg:gap-8 items-stretch">
+
+        <!-- BEFORE (source 1 = right column in RTL) -->
+        <div class="bg-stone-100 border border-stone-300/60 rounded-2xl p-6 lg:p-8 shadow-sm shadow-stone-900/5">
+          <h2 class="font-h text-[24px] lg:text-[28px] font-extrabold mb-4 leading-tight">מוכר לך?</h2>
+          <p class="text-[15px] lg:text-[16px] leading-[1.7] text-on-surface mb-5">
+            חזרת מהעבודה. הילדים רעבים. את עייפה.<br/>
+            זורקת להם פסטה — ומתחילה סיבוב שני: משהו נפרד למי שחייב לאכול אחרת.
+          </p>
+          <ul class="space-y-2.5 text-[15px] lg:text-[16px] text-on-surface border-r-2 border-secondary/40 pr-4">
+            <li>"שוב הכנתי שתי ארוחות ערב."</li>
+            <li>"הבן שלי סוכרתי — בימי הולדת הוא תמיד אוכל 'משהו אחר.'"</li>
+            <li>"אכלתי את השאריות של הילדים בעמידה."</li>
+            <li>"אין לי כוח לבשל עוד ארוחה."</li>
+          </ul>
+        </div>
+
+        <!-- Mobile-only gold divider between blocks -->
+        <div class="md:hidden flex items-center gap-3 px-2 py-1">
+          <div class="flex-1 h-px bg-gold/40"></div>
+          <span class="material-symbols-outlined text-[24px] text-gold">expand_more</span>
+          <div class="flex-1 h-px bg-gold/40"></div>
+        </div>
+
+        <!-- AFTER (source 2 = left column in RTL) -->
+        <div class="bg-primary/[0.06] border border-primary/30 rounded-2xl p-6 lg:p-8">
+          <h2 class="font-h text-[24px] lg:text-[28px] font-extrabold mb-4 leading-tight">עכשיו תארי לעצמך ערב אחר.</h2>
+          <p class="text-[15px] lg:text-[16px] leading-[1.7] text-on-surface mb-3">
+            אותו יום שלישי. אותם ילדים רעבים. אבל הפעם —<br/>
+            את שולפת לחם מהמקפיא, מחממת ב-5 דקות.<br/>
+            טונה סלט מוכן מהמקרר. לאפה לפיצה מהירה.<br/>
+            הכל ללא גלוטן, ללא סוכר. בטוח לסוכרתי. מושלם לצליאקי.<br/>
+            את יושבת לאכול. איתם. הילדים טועמים, מבקשים עוד.
+          </p>
+          <p class="font-h text-[22px] lg:text-[26px] font-extrabold text-primary leading-tight">שולחן אחד.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 3. WHAT IS IT + WHO IS IT FOR ════════════ -->
+  <section class="py-10 lg:py-14">
+    <div class="max-w-6xl mx-auto px-6 text-right">
+      <h2 class="font-h text-[28px] lg:text-[36px] font-extrabold mb-3 leading-tight">מה זה שיטת שולחן אחד?</h2>
+      <p class="text-[16px] lg:text-[17px] leading-[1.65] text-on-surface-variant mb-10 lg:mb-12 max-w-4xl">
+        מערכת ל-6 שבועות שאומרת לך בדיוק מה להכין כל ערב. תפריטים שבועיים, רשימות קניות, והכנה מראש שלוקחת דקות. <strong class="text-on-surface">לא אוסף מתכונים — מדריך שלם.</strong>
+      </p>
+
+      <!-- 3-icon strip — bigger circles, side-by-side text on mobile, stacked on md+ -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 lg:gap-8 mb-10 lg:mb-12">
+        <div class="flex md:flex-col items-center md:items-start gap-4 md:gap-3 text-right">
+          <div class="w-16 h-16 lg:w-[72px] lg:h-[72px] rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0 ring-1 ring-primary/15">
+            <span class="material-symbols-outlined text-[30px] lg:text-[34px]">restaurant</span>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-h text-[18px] lg:text-[20px] font-bold mb-1 leading-tight">שולחן אחד</h3>
+            <p class="text-[14px] lg:text-[15px] text-on-surface-variant leading-[1.5]">כולם אוכלים מאותו שולחן. אף אחד לא מרגיש שונה.</p>
+          </div>
+        </div>
+        <div class="flex md:flex-col items-center md:items-start gap-4 md:gap-3 text-right">
+          <div class="w-16 h-16 lg:w-[72px] lg:h-[72px] rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0 ring-1 ring-primary/15">
+            <span class="material-symbols-outlined text-[30px] lg:text-[34px]">schedule</span>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-h text-[18px] lg:text-[20px] font-bold mb-1 leading-tight">הכנה מראש</h3>
+            <p class="text-[14px] lg:text-[15px] text-on-surface-variant leading-[1.5]">דקות של הכנה כשיש זמן — שבוע שלם של ארוחות.</p>
+          </div>
+        </div>
+        <div class="flex md:flex-col items-center md:items-start gap-4 md:gap-3 text-right">
+          <div class="w-16 h-16 lg:w-[72px] lg:h-[72px] rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0 ring-1 ring-primary/15">
+            <span class="material-symbols-outlined text-[30px] lg:text-[34px]">groups</span>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-h text-[18px] lg:text-[20px] font-bold mb-1 leading-tight">מתאים לכולם</h3>
+            <p class="text-[14px] lg:text-[15px] text-on-surface-variant leading-[1.5]">סוכרתיים, צליאקים, תזונה דלת פחמימה — ולכל המשפחה.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two segment cards + shared bottom line -->
+      <div class="border-t border-outline-variant/40 pt-8 lg:pt-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5 mb-6">
+          <!-- Card A — medical/health hook -->
+          <div class="relative bg-secondary/[0.06] border border-secondary/25 rounded-2xl p-5 lg:p-6">
+            <div class="absolute top-4 left-4 w-9 h-9 rounded-full bg-secondary/15 flex items-center justify-center text-secondary">
+              <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+            </div>
+            <div class="text-secondary font-bold tracking-wide text-[12px] mb-2">בשבילך אם...</div>
+            <p class="text-[15px] lg:text-[16px] leading-[1.6] text-on-surface">מישהו במשפחה חייב לאכול אחרת — סוכרת, צליאק, רגישות לגלוטן — ואת מכינה שתי ארוחות כל ערב.</p>
+          </div>
+          <!-- Card B — lifestyle hook -->
+          <div class="relative bg-primary/5 border border-primary/25 rounded-2xl p-5 lg:p-6">
+            <div class="absolute top-4 left-4 w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+            </div>
+            <div class="text-primary font-bold tracking-wide text-[12px] mb-2">וגם בשבילך אם...</div>
+            <p class="text-[15px] lg:text-[16px] leading-[1.6] text-on-surface">את עושה קיטו או דלת פחמימה — והמשפחה אוכלת רגיל. עייפה מלבשל פעמיים.</p>
+          </div>
+        </div>
+        <p class="text-center font-semibold text-[16px] lg:text-[17px] text-on-surface leading-[1.55]">
+          שתיכן מגיעות לאותו מקום: <strong class="text-primary">שולחן אחד, ארוחה אחת, אף אחד לא מרגיש שונה.</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 4. SOCIAL PROOF ════════════ -->
+  <section class="bg-surface-container-low border-y border-outline-variant/30 py-10 lg:py-14">
+    <div class="max-w-6xl mx-auto px-6 text-right">
+      <h2 class="font-h text-[28px] lg:text-[36px] font-extrabold mb-7 leading-tight">מה אומרות המשפחות</h2>
+
+      <!-- Mobile: horizontal swipe carousel · Desktop: 3-col grid -->
+      <div id="testimonials-track" class="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none -mx-6 px-6 md:mx-0 md:px-0 pb-3 md:pb-0 [&::-webkit-scrollbar]:hidden" style="scrollbar-width: none;">
+
+        <figure class="snap-center md:snap-align-none shrink-0 md:shrink basis-[85%] md:basis-auto bg-[#fff9f0] border border-outline-variant/30 rounded-2xl p-5 lg:p-6 shadow-md shadow-stone-900/[0.05] relative">
+          <span class="font-h text-[64px] lg:text-[72px] leading-[0.6] text-gold/30 absolute top-3 right-4 select-none pointer-events-none">״</span>
+          <blockquote class="text-[16px] lg:text-[17px] leading-[1.55] text-on-surface relative z-10">המתכונים שלך מצילים אותי!</blockquote>
+          <figcaption class="text-[12px] lg:text-[13px] text-stone-500 mt-3">— אמא עם סכרת הריון</figcaption>
+        </figure>
+
+        <figure class="snap-center md:snap-align-none shrink-0 md:shrink basis-[85%] md:basis-auto bg-[#fff9f0] border border-outline-variant/30 rounded-2xl p-5 lg:p-6 shadow-md shadow-stone-900/[0.05] relative">
+          <span class="font-h text-[64px] lg:text-[72px] leading-[0.6] text-gold/30 absolute top-3 right-4 select-none pointer-events-none">״</span>
+          <blockquote class="text-[16px] lg:text-[17px] leading-[1.55] text-on-surface relative z-10">בזכותך הוא אוכל אוכל טעים.</blockquote>
+          <figcaption class="text-[12px] lg:text-[13px] text-stone-500 mt-3">— אמא לילד עם סכרת נעורים וצליאק</figcaption>
+        </figure>
+
+        <figure class="snap-center md:snap-align-none shrink-0 md:shrink basis-[85%] md:basis-auto bg-[#fff9f0] border border-outline-variant/30 rounded-2xl p-5 lg:p-6 shadow-md shadow-stone-900/[0.05] relative">
+          <span class="font-h text-[64px] lg:text-[72px] leading-[0.6] text-gold/30 absolute top-3 right-4 select-none pointer-events-none">״</span>
+          <blockquote class="text-[16px] lg:text-[17px] leading-[1.55] text-on-surface relative z-10">המשפחה אוכלים ואפילו לא שמים לב שזה דל״פ.</blockquote>
+        </figure>
+
+        <figure class="snap-center md:snap-align-none shrink-0 md:shrink basis-[85%] md:basis-auto bg-[#fff9f0] border border-outline-variant/30 rounded-2xl p-5 lg:p-6 shadow-md shadow-stone-900/[0.05] relative">
+          <span class="font-h text-[64px] lg:text-[72px] leading-[0.6] text-gold/30 absolute top-3 right-4 select-none pointer-events-none">״</span>
+          <blockquote class="text-[16px] lg:text-[17px] leading-[1.55] text-on-surface relative z-10">אחרי כל סדנה שלך אני אומרת לעצמי איפה הייתי עד היום.</blockquote>
+        </figure>
+
+        <figure class="snap-center md:snap-align-none shrink-0 md:shrink basis-[85%] md:basis-auto bg-[#fff9f0] border border-outline-variant/30 rounded-2xl p-5 lg:p-6 shadow-md shadow-stone-900/[0.05] relative">
+          <span class="font-h text-[64px] lg:text-[72px] leading-[0.6] text-gold/30 absolute top-3 right-4 select-none pointer-events-none">״</span>
+          <blockquote class="text-[16px] lg:text-[17px] leading-[1.55] text-on-surface relative z-10">החבר׳ה שלו במילואים מחסלים הכל ואפילו לא יודעים שזה ללא גלוטן.</blockquote>
+          <figcaption class="text-[12px] lg:text-[13px] text-stone-500 mt-3">— אשת חייל</figcaption>
+        </figure>
+
+        <figure class="snap-center md:snap-align-none shrink-0 md:shrink basis-[85%] md:basis-auto bg-[#fff9f0] border border-outline-variant/30 rounded-2xl p-5 lg:p-6 shadow-md shadow-stone-900/[0.05] relative">
+          <span class="font-h text-[64px] lg:text-[72px] leading-[0.6] text-gold/30 absolute top-3 right-4 select-none pointer-events-none">״</span>
+          <blockquote class="text-[16px] lg:text-[17px] leading-[1.55] text-on-surface relative z-10">5 דקות וזה היה מוכן.</blockquote>
+        </figure>
+
+      </div>
+      <div id="testimonials-dots" class="flex md:hidden justify-center gap-1.5 mt-3"></div>
+    </div>
+  </section>
+
+  <!-- ════════════ 5. ABOUT ADI (compact strip) ════════════ -->
+  <section class="bg-surface-container border-y border-outline-variant/30">
+    <div class="max-w-6xl mx-auto px-6 py-4 lg:py-5">
+      <div class="flex flex-col md:flex-row items-center md:items-center gap-3 md:gap-5 text-center md:text-right">
+        <div class="w-[72px] h-[72px] md:w-[88px] md:h-[88px] rounded-full overflow-hidden shadow-md shadow-stone-900/10 shrink-0 bg-surface-container-low">
+          <img src="/brand_assets/DSC02154.avif" alt="עדי" class="w-full h-full object-cover" style="object-position: center 25%;"/>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="text-secondary font-bold tracking-wide text-[12px] mb-1">נעים להכיר, אני עדי</div>
+          <p class="text-[14px] lg:text-[15px] leading-[1.5] text-on-surface mb-2">אמא, יוצרת מתכונים, ומאות משפחות שכבר יושבות סביב שולחן אחד.</p>
+          <div class="flex flex-wrap gap-x-1.5 gap-y-1.5 justify-center md:justify-start">
+            <span class="inline-flex items-center bg-primary-fixed/70 text-primary px-2.5 py-0.5 rounded-full text-[11px] lg:text-[12px] font-bold ring-1 ring-primary/15">115,000 עוקבים</span>
+            <span class="inline-flex items-center bg-primary-fixed/70 text-primary px-2.5 py-0.5 rounded-full text-[11px] lg:text-[12px] font-bold ring-1 ring-primary/15">6 ספרי מתכונים</span>
+            <span class="inline-flex items-center bg-primary-fixed/70 text-primary px-2.5 py-0.5 rounded-full text-[11px] lg:text-[12px] font-bold ring-1 ring-primary/15">13 שנה בארה״ב</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 6. VALUE STACK ════════════ -->
+  <section id="offer" class="py-10 lg:py-14">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-right mb-6 lg:mb-8">
+        <h2 class="font-h text-[28px] lg:text-[36px] font-extrabold leading-tight mb-2">מה כלול בשיטת שולחן אחד</h2>
+        <p class="text-on-surface-variant text-[16px] lg:text-[17px]">הכל מה שצריך — מהתפריט ועד השולחן</p>
+      </div>
+
+      <div class="bg-white border border-outline-variant/30 rounded-2xl divide-y divide-outline-variant/30 shadow-sm shadow-stone-900/5 overflow-hidden">
+
+        <!-- CORE -->
+        <div class="px-5 lg:px-6 py-5 bg-primary/5 flex items-start justify-between gap-4 lg:gap-6">
+          <div class="flex-1 text-right">
+            <div class="text-primary font-bold tracking-wide text-[11px] mb-1">המוצר המרכזי</div>
+            <h3 class="font-h text-[17px] lg:text-[19px] font-bold leading-snug mb-1.5">שיטת שולחן אחד — מערכת 6 שבועות</h3>
+            <p class="text-[14px] lg:text-[15px] text-on-surface-variant leading-[1.55]">תוכנית שאומרת לך בדיוק מה להכין כל ערב. תפריטים, רשימות קניות, הכנה מראש, כרטיסי מידע תזונתי. לא אוסף מתכונים — מדריך שלם.</p>
+          </div>
+          <div class="text-left shrink-0 pt-1">
+            <div class="text-[10px] uppercase tracking-wider text-on-surface-variant mb-0.5">שווי</div>
+            <div class="font-h font-bold text-[16px] lg:text-[18px]">990 ₪</div>
+          </div>
+        </div>
+
+        <!-- B1 -->
+        <div class="px-5 lg:px-6 py-5 flex items-start justify-between gap-4 lg:gap-6">
+          <div class="flex-1 text-right">
+            <div class="text-secondary font-bold tracking-wide text-[11px] mb-1">בונוס #1</div>
+            <h3 class="font-h text-[16px] lg:text-[18px] font-bold leading-snug mb-1.5">הכל מהסופר</h3>
+            <p class="text-[14px] lg:text-[15px] text-on-surface-variant leading-[1.55]">רשימת קניות מסודרת + תחליפים לכל מה שלא משיגים בסופר. אין סיבה לא להתחיל.</p>
+          </div>
+          <div class="text-left shrink-0 pt-1">
+            <div class="text-[10px] uppercase tracking-wider text-on-surface-variant mb-0.5">שווי</div>
+            <div class="font-h font-bold text-[16px] lg:text-[18px]">149 ₪</div>
+          </div>
+        </div>
+
+        <!-- B2 — SCARCITY (gold tint, gold right border, expiry note) -->
+        <div class="px-5 lg:px-6 py-5 bg-gold/[0.08] border-r-4 border-gold flex items-start justify-between gap-4 lg:gap-6">
+          <div class="flex-1 text-right">
+            <div class="text-gold font-bold tracking-wide text-[11px] mb-1">בונוס #2 · זמין לזמן מוגבל</div>
+            <h3 class="font-h text-[16px] lg:text-[18px] font-bold leading-snug mb-1.5">סדנת הלחמים המוקלטת</h3>
+            <p class="text-[14px] lg:text-[15px] text-on-surface-variant leading-[1.55]">לחם ב-15 דקות. בלי גלוטן, בלי סוכר. ״שנתיים חיכיתי לפרוסה הזאת.״</p>
+            <p class="text-[13px] lg:text-[14px] text-gold font-semibold mt-2">⏰ הבונוס הזה לא יהיה זמין בהמשך</p>
+          </div>
+          <div class="text-left shrink-0 pt-1">
+            <div class="text-[10px] uppercase tracking-wider text-on-surface-variant mb-0.5">שווי</div>
+            <div class="font-h font-bold text-[16px] lg:text-[18px]">199 ₪</div>
+          </div>
+        </div>
+
+        <!-- B3 -->
+        <div class="px-5 lg:px-6 py-5 flex items-start justify-between gap-4 lg:gap-6">
+          <div class="flex-1 text-right">
+            <div class="text-secondary font-bold tracking-wide text-[11px] mb-1">בונוס #3</div>
+            <h3 class="font-h text-[16px] lg:text-[18px] font-bold leading-snug mb-1.5">תפריט שבת שבועי</h3>
+            <p class="text-[14px] lg:text-[15px] text-on-surface-variant leading-[1.55]">שולחן שבת שכולם אוכלים מאותה ארוחה. כל שבוע, מוכן מראש. בלי ״מה נאכל בשבת?״</p>
+          </div>
+          <div class="text-left shrink-0 pt-1">
+            <div class="text-[10px] uppercase tracking-wider text-on-surface-variant mb-0.5">שווי</div>
+            <div class="font-h font-bold text-[16px] lg:text-[18px]">499 ₪</div>
+          </div>
+        </div>
+
+        <!-- B4 -->
+        <div class="px-5 lg:px-6 py-5 flex items-start justify-between gap-4 lg:gap-6">
+          <div class="flex-1 text-right">
+            <div class="text-secondary font-bold tracking-wide text-[11px] mb-1">בונוס #4</div>
+            <h3 class="font-h text-[16px] lg:text-[18px] font-bold leading-snug mb-1.5">ערכות הישרדות לחגים</h3>
+            <p class="text-[14px] lg:text-[15px] text-on-surface-variant leading-[1.55]">לפני כל חג — תפריט חגיגי שמתאים לכולם. בלי לחץ, בלי ארוחה נפרדת, בלי ״מה הוא יאכל?״</p>
+          </div>
+          <div class="text-left shrink-0 pt-1">
+            <div class="text-[10px] uppercase tracking-wider text-on-surface-variant mb-0.5">שווי</div>
+            <div class="font-h font-bold text-[16px] lg:text-[18px]">249 ₪</div>
+          </div>
+        </div>
+
+        <!-- B5 -->
+        <div class="px-5 lg:px-6 py-5 flex items-start justify-between gap-4 lg:gap-6">
+          <div class="flex-1 text-right">
+            <div class="text-secondary font-bold tracking-wide text-[11px] mb-1">בונוס #5</div>
+            <h3 class="font-h text-[16px] lg:text-[18px] font-bold leading-snug mb-1.5">מפגש קבוצתי חודשי עם עדי בזום</h3>
+            <p class="text-[14px] lg:text-[15px] text-on-surface-variant leading-[1.55]">גישה ישירה לעדי — שאלות, טיפים, ומוטיבציה. כל חודש. את לא לבד בזה.</p>
+          </div>
+          <div class="text-left shrink-0 pt-1">
+            <div class="text-[10px] uppercase tracking-wider text-on-surface-variant mb-0.5">שווי</div>
+            <div class="font-h font-bold text-[16px] lg:text-[18px]">499 ₪</div>
+          </div>
+        </div>
+
+        <!-- TOTAL -->
+        <div class="px-5 lg:px-6 py-4 flex items-center justify-between bg-stone-50">
+          <span class="font-bold text-on-surface text-[15px] lg:text-[16px]">שווי כולל</span>
+          <span class="font-h font-extrabold text-on-surface text-[18px] lg:text-[20px]">2,585 ₪</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 7. PRICE REVEAL ════════════ -->
+  <section class="py-10 lg:py-14 bg-gradient-to-b from-gold/[0.10] via-gold/[0.05] to-transparent">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-2xl mx-auto text-center">
+        <div class="text-on-surface-variant line-through decoration-1 text-[18px] lg:text-[20px] mb-2">במקום 2,585 ₪</div>
+        <div class="font-h text-[56px] lg:text-[72px] font-extrabold leading-none text-on-surface mb-5 tracking-[-0.02em]">497 ₪</div>
+        <p class="text-[15px] lg:text-[16px] text-on-surface-variant leading-[1.65] mb-7">
+          ביקור אחד אצל תזונאית = 400-600 ₪.<br/>
+          <strong class="text-on-surface">שיטת שולחן אחד = 6 שבועות שלמות + שבת + חגים + גישה לעדי.</strong> ב-497 ₪.
+        </p>
+        <a href="#checkout" class="inline-flex items-center justify-center gap-2 bg-gold text-white px-10 py-4 rounded-soft text-[17px] lg:text-[18px] font-bold hover:brightness-110 transition shadow-xl shadow-gold/25 w-full sm:w-auto">
+          <span>אני רוצה את זה</span>
+          <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+        </a>
+        <p class="text-[14px] text-on-surface-variant mt-4 max-w-md mx-auto leading-[1.55]">בלי לבשל שעות. בלי מתכונים מסובכים. פשוט ארוחה אחת שמתאימה לכולם.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 8. GUARANTEE (compact banner) ════════════ -->
+  <section class="py-6 lg:py-8">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="bg-primary/[0.06] border border-primary/30 rounded-2xl px-4 py-4 lg:px-6 lg:py-4 text-right flex items-center gap-4">
+        <div class="text-[28px] lg:text-[32px] shrink-0 leading-none">🛡️</div>
+        <div class="flex-1 min-w-0">
+          <h2 class="font-h text-[16px] lg:text-[18px] font-extrabold leading-tight"><span class="text-primary">המשפחה אוהבת</span> — או שלא משלמים.</h2>
+          <p class="text-[13px] lg:text-[14px] leading-[1.5] text-on-surface-variant mt-1">אם המשפחה שלך לא טועמת לפחות מנה אחת תוך שבועיים — החזר מלא. בלי שאלות.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 9. FAQ ════════════ -->
+  <section class="py-10 lg:py-14">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="font-h text-[28px] lg:text-[36px] font-extrabold mb-6 lg:mb-8 leading-tight text-right">שאלות נפוצות</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-2.5 lg:gap-x-5 lg:gap-y-3">
+
+        <details class="group bg-white border border-outline-variant/30 rounded-xl px-4 lg:px-5 py-3 [&_summary::-webkit-details-marker]:hidden text-right">
+          <summary class="cursor-pointer flex items-center justify-between gap-4 list-none">
+            <span class="font-h font-bold text-[15px] lg:text-[16px]">אני לא יודעת לבשל — זה בשבילי?</span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[20px] transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <p class="text-[14px] lg:text-[15px] text-on-surface-variant leading-[1.6] mt-2 pt-2 border-t border-outline-variant/30">בהחלט. המתכונים פשוטים, ההוראות מפורטות, ורוב ההכנה היא הרכבה — לא בישול מסובך. אם את יודעת להפעיל תנור ולערבב קערה, את בפנים.</p>
+        </details>
+
+        <details class="group bg-white border border-outline-variant/30 rounded-xl px-4 lg:px-5 py-3 [&_summary::-webkit-details-marker]:hidden text-right">
+          <summary class="cursor-pointer flex items-center justify-between gap-4 list-none">
+            <span class="font-h font-bold text-[15px] lg:text-[16px]">יש לי ילד סוכרתי — זה באמת מתאים?</span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[20px] transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <p class="text-[14px] lg:text-[15px] text-on-surface-variant leading-[1.6] mt-2 pt-2 border-t border-outline-variant/30">כל המתכונים דלי פחמימה, ללא סוכר וללא גלוטן. הם תוכננו מלכתחילה כך שכל המשפחה יכולה לאכול מאותו שולחן — כולל מי שחייב לאכול אחרת. מומלץ להתייעץ עם הרופא המטפל לגבי התאמה אישית.</p>
+        </details>
+
+        <details class="group bg-white border border-outline-variant/30 rounded-xl px-4 lg:px-5 py-3 [&_summary::-webkit-details-marker]:hidden text-right">
+          <summary class="cursor-pointer flex items-center justify-between gap-4 list-none">
+            <span class="font-h font-bold text-[15px] lg:text-[16px]">מה ההבדל בין זה לבין המתכונים החינמיים באתר?</span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[20px] transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <p class="text-[14px] lg:text-[15px] text-on-surface-variant leading-[1.6] mt-2 pt-2 border-t border-outline-variant/30">באתר יש מתכונים בודדים. כאן יש מערכת שלמה — תפריטים שבועיים, רשימות קניות, סדר הכנה מראש, וכל מה שצריך כדי שלא תצטרכי לחשוב מה לבשל כל ערב.</p>
+        </details>
+
+        <details class="group bg-white border border-outline-variant/30 rounded-xl px-4 lg:px-5 py-3 [&_summary::-webkit-details-marker]:hidden text-right">
+          <summary class="cursor-pointer flex items-center justify-between gap-4 list-none">
+            <span class="font-h font-bold text-[15px] lg:text-[16px]">כמה זמן צריך להשקיע?</span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[20px] transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <p class="text-[14px] lg:text-[15px] text-on-surface-variant leading-[1.6] mt-2 pt-2 border-t border-outline-variant/30">ההכנה מראש לוקחת בין שעה לשעתיים בשבוע. ארוחות הערב עצמן — 5 עד 15 דקות הרכבה ממה שכבר מוכן.</p>
+        </details>
+
+        <details class="group bg-white border border-outline-variant/30 rounded-xl px-4 lg:px-5 py-3 [&_summary::-webkit-details-marker]:hidden text-right">
+          <summary class="cursor-pointer flex items-center justify-between gap-4 list-none">
+            <span class="font-h font-bold text-[15px] lg:text-[16px]">מה אם זה לא מתאים לנו?</span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[20px] transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <p class="text-[14px] lg:text-[15px] text-on-surface-variant leading-[1.6] mt-2 pt-2 border-t border-outline-variant/30">אם המשפחה שלך לא טועמת לפחות מנה אחת תוך שבועיים — החזר מלא. בלי שאלות. זו הבטחת ״המשפחה אוהבת.״</p>
+        </details>
+
+        <details class="group bg-white border border-outline-variant/30 rounded-xl px-4 lg:px-5 py-3 [&_summary::-webkit-details-marker]:hidden text-right">
+          <summary class="cursor-pointer flex items-center justify-between gap-4 list-none">
+            <span class="font-h font-bold text-[15px] lg:text-[16px]">איך מקבלים את החומרים?</span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[20px] transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <p class="text-[14px] lg:text-[15px] text-on-surface-variant leading-[1.6] mt-2 pt-2 border-t border-outline-variant/30">מיד אחרי הרכישה מקבלים מייל עם גישה לכל חומרי השבוע הראשון. שאר השבועות נשלחים במייל לפי לוח הזמנים של התוכנית.</p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 10. FINAL CTA ════════════ -->
+  <section id="checkout" class="bg-surface-container-low py-10 lg:py-14 border-t border-outline-variant/30">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-h text-[28px] lg:text-[36px] font-extrabold leading-[1.15] mb-4">
+        שולחן אחד. ארוחה אחת.<br/>
+        <span class="text-gold">אף אחד לא מרגיש שונה.</span>
+      </h2>
+      <p class="text-on-surface-variant text-[15px] lg:text-[16px] leading-[1.6] mb-2">
+        6 שבועות + שבת + חגים + מפגש חודשי עם עדי — הכל ב-497 ₪.
+      </p>
+      <p class="text-gold font-semibold text-[13px] lg:text-[14px] mb-7 inline-flex items-center gap-1.5">
+        <span>⏰</span>
+        <span>סדנת הלחמים המוקלטת זמינה לזמן מוגבל בלבד.</span>
+      </p>
+      <div>
+        <a href="#" class="inline-flex items-center justify-center gap-2 bg-gold text-white px-12 py-4 rounded-soft text-[17px] lg:text-[18px] font-bold hover:brightness-110 transition shadow-xl shadow-stone-900/20 w-full sm:w-auto">
+          <span>רוצה להתחיל</span>
+          <span class="material-symbols-outlined text-[22px]">arrow_back</span>
+        </a>
+      </div>
+      <p class="text-[13px] lg:text-[14px] text-on-surface-variant tracking-wide mt-4 font-medium">מתאים לסוכרתיים, צליאקים, ותזונה דלת פחמימה.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ════════════ 11. STICKY MOBILE CTA ════════════ -->
+<div id="sticky-cta" class="fixed bottom-0 inset-x-0 z-40 lg:hidden border-t border-outline-variant/30 bg-white/95 backdrop-blur-md shadow-[0_-4px_24px_rgba(0,0,0,0.08)] px-4 py-3 flex items-center justify-between gap-3 transition-transform duration-300 translate-y-full">
+  <div class="font-h font-extrabold text-[18px] text-on-surface">497 ₪</div>
+  <a href="#checkout" class="bg-gold text-white px-5 py-2.5 rounded-soft text-[14px] font-bold hover:brightness-110 transition flex items-center gap-1.5">
+    <span>אני רוצה את זה</span>
+    <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+  </a>
+</div>
+
+<!-- Footer -->
+<footer class="bg-stone-100 w-full border-t border-stone-200 font-['Assistant'] text-sm">
+  <div class="flex flex-col sm:flex-row justify-between items-center gap-2 px-6 py-5 w-full max-w-6xl mx-auto text-center sm:text-right">
+    <a href="/" class="text-base font-black text-yellow-800 font-h">התפריט</a>
+    <div class="text-[11px] text-stone-500/80">© 2026 התפריט. כל הזכויות שמורות.</div>
+  </div>
+</footer>
+
+<script>
+  // Sticky mobile CTA — show after hero scrolls out, hide as #checkout enters view
+  const sticky = document.getElementById('sticky-cta');
+  const checkoutEl = document.getElementById('checkout');
+  if (sticky && checkoutEl) {
+    const onScroll = () => {
+      const heroBottom = window.innerHeight * 0.9;
+      const checkoutTop = checkoutEl.getBoundingClientRect().top;
+      const passedHero = window.scrollY > heroBottom;
+      const beforeCheckout = checkoutTop > 100;
+      if (passedHero && beforeCheckout) sticky.classList.remove('translate-y-full');
+      else sticky.classList.add('translate-y-full');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  // Testimonial carousel — render dot indicators tracking scroll center (mobile only)
+  const track = document.getElementById('testimonials-track');
+  const dotsHost = document.getElementById('testimonials-dots');
+  if (track && dotsHost) {
+    const cards = [...track.querySelectorAll('figure')];
+    const dotHTML = (active) => `<span class="block w-1.5 h-1.5 rounded-full transition-colors ${active ? 'bg-primary' : 'bg-outline-variant'}"></span>`;
+    const renderDots = (activeIdx) => { dotsHost.innerHTML = cards.map((_, i) => dotHTML(i === activeIdx)).join(''); };
+    renderDots(0);
+    let raf = 0;
+    track.addEventListener('scroll', () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const trackRect = track.getBoundingClientRect();
+        const trackCenter = trackRect.left + trackRect.width / 2;
+        let bestIdx = 0, bestDist = Infinity;
+        cards.forEach((c, i) => {
+          const r = c.getBoundingClientRect();
+          const cx = r.left + r.width / 2;
+          const d = Math.abs(cx - trackCenter);
+          if (d < bestDist) { bestDist = d; bestIdx = i; }
+        });
+        renderDots(bestIdx);
+      });
+    }, { passive: true });
+  }
+</script>
+
+</body>
+</html>

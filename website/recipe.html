@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title id="page-title">התפריט · מתכון</title>
+<link rel="icon" type="image/png" href="/brand_assets/Logo.png"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: { extend: {
+      colors: {
+        "outline": "#817563", "secondary": "#9e3e4c", "surface-bright": "#fff8f3",
+        "on-surface-variant": "#4f4535", "background": "#fff8f3", "primary": "#785600",
+        "on-primary": "#ffffff", "on-surface": "#201b13",
+        "surface-container-high": "#f1e7d9", "surface-container-low": "#fdf2e5",
+        "surface": "#fff8f3", "primary-container": "#986d00",
+        "surface-container-lowest": "#ffffff", "secondary-container": "#fd8896",
+        "outline-variant": "#d3c4af", "surface-container": "#f7ecdf"
+      },
+      borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
+      spacing: { lg: "32px", md: "16px", sm: "8px", gutter: "16px", xs: "2px", xl: "48px", base: "8px" },
+      fontFamily: {
+        h2: ["Heebo"], "body-lg": ["Assistant"], caption: ["Assistant"],
+        "body-md": ["Assistant"], h3: ["Heebo"], h1: ["Heebo"], "label-caps": ["Heebo"]
+      },
+      fontSize: {
+        "h2": ["28px", { lineHeight: "1.2", fontWeight: "700" }],
+        "body-lg": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+        "body-md": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+        "h3": ["20px", { lineHeight: "1.3", fontWeight: "600" }],
+        "h1": ["36px", { lineHeight: "1.1", fontWeight: "800" }],
+        "label-caps": ["13px", { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "700" }]
+      }
+    }}
+  };
+</script>
+<style>
+  body { background-color: #fff8f3; font-family: 'Assistant', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .step-checkbox:checked + label { text-decoration: line-through; opacity: 0.55; }
+  .skel { background: linear-gradient(90deg, #f1e7d9 0%, #ece1d4 50%, #f1e7d9 100%); background-size: 200% 100%; animation: skel 1.4s ease-in-out infinite; }
+  @keyframes skel { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body-md">
+
+<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-outline-variant/30">
+  <div class="flex justify-between items-center px-4 py-2 max-w-7xl mx-auto">
+    <a href="/" class="inline-flex items-center gap-2.5 text-2xl font-black text-primary font-['Heebo']">
+      <img src="/brand_assets/Logo.png" alt="התפריט" class="h-10 w-auto"/>
+      <span>התפריט</span>
+    </a>
+    <div class="hidden md:flex items-center gap-6 font-['Heebo'] text-sm font-medium">
+      <a class="text-stone-600 hover:text-primary transition-colors" href="/recipes">מתכונים</a>
+      <a class="text-stone-600 hover:text-primary transition-colors" href="/hamrot">המרות ומידות</a>
+      <a class="text-stone-600 hover:text-primary transition-colors" href="/#about">אודות</a>
+      <a class="bg-[#B8860B] text-white px-3.5 py-1 rounded-full hover:brightness-110 transition-[filter] duration-200" href="/shulchan-echad">שיטת שולחן אחד</a>
+    </div>
+    <button id="mobile-nav-toggle" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" aria-label="תפריט" aria-expanded="false" aria-controls="mobile-nav-panel">
+      <span class="material-symbols-outlined text-[24px]">menu</span>
+    </button>
+  </div>
+  <div id="mobile-nav-panel" hidden class="md:hidden border-t border-outline-variant/30 bg-white">
+    <div class="flex flex-col gap-1 px-4 py-3 max-w-7xl mx-auto font-['Heebo'] text-[15px] font-medium">
+      <a class="text-stone-700 hover:text-primary py-2.5" href="/recipes">מתכונים</a>
+      <a class="text-stone-700 hover:text-primary py-2.5" href="/hamrot">המרות ומידות</a>
+      <a class="text-stone-700 hover:text-primary py-2.5" href="/#about">אודות</a>
+      <a class="bg-[#B8860B] text-white px-4 py-2.5 rounded-full text-center mt-2 mb-1" href="/shulchan-echad">שיטת שולחן אחד</a>
+    </div>
+  </div>
+</nav>
+
+<main class="pt-[52px] pb-32 lg:pb-16">
+
+  <!-- HERO — contained, tight. Mobile stacks image-on-top via order. -->
+  <section class="max-w-6xl mx-auto px-6 pt-6 lg:pt-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center">
+      <div class="order-2 lg:order-none">
+        <h1 id="hero-title" class="font-h1 font-['Heebo'] text-[28px] md:text-[32px] lg:text-[36px] leading-[1.15] font-extrabold text-on-surface mb-3"></h1>
+        <p id="hero-description" class="text-[15px] lg:text-base leading-relaxed text-on-surface-variant mb-5 empty:hidden"></p>
+        <div class="flex flex-wrap items-center gap-2 pt-5 border-t border-outline-variant/40">
+          <span data-meta="time" class="inline-flex items-center gap-1.5 bg-primary/10 text-primary px-3 py-1.5 rounded-full text-[13px] font-semibold">
+            <span class="material-symbols-outlined text-[16px]">timer</span>
+            <span id="meta-time"></span>
+          </span>
+          <span data-meta="difficulty" class="inline-flex items-center gap-1.5 bg-secondary/10 text-secondary px-3 py-1.5 rounded-full text-[13px] font-semibold">
+            <span class="material-symbols-outlined text-[16px]">signal_cellular_alt</span>
+            <span id="meta-difficulty"></span>
+          </span>
+          <span data-meta="servings" class="inline-flex items-center gap-1.5 bg-on-surface/5 text-on-surface px-3 py-1.5 rounded-full text-[13px] font-semibold">
+            <span class="material-symbols-outlined text-[16px]">restaurant</span>
+            <span id="meta-servings"></span>
+          </span>
+          <span data-meta="netCarbs" class="inline-flex items-center gap-1.5 bg-on-surface/5 text-on-surface px-3 py-1.5 rounded-full text-[13px] font-semibold">
+            <span class="material-symbols-outlined text-[16px]">nutrition</span>
+            <span id="meta-net-carbs"></span>
+          </span>
+        </div>
+      </div>
+      <div class="order-1 lg:order-none aspect-[3/2] rounded-2xl overflow-hidden shadow-lg shadow-stone-900/10 bg-surface-container">
+        <img id="hero-img" class="w-full h-full object-cover" alt=""/>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="max-w-6xl mx-auto px-6 mt-8 lg:mt-10">
+    <div class="bg-primary/5 border border-outline-variant/40 rounded-xl px-4 py-3.5 lg:px-7 lg:py-5">
+      <div class="flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-6 text-right">
+        <div class="md:max-w-md md:shrink-0">
+          <h2 class="font-h2 text-[18px] lg:text-h2 text-on-surface mb-1 leading-tight">הצטרפו לקהילת 'התפריט'</h2>
+          <p class="text-[13px] lg:text-body-md text-on-surface-variant leading-snug">הירשמו לניוזלטר שלנו וקבלו מתכונים בריאים וטיפים לתזונה נכונה ישירות למייל שלכם.</p>
+        </div>
+        <form class="flex gap-2 w-full md:flex-1" onsubmit="event.preventDefault();">
+          <input class="flex-1 bg-white border border-outline-variant px-3 py-2 lg:px-4 lg:py-3 rounded-lg focus:border-primary outline-none text-[14px]" placeholder="כתובת האימייל שלכם" required type="email"/>
+          <button class="px-4 py-2 lg:px-7 lg:py-3 bg-primary text-on-primary font-label-caps text-[12px] lg:text-label-caps rounded-lg hover:bg-primary-container shadow-md whitespace-nowrap transition-colors" type="submit">הרשמה לניוזלטר</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="max-w-6xl mx-auto px-6 mt-10 lg:mt-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
+
+      <aside class="lg:col-span-4 lg:sticky lg:top-20 self-start lg:order-2">
+        <div class="bg-white rounded-xl p-5 lg:p-6 shadow-sm border border-outline-variant/20">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="font-h2 font-['Heebo'] text-xl lg:text-2xl">מצרכים</h2>
+            <span id="ingredient-count" class="text-xs font-medium text-primary bg-primary/5 px-2 py-0.5 rounded">—</span>
+          </div>
+          <ul id="ingredients-list" class="space-y-0.5">
+            <li class="skel h-7 rounded mb-2"></li>
+            <li class="skel h-7 rounded mb-2"></li>
+            <li class="skel h-7 rounded mb-2"></li>
+            <li class="skel h-7 rounded mb-2"></li>
+          </ul>
+          <!-- Desktop action row: save/print/share inside the card -->
+          <div class="hidden lg:flex items-center justify-between mt-6 pt-5 border-t border-outline-variant/30">
+            <button id="save-btn-desktop" aria-label="שמירה" class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-primary/5 hover:text-primary hover:border-primary/40 transition-colors"><span class="material-symbols-outlined text-lg">bookmark</span></button>
+            <button onclick="window.print()" aria-label="הדפסה" class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-primary/5 hover:text-primary hover:border-primary/40 transition-colors"><span class="material-symbols-outlined text-lg">print</span></button>
+            <button id="share-btn-desktop" aria-label="שיתוף" class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-primary/5 hover:text-primary hover:border-primary/40 transition-colors"><span class="material-symbols-outlined text-lg">share</span></button>
+          </div>
+        </div>
+      </aside>
+
+      <div class="lg:col-span-8 lg:order-1">
+        <div class="flex items-center gap-3 mb-6">
+          <h2 class="font-h2 font-['Heebo'] text-2xl lg:text-3xl whitespace-nowrap">אופן ההכנה</h2>
+          <div class="h-[1px] flex-1 bg-gradient-to-l from-secondary/30 to-transparent"></div>
+        </div>
+        <div id="steps-list">
+          <div class="skel h-24 rounded-xl mb-6"></div>
+          <div class="skel h-24 rounded-xl mb-6"></div>
+          <div class="skel h-24 rounded-xl mb-6"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<!-- FLOATING ACTION BAR (mobile only) -->
+<div class="fixed bottom-4 inset-x-0 z-50 flex justify-center px-4 lg:hidden">
+  <div class="bg-white/95 backdrop-blur-xl border border-outline-variant/30 px-3 py-2 rounded-full shadow-lg flex items-center gap-1.5 max-w-sm w-full">
+    <button id="save-btn-mobile" class="flex-1 bg-primary text-white h-10 rounded-full text-sm font-bold flex items-center justify-center gap-2 active:scale-95 transition"><span class="material-symbols-outlined text-lg">bookmark</span><span>שמירה</span></button>
+    <div class="flex gap-1.5">
+      <button onclick="window.print()" aria-label="הדפסה" class="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant"><span class="material-symbols-outlined text-lg">print</span></button>
+      <button id="share-btn-mobile" aria-label="שיתוף" class="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant"><span class="material-symbols-outlined text-lg">share</span></button>
+    </div>
+  </div>
+</div>
+
+<footer class="bg-stone-100 w-full border-t border-stone-200">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-4 px-8 py-6 w-full max-w-7xl mx-auto text-center md:text-right">
+    <div class="md:text-right">
+      <a href="/" class="text-xl font-black text-primary font-['Heebo']">התפריט</a>
+      <div class="text-[11px] text-stone-500 mt-0.5">מתאים לסוכרתיים, צליאקים, ותזונה דלת פחמימה</div>
+    </div>
+    <div class="flex gap-4 font-['Assistant'] text-xs text-stone-500">
+      <a class="hover:text-primary" href="/terms">תנאי שימוש</a>
+      <a class="hover:text-primary" href="/privacy">מדיניות פרטיות</a>
+      <a class="hover:text-primary" href="/contact">צור קשר</a>
+    </div>
+    <div class="font-['Assistant'] text-[10px] text-stone-500/80">© 2026 התפריט. כל הזכויות שמורות.</div>
+  </div>
+</footer>
+
+<script>
+  // Mobile hamburger toggle
+  const navToggle = document.getElementById('mobile-nav-toggle');
+  const navPanel = document.getElementById('mobile-nav-panel');
+  if (navToggle && navPanel) {
+    navToggle.addEventListener('click', () => {
+      const willOpen = navPanel.hidden;
+      navPanel.hidden = !willOpen;
+      navToggle.setAttribute('aria-expanded', String(willOpen));
+    });
+  }
+
+  const escapeHTML = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+
+  function getRecipeId() {
+    const path = location.pathname.split('/').filter(Boolean);
+    const last = path[path.length - 1] || '';
+    if (last && last !== 'recipe' && last !== 'recipe.html') return last.replace(/\.html$/, '');
+    const p = new URLSearchParams(location.search);
+    return p.get('id') || '';
+  }
+
+  function isIngSubheader(line) {
+    return line.endsWith(':') && line.length <= 40;
+  }
+
+  function ingredientItem(line, idx) {
+    if (isIngSubheader(line)) {
+      return `<li class="font-h font-bold text-[14px] lg:text-[15px] text-primary mt-3 mb-1 px-2">${escapeHTML(line)}</li>`;
+    }
+    return `
+      <li>
+        <label class="flex items-start gap-2.5 py-1.5 px-2 hover:bg-surface-container-lowest rounded-lg cursor-pointer group">
+          <input type="checkbox" class="step-checkbox w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary mt-1.5 shrink-0" id="ing-${idx}"/>
+          <span class="font-body-md text-on-surface group-hover:text-primary leading-relaxed">${escapeHTML(line)}</span>
+        </label>
+      </li>`;
+  }
+
+  // Render the instructions block. A line that's just a short label ending with
+  // ":" (e.g. "מילוי:", "ציפוי:", "בצק:") is a subsection header, not a step —
+  // it should not get a step number and should not break the running count.
+  function renderInstructions(text) {
+    const lines = (text || '').split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+    let stepNum = 0;
+    const out = [];
+    for (const line of lines) {
+      const cleaned = line.replace(/^\s*(\d+)\.\s*/, '').replace(/^\s*\*\s*/, '').trim();
+      const isSubheader = cleaned.endsWith(':') && cleaned.length <= 50;
+      if (isSubheader) {
+        out.push(`<h3 class="font-h font-['Heebo'] font-bold text-[17px] lg:text-[19px] text-primary mt-2 mb-1">${escapeHTML(cleaned)}</h3>`);
+        continue;
+      }
+      stepNum++;
+      const num = String(stepNum).padStart(2, '0');
+      out.push(`
+        <div class="flex gap-4 lg:gap-5 group mb-6">
+          <span class="text-3xl lg:text-4xl font-black text-secondary/25 font-['Heebo'] leading-none shrink-0 w-12 lg:w-14">${num}</span>
+          <p class="font-body-lg text-on-surface leading-relaxed pt-1">${escapeHTML(cleaned)}</p>
+        </div>`);
+    }
+    return out.join('');
+  }
+
+  // Some Airtable rows use newlines between ingredients, others run them together.
+  // If no newlines, split before "<digit/fraction> <Hebrew unit word>" so each
+  // measured ingredient becomes its own list item.
+  function splitIngredients(text) {
+    const lines = text.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+    let parts;
+    if (lines.length > 1) {
+      parts = lines;
+    } else {
+      const single = lines[0] || '';
+      if (!single) return [];
+      const UNITS = '(?:כוס(?:ות)?|כפית|כפיות|כפות|כף|גרם(?:ים)?|ק["״]ג|מ["״]ל|ליטר(?:ים)?|ביצים|ביצה|חבילה|חבילות|חופן|קופסה|פחית|שקית|צרור|טיפות|פרוסות|תפוז(?:ים)?)';
+      const re = new RegExp(`\\s+(?=(?:\\d+\\/\\d+|\\d+(?:\\.\\d+)?)\\s+${UNITS}(?:\\s|$))`, 'g');
+      parts = single.split(re).map(s => s.trim()).filter(Boolean);
+      if (parts.length <= 1) return [single];
+    }
+    // Some Airtable rows end the ingredients block with trailing prep notes
+    // (pan setup, oven temp, "after 20 min cover…"). Truncate each chunk at the
+    // first instructional keyword so those notes don't bleed into ingredients.
+    const INSTR = /\s+(?:תבנית|לחמ(?:ם|ים)|להעביר|להוסיף|לערבב|לאפות|להוציא|לכסות|לצנן|אחרי\s|מערבבים|מוסיפים|מכניסים|מומלץ|מחממים|אופים|פורסים|חותכים|חוצים|מצננים|להפריד|להמיס)/;
+    return parts
+      .map(p => {
+        const m = p.search(INSTR);
+        return m > 0 ? p.slice(0, m).trim() : p;
+      })
+      .filter(Boolean);
+  }
+
+  async function shareRecipe() {
+    const url = location.href;
+    const title = document.getElementById('hero-title').textContent || 'התפריט';
+    if (navigator.share) {
+      try { await navigator.share({ title, url }); return; } catch(_){}
+    }
+    try { await navigator.clipboard.writeText(url); alert('הקישור הועתק!'); }
+    catch(_) { alert('שיתוף לא נתמך'); }
+  }
+
+  function bindActions() {
+    document.getElementById('share-btn-desktop')?.addEventListener('click', shareRecipe);
+    document.getElementById('share-btn-mobile')?.addEventListener('click', shareRecipe);
+    const onSave = () => alert('שמירה תעבוד בהמשך — בקרוב!');
+    document.getElementById('save-btn-desktop')?.addEventListener('click', onSave);
+    document.getElementById('save-btn-mobile')?.addEventListener('click', onSave);
+  }
+
+  function renderError(msg) {
+    document.querySelector('main').innerHTML = `<div class="max-w-2xl mx-auto px-6 py-32 text-center">
+      <h1 class="font-h1 text-3xl mb-4">המתכון לא נמצא</h1>
+      <p class="text-on-surface-variant mb-8">${escapeHTML(msg || '')}</p>
+      <a href="/recipes" class="inline-block px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-container">חזרה לספרייה</a>
+    </div>`;
+  }
+
+  (async function init() {
+    bindActions();
+    const id = getRecipeId();
+    if (!id) { renderError('לא צויין מזהה מתכון.'); return; }
+
+    try {
+      const res = await fetch('/api/recipes?id=' + encodeURIComponent(id));
+      if (!res.ok) {
+        if (res.status === 404) renderError('המתכון שביקשתם לא קיים.');
+        else renderError('שגיאת שרת: ' + res.status);
+        return;
+      }
+      const r = await res.json();
+
+      document.getElementById('page-title').textContent = `התפריט · ${r.name}`;
+      document.title = `התפריט · ${r.name}`;
+      document.getElementById('hero-img').src = r.imageFullUrl || r.imageUrl || '';
+      document.getElementById('hero-img').alt = r.name || '';
+      document.getElementById('hero-title').textContent = r.name || '';
+      document.getElementById('hero-description').textContent = r.description || '';
+      const metas = { time: r.prepTime, difficulty: r.difficulty, servings: r.servingSize };
+      for (const [k, v] of Object.entries(metas)) {
+        const value = (v || '').trim();
+        document.getElementById(`meta-${k}`).textContent = value;
+        const pill = document.querySelector(`[data-meta="${k}"]`);
+        if (!value || value === '—') pill.style.display = 'none';
+      }
+      // CARB-AI Task 4 — derive total from per-serving × servings (lower bound for ranges).
+      const trimZero = (n) =>
+        String(n).replace(/\.0+$/, '').replace(/(\.\d*[1-9])0+$/, '$1');
+      const carbsDisplay = (netCarbs, servingSize) => {
+        const carbs = parseFloat(netCarbs);
+        if (!isFinite(carbs)) return null;
+        const match = String(servingSize || '').match(/(\d+(?:\.\d+)?)/);
+        const n = match ? parseFloat(match[1]) : NaN;
+        if (!isFinite(n) || n < 2) {
+          return { perServing: trimZero(carbs) + ' ג׳', hasTotal: false };
+        }
+        const total = trimZero(parseFloat((carbs * n).toFixed(1)));
+        return {
+          perServing: trimZero(carbs) + ' ג׳ לפי מנה',
+          total: total + ' ג׳ סה״כ',
+          hasTotal: true
+        };
+      };
+
+      // Net carbs — dual-display per-serving + total when servings ≥ 2.
+      // carbsDisplay returns null when netCarbs is empty/invalid (pill hidden).
+      const netCarbsPill = document.querySelector('[data-meta="netCarbs"]');
+      const carbsInfo = carbsDisplay(r.netCarbs, r.servingSize);
+      if (!carbsInfo) {
+        netCarbsPill.style.display = 'none';
+      } else if (carbsInfo.hasTotal) {
+        // No "פחמימות נטו" suffix — too long; the nutrition icon conveys context.
+        document.getElementById('meta-net-carbs').textContent =
+          `${carbsInfo.perServing} · ${carbsInfo.total}`;
+      } else {
+        // Original copy preserved verbatim when there's no total to disambiguate.
+        const perNum = carbsInfo.perServing.replace(/\s*ג׳$/, '');
+        document.getElementById('meta-net-carbs').textContent = `${perNum} ג׳ פחמימות נטו`;
+      }
+
+      const ings = splitIngredients(r.ingredients || '');
+      document.getElementById('ingredients-list').innerHTML = ings.map(ingredientItem).join('') ||
+        '<li class="text-on-surface-variant text-sm">אין מצרכים זמינים.</li>';
+      const realIngCount = ings.filter(l => !isIngSubheader(l)).length;
+      document.getElementById('ingredient-count').textContent = `${realIngCount} רכיבים`;
+
+      document.getElementById('steps-list').innerHTML = renderInstructions(r.instructions) ||
+        '<p class="text-on-surface-variant">אין הוראות הכנה זמינות.</p>';
+
+    } catch (err) {
+      console.error(err);
+      renderError('שגיאה בטעינת המתכון.');
+    }
+  })();
+</script>
+</body>
+</html>

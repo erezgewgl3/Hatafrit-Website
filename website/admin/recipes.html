@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="robots" content="noindex,nofollow">
+<title>התפריט · אדמין · כל המתכונים</title>
+<link rel="icon" type="image/png" href="/brand_assets/Logo.png"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        "outline": "#817563", "secondary": "#9e3e4c",
+        "surface-bright": "#fff8f3", "surface-container-highest": "#ece1d4",
+        "on-surface-variant": "#4f4535", "background": "#fff8f3",
+        "primary-fixed": "#ffdea6", "primary": "#785600", "on-primary": "#ffffff",
+        "on-surface": "#201b13", "surface-container-high": "#f1e7d9",
+        "surface-container-low": "#fdf2e5", "surface": "#fff8f3",
+        "primary-container": "#986d00", "surface-container-lowest": "#ffffff",
+        "outline-variant": "#d3c4af", "surface-container": "#f7ecdf",
+        "review-pending": "#B8860B",
+        "review-done": "#5a7a3a",
+        "review-done-bg": "#eef0e3"
+      },
+      borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
+      spacing: { lg: "48px", "container-max": "1200px", md: "24px", sm: "12px",
+        gutter: "24px", xs: "4px", xl: "80px", base: "8px" },
+      fontFamily: { display: ["Heebo"], body: ["Assistant"] },
+      boxShadow: {
+        "warm-sm": "0 1px 2px rgba(120,86,0,0.06), 0 1px 1px rgba(120,86,0,0.04)",
+        "warm-md": "0 4px 12px rgba(120,86,0,0.06), 0 2px 4px rgba(120,86,0,0.04)",
+        "warm-lg": "0 12px 32px rgba(120,86,0,0.08), 0 4px 12px rgba(120,86,0,0.05)",
+        "warm-xl": "0 24px 56px rgba(120,86,0,0.10), 0 8px 24px rgba(120,86,0,0.06)"
+      }
+    }}
+  };
+</script>
+<style>
+  /* ===== Source: Phase 2/3 chrome canon (edit.html:41-244) — wins for shared chrome per W5 ===== */
+  body { background: #fff8f3; font-family: 'Assistant', sans-serif; color: #201b13; }
+  .font-display { font-family: 'Heebo', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+  /* Paper grain — subtle SVG noise to give the cream a tactile feel */
+  .grain::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
+    opacity: 0.035; mix-blend-mode: multiply;
+  }
+
+  /* Inputs — branded, no Tailwind default blue rings */
+  /* Source: edit.html canon — list-view tweak: tighter padding to match mockup recipes-list.html:26-29 */
+  .input-base {
+    width: 100%; background: #ffffff; color: #201b13;
+    border: 1px solid #d3c4af; border-radius: 12px;
+    padding: 11px 16px; font-family: 'Assistant', sans-serif; font-size: 15px;
+    line-height: 1.5;
+    transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+    text-align: right;
+  }
+  .input-base:focus {
+    outline: none; border-color: #785600;
+    box-shadow: 0 0 0 4px rgba(120,86,0,0.10);
+    background: #fffdf9;
+  }
+
+  /* Primary button — warm brown */
+  /* Source: edit.html canon — slightly trimmed to match list-view density (mockup recipes-list.html:31-37) */
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(180deg, #8a6300 0%, #6d4c00 100%);
+    color: #ffffff; font-family: 'Heebo', sans-serif; font-weight: 700;
+    font-size: 15px; letter-spacing: 0.01em;
+    padding: 11px 20px; border-radius: 12px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 4px 12px rgba(120,86,0,0.20);
+    transition: transform 120ms ease, box-shadow 200ms ease, filter 150ms ease;
+    cursor: pointer; border: none; text-decoration: none;
+  }
+  .btn-primary:hover { filter: brightness(1.06); transform: translateY(-1px); box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 8px 18px rgba(120,86,0,0.26); }
+  .btn-primary:active { transform: translateY(0); filter: brightness(0.98); }
+  .btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(120,86,0,0.20), 0 4px 12px rgba(120,86,0,0.20); }
+  .btn-primary[disabled] { opacity: 0.6; cursor: wait; transform: none; filter: none; }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #ffffff; color: #4f4535; font-family: 'Heebo', sans-serif;
+    font-weight: 600; font-size: 14px;
+    padding: 9px 16px; border-radius: 10px;
+    border: 1px solid #d3c4af;
+    transition: background-color 150ms ease, border-color 150ms ease, transform 120ms ease;
+    cursor: pointer;
+  }
+  .btn-secondary:hover { background: #fdf2e5; border-color: #B8860B; }
+  .btn-secondary:active { transform: translateY(1px); }
+  .btn-secondary:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(120,86,0,0.18); border-color: #785600; }
+  .btn-secondary[disabled] { opacity: 0.6; cursor: wait; }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: #817563; font-family: 'Heebo', sans-serif;
+    font-weight: 500; font-size: 14px;
+    padding: 8px 12px; border-radius: 8px;
+    transition: color 150ms ease, background-color 150ms ease;
+    cursor: pointer; background: transparent; border: none;
+  }
+  .btn-ghost:hover { color: #785600; background: #fdf2e5; }
+  .btn-ghost:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(120,86,0,0.18); }
+
+  /* Card surface */
+  /* Source: list-view density — softer shadow than edit.html's card to keep the table dominant */
+  .card {
+    background: #ffffff; border-radius: 18px;
+    border: 1px solid #ece1d4;
+    box-shadow: 0 1px 2px rgba(120,86,0,0.04), 0 8px 20px rgba(120,86,0,0.04);
+  }
+
+  /* Top admin nav — canonical chrome */
+  /* Source: edit.html:211-212 */
+  .admin-nav { background: rgba(255, 248, 243, 0.9); backdrop-filter: blur(12px);
+    border-bottom: 1px solid #ece1d4; }
+
+  /* Dropdown menu (nav menu) */
+  /* Source: edit.html:232-243 */
+  .dropdown-menu { background: #ffffff; border-radius: 16px; border: 1px solid #ece1d4;
+    box-shadow: 0 1px 2px rgba(120,86,0,0.04), 0 16px 40px rgba(120,86,0,0.12); padding: 8px 0;
+    min-width: 260px; }
+  .dropdown-menu a, .dropdown-menu button {
+    display: flex; align-items: center; gap: 12px; width: 100%;
+    padding: 12px 16px; text-align: right;
+    font-family: 'Heebo', sans-serif; font-weight: 500; font-size: 15px; color: #201b13;
+    background: transparent; border: none; cursor: pointer;
+    transition: background-color 150ms ease;
+    text-decoration: none;
+  }
+  .dropdown-menu a:hover, .dropdown-menu button:hover { background: #fdf2e5; }
+  .dropdown-menu a:focus-visible, .dropdown-menu button:focus-visible { outline: none; background: #fdf2e5; }
+
+  /* ===== Source: mockup _dev-mockups/admin/recipes-list.html:55-132 — list-specific surface ===== */
+
+  /* Pill toggle (filter) */
+  /* Source: mockup wins per W5 */
+  .pill-toggle { display: inline-flex; gap: 4px; padding: 4px;
+    background: #f1e7d9; border-radius: 999px; border: 1px solid #ece1d4; }
+  .pill-toggle button {
+    padding: 8px 18px; border-radius: 999px;
+    font-family: 'Heebo', sans-serif; font-weight: 600; font-size: 13px;
+    color: #4f4535; cursor: pointer; background: transparent; border: none;
+    transition: background-color 150ms ease, color 150ms ease;
+    display: inline-flex; align-items: center; gap: 6px; }
+  .pill-toggle button:hover { color: #201b13; }
+  .pill-toggle button.active { background: #ffffff; color: #785600;
+    box-shadow: 0 1px 4px rgba(120,86,0,0.10); }
+  .pill-toggle button:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(120,86,0,0.18); }
+  .pill-toggle button .count { font-size: 11px; opacity: 0.7; font-variant-numeric: tabular-nums; }
+
+  /* Table */
+  /* Source: mockup recipes-list.html:69-89 */
+  .recipes-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+  .recipes-table thead th {
+    text-align: right; font-family: 'Heebo', sans-serif; font-weight: 700;
+    font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase;
+    color: #4f4535; padding: 14px 18px; background: #faf2e6;
+    border-bottom: 1px solid #ece1d4;
+  }
+  .recipes-table thead th:first-child { border-top-right-radius: 14px; padding-right: 22px; }
+  .recipes-table thead th:last-child { border-top-left-radius: 14px; padding-left: 22px; }
+  .recipes-table tbody td {
+    padding: 14px 18px; border-bottom: 1px solid #f1e7d9;
+    font-size: 14px; color: #4f4535; vertical-align: middle;
+  }
+  .recipes-table tbody tr { transition: background-color 150ms ease; cursor: pointer; }
+  .recipes-table tbody tr:hover { background: #fdf2e5; }
+  .recipes-table tbody tr:hover td:first-child { box-shadow: inset 3px 0 0 #785600; }
+  .recipes-table tbody td:first-child { padding-right: 22px; }
+  .recipes-table tbody td:last-child { padding-left: 22px; }
+  .recipes-table tbody tr:last-child td { border-bottom: none; }
+  .recipes-table tbody tr:last-child td:first-child { border-bottom-right-radius: 14px; }
+  .recipes-table tbody tr:last-child td:last-child { border-bottom-left-radius: 14px; }
+
+  /* Thumbnail */
+  /* Source: mockup recipes-list.html:91-94 */
+  .thumb {
+    width: 48px; height: 48px; border-radius: 10px; object-fit: cover;
+    background: #ece1d4; box-shadow: 0 2px 4px rgba(120,86,0,0.08);
+    display: block;
+  }
+  .recipe-name { font-family: 'Heebo', sans-serif; font-weight: 700; font-size: 15px; color: #201b13; }
+  .recipe-meta { font-size: 12px; color: #817563; margin-top: 2px; }
+
+  /* Category chip in row */
+  /* Source: mockup recipes-list.html:98-101 */
+  .cat-tag { display: inline-block; padding: 3px 10px; border-radius: 999px;
+    background: #f1e7d9; color: #4f4535;
+    font-family: 'Heebo', sans-serif; font-weight: 500; font-size: 12px;
+    margin-left: 4px; margin-bottom: 2px; }
+
+  /* Status pill — pending = saffron, done = sage */
+  /* Source: mockup recipes-list.html:103-110 */
+  .status-pill { display: inline-flex; align-items: center; gap: 7px;
+    padding: 4px 11px; border-radius: 999px;
+    font-family: 'Heebo', sans-serif; font-weight: 600; font-size: 12px; }
+  .status-pill::before { content: ""; width: 8px; height: 8px; border-radius: 999px; }
+  .status-pill.pending { background: rgba(184,134,11,0.10); color: #8a651e; }
+  .status-pill.pending::before { background: #B8860B; box-shadow: 0 0 0 3px rgba(184,134,11,0.18); }
+  .status-pill.done { background: rgba(90,122,58,0.10); color: #4a6630; }
+  .status-pill.done::before { background: #5a7a3a; box-shadow: 0 0 0 3px rgba(90,122,58,0.18); }
+
+  /* Numeric / date cells */
+  /* Source: mockup recipes-list.html:112-113 */
+  .num-cell { font-family: 'Heebo', sans-serif; font-weight: 700; font-variant-numeric: tabular-nums; color: #201b13; }
+  .date-cell { font-family: 'Heebo', sans-serif; font-size: 13px; color: #817563; font-variant-numeric: tabular-nums; }
+
+  /* Per-row 'ערוך' action */
+  /* Source: mockup recipes-list.html:115-122 */
+  .row-action {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 8px;
+    font-family: 'Heebo', sans-serif; font-weight: 600; font-size: 13px;
+    color: #785600; background: transparent; border: 1px solid transparent;
+    transition: background-color 150ms ease, border-color 150ms ease;
+    text-decoration: none;
+  }
+  .row-action:hover { background: #ffffff; border-color: #d3c4af; }
+  .row-action:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(120,86,0,0.18); border-color: #785600; }
+
+  /* Sort header link */
+  /* Source: mockup recipes-list.html:125-127 */
+  .sort-link { display: inline-flex; align-items: center; gap: 4px; cursor: pointer;
+    color: #4f4535; text-decoration: none;
+    transition: color 150ms ease;
+  }
+  .sort-link:hover { color: #201b13; }
+  .sort-link.active { color: #785600; }
+  .sort-link.active .material-symbols-outlined { color: #785600; }
+  .sort-link:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(120,86,0,0.18); border-radius: 4px; }
+
+  /* Search box */
+  /* Source: mockup recipes-list.html:130-132 */
+  .search-wrap { position: relative; }
+  .search-wrap input { padding-right: 42px; min-width: 280px; }
+  .search-wrap .icon { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: #817563; pointer-events: none; }
+
+  /* Empty state for filter+search returning 0 rows */
+  .empty-row { padding: 48px 24px; text-align: center; color: #817563;
+    font-family: 'Heebo', sans-serif; font-size: 14px; }
+</style>
+</head>
+<body class="grain min-h-screen">
+
+  <!-- =========================================================================
+       Top admin nav with progress chips + menu dropdown
+       (Source: website/admin/edit.html:285-343 — verbatim canonical chrome
+        with the post-Wave-0 hrefs for the 5 menu destinations.)
+       Note: replaces the mockup's top-right "חזרה ללוח" button per RESEARCH.md
+       A10/Q6 (cross-page consistency wins) — documented deviation.
+       ========================================================================= -->
+  <nav class="admin-nav fixed top-0 right-0 left-0 z-40">
+    <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="/admin/edit" class="flex items-center gap-3">
+        <img src="/brand_assets/Logo.png" alt="" class="h-9 w-auto"/>
+        <div class="leading-tight">
+          <div class="font-display font-extrabold text-[18px] text-on-surface">התפריט</div>
+          <div class="font-display text-[10px] tracking-[0.18em] uppercase text-on-surface-variant">אדמין</div>
+        </div>
+      </a>
+
+      <!-- Center mini progress (filled by renderProgressChips()) -->
+      <div class="hidden md:flex items-center gap-6">
+        <div class="text-center">
+          <div class="text-[11px] font-display font-bold uppercase tracking-[0.12em] text-on-surface-variant mb-1">היום</div>
+          <div class="font-display font-extrabold text-[18px] text-on-surface tabular-nums">
+            <span id="today-count">0</span> / 20
+          </div>
+        </div>
+        <div class="w-px h-8 bg-[#d3c4af]"></div>
+        <div class="text-center">
+          <div class="text-[11px] font-display font-bold uppercase tracking-[0.12em] text-on-surface-variant mb-1">סה״כ</div>
+          <div class="font-display font-extrabold text-[18px] text-on-surface tabular-nums">
+            <span id="total-reviewed">0</span> / <span id="total-recipes">222</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Menu button + dropdown -->
+      <div class="relative">
+        <button id="menu-toggle" type="button" class="btn-ghost" aria-haspopup="menu" aria-expanded="false">
+          <span class="material-symbols-outlined text-[20px]">menu</span>
+          <span>תפריט</span>
+        </button>
+        <div id="menu-dropdown" class="hidden dropdown-menu absolute top-full mt-2 left-0 z-50" role="menu">
+          <a href="/admin/recipes" role="menuitem">
+            <span class="material-symbols-outlined text-[20px] text-primary">list_alt</span>
+            <span>כל המתכונים</span>
+          </a>
+          <a href="/admin/new" role="menuitem">
+            <span class="material-symbols-outlined text-[20px] text-primary">add_circle</span>
+            <span>הוספת מתכון חדש</span>
+          </a>
+          <a href="/admin/coming-soon" role="menuitem">
+            <span class="material-symbols-outlined text-[20px] text-primary">label</span>
+            <span>ניהול קטגוריות</span>
+          </a>
+          <div class="border-t border-[#f1e7d9] my-1.5"></div>
+          <a href="/admin/dashboard" role="menuitem">
+            <span class="material-symbols-outlined text-[20px] text-on-surface-variant">space_dashboard</span>
+            <span>לוח התקדמות</span>
+          </a>
+          <button id="menu-logout" type="button" role="menuitem">
+            <span class="material-symbols-outlined text-[20px] text-on-surface-variant">logout</span>
+            <span>יציאה</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-24 pb-16 relative z-10">
+    <div class="max-w-[1400px] mx-auto px-6">
+
+      <!-- Page header (mockup recipes-list.html:164-168 — verbatim copy) -->
+      <header class="mb-7 text-right">
+        <div class="font-display text-[11px] font-bold uppercase tracking-[0.14em] text-primary mb-2">קטלוג מלא</div>
+        <h1 class="font-display font-extrabold text-[32px] tracking-tight text-on-surface mb-1.5 leading-tight" style="letter-spacing: -0.03em;">כל המתכונים</h1>
+        <p class="text-[15px] text-on-surface-variant max-w-[640px]" style="line-height: 1.7;">סינון, חיפוש ועריכה מהירה. לחיצה על שורה פותחת את עורך המתכון.</p>
+      </header>
+
+      <!-- Filter & search bar -->
+      <!-- DEVIATION (per RESEARCH.md Q7): mockup's "קטגוריות" filter button
+           omitted — search box already searches categories; full filter deferred to v2. -->
+      <div class="flex items-center gap-4 mb-5 flex-wrap justify-between">
+        <div class="flex items-center gap-3 flex-wrap">
+          <div class="pill-toggle" id="filter-pills" role="tablist" aria-label="סינון לפי סטטוס">
+            <button type="button" data-filter="all" class="active" role="tab" aria-selected="true">הכל <span class="count" id="count-all">0</span></button>
+            <button type="button" data-filter="unreviewed" role="tab" aria-selected="false">לבדוק <span class="count" id="count-unreviewed">0</span></button>
+            <button type="button" data-filter="reviewed" role="tab" aria-selected="false">נבדקו <span class="count" id="count-reviewed">0</span></button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="search-wrap">
+            <input id="search-input" type="text" class="input-base" placeholder="חיפוש לפי שם, מצרך, תיאור..." aria-label="חיפוש מתכונים"/>
+            <span class="material-symbols-outlined text-[20px] icon">search</span>
+          </div>
+          <a href="/admin/new" class="btn-primary">
+            <span class="material-symbols-outlined text-[18px]">add</span>
+            <span>מתכון חדש</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Table card -->
+      <div class="card overflow-hidden">
+        <table class="recipes-table" role="table" aria-label="כל המתכונים">
+          <thead>
+            <tr>
+              <th style="width:80px"></th>
+              <th>
+                <a class="sort-link active" data-sort="name" href="#" role="button" aria-label="מיון לפי שם">
+                  <span>שם</span>
+                  <span class="material-symbols-outlined text-[16px]" id="sort-arrow-name">arrow_upward</span>
+                </a>
+              </th>
+              <th>
+                <a class="sort-link" data-sort="category" href="#" role="button" aria-label="מיון לפי קטגוריה">
+                  <span>קטגוריה</span>
+                  <span class="material-symbols-outlined text-[16px]" id="sort-arrow-category">unfold_more</span>
+                </a>
+              </th>
+              <th>פח״נ</th>
+              <th>סטטוס</th>
+              <th>
+                <a class="sort-link" data-sort="reviewedAt" href="#" role="button" aria-label="מיון לפי תאריך בדיקה">
+                  <span>תאריך בדיקה</span>
+                  <span class="material-symbols-outlined text-[16px]" id="sort-arrow-reviewedAt">unfold_more</span>
+                </a>
+              </th>
+              <th style="width:100px"></th>
+            </tr>
+          </thead>
+          <tbody id="recipes-tbody">
+            <!-- Filled by renderTable(); shows skeleton text until first render. -->
+            <tr><td colspan="7" class="empty-row">טוען מתכונים…</td></tr>
+          </tbody>
+        </table>
+        <!-- DEVIATION (per RESEARCH.md Q1): replace mockup pagination footer (lines 362-369)
+             with a live count summary that updates with filter+search. -->
+        <div id="count-summary" class="text-center py-4 text-[13px] text-on-surface-variant border-t border-[#f1e7d9] font-display">טוען…</div>
+      </div>
+
+    </div>
+  </main>
+
+<script>
+// ===========================================================================
+// State + helpers
+// ===========================================================================
+
+const state = {
+  recipes: [],         // full list from GET /api/admin/recipes
+  allRecipes: [],      // alias used by renderProgressChips() — same array
+  search: '',
+  filter: 'all',       // 'all' | 'unreviewed' | 'reviewed'
+  sortKey: 'name',     // 'name' | 'category' | 'reviewedAt'
+  sortDir: 'asc',      // 'asc' | 'desc'
+};
+
+// Hebrew-correct sort — never use String.prototype.localeCompare (Pitfall #2)
+const collator = new Intl.Collator('he-IL', { numeric: true, sensitivity: 'base' });
+
+// Hebrew date formatter — "28.04.2026"
+const dateFmt = new Intl.DateTimeFormat('he-IL', { day: '2-digit', month: '2-digit', year: 'numeric' });
+function formatDate(iso) {
+  if (!iso) return '';
+  try { return dateFmt.format(new Date(iso)); }
+  catch { return ''; }
+}
+
+// ---- IL-timezone helpers — verbatim copy from edit.html:583-620 ----
+function todayStartIL() {
+  return new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Jerusalem' });
+}
+function ilDateOf(iso) {
+  if (!iso) return '';
+  try { return new Date(iso).toLocaleDateString('en-CA', { timeZone: 'Asia/Jerusalem' }); }
+  catch { return ''; }
+}
+function computeTodayCount() {
+  if (!Array.isArray(state.allRecipes)) return 0;
+  const today = todayStartIL();
+  return state.allRecipes.filter(r => r && r.reviewedAt && ilDateOf(r.reviewedAt) === today).length;
+}
+function computeTotalReviewed() {
+  if (!Array.isArray(state.allRecipes)) return 0;
+  return state.allRecipes.filter(r => r && r.reviewedAt).length;
+}
+function renderProgressChips() {
+  const today = computeTodayCount();
+  const total = computeTotalReviewed();
+  const totalCount = Array.isArray(state.allRecipes) ? state.allRecipes.length : 222;
+  const todayEl = document.getElementById('today-count');
+  const totalEl = document.getElementById('total-reviewed');
+  const totalRecipesEl = document.getElementById('total-recipes');
+  if (todayEl) todayEl.textContent = String(today);
+  if (totalEl) totalEl.textContent = String(total);
+  if (totalRecipesEl) totalRecipesEl.textContent = String(totalCount);
+}
+
+// ---- Debounce — vanilla 5-line, no library ----
+function debounce(fn, ms) {
+  let t = null;
+  return (...a) => { if (t) clearTimeout(t); t = setTimeout(() => { t = null; fn(...a); }, ms); };
+}
+
+// ===========================================================================
+// Filter / sort
+// ===========================================================================
+
+function applyFilters() {
+  let rows = state.recipes;
+  if (state.filter === 'unreviewed') rows = rows.filter(r => !r.reviewedAt);
+  else if (state.filter === 'reviewed') rows = rows.filter(r => r.reviewedAt);
+  if (state.search) {
+    const q = state.search.toLowerCase();
+    rows = rows.filter(r =>
+      (r.name || '').toLowerCase().includes(q) ||
+      (r.description || '').toLowerCase().includes(q) ||
+      (r.categories || []).some(c => (c || '').toLowerCase().includes(q))
+    );
+  }
+  return rows;
+}
+
+function applySort(rows) {
+  const dir = state.sortDir === 'asc' ? 1 : -1;
+  const k = state.sortKey;
+  return [...rows].sort((a, b) => {
+    if (k === 'name') {
+      return dir * collator.compare(a.name || '', b.name || '');
+    }
+    if (k === 'category') {
+      const av = (a.categories || [])[0] || '';
+      const bv = (b.categories || [])[0] || '';
+      return dir * collator.compare(av, bv);
+    }
+    if (k === 'reviewedAt') {
+      // Nulls always sort last regardless of direction.
+      const av = a.reviewedAt || '';
+      const bv = b.reviewedAt || '';
+      if (!av && !bv) return 0;
+      if (!av) return 1;
+      if (!bv) return -1;
+      return dir * (av < bv ? -1 : av > bv ? 1 : 0);
+    }
+    return 0;
+  });
+}
+
+// ===========================================================================
+// Auth-gated load
+// ===========================================================================
+
+async function loadRecipes() {
+  let r;
+  try {
+    r = await fetch('/api/admin/recipes', { credentials: 'same-origin' });
+  } catch {
+    showError('שגיאת רשת — רעני את הדף.');
+    return null;
+  }
+  if (r.status === 401) { window.location.replace('/admin/login'); return null; }
+  if (!r.ok) { showError('שגיאה בטעינה. (' + r.status + ')'); return null; }
+  let data;
+  try { data = await r.json(); } catch { showError('שגיאת פרסור.'); return null; }
+  return data.recipes || [];
+}
+
+function showError(msg) {
+  const tbody = document.getElementById('recipes-tbody');
+  const tr = document.createElement('tr');
+  const td = document.createElement('td');
+  td.colSpan = 7;
+  td.className = 'empty-row';
+  td.textContent = msg;
+  tr.appendChild(td);
+  tbody.replaceChildren(tr);
+  const summary = document.getElementById('count-summary');
+  if (summary) summary.textContent = '';
+}
+
+// ===========================================================================
+// DOM-only row builder — XSS-safe via textContent (T-04-01-01 mitigation)
+// ===========================================================================
+
+function buildRow(recipe) {
+  const tr = document.createElement('tr');
+  // Whole-row click → editor (defensive: skip if user clicked the explicit ערוך action)
+  tr.addEventListener('click', (e) => {
+    if (e.target.closest('.row-action')) return;
+    window.location.href = '/admin/edit?id=' + encodeURIComponent(recipe.id);
+  });
+
+  // ---- Thumbnail cell ----
+  const tdImg = document.createElement('td');
+  if (recipe.imageUrl) {
+    const img = document.createElement('img');
+    img.src = recipe.imageUrl;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.className = 'thumb';
+    img.alt = '';
+    tdImg.appendChild(img);
+  } else {
+    const ph = document.createElement('div');
+    ph.className = 'thumb';
+    tdImg.appendChild(ph);
+  }
+  tr.appendChild(tdImg);
+
+  // ---- Name + meta cell ----
+  const tdName = document.createElement('td');
+  const nameDiv = document.createElement('div');
+  nameDiv.className = 'recipe-name';
+  nameDiv.textContent = recipe.name || '(ללא שם)';
+  tdName.appendChild(nameDiv);
+  if (recipe.prepTime || recipe.servingSize) {
+    const meta = document.createElement('div');
+    meta.className = 'recipe-meta';
+    meta.textContent = [recipe.prepTime, recipe.servingSize].filter(Boolean).join(' · ');
+    tdName.appendChild(meta);
+  }
+  tr.appendChild(tdName);
+
+  // ---- Categories cell — first 2 chips, +N if more ----
+  const tdCat = document.createElement('td');
+  const cats = recipe.categories || [];
+  cats.slice(0, 2).forEach(c => {
+    const span = document.createElement('span');
+    span.className = 'cat-tag';
+    span.textContent = c;
+    tdCat.appendChild(span);
+  });
+  if (cats.length > 2) {
+    const more = document.createElement('span');
+    more.className = 'cat-tag';
+    more.textContent = '+' + (cats.length - 2);
+    tdCat.appendChild(more);
+  }
+  if (cats.length === 0) {
+    const dash = document.createElement('span');
+    dash.className = 'text-outline';
+    dash.textContent = '—';
+    tdCat.appendChild(dash);
+  }
+  tr.appendChild(tdCat);
+
+  // ---- netCarbs cell ----
+  const tdNet = document.createElement('td');
+  if (recipe.netCarbs) {
+    const num = document.createElement('span');
+    num.className = 'num-cell';
+    num.textContent = recipe.netCarbs;
+    tdNet.appendChild(num);
+    const unit = document.createElement('span');
+    unit.className = 'text-[12px] text-outline mr-0.5';
+    unit.textContent = 'g';
+    tdNet.appendChild(unit);
+  } else {
+    const dash = document.createElement('span');
+    dash.className = 'text-outline';
+    dash.textContent = '—';
+    tdNet.appendChild(dash);
+  }
+  tr.appendChild(tdNet);
+
+  // ---- Status pill ----
+  const tdStatus = document.createElement('td');
+  const pill = document.createElement('span');
+  pill.className = 'status-pill ' + (recipe.reviewedAt ? 'done' : 'pending');
+  pill.textContent = recipe.reviewedAt ? 'נבדק' : 'לבדוק';
+  tdStatus.appendChild(pill);
+  tr.appendChild(tdStatus);
+
+  // ---- Reviewed date ----
+  const tdDate = document.createElement('td');
+  const dateSpan = document.createElement('span');
+  dateSpan.className = 'date-cell';
+  dateSpan.textContent = recipe.reviewedAt ? formatDate(recipe.reviewedAt) : '—';
+  tdDate.appendChild(dateSpan);
+  tr.appendChild(tdDate);
+
+  // ---- Per-row 'ערוך' deep-link (encodeURIComponent — T-04-01-02 mitigation) ----
+  const tdAction = document.createElement('td');
+  const a = document.createElement('a');
+  a.href = '/admin/edit?id=' + encodeURIComponent(recipe.id);
+  a.className = 'row-action';
+  // Stop the row-level click from firing too — the link nav is enough.
+  a.addEventListener('click', (e) => { e.stopPropagation(); });
+  const label = document.createElement('span');
+  label.textContent = 'ערוך';
+  a.appendChild(label);
+  const arrow = document.createElement('span');
+  arrow.className = 'material-symbols-outlined text-[16px]';
+  arrow.textContent = 'arrow_back';
+  a.appendChild(arrow);
+  tdAction.appendChild(a);
+  tr.appendChild(tdAction);
+
+  return tr;
+}
+
+// ===========================================================================
+// Render pipeline
+// ===========================================================================
+
+function renderTable() {
+  const visible = applySort(applyFilters());
+  const tbody = document.getElementById('recipes-tbody');
+  if (visible.length === 0) {
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 7;
+    td.className = 'empty-row';
+    td.textContent = 'אין מתכונים בפילטר הזה';
+    tr.appendChild(td);
+    tbody.replaceChildren(tr);
+  } else {
+    tbody.replaceChildren(...visible.map(buildRow));
+  }
+  const summary = document.getElementById('count-summary');
+  if (summary) {
+    summary.textContent = 'מציגה ' + visible.length + ' מתוך ' + state.recipes.length + ' מתכונים';
+  }
+}
+
+function renderPillCounts() {
+  const all = state.recipes.length;
+  const unrev = state.recipes.filter(r => !r.reviewedAt).length;
+  const rev = state.recipes.filter(r => r.reviewedAt).length;
+  document.getElementById('count-all').textContent = String(all);
+  document.getElementById('count-unreviewed').textContent = String(unrev);
+  document.getElementById('count-reviewed').textContent = String(rev);
+}
+
+function updateSortIndicators() {
+  document.querySelectorAll('.sort-link[data-sort]').forEach(link => {
+    const isActive = link.dataset.sort === state.sortKey;
+    link.classList.toggle('active', isActive);
+    if (link.getAttribute('role') === 'button') {
+      link.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    }
+    const arrow = link.querySelector('.material-symbols-outlined');
+    if (arrow) {
+      if (isActive) {
+        arrow.textContent = state.sortDir === 'asc' ? 'arrow_upward' : 'arrow_downward';
+      } else {
+        arrow.textContent = 'unfold_more';
+      }
+    }
+  });
+}
+
+// ===========================================================================
+// Wire controls
+// ===========================================================================
+
+function wireFilterPills() {
+  const pills = document.getElementById('filter-pills');
+  pills.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-filter]');
+    if (!btn) return;
+    pills.querySelectorAll('button').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+    state.filter = btn.dataset.filter;
+    renderTable();
+  });
+}
+
+function wireSearch() {
+  const input = document.getElementById('search-input');
+  // 150ms debounce — Pitfall #4 mitigation
+  input.addEventListener('input', debounce(() => {
+    state.search = input.value.trim();
+    renderTable();
+  }, 150));
+}
+
+function wireSort() {
+  document.querySelectorAll('.sort-link[data-sort]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const key = link.dataset.sort;
+      if (state.sortKey === key) {
+        state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        state.sortKey = key;
+        state.sortDir = 'asc';
+      }
+      updateSortIndicators();
+      renderTable();
+    });
+  });
+}
+
+// ===========================================================================
+// Menu dropdown — verbatim copy from edit.html:1164-1215
+// (Drops the bubble-phase Esc handler from edit.html:1277-1285 — recipes.html
+//  has no dirty state, so capture-phase menu-close is the only Esc behavior.)
+// ===========================================================================
+
+function setupMenuDropdown() {
+  const toggleBtn = document.getElementById('menu-toggle');
+  const dropdown = document.getElementById('menu-dropdown');
+  if (!toggleBtn || !dropdown) return;
+
+  function open() {
+    dropdown.classList.remove('hidden');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+  }
+  function close() {
+    dropdown.classList.add('hidden');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = !dropdown.classList.contains('hidden');
+    if (isOpen) close(); else open();
+  });
+
+  // Click-outside dismissal.
+  document.addEventListener('click', (e) => {
+    if (dropdown.classList.contains('hidden')) return;
+    if (dropdown.contains(e.target) || toggleBtn.contains(e.target)) return;
+    close();
+  });
+
+  // Esc closes the dropdown (capture phase — same composition contract as
+  // edit.html, even though recipes.html doesn't ship a bubble-phase handler).
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !dropdown.classList.contains('hidden')) {
+      close();
+      e.stopImmediatePropagation();
+    }
+  }, true);
+
+  // Logout — POST then redirect; redirect even if POST fails.
+  const logoutBtn = document.getElementById('menu-logout');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', async () => {
+      try { await fetch('/api/admin/logout', { method: 'POST', credentials: 'same-origin' }); } catch {}
+      window.location.replace('/admin/login');
+    });
+  }
+}
+
+// ===========================================================================
+// Init
+// ===========================================================================
+
+(async function init() {
+  setupMenuDropdown();
+  wireFilterPills();
+  wireSearch();
+  wireSort();
+
+  const recipes = await loadRecipes();
+  if (!recipes) return; // showError or 401 already handled
+
+  state.recipes = recipes;
+  state.allRecipes = recipes; // alias for renderProgressChips()
+  renderPillCounts();
+  updateSortIndicators();
+  renderTable();
+  renderProgressChips();
+})();
+</script>
+</body>
+</html>

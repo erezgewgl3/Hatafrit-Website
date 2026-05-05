@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>צור קשר | התפריט</title>
+<meta name="description" content="יצירת קשר עם עדי מהתפריט — מייל, אינסטגרם וזמני מענה."/>
+<link rel="icon" type="image/png" href="/brand_assets/Logo.png"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        "outline": "#817563", "secondary": "#9e3e4c",
+        "on-surface-variant": "#4f4535", "background": "#fff8f3",
+        "primary-fixed": "#ffdea6", "primary": "#785600", "on-primary": "#ffffff",
+        "on-surface": "#201b13", "surface-container-low": "#fdf2e5",
+        "outline-variant": "#d3c4af", "surface-container": "#f7ecdf", "gold": "#B8860B",
+      },
+      borderRadius: { DEFAULT: "0.125rem", lg: "0.5rem", xl: "0.75rem", "2xl": "1rem", full: "9999px" },
+      fontFamily: { h: ["Heebo"], body: ["Assistant"] },
+    }}
+  };
+</script>
+<style>
+  body { background-color: #fff8f3; color: #201b13; font-family: 'Assistant', sans-serif; }
+  h1, h2, h3, h4 { font-family: 'Heebo', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
+</head>
+<body class="font-body bg-background text-on-surface antialiased">
+
+<header class="bg-stone-50/95 backdrop-blur-md fixed top-0 w-full z-50 border-b border-stone-200/50 shadow-sm shadow-stone-200/50">
+  <div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto font-['Heebo'] text-base font-medium">
+    <a href="/" class="inline-flex items-center gap-3 text-4xl font-black text-yellow-800">
+      <img src="/brand_assets/Logo.png" alt="התפריט" class="h-14 w-auto"/>
+      <span>התפריט</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8">
+      <a class="text-stone-600 hover:text-yellow-600 transition-colors" href="/recipes">מתכונים</a>
+      <a class="text-stone-600 hover:text-yellow-600 transition-colors" href="/hamrot">המרות ומידות</a>
+      <a class="text-stone-600 hover:text-yellow-600 transition-colors" href="/#about">אודות</a>
+      <a class="bg-[#B8860B] text-white px-4 py-1.5 rounded-full hover:brightness-110 transition-[filter] duration-200" href="/shulchan-echad">שיטת שולחן אחד</a>
+    </nav>
+    <button id="mobile-nav-toggle" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg text-on-surface-variant hover:bg-stone-100 transition-colors" aria-label="תפריט" aria-expanded="false" aria-controls="mobile-nav-panel">
+      <span class="material-symbols-outlined text-[26px]">menu</span>
+    </button>
+  </div>
+  <div id="mobile-nav-panel" hidden class="md:hidden border-t border-stone-200/50 bg-white">
+    <div class="flex flex-col gap-1 px-6 py-3 max-w-7xl mx-auto font-['Heebo'] text-[15px] font-medium">
+      <a class="text-stone-700 hover:text-yellow-700 py-2.5" href="/recipes">מתכונים</a>
+      <a class="text-stone-700 hover:text-yellow-700 py-2.5" href="/hamrot">המרות ומידות</a>
+      <a class="text-stone-700 hover:text-yellow-700 py-2.5" href="/#about">אודות</a>
+      <a class="bg-[#B8860B] text-white px-4 py-2.5 rounded-full text-center mt-2 mb-1" href="/shulchan-echad">שיטת שולחן אחד</a>
+    </div>
+  </div>
+</header>
+
+<main class="pt-32 pb-20 px-6 max-w-2xl mx-auto">
+
+  <h1 class="text-[32px] md:text-[40px] lg:text-[44px] font-extrabold leading-tight text-on-surface mb-4">צור קשר</h1>
+
+  <p class="text-[16px] leading-relaxed text-on-surface mb-10">יש שאלה? רוצה לשתף? אשמח לשמוע.</p>
+
+  <div class="space-y-7 mb-10">
+    <div>
+      <div class="text-[13px] text-on-surface-variant mb-1">דואר אלקטרוני</div>
+      <a href="mailto:adi@hatafrit.co.il" class="text-[16px] font-medium text-primary hover:text-gold transition-colors underline underline-offset-4 decoration-primary/30 hover:decoration-gold">adi@hatafrit.co.il</a>
+    </div>
+    <div>
+      <div class="text-[13px] text-on-surface-variant mb-1">אינסטגרם</div>
+      <a href="https://instagram.com/hatafrit" target="_blank" rel="noopener noreferrer" class="text-[16px] font-medium text-primary hover:text-gold transition-colors underline underline-offset-4 decoration-primary/30 hover:decoration-gold">@hatafrit</a>
+    </div>
+  </div>
+
+  <div class="border-t border-outline-variant/40 pt-6">
+    <div class="text-[13px] text-on-surface-variant mb-1.5">זמני מענה</div>
+    <p class="text-[14px] leading-relaxed text-on-surface-variant">אני משתדלת להגיב תוך 1-2 ימי עסקים. בתקופות עמוסות זה יכול לקחת קצת יותר — אבל אני תמיד חוזרת.</p>
+  </div>
+
+</main>
+
+<footer class="bg-stone-100 w-full mt-auto border-t border-stone-200 font-['Assistant'] text-sm">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-6 px-6 py-10 w-full max-w-7xl mx-auto">
+    <div class="text-right">
+      <div class="text-xl font-bold text-stone-800">התפריט</div>
+      <div class="text-stone-500 text-[12px] mt-1">מתאים לסוכרתיים, צליאקים, ותזונה דלת פחמימה</div>
+    </div>
+    <div class="flex gap-8">
+      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="/terms">תנאי שימוש</a>
+      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="/privacy">מדיניות פרטיות</a>
+      <a class="text-stone-500 hover:text-red-700 underline underline-offset-4" href="/contact">צור קשר</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('mobile-nav-toggle');
+  const navPanel = document.getElementById('mobile-nav-panel');
+  if (navToggle && navPanel) {
+    navToggle.addEventListener('click', () => {
+      const willOpen = navPanel.hidden;
+      navPanel.hidden = !willOpen;
+      navToggle.setAttribute('aria-expanded', String(willOpen));
+    });
+  }
+</script>
+
+</body>
+</html>
