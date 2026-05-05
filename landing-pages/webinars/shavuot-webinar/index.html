@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>סדנת מתכוני שבועות דלי פחמימה | התפריט</title>
+<meta name="description" content="סדנת מתכוני שבועות דלי פחמימה בזום עם עדי מהתפריט. פיצה, בלינצ׳ס ובורקס בגרסה ללא גלוטן וללא סוכר — שכל המשפחה אוכלת מאותו שולחן.">
+<meta property="og:title" content="סדנת מתכוני שבועות דלי פחמימה | התפריט">
+<meta property="og:description" content="פיצה, בלינצ׳ס ובורקס בגרסה ללא גלוטן וללא סוכר. שבועות אחד שכולם אוכלים מאותו שולחן.">
+<meta property="og:image" content="https://raw.githubusercontent.com/erezgewgl3/Hatafrit-Website/main/landing-pages/webinars/shavuot-webinar/pizza.jpeg">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #FDF6EC;
+  --warm-bg: #FAF0E4;
+  --gold: #C8963E;
+  --gold-light: #E8C882;
+  --gold-glow: rgba(200, 150, 62, 0.35);
+  --brown: #5C3D2E;
+  --brown-light: #8B6848;
+  --brown-deep: #3A2518;
+  --brown-darkest: #2A1810;
+  --text-main: #3A2518;
+  --text-soft: #6B5243;
+  --white: #FFFFFF;
+  --accent-green: #6B8F5B;
+  --accent-red: #C0392B;
+  --border-subtle: rgba(200, 150, 62, 0.2);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Heebo', sans-serif;
+  background: var(--cream);
+  color: var(--text-main);
+  line-height: 1.7;
+  overflow-x: hidden;
+  padding-bottom: 80px;
+}
+
+@media (min-width: 769px) { body { padding-bottom: 0; } }
+
+/* ===== HERO ===== */
+.hero {
+  background: linear-gradient(175deg, var(--brown) 0%, var(--brown-deep) 60%, var(--brown-darkest) 100%);
+  color: var(--white);
+  padding: 2.5rem 1.25rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C8963E' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.6;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--gold);
+  color: var(--brown);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.3rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.02em;
+}
+
+.hero h1 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 span { color: var(--gold-light); }
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.85);
+  font-weight: 300;
+  max-width: 560px;
+  margin: 0 auto 1.2rem;
+  line-height: 1.7;
+}
+
+.hero-details {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+
+.hero-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.9);
+}
+
+.hero-detail .icon { font-size: 1.1rem; }
+
+.hero-image {
+  max-width: 340px;
+  margin: 1rem auto 1.2rem;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(200, 150, 62, 0.2);
+  border: 2px solid rgba(200, 150, 62, 0.3);
+}
+
+.hero-image img { width: 100%; height: auto; display: block; }
+
+@media (min-width: 768px) {
+  .hero-image { max-width: 420px; margin: 1.5rem auto 1.5rem; border-radius: 16px; }
+}
+
+.hero-price-anchor {
+  display: inline-block;
+  font-size: 0.95rem;
+  color: var(--gold-light);
+  font-weight: 500;
+  margin-bottom: 1.2rem;
+  opacity: 0.9;
+}
+
+.hero-price-anchor strong { font-size: 1.2rem; font-weight: 800; }
+
+/* Urgency bar */
+.urgency-bar {
+  background: var(--accent-red);
+  color: var(--white);
+  text-align: center;
+  padding: 0.55rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  position: relative;
+  overflow: hidden;
+}
+
+.urgency-bar::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  animation: urgencyShine 3s infinite;
+}
+
+@keyframes urgencyShine {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* ===== CTA BUTTON ===== */
+.cta-button {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--brown);
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.9rem 2.2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 20px var(--gold-glow);
+  cursor: pointer;
+  border: none;
+  position: relative;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(200, 150, 62, 0.5);
+  background: var(--gold-light);
+}
+
+.cta-button:focus-visible { outline: 3px solid var(--gold-light); outline-offset: 3px; }
+.cta-button:active { transform: translateY(0); box-shadow: 0 2px 12px var(--gold-glow); }
+
+.cta-button--hero {
+  font-size: 1.15rem;
+  padding: 1rem 2.5rem;
+  animation: ctaPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: 0 4px 20px var(--gold-glow); }
+  50% { box-shadow: 0 4px 35px rgba(200, 150, 62, 0.55); }
+}
+
+.cta-subtext {
+  display: block;
+  text-align: center;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.55);
+  margin-top: 0.5rem;
+}
+
+/* ===== INLINE TESTIMONIAL (mini, near hero) ===== */
+.inline-testimonial {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin: 1.5rem auto 0;
+  max-width: 440px;
+  text-align: right;
+}
+
+.inline-testimonial-text {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+.inline-testimonial-source {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
+/* ===== SECTION COMMON ===== */
+.section {
+  padding: 2.5rem 1.25rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--brown);
+  margin-bottom: 1.2rem;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+
+/* ===== INSTRUCTOR CREDIBILITY ===== */
+.instructor { background: var(--white); border-bottom: 1px solid var(--border-subtle); }
+
+.instructor-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: right;
+}
+
+.instructor-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 2px solid var(--gold);
+  box-shadow: 0 2px 10px var(--gold-glow);
+}
+
+.instructor-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center 12%; }
+.instructor-info { flex: 1; }
+
+.instructor-name {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--brown);
+}
+
+.instructor-bio {
+  font-size: 0.88rem;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+.instructor-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.6rem;
+}
+
+.instructor-stat {
+  font-size: 0.8rem;
+  color: var(--brown-light);
+  font-weight: 600;
+}
+
+/* ===== RECOGNITION / PAIN ===== */
+.recognition { background: var(--white); border-bottom: 1px solid var(--border-subtle); }
+
+.recognition-text {
+  font-size: 1.05rem;
+  color: var(--text-main);
+  text-align: center;
+  line-height: 1.9;
+}
+
+.recognition-text p { margin-bottom: 0.8rem; }
+
+.recognition-text .highlight {
+  background: linear-gradient(transparent 60%, rgba(200, 150, 62, 0.25) 60%);
+  font-weight: 600;
+}
+
+.recognition-punchline {
+  font-weight: 700;
+  color: var(--brown);
+  font-size: 1.1rem;
+  margin-top: 0.3rem;
+}
+
+/* ===== WHAT YOU GET ===== */
+.what-you-get { background: var(--cream); }
+
+.benefit-card {
+  background: var(--white);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.3rem 1.2rem;
+  margin-bottom: 0.9rem;
+  position: relative;
+  transition: transform 0.2s ease;
+  overflow: hidden;
+}
+
+.benefit-card:hover { transform: translateY(-2px); }
+
+.benefit-image {
+  width: calc(100% + 2.4rem);
+  margin: -1.3rem -1.2rem 1rem;
+  height: 180px;
+  overflow: hidden;
+  position: relative;
+}
+
+.benefit-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.benefit-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.15), transparent 40%);
+  pointer-events: none;
+}
+
+.benefit-number {
+  position: absolute;
+  top: -11px;
+  right: 18px;
+  background: var(--gold);
+  color: var(--white);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px var(--gold-glow);
+  z-index: 2;
+}
+
+.benefit-card.has-image .benefit-number { top: 158px; }
+
+.benefit-title {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--brown);
+  margin-bottom: 0.3rem;
+}
+
+.benefit-desc {
+  font-size: 0.92rem;
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+.benefit-desc strong { color: var(--brown); }
+
+/* ===== BONUS ===== */
+.bonus-section {
+  background: var(--warm-bg);
+  border-top: 2px solid var(--gold);
+  border-bottom: 2px solid var(--gold);
+}
+
+.bonus-card {
+  background: var(--white);
+  border: 2px dashed var(--gold-light);
+  border-radius: 12px;
+  padding: 1.3rem;
+  text-align: center;
+}
+
+.bonus-label {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--white);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.7rem;
+  border-radius: 4px;
+  margin-bottom: 0.6rem;
+}
+
+.bonus-title {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--brown);
+  margin-bottom: 0.3rem;
+}
+
+.bonus-desc {
+  font-size: 0.88rem;
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+/* ===== SUITABILITY TAG ===== */
+.suitability {
+  background: linear-gradient(135deg, #F0F7ED, #E8F1E4);
+  border: 1px solid rgba(107, 143, 91, 0.3);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 720px;
+}
+
+.suitability-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent-green);
+}
+
+/* ===== SOCIAL PROOF ===== */
+.social-proof { background: var(--white); }
+
+.testimonial {
+  background: var(--cream);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 0.8rem;
+  border-right: 3px solid var(--gold);
+  position: relative;
+}
+
+.testimonial::before {
+  content: '\201D';
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  font-size: 2.2rem;
+  color: var(--gold-light);
+  font-family: serif;
+  line-height: 1;
+}
+
+.testimonial-text {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  padding-right: 1.3rem;
+  line-height: 1.7;
+}
+
+.testimonial-source {
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  margin-top: 0.4rem;
+  font-weight: 500;
+}
+
+/* ===== SCHEDULE ===== */
+.schedule { background: var(--cream); }
+
+.schedule-box {
+  background: var(--white);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.schedule-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  gap: 0.7rem;
+}
+
+.schedule-row:last-child { border-bottom: none; }
+
+.schedule-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.schedule-label { font-weight: 600; font-size: 0.9rem; color: var(--brown); }
+.schedule-value { font-size: 0.85rem; color: var(--text-soft); margin-top: 0.1rem; }
+
+/* ===== WHO IS THIS FOR ===== */
+.who-for { background: var(--white); }
+.who-list { list-style: none; }
+
+.who-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.55rem 0;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+.who-list li .check {
+  color: var(--accent-green);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ===== PRICING ===== */
+.pricing {
+  background: linear-gradient(175deg, var(--brown), var(--brown-deep));
+  color: var(--white);
+  text-align: center;
+  padding: 2.5rem 1.25rem;
+}
+
+.pricing .section-title { color: var(--gold-light); }
+
+.pricing-cards {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pricing-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 16px;
+  padding: 1.5rem 1.2rem;
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.pricing-card.featured {
+  border-color: var(--gold);
+  background: rgba(200, 150, 62, 0.12);
+}
+
+.pricing-card.featured::before {
+  content: 'הכי משתלם';
+  position: absolute;
+  top: -11px;
+  right: 50%;
+  transform: translateX(50%);
+  background: var(--gold);
+  color: var(--brown);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.9rem;
+  border-radius: 50px;
+  white-space: nowrap;
+}
+
+.pricing-label { font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 0.4rem; }
+
+.pricing-amount {
+  font-family: 'Rubik', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--gold-light);
+  line-height: 1;
+}
+
+.pricing-amount span { font-size: 1.1rem; font-weight: 400; }
+
+.pricing-note { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 0.4rem; }
+
+/* Value stack — Hormozi-style "what you get" list */
+.value-stack {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 1.2rem 1.3rem;
+  max-width: 480px;
+  margin: 0 auto 1.5rem;
+  text-align: right;
+}
+
+.value-stack-title {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--gold-light);
+  margin-bottom: 0.7rem;
+  text-align: center;
+}
+
+.value-stack ul { list-style: none; padding: 0; margin: 0; }
+
+.value-stack li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  padding: 0.35rem 0;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.55;
+}
+
+.value-stack li .check {
+  color: var(--gold-light);
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.guarantee {
+  margin: 1.2rem auto 0;
+  padding: 0.85rem 1.1rem;
+  background: rgba(107, 143, 91, 0.15);
+  border: 1px solid rgba(107, 143, 91, 0.3);
+  border-radius: 10px;
+  display: block;
+  max-width: 460px;
+}
+
+.guarantee-text { font-size: 0.85rem; color: rgba(255,255,255,0.9); line-height: 1.6; }
+.guarantee-text strong { color: var(--gold-light); }
+
+/* ===== FAQ ===== */
+.faq { background: var(--cream); }
+
+.faq-item {
+  background: var(--white);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  margin-bottom: 0.6rem;
+  overflow: hidden;
+}
+
+.faq-q {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--brown);
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.faq-q:hover { background: rgba(200, 150, 62, 0.05); }
+.faq-q:active { background: rgba(200, 150, 62, 0.1); }
+
+.faq-q::after {
+  content: '+';
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--gold);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+}
+
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+
+.faq-a {
+  font-size: 0.88rem;
+  color: var(--text-soft);
+  line-height: 1.7;
+  padding: 0 1.2rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding-bottom 0.3s ease;
+  padding-bottom: 0;
+}
+
+.faq-item.open .faq-a { max-height: 320px; padding-bottom: 1rem; }
+
+/* ===== FINAL CTA ===== */
+.final-cta {
+  background: var(--warm-bg);
+  text-align: center;
+  padding: 2.5rem 1.25rem;
+}
+
+.final-cta-text {
+  font-size: 1.1rem;
+  color: var(--text-main);
+  margin-bottom: 1.2rem;
+  line-height: 1.8;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.final-cta .cta-button { background: var(--brown); color: var(--gold-light); }
+.final-cta .cta-button:hover { background: var(--brown-deep); }
+.final-cta .cta-button:active { background: var(--brown-darkest); }
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--text-main);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 1.2rem;
+  font-size: 0.78rem;
+}
+
+.footer a { color: var(--gold-light); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* ===== STICKY MOBILE CTA ===== */
+.sticky-cta { display: none; }
+
+@media (max-width: 768px) {
+  .sticky-cta {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: var(--brown-deep);
+    border-top: 2px solid var(--gold);
+    padding: 0.6rem 1rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+  }
+
+  .sticky-cta-price {
+    color: var(--gold-light);
+    font-family: 'Rubik', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .sticky-cta-price small {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    display: block;
+  }
+
+  .sticky-cta .cta-button {
+    font-size: 0.95rem;
+    padding: 0.7rem 1.4rem;
+    white-space: nowrap;
+    animation: none;
+    flex-shrink: 0;
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (min-width: 768px) {
+  .hero { padding: 3.5rem 2rem 4rem; }
+  .hero h1 { font-size: 2.5rem; }
+  .section { padding: 3rem 2rem; }
+  .section-title { font-size: 1.6rem; }
+}
+
+@media (max-width: 768px) {
+  .section { padding: 1.5rem 1.1rem; }
+  .section-title { margin-bottom: 0.8rem; }
+  .hero { padding: 2rem 1.1rem 2rem; }
+  .pricing { padding: 2rem 1.1rem; }
+  .final-cta { padding: 1.8rem 1.1rem; }
+  .mid-cta { padding: 1rem 1.1rem; }
+  .suitability { margin: 1rem auto; }
+  .recognition-text { line-height: 1.7; }
+}
+
+@media (max-width: 500px) {
+  .hero h1 { font-size: 1.55rem; }
+  .hero-sub { font-size: 0.98rem; }
+  .pricing-cards { flex-direction: column; align-items: center; }
+  .pricing-card { width: 100%; max-width: 280px; }
+}
+
+.mid-cta {
+  text-align: center;
+  padding: 1.5rem 1.25rem;
+  background: var(--cream);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.benefit-card, .testimonial, .bonus-card {
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+.benefit-card:nth-child(1) { animation-delay: 0.1s; }
+.benefit-card:nth-child(2) { animation-delay: 0.15s; }
+.benefit-card:nth-child(3) { animation-delay: 0.2s; }
+.benefit-card:nth-child(4) { animation-delay: 0.25s; }
+
+/* ===== COUNTDOWN ===== */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.countdown-unit {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 0.4rem 0.6rem;
+  min-width: 52px;
+  text-align: center;
+}
+
+.countdown-number {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1;
+}
+
+.countdown-label {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.55);
+  margin-top: 0.15rem;
+}
+
+/* ===== CRO: Hero mini-guarantee pill (under primary CTA) ===== */
+.hero-mini-guarantee {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 0.7rem auto 0;
+  padding: 0.45rem 0.95rem;
+  background: rgba(107, 143, 91, 0.18);
+  border: 1px solid rgba(107, 143, 91, 0.4);
+  border-radius: 50px;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.5;
+  max-width: 460px;
+  text-align: center;
+}
+
+.mini-guarantee-icon {
+  font-size: 0.95rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+@media (max-width: 380px) {
+  .hero-mini-guarantee { font-size: 0.72rem; padding: 0.4rem 0.75rem; }
+}
+
+/* ===== CRO: Mobile-first hero CTA full-width ===== */
+.hero .cta-button--hero {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+@media (min-width: 769px) {
+  .hero .cta-button--hero {
+    display: inline-block;
+    width: auto;
+  }
+}
+
+/* ===== CRO: Enemy / Agitation Block ===== */
+.enemy-block {
+  background: linear-gradient(180deg, #FAF0E4 0%, #F5E6D0 100%);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 2.2rem 1.25rem;
+  position: relative;
+}
+
+.enemy-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 50%;
+  transform: translateX(50%);
+  width: 60px;
+  height: 3px;
+  background: var(--accent-red);
+  border-radius: 0 0 3px 3px;
+}
+
+.enemy-content {
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.enemy-content p {
+  font-size: 1.05rem;
+  color: var(--text-main);
+  line-height: 1.75;
+  margin-bottom: 0.6rem;
+}
+
+.enemy-content p strong { color: var(--brown); }
+
+.enemy-punchline {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.15rem !important;
+  font-weight: 700;
+  color: var(--brown) !important;
+  margin-top: 0.8rem !important;
+  letter-spacing: -0.01em;
+}
+
+@media (min-width: 768px) {
+  .enemy-block { padding: 2.5rem 2rem; }
+  .enemy-content p { font-size: 1.15rem; }
+  .enemy-punchline { font-size: 1.3rem !important; }
+}
+
+/* ===== CRO: Value Stack with Item + Price columns ===== */
+.value-stack-list { list-style: none; padding: 0; margin: 0; }
+
+.value-stack-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.55rem 0;
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.45;
+  border-bottom: 1px dashed rgba(255,255,255,0.08);
+}
+
+.value-stack-list li:last-child { border-bottom: none; }
+
+.value-stack-list .vs-item {
+  flex: 1;
+  text-align: right;
+}
+
+.value-stack-list .vs-price {
+  flex-shrink: 0;
+  color: var(--gold-light);
+  font-weight: 600;
+  font-size: 0.85rem;
+  font-family: 'Rubik', sans-serif;
+  white-space: nowrap;
+}
+
+.value-total {
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 2px solid rgba(200, 150, 62, 0.3);
+  text-align: center;
+}
+
+.value-total-row {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 0.35rem;
+  font-family: 'Rubik', sans-serif;
+}
+
+.value-strike {
+  text-decoration: line-through;
+  text-decoration-color: var(--accent-red);
+  text-decoration-thickness: 2px;
+  color: rgba(255,255,255,0.6);
+  margin-right: 0.3rem;
+}
+
+.value-today {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.25rem;
+  color: var(--gold-light);
+}
+
+.value-today strong {
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* ===== CRO: Risk Reversal Guarantee Box ===== */
+.guarantee--risk-reversal {
+  display: block;
+  margin: 0 auto 1.4rem;
+  max-width: 520px;
+  padding: 1.2rem 1.3rem;
+  background: rgba(107, 143, 91, 0.18);
+  border: 2px dashed rgba(232, 200, 130, 0.55);
+  border-radius: 14px;
+  text-align: center;
+}
+
+.guarantee-icon {
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.guarantee-headline {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.guarantee-text {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.7;
+}
+
+/* ===== CRO: Instructor bio bullets ===== */
+.bio-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 0;
+}
+
+.bio-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--text-soft);
+  line-height: 1.5;
+  padding: 0.18rem 0;
+}
+
+.bio-list li::before {
+  content: '✓';
+  color: var(--accent-green);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ===== CRO: Sticky bar — single full-width button ===== */
+@media (max-width: 768px) {
+  .sticky-cta {
+    z-index: 50;
+    padding: 0.6rem 0.9rem;
+    justify-content: center;
+  }
+  .sticky-cta .cta-button {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    font-size: 1rem;
+    padding: 0.85rem 1rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== URGENCY BAR ===== -->
+<div class="urgency-bar">
+  🔥 הרשמה מוקדמת ב-99₪ עד 11.5 בלבד — אחרי זה המחיר עולה!
+</div>
+
+<!-- ===== HERO (mobile-first: text + CTA above the fold, image below) ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">סדנת שולחן אחד לשבועות</div>
+    <h1>
+      שבועות בלי להכין <span>שתי ארוחות</span>
+    </h1>
+    <p class="hero-sub">
+      ב־90 דקות תלמדי להכין פיצה, בלינצ׳ס ובורקס לחג. מתאים לסוכרתיים, לצליאק ולדלת פחמימה — בלי שאף אחד בשולחן ירגיש שהוא אוכל "אוכל מיוחד".
+    </p>
+
+    <a href="https://meshulam.co.il/purchase?b=19aeb8a09f9ee5f052106f4a81ad3c95" class="cta-button cta-button--hero">שמרי לי מקום ב־99₪</a>
+    <div class="hero-mini-guarantee">
+      <span class="mini-guarantee-icon">🛡️</span>
+      <span>כולל אחריות משפחה אוהבת · החזר מלא אם זה לא עומד בהבטחה</span>
+    </div>
+    <span class="cta-subtext">הצטרפי ליותר מ־1,000 נשים שכבר למדו לבשל ולאפות בסדנאות שלי</span>
+
+    <!-- Below-the-fold supporting content -->
+    <div class="hero-image">
+      <img src="https://raw.githubusercontent.com/erezgewgl3/Hatafrit-Website/main/landing-pages/webinars/shavuot-webinar/pizza.jpeg" alt="פיצה דלת פחמימה - ללא גלוטן וללא סוכר">
+    </div>
+
+    <div class="hero-details">
+      <div class="hero-detail">
+        <span class="icon">📅</span>
+        <span>ראשון 17.5 | 19:00</span>
+      </div>
+      <div class="hero-detail">
+        <span class="icon">💻</span>
+        <span>בזום, מהבית</span>
+      </div>
+      <div class="hero-detail">
+        <span class="icon">📖</span>
+        <span>חוברת וסרטוני הדרכה</span>
+      </div>
+    </div>
+
+    <div class="countdown" id="countdown">
+      <div class="countdown-unit">
+        <div class="countdown-number" id="cd-days">--</div>
+        <div class="countdown-label">ימים</div>
+      </div>
+      <div class="countdown-unit">
+        <div class="countdown-number" id="cd-hours">--</div>
+        <div class="countdown-label">שעות</div>
+      </div>
+      <div class="countdown-unit">
+        <div class="countdown-number" id="cd-mins">--</div>
+        <div class="countdown-label">דקות</div>
+      </div>
+    </div>
+
+    <div class="inline-testimonial">
+      <div class="inline-testimonial-text">
+        "הסדנה נותנת אומץ להאמין בעצמי שאני מסוגלת ליצור מאכלים טעימים של קיטו."
+      </div>
+      <div class="inline-testimonial-source">— משתתפת בסדנת הלחמים</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ENEMY / AGITATION BLOCK (directly below hero — replaces longer recognition) ===== -->
+<section class="enemy-block">
+  <div class="enemy-content">
+    <p>מכירה את זה שבשבועות כולם סביב השולחן... <strong>ואז יש מישהו שלא יכול לאכול כמעט כלום?</strong></p>
+    <p>הילד הסוכרתי. בת המשפחה עם הצליאק.</p>
+    <p>ואז מתחילות שתי ארוחות.</p>
+    <p class="enemy-punchline">בסדנה הזו אנחנו עושות את זה אחרת.</p>
+  </div>
+</section>
+
+<!-- ===== INSTRUCTOR CREDIBILITY (bio chopped to authority bullets) ===== -->
+<section class="instructor section">
+  <div class="instructor-content">
+    <div class="instructor-avatar"><img src="https://raw.githubusercontent.com/erezgewgl3/Hatafrit-Website/main/landing-pages/webinars/shavuot-webinar/adi.jpeg" alt="עדי - התפריט"></div>
+    <div class="instructor-info">
+      <div class="instructor-name">עדי מהתפריט</div>
+      <ul class="bio-list">
+        <li>מחברת 6 ספרי מתכונים דלי פחמימה וללא גלוטן</li>
+        <li>מעל 1,000 נשים השתתפו בסדנאות שלי</li>
+        <li>שנים של ניסיון בבישול לסוכרתיים, צליאקים ודלת פחמימה</li>
+        <li>בבית שלי כולם אוכלים מאותו שולחן — בלי ארוחות נפרדות</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MID-PAGE CTA ===== -->
+<div class="mid-cta">
+  <a href="https://meshulam.co.il/purchase?b=19aeb8a09f9ee5f052106f4a81ad3c95" class="cta-button">אני רוצה את כל המנות האלה בשבועות ←</a>
+</div>
+
+<!-- ===== WHAT YOU GET / מה לומדים ===== -->
+<section class="what-you-get section">
+  <h2 class="section-title">מה לומדים בסדנה?</h2>
+
+  <div class="benefit-card has-image">
+    <div class="benefit-image">
+      <img src="https://raw.githubusercontent.com/erezgewgl3/Hatafrit-Website/main/landing-pages/webinars/shavuot-webinar/pizza.jpeg" alt="פיצה דלת פחמימה - הסדנה הראשונה שמכינות ביחד">
+    </div>
+    <div class="benefit-number">1</div>
+    <div class="benefit-title">פיצה מרגריטה — נכין ביחד, בזמן אמת</div>
+    <div class="benefit-desc">
+      את מכינה את המצרכים מראש. בסדנה אנחנו הולכות יד ביד, צעד אחר צעד, כל אחת מהמטבח שלה. בצק ללא גלוטן וללא סוכר שמתנהג כמו הבצק האמיתי. <strong>בסוף הסדנה — פיצה אמיתית על השולחן שלך.</strong> לא תחליף, לא מאכזב.
+    </div>
+  </div>
+
+  <div class="benefit-card has-image">
+    <div class="benefit-image">
+      <img src="https://raw.githubusercontent.com/erezgewgl3/Hatafrit-Website/main/landing-pages/webinars/shavuot-webinar/blintzes.jpeg" alt="בלינצ׳ס פטריות ושמנת - מנה עיקרית מרשימה">
+    </div>
+    <div class="benefit-number">2</div>
+    <div class="benefit-title">בלינצ׳ס מלוח ומתוק — בצק אחד, שני עולמות</div>
+    <div class="benefit-desc">
+      בצק אחד שעובד גם למנה עיקרית (פטריות ושמנת) וגם לקינוח (ממרח שוקולד ביתי). <strong>שתי מנות מרשימות מאותו בצק</strong> — לארוחת החג, לאורחים, ולכל זמן שבא לכן משהו טעים.
+    </div>
+  </div>
+
+  <div class="benefit-card has-image">
+    <div class="benefit-image">
+      <img src="https://raw.githubusercontent.com/erezgewgl3/Hatafrit-Website/main/landing-pages/webinars/shavuot-webinar/tartlets.jpeg" alt="טארטלטים גבינה - בצק שמשמש כל השנה">
+    </div>
+    <div class="benefit-number">3</div>
+    <div class="benefit-title">טארטלט שיכול להפוך לבורקס — הבצק שישמש אותך כל השנה</div>
+    <div class="benefit-desc">
+      אחד הבצקים הכי שימושיים שיש. לומדים אותו פעם אחת — ומשתמשים בו לבורקס, לטארטלטים, וכבסיס לפשטידות. <strong>זה לא מתכון לחג — זה ארגז כלים לכל השנה.</strong>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BONUS ===== -->
+<section class="bonus-section section">
+  <h2 class="section-title">🎁 בונוס בחוברת המתכונים</h2>
+
+  <div class="bonus-card">
+    <div class="bonus-label">בונוס</div>
+    <div class="bonus-title">מתכוני בונוס נוספים — לא רק לחג</div>
+    <div class="bonus-desc">
+      בנוסף ל-3 המנות שלומדים בסדנה, חוברת המתכונים כוללת מתכוני בונוס שתוכלו להכין כל השנה.<br>
+      <strong>הבצקים שתלמדי בסדנה — תשתמשי בהם הרבה אחרי שהחג נגמר.</strong>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SUITABILITY ===== -->
+<div class="section" style="padding-top: 0; padding-bottom: 0;">
+  <div class="suitability">
+    <div class="suitability-text">
+      ✅ כל המתכונים בסדנה בנויים ללא גלוטן, ללא סוכר ודלי פחמימה — ומתאימים למשפחות שמתמודדות עם סוכרת או צליאק, ולמי שאוכלת דל פחמימה
+    </div>
+  </div>
+</div>
+
+<!-- ===== WHO IS THIS FOR ===== -->
+<section class="who-for section">
+  <h2 class="section-title">הסדנה הזו בשבילך אם</h2>
+  <ul class="who-list">
+    <li>
+      <span class="check">✓</span>
+      <span>את בתזונה דלת פחמימה ורוצה לשבת בשבועות עם כולם ולאכול — לא להסתכל</span>
+    </li>
+    <li>
+      <span class="check">✓</span>
+      <span>יש במשפחה מישהו עם סוכרת או צליאק ואת רוצה שכולם יאכלו מאותו שולחן</span>
+    </li>
+    <li>
+      <span class="check">✓</span>
+      <span>את מארחת בחג ורוצה שיהיה על השולחן משהו שמתאים לכולם — בלי שמישהי תרגיש שמכינים לה "ארוחה בצד"</span>
+    </li>
+    <li>
+      <span class="check">✓</span>
+      <span>ניסית מתכונים מהאינטרנט וקיבלת משהו מאכזב שלא דומה למקור</span>
+    </li>
+    <li>
+      <span class="check">✓</span>
+      <span>את רוצה ללמוד להכין בצקים שישמשו אותך כל השנה, לא רק לשבועות</span>
+    </li>
+  </ul>
+</section>
+
+<!-- ===== SOCIAL PROOF ===== -->
+<section class="social-proof section">
+  <h2 class="section-title">מה אומרות משתתפות מסדנאות קודמות</h2>
+
+  <div class="testimonial">
+    <div class="testimonial-text">
+      תודה רבה על סדנה נהדרת, זה כניסה רכה לעולם של מוצרים שלא הכרתי ואני מחכה להתנסות עוד ועוד!
+    </div>
+    <div class="testimonial-source">— משתתפת בסדנת הלחמים</div>
+  </div>
+
+  <div class="testimonial">
+    <div class="testimonial-text">
+      היה כיף וטעים — חיסלתי את כל המטוגנים בשמחה. אני הולכת לנסות את כל שאר המתכונים בשבועות הקרובים.
+    </div>
+    <div class="testimonial-source">— משתתפת בסדנת הלחמים</div>
+  </div>
+
+  <div class="testimonial">
+    <div class="testimonial-text">
+      גילו לאח שלי סוכרת נעורים ולי יש צליאק כבר שנים, ככה שכל המתכונים שלך מושלמים עבור שנינו. תודה לך על רגע של שלווה.
+    </div>
+    <div class="testimonial-source">— עוקבת באינסטגרם</div>
+  </div>
+
+  <div class="testimonial">
+    <div class="testimonial-text">
+      מסתכלת עכשיו על המייל — המתכונים והסרטונים. שאפו על ההשקעה!
+    </div>
+    <div class="testimonial-source">— משתתפת בסדנת הלחמים</div>
+  </div>
+</section>
+
+<!-- ===== SCHEDULE ===== -->
+<section class="schedule section">
+  <h2 class="section-title">פרטים טכניים</h2>
+  <div class="schedule-box">
+    <div class="schedule-row">
+      <span class="schedule-icon">📅</span>
+      <div>
+        <div class="schedule-label">מתי</div>
+        <div class="schedule-value">יום ראשון, 17 במאי 2026, בשעה 19:00</div>
+      </div>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-icon">💻</span>
+      <div>
+        <div class="schedule-label">איפה</div>
+        <div class="schedule-value">בזום. לינק יישלח למייל ולוואטסאפ לפני הסדנה</div>
+      </div>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-icon">⏱️</span>
+      <div>
+        <div class="schedule-label">כמה זמן</div>
+        <div class="schedule-value">כשעה וחצי עד שעתיים</div>
+      </div>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-icon">🛒</span>
+      <div>
+        <div class="schedule-label">מה צריך להכין</div>
+        <div class="schedule-value">רשימת מצרכים תישלח מראש, ככה תספיקי לקנות הכל בזמן</div>
+      </div>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-icon">🎥</span>
+      <div>
+        <div class="schedule-label">לא יכולה בתאריך?</div>
+        <div class="schedule-value">הסדנה מוקלטת. תקבלי את ההקלטה, חוברת המתכונים והסרטונים גם אם לא הצלחת להגיע</div>
+      </div>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-icon">📖</span>
+      <div>
+        <div class="schedule-label">מה תקבלי אחרי</div>
+        <div class="schedule-value">חוברת מתכונים, מתכוני בונוס, סרטוני הדרכה והקלטה — הכל במייל</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="pricing" id="pricing">
+  <h2 class="section-title">כמה זה עולה?</h2>
+
+  <div class="pricing-cards">
+    <div class="pricing-card featured">
+      <div class="pricing-label">הרשמה מוקדמת</div>
+      <div class="pricing-amount">99 <span>₪</span></div>
+      <div class="pricing-note">עד 11.5</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-label">מחיר רגיל</div>
+      <div class="pricing-amount">129 <span>₪</span></div>
+      <div class="pricing-note">מ־12.5 והלאה</div>
+    </div>
+  </div>
+
+  <div class="value-stack">
+    <div class="value-stack-title">מה את מקבלת בסדנה הזו</div>
+    <ul class="value-stack-list">
+      <li>
+        <span class="vs-item">סדנת זום חיה</span>
+        <span class="vs-price">שווי: <bdi>150₪</bdi></span>
+      </li>
+      <li>
+        <span class="vs-item">הקלטה לצפייה חוזרת</span>
+        <span class="vs-price">שווי: <bdi>100₪</bdi></span>
+      </li>
+      <li>
+        <span class="vs-item">חוברת מתכונים להדפסה</span>
+        <span class="vs-price">שווי: <bdi>90₪</bdi></span>
+      </li>
+      <li>
+        <span class="vs-item">רשימת קניות מסודרת לחג</span>
+        <span class="vs-price">שווי: <bdi>50₪</bdi></span>
+      </li>
+    </ul>
+    <div class="value-total">
+      <div class="value-total-row">שווי כולל: <span class="value-strike"><bdi>390₪</bdi></span></div>
+      <div class="value-today">היום: <strong><bdi>99₪</bdi> בלבד</strong></div>
+    </div>
+  </div>
+
+  <!-- Risk reversal — placed directly above the checkout CTA -->
+  <div class="guarantee guarantee--risk-reversal">
+    <div class="guarantee-icon">🛡️</div>
+    <div class="guarantee-headline">אחריות משפחה אוהבת</div>
+    <div class="guarantee-text">
+      תכיני מנה אחת מהסדנה תוך 14 יום. אם המשפחה לא טעמה, לא אכלה ואת מרגישה שזה לא עמד בהבטחה — תקבלי החזר מלא.
+    </div>
+  </div>
+
+  <a href="https://meshulam.co.il/purchase?b=19aeb8a09f9ee5f052106f4a81ad3c95" class="cta-button cta-button--hero">שמרי לי מקום ב־99₪</a>
+</section>
+
+<!-- ===== FAQ (medical reassurance first, open by default) ===== -->
+<section class="faq section">
+  <h2 class="section-title">שאלות שתמיד שואלים</h2>
+
+  <div class="faq-item open">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      <span>האם המתכונים מתאימים לסוכרתיים / צליאקים?</span>
+    </div>
+    <div class="faq-a">המתכונים בסדנה בנויים ללא גלוטן, ללא סוכר ודלי פחמימה. במקרה של צליאק חשוב להשתמש בחומרי גלם שמסומנים ללא גלוטן ולוודא שאין זיהום משני. במקרה של סוכרת, חשוב להתאים לפי ההנחיות האישיות שלכם.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      <span>אני לא יודעת לאפות, זה מתאים לי?</span>
+    </div>
+    <div class="faq-a">בהחלט. הסדנה מיועדת גם למתחילות. אני מסבירה כל שלב, כל חומר גלם, וכל טעות נפוצה. תצאי עם ביטחון להכין לבד, והמתכונים לא מצריכים שום ציוד מיוחד או ניסיון קודם.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      <span>מה אם אני לא יכולה להגיע ב-17.5?</span>
+    </div>
+    <div class="faq-a">הסדנה מוקלטת. תקבלי את ההקלטה המלאה, חוברת המתכונים וסרטוני ההדרכה גם אם לא השתתפת בלייב. לא מפספסת כלום.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      <span>מאיפה קונים את חומרי הגלם?</span>
+    </div>
+    <div class="faq-a">רשימת מצרכים מפורטת תישלח מראש. רוב החומרים זמינים בחנויות טבע, באינטרנט, או ברשתות השיווק הגדולות. גם אתן טיפים למי שקונה לראשונה.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      <span>אפשר לשלם בתשלומים?</span>
+    </div>
+    <div class="faq-a">מי שנרשמה עד 11.5 משלמת 99₪ בלבד. מ־12.5 והלאה המחיר 129₪ — תשלום אחד.</div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta">
+  <div class="final-cta-text">
+    שבועות זה לא החג שבו יושבים בצד.<br>
+    פיצה, בלינצ׳ס, בורקס — המנות האלה יכולות להיות על השולחן שלך, בגרסה שמתאימה לסוכרתיים, לצליאקים ולכל המשפחה.<br>
+    <strong>כולם אוכלים מאותו שולחן. ואף אחד לא מרגיש שונה.</strong>
+  </div>
+  <a href="https://meshulam.co.il/purchase?b=19aeb8a09f9ee5f052106f4a81ad3c95" class="cta-button">אני רוצה שכולם יאכלו מאותו שולחן בשבועות ←</a>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  התפריט &copy; 2026 | כל הזכויות שמורות
+</footer>
+
+<!-- ===== STICKY MOBILE CTA (single full-width button to checkout) ===== -->
+<div class="sticky-cta">
+  <a href="https://meshulam.co.il/purchase?b=19aeb8a09f9ee5f052106f4a81ad3c95" class="cta-button">שמרי מקום · 99₪</a>
+</div>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+// Countdown to workshop: May 17, 2026 19:00 Israel time
+(function() {
+  var target = new Date('2026-05-17T19:00:00+03:00').getTime();
+
+  function update() {
+    var now = Date.now();
+    var diff = target - now;
+
+    if (diff <= 0) {
+      document.getElementById('countdown').style.display = 'none';
+      return;
+    }
+
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+    document.getElementById('cd-days').textContent = days;
+    document.getElementById('cd-hours').textContent = hours;
+    document.getElementById('cd-mins').textContent = mins;
+  }
+
+  update();
+  setInterval(update, 60000);
+})();
+
+// Price auto-switch: early bird ends end of May 11, 2026 (Israel time)
+// Preview post-deadline view with ?after in URL
+(function() {
+  var deadline = new Date('2026-05-12T00:00:00+03:00').getTime();
+  var forceAfter = window.location.search.indexOf('after') !== -1;
+  var isAfterDeadline = forceAfter || Date.now() >= deadline;
+
+  if (isAfterDeadline) {
+    var urgencyBar = document.querySelector('.urgency-bar');
+    if (urgencyBar) urgencyBar.style.display = 'none';
+
+    // Pricing cards → single card
+    var pricingCards = document.querySelector('.pricing-cards');
+    if (pricingCards) {
+      pricingCards.innerHTML = '<div class="pricing-card featured" style="min-width:240px;">' +
+        '<div class="pricing-label">מחיר הסדנה</div>' +
+        '<div class="pricing-amount">129 <span>₪</span></div>' +
+        '<div class="pricing-note">כולל הקלטה, חוברת וסרטונים</div>' +
+        '</div>';
+    }
+
+    // Value stack today line → 129₪
+    var valueToday = document.querySelector('.value-today');
+    if (valueToday) valueToday.innerHTML = 'היום: <strong><bdi>129₪</bdi> בלבד</strong>';
+
+    // All CTAs that mention "ב־99₪" → "ב־129₪"
+    var ctaButtons = document.querySelectorAll('.cta-button');
+    ctaButtons.forEach(function(btn) {
+      if (btn.textContent.indexOf('99₪') !== -1) {
+        btn.innerHTML = btn.innerHTML.replace(/99₪/g, '129₪');
+      }
+    });
+
+    // FAQ payment answer
+    var faqItems = document.querySelectorAll('.faq-a');
+    faqItems.forEach(function(item) {
+      if (item.textContent.indexOf('מי שנרשמה עד 11.5') !== -1) {
+        item.textContent = 'המחיר הוא 129₪ — תשלום אחד שכולל סדנה לייב, הקלטה, חוברת מתכונים וסרטוני הדרכה.';
+      }
+    });
+  }
+})();
+
+// Show sticky CTA only after scrolling past hero
+(function() {
+  var sticky = document.querySelector('.sticky-cta');
+  if (!sticky) return;
+
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        var scrolled = window.scrollY > window.innerHeight * 0.6;
+        sticky.style.transform = scrolled ? 'translateY(0)' : 'translateY(100%)';
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  sticky.style.transform = 'translateY(100%)';
+  sticky.style.transition = 'transform 0.3s ease';
+})();
+</script>
+
+</body>
+</html>
