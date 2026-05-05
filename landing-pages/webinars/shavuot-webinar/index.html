@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>סדנת מתכוני שבועות דלי פחמימה | התפריט</title>
-<meta name="description" content="סדנת מתכוני שבועות דלי פחמימה בזום עם עדי מהתפריט. פיצה, בלינצ׳ס ובורקס בגרסה ללא גלוטן וללא סוכר — שכל המשפחה אוכלת מאותו שולחן.">
+<meta name="description" content="סדנת מתכוני שבועות דלי פחמימה בזום עם עדי מהתפריט. פיצה, בלינצ׳ס ובורקס בגרסה ללא גלוטן וללא סוכר, שכל המשפחה אוכלת מאותו שולחן.">
 <meta property="og:title" content="סדנת מתכוני שבועות דלי פחמימה | התפריט">
 <meta property="og:description" content="פיצה, בלינצ׳ס ובורקס בגרסה ללא גלוטן וללא סוכר. שבועות אחד שכולם אוכלים מאותו שולחן.">
 <meta property="og:image" content="https://raw.githubusercontent.com/erezgewgl3/Hatafrit-Website/main/landing-pages/webinars/shavuot-webinar/pizza.jpeg">
@@ -353,10 +353,10 @@ body {
 
 .benefit-image {
   width: calc(100% + 2.4rem);
-  margin: -1.3rem -1.2rem 1rem;
-  height: 180px;
-  overflow: hidden;
+  margin: -1.3rem -1.2rem 1.4rem;
+  aspect-ratio: 3 / 4;
   position: relative;
+  background: var(--warm-bg);
 }
 
 .benefit-image img {
@@ -392,7 +392,10 @@ body {
   z-index: 2;
 }
 
-.benefit-card.has-image .benefit-number { top: 158px; }
+.benefit-card.has-image .benefit-number {
+  top: auto;
+  bottom: -13px;
+}
 
 .benefit-title {
   font-family: 'Rubik', sans-serif;
@@ -615,7 +618,7 @@ body {
 
 .pricing-note { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 0.4rem; }
 
-/* Value stack — Hormozi-style "what you get" list */
+/* Value stack,Hormozi-style "what you get" list */
 .value-stack {
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.12);
@@ -803,6 +806,7 @@ body {
   .hero h1 { font-size: 2.5rem; }
   .section { padding: 3rem 2rem; }
   .section-title { font-size: 1.6rem; }
+  .what-you-get .benefit-card { max-width: 460px; margin-left: auto; margin-right: auto; }
 }
 
 @media (max-width: 768px) {
@@ -1092,7 +1096,7 @@ body {
   margin-top: 1px;
 }
 
-/* ===== CRO: Sticky bar — single full-width button ===== */
+/* ===== CRO: Sticky bar,single full-width button ===== */
 @media (max-width: 768px) {
   .sticky-cta {
     z-index: 50;
@@ -1114,7 +1118,7 @@ body {
 
 <!-- ===== URGENCY BAR ===== -->
 <div class="urgency-bar">
-  🔥 הרשמה מוקדמת ב-99₪ עד 11.5 בלבד — אחרי זה המחיר עולה!
+  🔥 הרשמה מוקדמת ב-99₪ עד 11.5 בלבד, אחרי זה המחיר עולה!
 </div>
 
 <!-- ===== HERO (mobile-first: text + CTA above the fold, image below) ===== -->
@@ -1125,7 +1129,7 @@ body {
       שבועות בלי להכין <span>שתי ארוחות</span>
     </h1>
     <p class="hero-sub">
-      ב־90 דקות תלמדי להכין פיצה, בלינצ׳ס ובורקס לחג. מתאים לסוכרתיים, לצליאק ולדלת פחמימה — בלי שאף אחד בשולחן ירגיש שהוא אוכל "אוכל מיוחד".
+      ב־90 דקות תלמדי להכין פיצה, בלינצ׳ס ובורקס לחג. מתאימים לסוכרתיים, צליאקים, ולתזונת דלת פחמימה, בלי שאף אחד בשולחן ירגיש שהוא אוכל "אוכל מיוחד".
     </p>
 
     <a href="https://meshulam.co.il/purchase?b=19aeb8a09f9ee5f052106f4a81ad3c95" class="cta-button cta-button--hero">שמרי לי מקום ב־99₪</a>
@@ -1174,12 +1178,12 @@ body {
       <div class="inline-testimonial-text">
         "הסדנה נותנת אומץ להאמין בעצמי שאני מסוגלת ליצור מאכלים טעימים של קיטו."
       </div>
-      <div class="inline-testimonial-source">— משתתפת בסדנת הלחמים</div>
+      <div class="inline-testimonial-source">משתתפת בסדנת הלחמים</div>
     </div>
   </div>
 </section>
 
-<!-- ===== ENEMY / AGITATION BLOCK (directly below hero — replaces longer recognition) ===== -->
+<!-- ===== ENEMY / AGITATION BLOCK (directly below hero,replaces longer recognition) ===== -->
 <section class="enemy-block">
   <div class="enemy-content">
     <p>מכירה את זה שבשבועות כולם סביב השולחן... <strong>ואז יש מישהו שלא יכול לאכול כמעט כלום?</strong></p>
@@ -1198,8 +1202,8 @@ body {
       <ul class="bio-list">
         <li>מחברת 6 ספרי מתכונים דלי פחמימה וללא גלוטן</li>
         <li>מעל 1,000 נשים השתתפו בסדנאות שלי</li>
-        <li>שנים של ניסיון בבישול לסוכרתיים, צליאקים ודלת פחמימה</li>
-        <li>בבית שלי כולם אוכלים מאותו שולחן — בלי ארוחות נפרדות</li>
+        <li>שנים של ניסיון בבישול לסוכרתיים,צליאקים ומאכלים דלי פחמימה</li>
+        <li>בבית שלי כולם אוכלים מאותו שולחן, בלי ארוחות נפרדות</li>
       </ul>
     </div>
   </div>
@@ -1217,33 +1221,32 @@ body {
   <div class="benefit-card has-image">
     <div class="benefit-image">
       <img src="https://raw.githubusercontent.com/erezgewgl3/Hatafrit-Website/main/landing-pages/webinars/shavuot-webinar/pizza.jpeg" alt="פיצה דלת פחמימה - הסדנה הראשונה שמכינות ביחד">
+      <div class="benefit-number">1</div>
     </div>
-    <div class="benefit-number">1</div>
-    <div class="benefit-title">פיצה מרגריטה — נכין ביחד, בזמן אמת</div>
+    <div class="benefit-title">פיצה, נכין ביחד, בזמן אמת</div>
     <div class="benefit-desc">
-      את מכינה את המצרכים מראש. בסדנה אנחנו הולכות יד ביד, צעד אחר צעד, כל אחת מהמטבח שלה. בצק ללא גלוטן וללא סוכר שמתנהג כמו הבצק האמיתי. <strong>בסוף הסדנה — פיצה אמיתית על השולחן שלך.</strong> לא תחליף, לא מאכזב.
-    </div>
+      את מכינה את המצרכים מראש. בסדנה אנחנו הולכות יד ביד, צעד אחר צעד, כל אחת מהמטבח שלה. בצק ללא גלוטן וללא סוכר שמתנהג כמו הבצק האמיתי. <strong>בסוף הסדנה, פיצה אמיתית על השולחן שלך.</strong>    </div>
   </div>
 
   <div class="benefit-card has-image">
     <div class="benefit-image">
       <img src="https://raw.githubusercontent.com/erezgewgl3/Hatafrit-Website/main/landing-pages/webinars/shavuot-webinar/blintzes.jpeg" alt="בלינצ׳ס פטריות ושמנת - מנה עיקרית מרשימה">
+      <div class="benefit-number">2</div>
     </div>
-    <div class="benefit-number">2</div>
-    <div class="benefit-title">בלינצ׳ס מלוח ומתוק — בצק אחד, שני עולמות</div>
+    <div class="benefit-title">בלינצ׳ס מלוח ומתוק, בצק אחד, שני עולמות</div>
     <div class="benefit-desc">
-      בצק אחד שעובד גם למנה עיקרית (פטריות ושמנת) וגם לקינוח (ממרח שוקולד ביתי). <strong>שתי מנות מרשימות מאותו בצק</strong> — לארוחת החג, לאורחים, ולכל זמן שבא לכן משהו טעים.
+      בצק אחד שעובד גם למנה עיקרית (פטריות ושמנת) וגם לקינוח (ממרח שוקולד ביתי). <strong>שתי מנות מרשימות מאותו בצק</strong>, לארוחת החג, לאורחים, ולכל זמן שבא לכן משהו טעים.
     </div>
   </div>
 
   <div class="benefit-card has-image">
     <div class="benefit-image">
       <img src="https://raw.githubusercontent.com/erezgewgl3/Hatafrit-Website/main/landing-pages/webinars/shavuot-webinar/tartlets.jpeg" alt="טארטלטים גבינה - בצק שמשמש כל השנה">
+      <div class="benefit-number">3</div>
     </div>
-    <div class="benefit-number">3</div>
-    <div class="benefit-title">טארטלט שיכול להפוך לבורקס — הבצק שישמש אותך כל השנה</div>
+    <div class="benefit-title">טארטלט שיכול להפוך לבורקס, הבצק שישמש אותך כל השנה</div>
     <div class="benefit-desc">
-      אחד הבצקים הכי שימושיים שיש. לומדים אותו פעם אחת — ומשתמשים בו לבורקס, לטארטלטים, וכבסיס לפשטידות. <strong>זה לא מתכון לחג — זה ארגז כלים לכל השנה.</strong>
+      אחד הבצקים הכי שימושיים שיש. כזה שלומדים להכין פעם אחת, ומשתמשים בו לבורקס, לטארטלטים, וכבסיס לפשטידות. <strong>זה לא מתכון לחג, זה ארגז כלים לכל השנה.</strong>
     </div>
   </div>
 </section>
@@ -1254,10 +1257,10 @@ body {
 
   <div class="bonus-card">
     <div class="bonus-label">בונוס</div>
-    <div class="bonus-title">מתכוני בונוס נוספים — לא רק לחג</div>
+    <div class="bonus-title">מתכוני בונוס נוספים, לא רק לחג</div>
     <div class="bonus-desc">
       בנוסף ל-3 המנות שלומדים בסדנה, חוברת המתכונים כוללת מתכוני בונוס שתוכלו להכין כל השנה.<br>
-      <strong>הבצקים שתלמדי בסדנה — תשתמשי בהם הרבה אחרי שהחג נגמר.</strong>
+      <strong>הבצקים שתלמדי להכין בסדנה ישמשו אותך הרבה אחרי שהחג נגמר.</strong>
     </div>
   </div>
 </section>
@@ -1266,7 +1269,7 @@ body {
 <div class="section" style="padding-top: 0; padding-bottom: 0;">
   <div class="suitability">
     <div class="suitability-text">
-      ✅ כל המתכונים בסדנה בנויים ללא גלוטן, ללא סוכר ודלי פחמימה — ומתאימים למשפחות שמתמודדות עם סוכרת או צליאק, ולמי שאוכלת דל פחמימה
+      ✅ כל המתכונים בסדנה הם ללא גלוטן, ללא סוכר והם דלי פחמימה, ומתאימים למשפחות שמתמודדות עם סוכרת או צליאק, ולמי שאוכלת דל פחמימה
     </div>
   </div>
 </div>
@@ -1277,7 +1280,7 @@ body {
   <ul class="who-list">
     <li>
       <span class="check">✓</span>
-      <span>את בתזונה דלת פחמימה ורוצה לשבת בשבועות עם כולם ולאכול — לא להסתכל</span>
+      <span>את בתזונה דלת פחמימה ורוצה לשבת בשבועות עם כולם ולאכול, לא להסתכל</span>
     </li>
     <li>
       <span class="check">✓</span>
@@ -1285,7 +1288,7 @@ body {
     </li>
     <li>
       <span class="check">✓</span>
-      <span>את מארחת בחג ורוצה שיהיה על השולחן משהו שמתאים לכולם — בלי שמישהי תרגיש שמכינים לה "ארוחה בצד"</span>
+      <span>את מארחת בחג ורוצה שיהיה על השולחן משהו שמתאים לכולם, בלי שמישהי תרגיש שמכינים לה "ארוחה בצד"</span>
     </li>
     <li>
       <span class="check">✓</span>
@@ -1306,28 +1309,28 @@ body {
     <div class="testimonial-text">
       תודה רבה על סדנה נהדרת, זה כניסה רכה לעולם של מוצרים שלא הכרתי ואני מחכה להתנסות עוד ועוד!
     </div>
-    <div class="testimonial-source">— משתתפת בסדנת הלחמים</div>
+    <div class="testimonial-source">משתתפת בסדנת הלחמים</div>
   </div>
 
   <div class="testimonial">
     <div class="testimonial-text">
-      היה כיף וטעים — חיסלתי את כל המטוגנים בשמחה. אני הולכת לנסות את כל שאר המתכונים בשבועות הקרובים.
+      היה כיף וטעים, חיסלתי את כל המטוגנים בשמחה. אני הולכת לנסות את כל שאר המתכונים בשבועות הקרובים.
     </div>
-    <div class="testimonial-source">— משתתפת בסדנת הלחמים</div>
+    <div class="testimonial-source">משתתפת בסדנת הלחמים</div>
   </div>
 
   <div class="testimonial">
     <div class="testimonial-text">
       גילו לאח שלי סוכרת נעורים ולי יש צליאק כבר שנים, ככה שכל המתכונים שלך מושלמים עבור שנינו. תודה לך על רגע של שלווה.
     </div>
-    <div class="testimonial-source">— עוקבת באינסטגרם</div>
+    <div class="testimonial-source">עוקבת באינסטגרם</div>
   </div>
 
   <div class="testimonial">
     <div class="testimonial-text">
-      מסתכלת עכשיו על המייל — המתכונים והסרטונים. שאפו על ההשקעה!
+      מסתכלת עכשיו על המייל, המתכונים והסרטונים. שאפו על ההשקעה!
     </div>
-    <div class="testimonial-source">— משתתפת בסדנת הלחמים</div>
+    <div class="testimonial-source">משתתפת בסדנת הלחמים</div>
   </div>
 </section>
 
@@ -1374,7 +1377,7 @@ body {
       <span class="schedule-icon">📖</span>
       <div>
         <div class="schedule-label">מה תקבלי אחרי</div>
-        <div class="schedule-value">חוברת מתכונים, מתכוני בונוס, סרטוני הדרכה והקלטה — הכל במייל</div>
+        <div class="schedule-value">חוברת מתכונים, מתכוני בונוס, סרטוני הדרכה והקלטה, הכל במייל</div>
       </div>
     </div>
   </div>
@@ -1423,12 +1426,12 @@ body {
     </div>
   </div>
 
-  <!-- Risk reversal — placed directly above the checkout CTA -->
+  <!-- Risk reversal,placed directly above the checkout CTA -->
   <div class="guarantee guarantee--risk-reversal">
     <div class="guarantee-icon">🛡️</div>
     <div class="guarantee-headline">אחריות משפחה אוהבת</div>
     <div class="guarantee-text">
-      תכיני מנה אחת מהסדנה תוך 14 יום. אם המשפחה לא טעמה, לא אכלה ואת מרגישה שזה לא עמד בהבטחה — תקבלי החזר מלא.
+      תכיני מנה אחת מהסדנה תוך 14 יום. אם המשפחה לא אהבה, לא אכלה ואת מרגישה שזה לא עמד בהבטחה, תקבלי החזר מלא.
     </div>
   </div>
 
@@ -1471,7 +1474,7 @@ body {
     <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
       <span>אפשר לשלם בתשלומים?</span>
     </div>
-    <div class="faq-a">מי שנרשמה עד 11.5 משלמת 99₪ בלבד. מ־12.5 והלאה המחיר 129₪ — תשלום אחד.</div>
+    <div class="faq-a">מי שנרשמה עד 11.5 משלמת 99₪ בלבד. מ־12.5 והלאה המחיר 129₪, תשלום אחד.</div>
   </div>
 </section>
 
@@ -1479,7 +1482,7 @@ body {
 <section class="final-cta">
   <div class="final-cta-text">
     שבועות זה לא החג שבו יושבים בצד.<br>
-    פיצה, בלינצ׳ס, בורקס — המנות האלה יכולות להיות על השולחן שלך, בגרסה שמתאימה לסוכרתיים, לצליאקים ולכל המשפחה.<br>
+    פיצה, בלינצ׳ס, בורקס, המנות האלה יכולות להיות על השולחן שלך, בגרסה שמתאימה לסוכרתיים, לצליאקים ולכל המשפחה.<br>
     <strong>כולם אוכלים מאותו שולחן. ואף אחד לא מרגיש שונה.</strong>
   </div>
   <a href="https://meshulam.co.il/purchase?b=19aeb8a09f9ee5f052106f4a81ad3c95" class="cta-button">אני רוצה שכולם יאכלו מאותו שולחן בשבועות ←</a>
@@ -1560,7 +1563,7 @@ body {
     var faqItems = document.querySelectorAll('.faq-a');
     faqItems.forEach(function(item) {
       if (item.textContent.indexOf('מי שנרשמה עד 11.5') !== -1) {
-        item.textContent = 'המחיר הוא 129₪ — תשלום אחד שכולל סדנה לייב, הקלטה, חוברת מתכונים וסרטוני הדרכה.';
+        item.textContent = 'המחיר הוא 129₪, תשלום אחד שכולל סדנה לייב, הקלטה, חוברת מתכונים וסרטוני הדרכה.';
       }
     });
   }
