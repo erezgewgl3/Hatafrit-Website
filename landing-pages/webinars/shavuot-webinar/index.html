@@ -589,21 +589,6 @@ body {
   background: rgba(200, 150, 62, 0.12);
 }
 
-.pricing-card.featured::before {
-  content: 'הכי משתלם';
-  position: absolute;
-  top: -11px;
-  right: 50%;
-  transform: translateX(50%);
-  background: var(--gold);
-  color: var(--brown);
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 0.2rem 0.9rem;
-  border-radius: 50px;
-  white-space: nowrap;
-}
-
 .pricing-label { font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 0.4rem; }
 
 .pricing-amount {
@@ -1116,11 +1101,6 @@ body {
 </head>
 <body>
 
-<!-- ===== URGENCY BAR ===== -->
-<div class="urgency-bar">
-  🔥 הרשמה מוקדמת ב-99₪ עד 11.5 בלבד, אחרי זה המחיר עולה!
-</div>
-
 <!-- ===== HERO (mobile-first: text + CTA above the fold, image below) ===== -->
 <section class="hero">
   <div class="hero-content">
@@ -1132,7 +1112,7 @@ body {
       ב־90 דקות תלמדי להכין פיצה, בלינצ׳ס ובורקס לחג. מתאימים לסוכרתיים, צליאקים, ולתזונת דלת פחמימה, בלי שאף אחד בשולחן ירגיש שהוא אוכל "אוכל מיוחד".
     </p>
 
-    <a href="https://meshulam.co.il/purchase?b=19aeb8a09f9ee5f052106f4a81ad3c95" class="cta-button cta-button--hero">שמרי לי מקום ב־99₪</a>
+    <a href="https://meshulam.co.il/purchase?b=19aeb8a09f9ee5f052106f4a81ad3c95" class="cta-button cta-button--hero">שמרי לי מקום ב־129₪</a>
     <div class="hero-mini-guarantee">
       <span class="mini-guarantee-icon">🛡️</span>
       <span>כולל אחריות משפחה אוהבת · החזר מלא אם זה לא עומד בהבטחה</span>
@@ -1388,15 +1368,10 @@ body {
   <h2 class="section-title">כמה זה עולה?</h2>
 
   <div class="pricing-cards">
-    <div class="pricing-card featured">
-      <div class="pricing-label">הרשמה מוקדמת</div>
-      <div class="pricing-amount">99 <span>₪</span></div>
-      <div class="pricing-note">עד 11.5</div>
-    </div>
-    <div class="pricing-card">
-      <div class="pricing-label">מחיר רגיל</div>
+    <div class="pricing-card featured" style="min-width:240px;">
+      <div class="pricing-label">מחיר הסדנה</div>
       <div class="pricing-amount">129 <span>₪</span></div>
-      <div class="pricing-note">מ־12.5 והלאה</div>
+      <div class="pricing-note">כולל הקלטה, חוברת וסרטונים</div>
     </div>
   </div>
 
@@ -1422,7 +1397,7 @@ body {
     </ul>
     <div class="value-total">
       <div class="value-total-row">שווי כולל: <span class="value-strike"><bdi>390₪</bdi></span></div>
-      <div class="value-today">היום: <strong><bdi>99₪</bdi> בלבד</strong></div>
+      <div class="value-today">היום: <strong><bdi>129₪</bdi> בלבד</strong></div>
     </div>
   </div>
 
@@ -1435,7 +1410,7 @@ body {
     </div>
   </div>
 
-  <a href="https://meshulam.co.il/purchase?b=19aeb8a09f9ee5f052106f4a81ad3c95" class="cta-button cta-button--hero">שמרי לי מקום ב־99₪</a>
+  <a href="https://meshulam.co.il/purchase?b=19aeb8a09f9ee5f052106f4a81ad3c95" class="cta-button cta-button--hero">שמרי לי מקום ב־129₪</a>
 </section>
 
 <!-- ===== FAQ (medical reassurance first, open by default) ===== -->
@@ -1474,7 +1449,7 @@ body {
     <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
       <span>אפשר לשלם בתשלומים?</span>
     </div>
-    <div class="faq-a">מי שנרשמה עד 11.5 משלמת 99₪ בלבד. מ־12.5 והלאה המחיר 129₪, תשלום אחד.</div>
+    <div class="faq-a">המחיר הוא 129₪, תשלום אחד שכולל סדנה לייב, הקלטה, חוברת מתכונים וסרטוני הדרכה.</div>
   </div>
 </section>
 
@@ -1495,7 +1470,7 @@ body {
 
 <!-- ===== STICKY MOBILE CTA (single full-width button to checkout) ===== -->
 <div class="sticky-cta">
-  <a href="https://meshulam.co.il/purchase?b=19aeb8a09f9ee5f052106f4a81ad3c95" class="cta-button">שמרי מקום · 99₪</a>
+  <a href="https://meshulam.co.il/purchase?b=19aeb8a09f9ee5f052106f4a81ad3c95" class="cta-button">שמרי מקום · 129₪</a>
 </div>
 
 <!-- ===== SCRIPTS ===== -->
@@ -1524,49 +1499,6 @@ body {
 
   update();
   setInterval(update, 60000);
-})();
-
-// Price auto-switch: early bird ends end of May 11, 2026 (Israel time)
-// Preview post-deadline view with ?after in URL
-(function() {
-  var deadline = new Date('2026-05-12T00:00:00+03:00').getTime();
-  var forceAfter = window.location.search.indexOf('after') !== -1;
-  var isAfterDeadline = forceAfter || Date.now() >= deadline;
-
-  if (isAfterDeadline) {
-    var urgencyBar = document.querySelector('.urgency-bar');
-    if (urgencyBar) urgencyBar.style.display = 'none';
-
-    // Pricing cards → single card
-    var pricingCards = document.querySelector('.pricing-cards');
-    if (pricingCards) {
-      pricingCards.innerHTML = '<div class="pricing-card featured" style="min-width:240px;">' +
-        '<div class="pricing-label">מחיר הסדנה</div>' +
-        '<div class="pricing-amount">129 <span>₪</span></div>' +
-        '<div class="pricing-note">כולל הקלטה, חוברת וסרטונים</div>' +
-        '</div>';
-    }
-
-    // Value stack today line → 129₪
-    var valueToday = document.querySelector('.value-today');
-    if (valueToday) valueToday.innerHTML = 'היום: <strong><bdi>129₪</bdi> בלבד</strong>';
-
-    // All CTAs that mention "ב־99₪" → "ב־129₪"
-    var ctaButtons = document.querySelectorAll('.cta-button');
-    ctaButtons.forEach(function(btn) {
-      if (btn.textContent.indexOf('99₪') !== -1) {
-        btn.innerHTML = btn.innerHTML.replace(/99₪/g, '129₪');
-      }
-    });
-
-    // FAQ payment answer
-    var faqItems = document.querySelectorAll('.faq-a');
-    faqItems.forEach(function(item) {
-      if (item.textContent.indexOf('מי שנרשמה עד 11.5') !== -1) {
-        item.textContent = 'המחיר הוא 129₪, תשלום אחד שכולל סדנה לייב, הקלטה, חוברת מתכונים וסרטוני הדרכה.';
-      }
-    });
-  }
 })();
 
 // Show sticky CTA only after scrolling past hero
